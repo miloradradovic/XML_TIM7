@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zahtev mesto="" datum="">
+    
+    <kome_se_upucuje>
+        <naziv_organa>____</naziv_organa>
+        <sediste_organa>_____</sediste_organa>
+    </kome_se_upucuje>
+    
+    <naziv>
+        <b>З А Х Т Е В
+        за приступ информацији од јавног значаја</b>
+    </naziv>
+    
+    <tekst_zahteva>
+        На основу члана 15. ст. 1. Закона о слободном приступу информацијама од јавног значаја
+        („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), од горе 
+        наведеног органа захтевам:*
+        <opcije>
+            <opcija>oбавештење да ли поседује тражену информацију;</opcija>
+            <opcija>увид у документ који садржи тражену информацију;</opcija>
+            <opcija>копију документа који садржи тражену информацију;</opcija>
+            <opcija>достављање копије документа који садржи тражену информацију:**</opcija>
+            <nacini_dostave>
+                <nacin_dostave id="1a" izabran="">поштом</nacin_dostave>
+                <nacin_dostave id="2a" izabran="">електронском поштом</nacin_dostave>
+                <nacin_dostave id="3a" izabran="">факсом</nacin_dostave>
+                <nacin_dostave>на други начин:***
+                    <nacin_dostave_input>_____</nacin_dostave_input>
+                </nacin_dostave>
+            </nacini_dostave>
+        </opcije>
+        Овај захтев се односи на следеће информације:
+        <informacija_o_zahtevu>
+            ___________
+        </informacija_o_zahtevu>
+    </tekst_zahteva>
+    
+    <informacije_o_traziocu>
+        <osoba>
+            <ime>____</ime>
+            <prezime>_____</prezime>
+        </osoba>
+        <preduzece>
+            <naziv>_____</naziv>
+        </preduzece>
+        <adresa>
+            _______
+        </adresa>
+        <drugi_podaci_kontakt>_______</drugi_podaci_kontakt>
+        <potpis>______</potpis>
+    </informacije_o_traziocu>
+    
+    <fusnote>
+        <fusnota id="1">* У кућици означити која законска права на приступ информацијама желите да остварите.</fusnota>
+        <fusnota id="2">** У кућици означити начин достављања копије докумената.</fusnota>
+        <fusnota id="3">*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</fusnota>
+    </fusnote>
+    
+</zahtev>

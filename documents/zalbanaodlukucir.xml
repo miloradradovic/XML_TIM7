@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zalba mesto="" datum="">
+    <naslov>
+        <b>
+            ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ 
+            <u>ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАХТЕВ</u> ЗА ПРИСТУП ИНФОРМАЦИЈИ
+        </b>
+    </naslov>
+    <podaci_povereniku>
+        <uloga><b>Поверенику за информације од јавног значаја и заштиту података о личности</b></uloga>
+        <adresa_za_postu>
+            <mesto>Београд</mesto>
+            <ulica broj="15">Булевар краља Александрa</ulica>
+        </adresa_za_postu>
+    </podaci_povereniku>
+    
+    <podnaslov><b>Ж А Л Б А </b></podnaslov>
+    
+    <zalioc>
+        <osoba>
+            <ime></ime>
+            <prezime></prezime>
+        </osoba>
+        <preduzece></preduzece>
+        <adresa>
+            <mesto></mesto>
+            <ulica broj=""></ulica>
+        </adresa>
+        <sediste_zalioca></sediste_zalioca>
+    </zalioc>
+    
+    <protiv_resenja_zakljucka>
+        <naziv_organa_koji_je_doneo_odluku></naziv_organa_koji_je_doneo_odluku>
+        <broj></broj>
+        <od_godine></od_godine>
+    </protiv_resenja_zakljucka>
+    
+    <sadrzaj>
+        Наведеном одлуком органа власти (решењем, закључком, обавештењем у писаној форми 
+        са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који сам поднео/ла-
+        упутио/ла дана
+        <datum></datum>
+        године и тако ми ускраћено-онемогућено остваривање уставног и 
+        законског права на слободан приступ информацијама од јавног значаја. Oдлуку побијам у 
+        целости, односно у делу којим
+        <osnova_za_zalbu></osnova_za_zalbu>
+        јер није заснована на Закону о слободном приступу информацијама од јавног значаја.
+        <p>
+            На основу изнетих разлога, предлажем да Повереник уважи моју жалбу,  поништи
+            одлука првостепеног органа и омогући ми приступ траженој/им  информацији/ма.
+        </p>
+        <p>
+            Жалбу подносим благовремено, у законском року утврђеном у члану 22. ст. 1. Закона о
+            слободном приступу информацијама од јавног значаја.
+        </p>
+    </sadrzaj>
+    
+    <podaci_o_podnosiocu_zalbe>
+        <podnosilac>
+            <ime></ime>
+            <prezime></prezime>>
+        </podnosilac>
+        <adresa>
+            <mesto></mesto>
+            <ulica broj=""></ulica>
+        </adresa>
+        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
+        <potpis></potpis>
+    </podaci_o_podnosiocu_zalbe>
+    
+    <napomena>
+        <naslov><b>Напомена:</b></naslov>
+        <tacka>
+            У жалби се мора навести одлука која се побија (решење, закључак, обавештење), назив 
+            органа који је одлуку донео, као и број и датум одлуке. Довољно је да жалилац наведе у 
+            жалби у ком погледу је незадовољан одлуком, с тим да жалбу не мора посебно образложити. 
+        </tacka>
+        <tacka>
+             Ако жалбу изјављује на овом обрасцу, додатно образложење може  посебно приложити. 
+             Уз жалбу обавезно приложити копију поднетог захтева и доказ о његовој предаји-упућивању органу 
+             као и копију одлуке органа која се оспорава жалбом.      
+        </tacka>                 
+    </napomena>
+</zalba>

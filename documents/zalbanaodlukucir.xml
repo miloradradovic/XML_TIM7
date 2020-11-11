@@ -2,22 +2,22 @@
 
 <zalba mesto="" datum="">
     <naslov>
-        <b>
+        
             ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ 
-            <u>ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАХТЕВ</u> ЗА ПРИСТУП ИНФОРМАЦИЈИ
-        </b>
+            ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАХТЕВ ЗА ПРИСТУП ИНФОРМАЦИЈИ
+        
     </naslov>
     <podaci_povereniku>
-        <uloga><b>Поверенику за информације од јавног значаја и заштиту података о личности</b></uloga>
+        <uloga>Поверенику за информације од јавног значаја и заштиту података о личности</uloga>
         <adresa_za_postu>
             <mesto>Београд</mesto>
             <ulica broj="15">Булевар краља Александрa</ulica>
         </adresa_za_postu>
     </podaci_povereniku>
     
-    <podnaslov><b>Ж А Л Б А </b></podnaslov>
+    <podnaslov>Ж А Л Б А </podnaslov>
     
-    <zalioc>
+    <zalilac>
         <osoba>
             <ime></ime>
             <prezime></prezime>
@@ -28,7 +28,7 @@
             <ulica broj=""></ulica>
         </adresa>
         <sediste_zalioca></sediste_zalioca>
-    </zalioc>
+    </zalilac>
     
     <protiv_resenja_zakljucka>
         <naziv_organa_koji_je_doneo_odluku></naziv_organa_koji_je_doneo_odluku>
@@ -51,7 +51,7 @@
             одлука првостепеног органа и омогући ми приступ траженој/им  информацији/ма.
         </p>
         <p>
-            Жалбу подносим благовремено, у законском року утврђеном у члану 22. ст. 1. Закона о
+            Жалбу подносим благовремено, у законском року утврђеном у <clan broj="22">члану 22. <stav broj="1">ст. 1.</stav> </clan>Закона о
             слободном приступу информацијама од јавног значаја.
         </p>
     </sadrzaj>
@@ -66,11 +66,10 @@
             <ulica broj=""></ulica>
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-        <potpis></potpis>
     </podaci_o_podnosiocu_zalbe>
     
     <napomena>
-        <naslov><b>Напомена:</b></naslov>
+        <naslov>Напомена:</naslov>
         <tacka>
             У жалби се мора навести одлука која се побија (решење, закључак, обавештење), назив 
             органа који је одлуку донео, као и број и датум одлуке. Довољно је да жалилац наведе у 

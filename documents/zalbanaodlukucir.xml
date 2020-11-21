@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zalba mesto="" datum="">
+<zalba xmlns:re="http://www.reusability"
+    xmlns:zoc="http://www.zalbanaodlukacir"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="zalbanaodlukucir.xsd"
+    mesto="" datum="2000-12-12">
     <naslov>
         
             ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ 
@@ -18,11 +22,13 @@
     <podnaslov>Ж А Л Б А </podnaslov>
     
     <zalilac>
-        <osoba>
-            <ime></ime>
-            <prezime></prezime>
-        </osoba>
-        <preduzece></preduzece>
+        <tip_lica>
+            <osoba>
+                <ime></ime>
+                <prezime></prezime>
+            </osoba>
+            <preduzece></preduzece>
+        </tip_lica>
         <adresa>
             <mesto></mesto>
             <ulica broj=""></ulica>
@@ -40,7 +46,7 @@
         Наведеном одлуком органа власти (решењем, закључком, обавештењем у писаној форми 
         са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који сам поднео/ла-
         упутио/ла дана
-        <datum></datum>
+        <datum>2000-12-12</datum>
         године и тако ми ускраћено-онемогућено остваривање уставног и 
         законског права на слободан приступ информацијама од јавног значаја. Oдлуку побијам у 
         целости, односно у делу којим
@@ -57,10 +63,10 @@
     </sadrzaj>
     
     <podaci_o_podnosiocu_zalbe>
-        <podnosilac>
+        <osoba>
             <ime></ime>
             <prezime></prezime>>
-        </podnosilac>
+        </osoba>
         <adresa>
             <mesto></mesto>
             <ulica broj=""></ulica>

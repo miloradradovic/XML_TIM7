@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.reusability" xmlns:re="http://www.reusability">
+
+    <xs:complexType name="Tpodaci_povereniku">
+        <xs:sequence>
+            <xs:element name="uloga" type="xs:string"/>
+            <xs:element name="adesa_za_postu" type="re:Tadresa_za_postu"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tadresa_za_postu">
+        <xs:sequence>
+            <xs:element name="mesto" type="xs:string"/>
+            <xs:element name="ulica">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="broj" type="xs:int"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tzalilac">
+        <xs:sequence>
+            <xs:element name="tip_lica" type="re:Ttip_lica"/>
+            <xs:element name="adresa" type="re:Tadresa_za_postu"/>
+            <xs:element name="sediste_zalioca" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Ttip_lica">
+        <xs:choice>
+            <xs:element name="osoba" type="re:Tosoba"/>
+            <xs:element name="preduzece" type="xs:string"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="Tosoba">
+        <xs:sequence>
+            <xs:element name="ime" type="xs:string"/>
+            <xs:element name="prezime" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tprotiv_resenja_zakljucka">
+        <xs:sequence>
+            <xs:element name="naziv_organa_koji_je_doneo_odluku" type="xs:string"/>
+            <xs:element name="broj" type="xs:int"/>
+            <xs:element name="od_godine" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tsadrzaj">
+        <xs:sequence>
+            <xs:element name="datum" type="xs:date"/>
+            <xs:element name="osnova_za_zalbu" type="xs:string"/>
+            <xs:element name="clan"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tclan">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="stav">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="broj" type="xs:int"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tpodaci_o_podnosiocu_zalbe">
+        <xs:sequence>
+            <xs:element name="osoba" type="re:Tosoba"/>
+            <xs:element name="adresa" type="re:Tadresa_za_postu"/>
+            <xs:element name="drugi_podaci_za_kontakt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tnapomena">
+        <xs:sequence>
+            <xs:element name="naslov" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="tacka" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

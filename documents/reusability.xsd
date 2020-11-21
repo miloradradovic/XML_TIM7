@@ -120,7 +120,7 @@
     <xs:complexType name="Topcije">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" name="opcija" type="xs:string"/>
-            <xs:element name="nacini_dostave" type="re:Tnacini_dostave"/>
+            <xs:element name="nacini_dostave" type="re:Tnacini_dostave" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="Tnacini_dostave">
@@ -145,6 +145,44 @@
     <xs:complexType name="Tfusnote">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" name="fusnota" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tinformacije_o_podnosiocu">
+        <xs:sequence>
+            <xs:element name="lice" type="re:Ttip_lica"/>
+            <xs:element name="adresa" type="re:Tadresa_za_postu"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Ttekst_zahteva_obavestenja">
+        <xs:sequence>
+            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="godina" type="xs:string"/>
+            <xs:element name="opis_trazene_informacije" type="xs:string"/>
+            <xs:element name="dan" type="xs:string"/>
+            <xs:element name="vreme" type="xs:string"/>
+            <xs:element name="radno_vreme" type="re:Tradno_vreme"/>
+            <xs:element name="adresa" type="re:Tadresa_za_postu"/>
+            <xs:element name="broj_kancelarije" type="xs:int"/>
+            <xs:element name="opis_troskova" type="re:Topis_troskova"/>
+            <xs:element name="ukupan_trosak" type="re:Tukupan_trosak"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tradno_vreme">
+        <xs:sequence>
+            <xs:element name="pocetak" type="xs:string"/>
+            <xs:element name="kraj" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Topis_troskova">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="cena" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tukupan_trosak">
+        <xs:sequence>
+            <xs:element name="iznos" type="xs:int"/>
+            <xs:element name="broj_racuna" type="xs:string"/>
+            <xs:element name="poziv_na_broj" type="xs:int"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<obavestenje br_predmeta="" datum="">
+<obavestenje xmlns:re="http://www.reusability"
+    xmlns:oba="http://www.obavestenje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="obavestenje.xsd"
+    br_predmeta="" datum="">
     
     <naziv_organa sediste=""></naziv_organa>
     
     <informacije_o_podnosiocu>
-        <ime>____</ime>
-        <prezime>___</prezime>
-        <naziv>___</naziv>
-        <adresa>____</adresa>
+        <lice>
+             <osoba>
+                 <ime>____</ime>
+                 <prezime>___</prezime>
+             </osoba>
+             <preduzece>___</preduzece>
+        </lice>
+        <adresa>
+            <mesto></mesto>
+            <ulica broj=""></ulica>
+        </adresa>   
     </informacije_o_podnosiocu>
     
     <naslov>
@@ -25,11 +36,11 @@
         <opis_trazene_informacije>_____</opis_trazene_informacije>
         обавештавамо вас да дана <dan>___</dan> , у <vreme>___</vreme> часова, односно у времену 
         од 
-        <radno_vreme pocetak="" kraj=""> 
-            pocetak до kraj
+        <radno_vreme>
+            od <pocetak></pocetak> do <kraj></kraj>
         </radno_vreme>
         часова,
-        у просторијама органа у <mesto>___</mesto> ул. <ulica>___</ulica> бр. <broj></broj> 
+        у просторијама органа у <adresa><mesto>___</mesto> <ulica broj="">___</ulica></adresa>
         канцеларија бр. <broj_kancelarije>___</broj_kancelarije> можете извршити увид
         у документ/е у коме је садржана тражена информација.
         Том приликом на ваш захтев, може вам се издати и копија документа са траженом

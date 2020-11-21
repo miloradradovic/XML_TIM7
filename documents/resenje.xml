@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resenja>
-    <resenje broj="071-01-1114/2020-03" tip_resenja="жалба је основана" datum="09.06.2020. године">
+<resenja xmlns="http://resenja/resenje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://resenja/resenje resenje.xsd">
+    <resenje broj="071-01-1114/2020-03" tip_resenja="жалба је основана" datum="09.06.2020.">
         <uvodne_informacije>
             Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби
             коју је изјавио AA, због непоступања <lice>Учитељског факултета у Призрену</lice>са привременим седиштем 
@@ -90,7 +92,7 @@
             
                 Против овог решења није допуштена жалба већ се, у складу са Законом о управним
                 споровима, може покренути управни спор тужбом Управном суду у Београду, у року од 30 дана од
-                дана пријема решења. Такса на тужбу износи <iznos valuta="dinar">390,00 динара</iznos>.
+                дана пријема решења. Такса на тужбу износи <iznos valuta="dinar">390,00</iznos> динара.
             
             </odluka>
         </podaci_o_obrazlozenju>

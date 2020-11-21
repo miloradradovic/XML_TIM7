@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zahtev mesto="" datum="">
+<zahtev xmlns:re="http://www.reusability"
+    xmlns:zc="http://www.zahtevcir"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="zahtevcir.xsd" 
+    mesto="" datum="">
     
     <ciljani_organ_vlasti>
         <naziv_organa>____</naziv_organa>
         <sediste_organa>_____</sediste_organa>
     </ciljani_organ_vlasti>
-    
+ 
     <naziv>
         З А Х Т Е В
         за приступ информацији од јавног значаја
@@ -36,17 +40,20 @@
     </tekst_zahteva>
     
     <informacije_o_traziocu>
+        <lice>
         <osoba>
             <ime>____</ime>
             <prezime>_____</prezime>
         </osoba>
-        <preduzece>
-            <naziv>_____</naziv>
-        </preduzece>
+        </lice>
         <adresa>
-            _______
+            <mesto>
+                
+            </mesto>
+            <ulica broj=""></ulica>
+            
         </adresa>
-        <drugi_podaci_kontakt>_______</drugi_podaci_kontakt>
+        <drugi_podaci_za_kontakt>_______</drugi_podaci_za_kontakt>
     </informacije_o_traziocu>
     
     <fusnote>

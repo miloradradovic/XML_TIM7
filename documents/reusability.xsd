@@ -104,4 +104,47 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="Tciljani_organ_vlasti">
+        <xs:sequence>
+            <xs:element name="nazivOrgana" type="xs:string"/>
+            <xs:element name="sedisteOrgana" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Ttekst_zahteva">
+        <xs:sequence>
+            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="opcije" type="re:Topcije"/>
+            <xs:element name="informacije_o_zahtevu" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Topcije">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="opcija" type="xs:string"/>
+            <xs:element name="nacini_dostave" type="re:Tnacini_dostave"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tnacini_dostave">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="nacin_dostave">
+                <xs:complexType mixed="true">
+                    <xs:sequence minOccurs="1">
+                        <xs:element minOccurs="0" name="nacin_dostave_input" type="xs:string"/>
+                    </xs:sequence>
+                    <xs:attribute name="izabran" type="xs:boolean"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tinformacije_o_traziocu">
+        <xs:sequence>
+            <xs:element name="lice" type="re:Ttip_lica"/>
+            <xs:element name="adresa" type="re:Tadresa_za_postu"/>
+            <xs:element name="drugi_podaci_za_kontakt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tfusnote">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="fusnota" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

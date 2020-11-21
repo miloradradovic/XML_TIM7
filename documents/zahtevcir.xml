@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zahtev xmlns:re="http://www.reusability"
-    xmlns:zc="http://www.zahtevcir"
+<zcir:zahtev
+    xmlns:zcir="http://www.zahtevcir" 
+    xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="zahtevcir.xsd" 
-    mesto="" datum="">
+    xsi:schemaLocation="http://www.zahtevcir zahtevcir.xsd" 
+    mesto="" datum="2000-12-12">
     
     <ciljani_organ_vlasti>
-        <naziv_organa>____</naziv_organa>
-        <sediste_organa>_____</sediste_organa>
+        <naziv_organa></naziv_organa>
+        <sediste_organa></sediste_organa>
     </ciljani_organ_vlasti>
  
     <naziv>
@@ -20,40 +21,39 @@
         („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), од горе 
         наведеног органа захтевам:*
         <opcije>
-            <opcija izabran="">oбавештење да ли поседује тражену информацију;</opcija>
-            <opcija izabran="">увид у документ који садржи тражену информацију;</opcija>
-            <opcija izabran="">копију документа који садржи тражену информацију;</opcija>
-            <opcija izabran="">достављање копије документа који садржи тражену информацију:**</opcija>
+            <opcija izabran="false">oбавештење да ли поседује тражену информацију;</opcija>
+            <opcija izabran="false">увид у документ који садржи тражену информацију;</opcija>
+            <opcija izabran="false">копију документа који садржи тражену информацију;</opcija>
+            <opcija izabran="false">достављање копије документа који садржи тражену информацију:**</opcija>
             <nacini_dostave>
-                <nacin_dostave izabran="">поштом</nacin_dostave>
-                <nacin_dostave izabran="">електронском поштом</nacin_dostave>
-                <nacin_dostave izabran="">факсом</nacin_dostave>
+                <nacin_dostave izabran="false">поштом</nacin_dostave>
+                <nacin_dostave izabran="false">електронском поштом</nacin_dostave>
+                <nacin_dostave izabran="false">факсом</nacin_dostave>
                 <nacin_dostave>на други начин:***
-                    <nacin_dostave_input>_____</nacin_dostave_input>
+                    <nacin_dostave_input></nacin_dostave_input>
                 </nacin_dostave>
             </nacini_dostave>
         </opcije>
         Овај захтев се односи на следеће информације:
         <informacija_o_zahtevu>
-            ___________
         </informacija_o_zahtevu>
     </tekst_zahteva>
     
     <informacije_o_traziocu>
         <lice>
         <osoba>
-            <ime>____</ime>
-            <prezime>_____</prezime>
+            <ime></ime>
+            <prezime></prezime>
         </osoba>
         </lice>
         <adresa>
             <mesto>
                 
             </mesto>
-            <ulica broj=""></ulica>
+            <ulica broj="0"></ulica>
             
         </adresa>
-        <drugi_podaci_za_kontakt>_______</drugi_podaci_za_kontakt>
+        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
     </informacije_o_traziocu>
     
     <fusnote>
@@ -62,4 +62,4 @@
         <fusnota>*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</fusnota>
     </fusnote>
     
-</zahtev>
+</zcir:zahtev>

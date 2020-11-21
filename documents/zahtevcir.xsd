@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
     targetNamespace="http://www.zahtevcir" xmlns:re="http://www.reusability"
     xmlns:zcir="http://www.zahtevcir">
 
@@ -9,7 +9,7 @@
             <xs:sequence>
                 <xs:element name="ciljani_organ_vlasti" type="re:Tciljani_organ_vlasti"/>
                 <xs:element name="naziv" type="xs:string"/>
-                <xs:element name="tekst_zahteva" type="re:Ttekst_zahteva"/>
+                <xs:element name="tekst_zahteva" type="re:Ttekst_zahteva_zahtevcir"/>
                 <xs:element name="informacije_o_traziocu" type="re:Tinformacije_o_traziocu"/>
                 <xs:element name="fusnote" type="re:Tfusnote"/>
             </xs:sequence>

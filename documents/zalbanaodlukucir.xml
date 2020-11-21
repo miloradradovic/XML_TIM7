@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zalba xmlns:re="http://www.reusability"
-    xmlns:zoc="http://www.zalbanaodlukacir"
+<zoc:zalba
+    xmlns:zoc="http://www.zalbanaodlukucir" 
+    xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="zalbanaodlukucir.xsd"
+    xsi:schemaLocation="http://www.zalbanaodlukucir zalbanaodlukucir.xsd" 
     mesto="" datum="2000-12-12">
     <naslov>
         
@@ -13,10 +14,10 @@
     </naslov>
     <podaci_povereniku>
         <uloga>Поверенику за информације од јавног значаја и заштиту података о личности</uloga>
-        <adresa_za_postu>
+        <adresa>
             <mesto>Београд</mesto>
             <ulica broj="15">Булевар краља Александрa</ulica>
-        </adresa_za_postu>
+        </adresa>
     </podaci_povereniku>
     
     <podnaslov>Ж А Л Б А </podnaslov>
@@ -27,19 +28,18 @@
                 <ime></ime>
                 <prezime></prezime>
             </osoba>
-            <preduzece></preduzece>
         </tip_lica>
         <adresa>
             <mesto></mesto>
-            <ulica broj=""></ulica>
+            <ulica broj="0"></ulica>
         </adresa>
         <sediste_zalioca></sediste_zalioca>
     </zalilac>
     
     <protiv_resenja_zakljucka>
         <naziv_organa_koji_je_doneo_odluku></naziv_organa_koji_je_doneo_odluku>
-        <broj></broj>
-        <od_godine></od_godine>
+        <broj>1</broj>
+        <od_godine>2000</od_godine>
     </protiv_resenja_zakljucka>
     
     <sadrzaj>
@@ -65,11 +65,11 @@
     <podaci_o_podnosiocu_zalbe>
         <osoba>
             <ime></ime>
-            <prezime></prezime>>
+            <prezime></prezime>
         </osoba>
         <adresa>
             <mesto></mesto>
-            <ulica broj=""></ulica>
+            <ulica broj="0"></ulica>
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
     </podaci_o_podnosiocu_zalbe>
@@ -87,4 +87,4 @@
              као и копију одлуке органа која се оспорава жалбом.      
         </tacka>                 
     </napomena>
-</zalba>
+</zoc:zalba>

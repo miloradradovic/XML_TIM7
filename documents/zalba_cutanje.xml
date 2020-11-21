@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zalba xmlns:re="http://www.reusability"
-    xmlns:zc="http://www.zalbacutanje"
+<zc:zalba 
+    xmlns:zc="http://www.zalbacutanje" 
+    xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="zalba_cutanje.xsd"
-    mjesto="" datum="">
+    xsi:schemaLocation="http://www.zalbacutanje zalba_cutanje.xsd"
+    mjesto="" datum="2000-12-12">
     <naziv>
         ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)
     </naziv>
@@ -16,16 +17,16 @@
     </podaci_o_primaocu>
     <sadrzaj_zalbe>
         У складу са <clan broj="22">чланом 22.</clan> Закона о слободном приступу информацијама од јавног значаја подносим: Ж А Л Б У
-        против <ciljani_organ_vlasti>___</ciljani_organ_vlasti> ( навести назив органа) због тога што орган власти: 
+        против <ciljani_organ_vlasti></ciljani_organ_vlasti> ( навести назив органа) због тога што орган власти: 
         <razlog_zalbe>
-            <opcija izabrana="">није поступио</opcija>
-            <opcija izabrana="">није поступио у целости</opcija> 
-            <opcija izabrana="">у законском року</opcija> 
+            <opcija izabran="false">није поступио</opcija>
+            <opcija izabran="false">није поступио у целости</opcija> 
+            <opcija izabran="false">у законском року</opcija> 
         </razlog_zalbe>
         (подвући  због чега се изјављује жалба) по мом захтеву  за слободан приступ информацијама од јавног значаја 
-        који сам поднео  том органу  дана <datum>___</datum> године, а којим сам тражио/ла да ми се у складу са 
+        који сам поднео  том органу  дана <datum>2000-12-12</datum> године, а којим сам тражио/ла да ми се у складу са 
         Законом о слободном приступу информацијама од јавног значаја омогући увид- копија документа који садржи 
-        информације  о /у вези са : <podaci_o_zahtjevu_i_informacijama>___</podaci_o_zahtjevu_i_informacijama>
+        информације  о /у вези са : <podaci_o_zahtjevu_i_informacijama></podaci_o_zahtjevu_i_informacijama>
         На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми приступ траженој/им  информацији/ма. 
         Као доказ , уз жалбу достављам копију захтева са доказом о предаји органу власти.
         <napomena>Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор 
@@ -33,13 +34,13 @@
     </sadrzaj_zalbe>
     <podaci_o_podnosiocu>
         <osoba>
-            <ime>___</ime>
-            <prezime>___</prezime>
+            <ime></ime>
+            <prezime></prezime>
         </osoba>
         <adresa>
-            <mesto>___</mesto>
-            <ulica broj="">___</ulica>
+            <mesto></mesto>
+            <ulica broj="0"></ulica>
         </adresa>
-        <drugi_podaci_za_kontakt>___</drugi_podaci_za_kontakt>
+        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
     </podaci_o_podnosiocu>
-</zalba>
+</zc:zalba>

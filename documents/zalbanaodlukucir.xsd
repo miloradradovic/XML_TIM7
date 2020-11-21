@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.zalbanaodlukacir" xmlns:re="http://www.reusability"
-    xmlns:zoc="http://www.zalbanaodlukacir">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+    targetNamespace="http://www.zalbanaodlukucir" xmlns:re="http://www.reusability"
+    xmlns:zoc="http://www.zalbanaodlukucir">
 
     <xs:import namespace="http://www.reusability" schemaLocation="reusability.xsd"/>
     <xs:element name="zalba">

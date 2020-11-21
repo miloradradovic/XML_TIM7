@@ -68,7 +68,7 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="Tpodaci_o_podnosiocu_zalbe">
+    <xs:complexType name="Tpodaci_o_podnosiocu">
         <xs:sequence>
             <xs:element name="osoba" type="re:Tosoba"/>
             <xs:element name="adresa" type="re:Tadresa_za_postu"/>
@@ -79,6 +79,29 @@
         <xs:sequence>
             <xs:element name="naslov" type="xs:string"/>
             <xs:element maxOccurs="unbounded" name="tacka" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tsadrzaj_zalbe">
+        <xs:sequence>
+            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="ciljani_organ_vlasti" type="xs:string"/>
+            <xs:element name="razlog_zalbe" type="re:Trazlog_zalbe"/>
+            <xs:element name="datum" type="xs:date"/>
+            <xs:element name="podaci_o_zahtjevu_i_informacijama" type="xs:string"/>
+            <xs:element name="napomena" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Trazlog_zalbe">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="opcija">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="izabrana" type="xs:string"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

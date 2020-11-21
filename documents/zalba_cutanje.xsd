@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.zalbacutanje" xmlns:re="http://www.reusability"
+    xmlns:zc="http://www.zalbacutanje">
+
+    <xs:import namespace="http://www.reusability" schemaLocation="reusability.xsd"/>
+    <xs:element name="zalba">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="naziv" type="xs:string"/>
+                <xs:element name="podaci_o_primaocu" type="re:Tpodaci_povereniku"/>
+                <xs:element name="sadrzaj_zalbe" type="re:Tsadrzaj_zalbe"/>
+                <xs:element name="podaci_o_podnosiocu" type="re:Tpodaci_o_podnosiocu"/>
+            </xs:sequence>
+            <xs:attribute name="mjesto" type="xs:string"/>
+            <xs:attribute name="datum" type="xs:date"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

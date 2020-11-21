@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zalba mjesto="" datum="">
+<zalba xmlns:re="http://www.reusability"
+    xmlns:zc="http://www.zalbacutanje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="zalba_cutanje.xsd"
+    mjesto="" datum="">
     <naziv>
         ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)
     </naziv>
     <podaci_o_primaocu>
         <uloga>Повереник за информације од јавног значаја и заштиту података о личности</uloga>
         <adresa>
-            <mjesto>Београд</mjesto>
+            <mesto>Београд</mesto>
             <ulica broj="15">Булевар краља Александрa</ulica>
         </adresa>
     </podaci_o_primaocu>
@@ -28,12 +32,12 @@
         органа власти.</napomena>
     </sadrzaj_zalbe>
     <podaci_o_podnosiocu>
-        <ime_i_prezime>
+        <osoba>
             <ime>___</ime>
             <prezime>___</prezime>
-        </ime_i_prezime>
+        </osoba>
         <adresa>
-            <mjesto>___</mjesto>
+            <mesto>___</mesto>
             <ulica broj="">___</ulica>
         </adresa>
         <drugi_podaci_za_kontakt>___</drugi_podaci_za_kontakt>

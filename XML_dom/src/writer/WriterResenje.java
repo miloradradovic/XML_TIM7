@@ -62,116 +62,46 @@ public class WriterResenje {
 		rad.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "http://resenja/resenje ../xsd/resenje.xsd");
 
 		Element resenje = document.createElementNS(TARGET_NAMESPACE, "resenje");
-		resenje.setAttribute("broj", "071-01-1114/2020-03");
-		resenje.setAttribute("tip_resenja", "жалба је основана");
-		resenje.setAttribute("datum", "09.06.2020.");
+		resenje.setAttribute("broj", "");
+		resenje.setAttribute("tip_resenja", "");
+		resenje.setAttribute("datum", "");
 		rad.appendChild(resenje);
 
 		Element uvodneInformacije = document.createElementNS(TARGET_NAMESPACE, "uvodne_informacije");
 		resenje.appendChild(uvodneInformacije);
+		
+		Element podaciOResenju = document.createElementNS(TARGET_NAMESPACE, "podaci_o_resenju");
+		resenje.appendChild(podaciOResenju);
+		
+		Element naslov = document.createElementNS(TARGET_NAMESPACE, "naslov");
+		podaciOResenju.appendChild(naslov);
+		
+		Element tacka2 = document.createElementNS(TARGET_NAMESPACE, "tacka");
+		tacka2.setAttribute("broj", "1");
+		podaciOResenju.appendChild(tacka2);
+				
+		Element tacka3 = document.createElementNS(TARGET_NAMESPACE, "tacka");
+		tacka3.setAttribute("broj", "2");
+		podaciOResenju.appendChild(tacka3);
+		
+		Element podaciOObrazlozenju = document.createElementNS(TARGET_NAMESPACE, "podaci_o_obrazlozenju");
+		resenje.appendChild(podaciOObrazlozenju);
+		
+		Element naslov1 = document.createElementNS(TARGET_NAMESPACE, "naslov");
+		podaciOObrazlozenju.appendChild(naslov1);
+		
+		Element predmetZalbe = document.createElementNS(TARGET_NAMESPACE, "predmet_zalbe");
+		podaciOObrazlozenju.appendChild(predmetZalbe);
+		
+		Element postupakPoverenika = document.createElementNS(TARGET_NAMESPACE, "postupak_poverenika");
+		podaciOObrazlozenju.appendChild(postupakPoverenika);
+		
+		Element odluka = document.createElementNS(TARGET_NAMESPACE, "odluka");
+		podaciOObrazlozenju.appendChild(odluka);
 
-		uvodneInformacije.appendChild(document.createTextNode("Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби коју је изјавио AA, због непоступања "));
-		Element lice = document.createElementNS(TARGET_NAMESPACE, "lice");
-		lice.appendChild(document.createTextNode("Учитељског факултета у Призрену"));
-		uvodneInformacije.appendChild(lice);
-
-		uvodneInformacije.appendChild(document.createTextNode("са привременим седиштем у"));
-		Element adresa = document.createElementNS(TARGET_NAMESPACE, "adresa");
-
-		Element mesto = document.createElementNS(TARGET_NAMESPACE, "mesto");
-		mesto.appendChild(document.createTextNode("Лепосавићу"));
-		adresa.appendChild(mesto);
-
-		uvodneInformacije.appendChild(document.createTextNode(","));
-
-		Element ulica = document.createElementNS(TARGET_NAMESPACE, "ulica");
-		ulica.setAttribute("broj", "66");
-		ulica.appendChild(document.createTextNode("ул. Немањина"));
-		adresa.appendChild(ulica);
-		uvodneInformacije.appendChild(adresa);
-
-		uvodneInformacije.appendChild(document.createTextNode(", по његовом захтеву од "));
-		Element datum = document.createElementNS(TARGET_NAMESPACE, "datum");
-		datum.appendChild(document.createTextNode("16.04.2020."));
-		uvodneInformacije.appendChild(datum);
-
-		uvodneInformacije.appendChild(document.createTextNode(" године за приступ информацијама од јавног значаја, на основу "));
-
-		Element clan = document.createElementNS(TARGET_NAMESPACE, "clan");
-		clan.setAttribute("broj", "35");
-		clan.appendChild(document.createTextNode("члана 35."));
-
-		Element stav = document.createElementNS(TARGET_NAMESPACE, "stav");
-		stav.setAttribute("broj", "1");
-		stav.appendChild(document.createTextNode("став 1."));
-
-		Element tacka = document.createElementNS(TARGET_NAMESPACE, "tacka");
-		tacka.setAttribute("broj", "5");
-		tacka.appendChild(document.createTextNode("тачка 5."));
-
-		stav.appendChild(tacka);
-		clan.appendChild(stav);
-		uvodneInformacije.appendChild(clan);
-
-		uvodneInformacije.appendChild(document.createTextNode("Закона о слободном приступу информацијама од јавног значаја („Сл. гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), а у вези са"));
-
-		clan.setAttribute("broj", "3");
-
-		uvodneInformacije.appendChild(clan);
-
-		/*Element univerzitet = document.createElementNS(TARGET_NAMESPACE, "univerzitet");
-		univerzitet.appendChild(document.createTextNode("Univerzitet u Novom Sadu"));
-		institucija.appendChild(univerzitet);
-
-		Element fakultet = document.createElementNS(TARGET_NAMESPACE, "fakultet");
-		fakultet.appendChild(document.createTextNode("Fakultet tehničkih nauka"));
-		institucija.appendChild(fakultet);
-
-		Element departman = document.createElementNS(TARGET_NAMESPACE, "departman");
-		departman.appendChild(document.createTextNode("Računarstvo i automatika"));
-		institucija.appendChild(departman);
-
-		Element katedra = document.createElementNS(TARGET_NAMESPACE, "katedra");
-		katedra.appendChild(document.createTextNode("Katedra za informatiku"));
-		institucija.appendChild(katedra);
-
-		Element autor = document.createElementNS(TARGET_NAMESPACE, "autor");
-		naslovnaStrana.appendChild(autor);
-
-		Element ime = document.createElementNS(TARGET_NAMESPACE, "ime");
-		ime.appendChild(document.createTextNode("Petar"));
-		autor.appendChild(ime);
-
-		Element prezime = document.createElementNS(TARGET_NAMESPACE, "prezime");
-		prezime.appendChild(document.createTextNode("Petrović"));
-		autor.appendChild(prezime);
-
-		Element broj_indeksa = document.createElementNS(TARGET_NAMESPACE, "broj_indeksa");
-		broj_indeksa.appendChild(document.createTextNode("RA 1/2012"));
-		autor.appendChild(broj_indeksa);
-
-		Element temaSrpski = document.createElementNS(TARGET_NAMESPACE, "tema_rada");
-		temaSrpski.setAttribute("jezik", "srpski");
-		temaSrpski.appendChild(document.createTextNode("Implementacija podsistema banke u okviru sistema platnog prometa."));
-		naslovnaStrana.appendChild(temaSrpski);
-
-		Element temaEngleski = document.createElementNS(TARGET_NAMESPACE, "tema_rada");
-		temaEngleski.setAttribute("jezik", "engleski");
-		temaEngleski.appendChild(document.createTextNode("Implementation of banking subsystem in an electronic payment system."));
-		naslovnaStrana.appendChild(temaEngleski);
-
-		Element nivoStudija = document.createElementNS(TARGET_NAMESPACE, "nivo_studija");
-		nivoStudija.appendChild(document.createTextNode("OAS"));
-		naslovnaStrana.appendChild(nivoStudija);
-
-		Element sadrzaj = document.createElementNS(TARGET_NAMESPACE, "sadrzaj");
-		sadrzaj.appendChild(document.createComment("Generisati \"sadrzaj\" analogno."));
-		rad.appendChild(sadrzaj);
-
-		Element poglavlja = document.createElementNS(TARGET_NAMESPACE, "poglavlja");
-		poglavlja.appendChild(document.createComment("Generisati \"poglavlja\" analogno."));
-		rad.appendChild(poglavlja);*/
-
+		Element poverenik = document.createElementNS(TARGET_NAMESPACE, "poverenik");
+		resenje.appendChild(poverenik);
+		
 	}
 
 	/**
@@ -187,13 +117,13 @@ public class WriterResenje {
 			transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-			// Nad "source" objektom (DOM stablo) vrši se transformacija
+			// Nad "source" objektom (DOM stablo) vrÅ¡i se transformacija
 			DOMSource source = new DOMSource(document);
 
-			// Rezultujući stream (argument metode)
+			// RezultujuÄ‡i stream (argument metode)
 			StreamResult result = new StreamResult(out);
 
-			// Poziv metode koja vrši opisanu transformaciju
+			// Poziv metode koja vrÅ¡i opisanu transformaciju
 			transformer.transform(source, result);
 
 		} catch (TransformerConfigurationException e) {
@@ -223,13 +153,13 @@ public class WriterResenje {
 
 		WriterResenje handler = new WriterResenje();
 
-		// Kreiranje Document čvora
+		// Kreiranje Document Ä�vora
 		handler.createDocument();
 
 		// Generisanje DOM stabla
 		handler.generateDOM();
 
-		// Prikaz sadržaja (isprobati sa FileOutputStream-om)
+		// Prikaz sadrÅ¾aja (isprobati sa FileOutputStream-om)
 		handler.transform(System.out);
 
 		/*

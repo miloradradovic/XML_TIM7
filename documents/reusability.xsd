@@ -58,7 +58,7 @@
         <xs:sequence>
             <xs:element name="datum" type="xs:date"/>
             <xs:element name="osnova_za_zalbu" type="xs:string"/>
-            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType mixed="true" name="Tclan">
@@ -90,7 +90,7 @@
     </xs:complexType>
     <xs:complexType mixed="true" name="Tsadrzaj_zalbe">
         <xs:sequence>
-            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
             <xs:element name="ciljani_organ_vlasti" type="xs:string"/>
             <xs:element name="razlog_zalbe" type="re:Topcije"/>
             <xs:element name="datum" type="xs:date"/>
@@ -106,7 +106,7 @@
     </xs:complexType>
     <xs:complexType mixed="true" name="Ttekst_zahteva_zahtevcir">
         <xs:sequence>
-            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
             <xs:element name="opcije" type="re:Topcije_dostave"/>
             <xs:element name="informacija_o_zahtevu" type="xs:string"/>
         </xs:sequence>
@@ -157,7 +157,7 @@
     </xs:complexType>
     <xs:complexType mixed="true" name="Ttekst_zahteva_obavestenja">
         <xs:sequence>
-            <xs:element name="clan" type="re:Tclan"/>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
             <xs:element name="godina">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">

@@ -263,15 +263,16 @@ public class Parser implements ErrorHandler{
 			Parser handler = new Parser();
 			choice = scanner.next();
 			switch (choice) {
-				case "1" -> filePath = "data/xml/resenje.xml";
-				case "2" -> filePath = "data/xml/obavestenje.xml";
-				case "3" -> filePath = "data/xml/zahtevcir.xml";
-				case "4" -> filePath = "data/xml/zalba_cutanje.xml";
-				case "5" -> filePath = "data/xml/zalbanaodlukucir.xml";
-				case "q" -> {
+				case "1" :
+					filePath = "data/xml/resenje.xml"; break;
+				case "2" : filePath = "data/xml/obavestenje.xml"; break;
+				case "3" : filePath = "data/xml/zahtevcir.xml"; break;
+				case "4" : filePath = "data/xml/zalba_cutanje.xml"; break;
+				case "5" : filePath = "data/xml/zalbanaodlukucir.xml"; break;
+				case "q" : {
 					continue;
 				}
-				default -> {
+				default : {
 					System.out.println("Nevalidan unos");
 					continue;
 				}

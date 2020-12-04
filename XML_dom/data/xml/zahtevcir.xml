@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zcir:zahtev
+    xmlns:zcir="http://www.zahtevcir" 
+    xmlns:re="http://www.reusability"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd"
+    mesto="" datum="2000-12-12">
+    
+    <ciljani_organ_vlasti>
+        <naziv_organa></naziv_organa>
+        <sediste_organa></sediste_organa>
+    </ciljani_organ_vlasti>
+ 
+    <naziv>
+        З А Х Т Е В
+        за приступ информацији од јавног значаја
+    </naziv>
+    
+    <tekst_zahteva>
+        На основу <clan broj="15">члана 15. <stav broj="1">ст. 1.</stav></clan> Закона о слободном приступу информацијама од јавног значаја
+        („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), од горе 
+        наведеног органа захтевам:*
+        <opcije>
+            <opcija izabran="false">oбавештење да ли поседује тражену информацију;</opcija>
+            <opcija izabran="false">увид у документ који садржи тражену информацију;</opcija>
+            <opcija izabran="false">копију документа који садржи тражену информацију;</opcija>
+            <opcija izabran="false">достављање копије документа који садржи тражену информацију:**</opcija>
+            <nacini_dostave>
+                <nacin_dostave izabran="false">поштом</nacin_dostave>
+                <nacin_dostave izabran="false">електронском поштом</nacin_dostave>
+                <nacin_dostave izabran="false">факсом</nacin_dostave>
+                <nacin_dostave>на други начин:***
+                    <nacin_dostave_input></nacin_dostave_input>
+                </nacin_dostave>
+            </nacini_dostave>
+        </opcije>
+        Овај захтев се односи на следеће информације:
+        <informacija_o_zahtevu>
+        </informacija_o_zahtevu>
+    </tekst_zahteva>
+    
+    <informacije_o_traziocu>
+        <lice>
+        <osoba>
+            <ime></ime>
+            <prezime></prezime>
+        </osoba>
+        </lice>
+        <adresa>
+            <mesto>
+                
+            </mesto>
+            <ulica broj="0"></ulica>
+            
+        </adresa>
+        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
+    </informacije_o_traziocu>
+    
+    <fusnote>
+        <fusnota>* У кућици означити која законска права на приступ информацијама желите да остварите.</fusnota>
+        <fusnota>** У кућици означити начин достављања копије докумената.</fusnota>
+        <fusnota>*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</fusnota>
+    </fusnote>
+    
+</zcir:zahtev>

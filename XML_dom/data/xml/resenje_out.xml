@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><resenja xmlns="http://resenja/resenje" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://resenja/resenje ../xsd/resenje.xsd">
+  <resenje broj="071-01-1114/2020-03" datum="" tip_resenja="">
+    <uvodne_informacije/>
+    <podaci_o_resenju>
+      <naslov/>
+      <tacka broj="1"/>
+      <tacka broj="2"/>
+    </podaci_o_resenju>
+    <podaci_o_obrazlozenju>
+      <naslov/>
+      <predmet_zalbe/>
+      <postupak_poverenika/>
+      <odluka/>
+    </podaci_o_obrazlozenju>
+    <poverenik/>
+  </resenje>
+</resenja>

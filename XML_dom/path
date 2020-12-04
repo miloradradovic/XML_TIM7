@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><zalba xmlns="http://www.zalbanaodlukucir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" datum="" mesto="" xsi:schemaLocation="http://www.zalbanaodlukucir ../xsd/zalbanaodlukucir.xsd">
+  <naslov/>
+  <podaci_povereniku>
+    <uloga/>
+    <adresa>
+      <mesto/>
+      <ulica broj=""/>
+    </adresa>
+  </podaci_povereniku>
+  <podnaslov/>
+  <zalilac>
+    <tip_lica>
+      <osoba>
+        <ime/>
+        <prezime/>
+      </osoba>
+    </tip_lica>
+    <adresa>
+      <mesto/>
+      <ulica broj=""/>
+    </adresa>
+    <sediste_zalioca/>
+  </zalilac>
+  <protiv_resenja_zakljucak>
+    <naziv_organa_koji_je_doneo_odluku/>
+    <broj/>
+    <od_godine/>
+  </protiv_resenja_zakljucak>
+  <sadrzaj/>
+  <podaci_o_podnosiocu_zalbe>
+    <osoba>
+      <ime/>
+      <prezime/>
+    </osoba>
+    <adresa>
+      <mesto/>
+      <ulica broj=""/>
+    </adresa>
+  </podaci_o_podnosiocu_zalbe>
+  <drugi_podaci_za_kontakt/>
+  <napomena>
+    <naslov/>
+    <tacka/>
+    <tacka/>
+  </napomena>
+</zalba>

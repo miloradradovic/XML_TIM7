@@ -8,8 +8,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.io.Writer;
 
 public class WriterResenje {
 
@@ -62,7 +64,7 @@ public class WriterResenje {
 		rad.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "http://resenja/resenje ../xsd/resenje.xsd");
 
 		Element resenje = document.createElementNS(TARGET_NAMESPACE, "resenje");
-		resenje.setAttribute("broj", "");
+		resenje.setAttribute("broj", "071-01-1114/2020-03");
 		resenje.setAttribute("tip_resenja", "");
 		resenje.setAttribute("datum", "");
 		rad.appendChild(resenje);
@@ -143,7 +145,7 @@ public class WriterResenje {
 
 		if (args.length != 1) {
 
-			filePath = "data/xml/zavrsni_rad.xml";
+			filePath = "data/xml/resenje_out.xml";
 
 			System.out.println("[INFO] No input file, using default \""	+ filePath + "\"");
 
@@ -160,14 +162,12 @@ public class WriterResenje {
 		handler.generateDOM();
 
 		// Prikaz sadrÅ¾aja (isprobati sa FileOutputStream-om)
-		handler.transform(System.out);
+		//handler.transform(System.out);
 
-		/*
 		try {
-			handler.transform(new FileOutputStream("data/xml/zavrsni_rad_out_3.xml"));
+			handler.transform(new FileOutputStream(filePath));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		*/
 	}
 }

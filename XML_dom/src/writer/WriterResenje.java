@@ -70,9 +70,56 @@ public class WriterResenje {
 		Element uvodneInformacije = document.createElementNS(TARGET_NAMESPACE, "uvodne_informacije");
 		resenje.appendChild(uvodneInformacije);
 
+		uvodneInformacije.appendChild(document.createTextNode("Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби коју је изјавио AA, због непоступања "));
+		Element lice = document.createElementNS(TARGET_NAMESPACE, "lice");
+		lice.appendChild(document.createTextNode("Учитељског факултета у Призрену"));
+		uvodneInformacije.appendChild(lice);
 
+		uvodneInformacije.appendChild(document.createTextNode("са привременим седиштем у"));
+		Element adresa = document.createElementNS(TARGET_NAMESPACE, "adresa");
 
-		Element univerzitet = document.createElementNS(TARGET_NAMESPACE, "univerzitet");
+		Element mesto = document.createElementNS(TARGET_NAMESPACE, "mesto");
+		mesto.appendChild(document.createTextNode("Лепосавићу"));
+		adresa.appendChild(mesto);
+
+		uvodneInformacije.appendChild(document.createTextNode(","));
+
+		Element ulica = document.createElementNS(TARGET_NAMESPACE, "ulica");
+		ulica.setAttribute("broj", "66");
+		ulica.appendChild(document.createTextNode("ул. Немањина"));
+		adresa.appendChild(ulica);
+		uvodneInformacije.appendChild(adresa);
+
+		uvodneInformacije.appendChild(document.createTextNode(", по његовом захтеву од "));
+		Element datum = document.createElementNS(TARGET_NAMESPACE, "datum");
+		datum.appendChild(document.createTextNode("16.04.2020."));
+		uvodneInformacije.appendChild(datum);
+
+		uvodneInformacije.appendChild(document.createTextNode(" године за приступ информацијама од јавног значаја, на основу "));
+
+		Element clan = document.createElementNS(TARGET_NAMESPACE, "clan");
+		clan.setAttribute("broj", "35");
+		clan.appendChild(document.createTextNode("члана 35."));
+
+		Element stav = document.createElementNS(TARGET_NAMESPACE, "stav");
+		stav.setAttribute("broj", "1");
+		stav.appendChild(document.createTextNode("став 1."));
+
+		Element tacka = document.createElementNS(TARGET_NAMESPACE, "tacka");
+		tacka.setAttribute("broj", "5");
+		tacka.appendChild(document.createTextNode("тачка 5."));
+
+		stav.appendChild(tacka);
+		clan.appendChild(stav);
+		uvodneInformacije.appendChild(clan);
+
+		uvodneInformacije.appendChild(document.createTextNode("Закона о слободном приступу информацијама од јавног значаја („Сл. гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), а у вези са"));
+
+		clan.setAttribute("broj", "3");
+
+		uvodneInformacije.appendChild(clan);
+
+		/*Element univerzitet = document.createElementNS(TARGET_NAMESPACE, "univerzitet");
 		univerzitet.appendChild(document.createTextNode("Univerzitet u Novom Sadu"));
 		institucija.appendChild(univerzitet);
 
@@ -123,7 +170,7 @@ public class WriterResenje {
 
 		Element poglavlja = document.createElementNS(TARGET_NAMESPACE, "poglavlja");
 		poglavlja.appendChild(document.createComment("Generisati \"poglavlja\" analogno."));
-		rad.appendChild(poglavlja);
+		rad.appendChild(poglavlja);*/
 
 	}
 

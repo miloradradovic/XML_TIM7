@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><zcir:zahtev xmlns:zcir="http://www.zahtevcir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" datum="2000-12-12" mesto="" xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd">
+  <ciljani_organ_vlasti>
+    <naziv_organa/>
+    <sediste_organa/>
+  </ciljani_organ_vlasti>
+  <naziv/>
+  <informacije_o_traziocu>
+    <lice>
+      <osoba>
+        <ime/>
+        <prezime/>
+      </osoba>
+    </lice>
+    <adresa>
+      <mesto/>
+      <ulica broj="0"/>
+    </adresa>
+    <drugi_podaci_za_kontakt/>
+  </informacije_o_traziocu>
+  <fusnote>
+    <fusnota/>
+    <fusnota/>
+    <fusnota/>
+  </fusnote>
+</zcir:zahtev>

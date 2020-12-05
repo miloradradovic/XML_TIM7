@@ -68,122 +68,123 @@ public class WriterZalbaodluka {
 
 		Element naslov = document.createElement("naslov");
 		zalba.appendChild(naslov);
-		
+
 		Element podaciPovereniku = document.createElement("podaci_povereniku");
 		zalba.appendChild(podaciPovereniku);
-		
+
 		Element uloga = document.createElement("uloga");
 		podaciPovereniku.appendChild(uloga);
-		
+
 		Element adresa = document.createElement("adresa");
 		podaciPovereniku.appendChild(adresa);
-				
+
 		Element mesto = document.createElement("mesto");
 		adresa.appendChild(mesto);
-		
+
 		Element ulica = document.createElement("ulica");
 		ulica.setAttribute("broj", "0");
 		adresa.appendChild(ulica);
-		
+
 		Element podnaslov = document.createElement("podnaslov");
 		zalba.appendChild(podnaslov);
-		
+
 		Element zalilac = document.createElement("zalilac");
 		zalba.appendChild(zalilac);
-		
+
 		Element tipLica = document.createElement("tip_lica");
 		zalilac.appendChild(tipLica);
-		
+
 		Element osoba = document.createElement("osoba");
 		tipLica.appendChild(osoba);
 
 		Element ime = document.createElement("ime");
 		osoba.appendChild(ime);
-		
+
 		Element prezime = document.createElement("prezime");
 		osoba.appendChild(prezime);
-		
+
 		Element adresa1 = document.createElement("adresa");
 		podaciPovereniku.appendChild(adresa1);
-				
+
 		Element mesto1 = document.createElement("mesto");
 		adresa1.appendChild(mesto1);
-		
+
 		Element ulica1 = document.createElement("ulica");
 		ulica1.setAttribute("broj", "0");
 		adresa1.appendChild(ulica1);
-		
+
 		zalilac.appendChild(adresa1);
-		
+
 		Element sedisteZalioca = document.createElement("sediste_zalioca");
 		zalilac.appendChild(sedisteZalioca);
-		
+
 		Element protivResenjaZakljucak = document.createElement("protiv_resenja_zakljucka");
 		zalba.appendChild(protivResenjaZakljucak);
-		
+
 		Element nazivOrgana = document.createElement("naziv_organa_koji_je_doneo_odluku");
 		protivResenjaZakljucak.appendChild(nazivOrgana);
-		
+
 		Element broj = document.createElement("broj");
 		broj.appendChild(document.createTextNode("1"));
 		protivResenjaZakljucak.appendChild(broj);
-		
+
 		Element odGodine = document.createElement("od_godine");
 		odGodine.appendChild(document.createTextNode("2000"));
 		protivResenjaZakljucak.appendChild(odGodine);
-		
+
 		Element sadrzaj = document.createElement("sadrzaj");
 		zalba.appendChild(sadrzaj);
-		
+
 		Element datum = document.createElement("datum");
 		datum.appendChild(document.createTextNode("2000-12-12"));
 		sadrzaj.appendChild(datum);
-		
+
 		Element osnovaZaZalbu = document.createElement("osnova_za_zalbu");
 		sadrzaj.appendChild(osnovaZaZalbu);
-		
+
 		Element clan = document.createElement("clan");
 		sadrzaj.appendChild(clan);
-		
+
 		Element podnosiocZalbe = document.createElement("podaci_o_podnosiocu_zalbe");
 		zalba.appendChild(podnosiocZalbe);
-		
+
 		Element osoba1 = document.createElement("osoba");
 		podnosiocZalbe.appendChild(osoba1);
 
 		Element ime1 = document.createElement("ime");
 		osoba1.appendChild(ime1);
-		
+
 		Element prezime1 = document.createElement("prezime");
 		osoba1.appendChild(prezime1);
 
-		
+
 		Element adresa2 = document.createElement("adresa");
 		podnosiocZalbe.appendChild(adresa2);
-				
+
 		Element mesto2 = document.createElement("mesto");
 		adresa2.appendChild(mesto2);
-		
+
 		Element ulica2 = document.createElement("ulica");
 		ulica2.setAttribute("broj", "0");
 		adresa2.appendChild(ulica2);
-		
-		
+
+
 		Element drugiPodaci = document.createElement("drugi_podaci_za_kontakt");
 		podnosiocZalbe.appendChild(drugiPodaci);
-		
+
 		Element napomena = document.createElement("napomena");
 		zalba.appendChild(napomena);
-		
+
 		Element naslov1 = document.createElement("naslov");
 		napomena.appendChild(naslov1);
-		
+
 		Element tacka1 = document.createElement("tacka");
 		napomena.appendChild(tacka1);
-		
+
 		Element tacka2 = document.createElement("tacka");
 		napomena.appendChild(tacka2);
-		
+
+
 	}
 
 	/**

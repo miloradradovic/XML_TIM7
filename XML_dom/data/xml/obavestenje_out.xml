@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><oba:obavestenje xmlns:oba="http://www.obavestenje" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" br_predmeta="" datum="2000-12-12" xsi:schemaLocation="http://www.obavestenje ../xsd/obavestenje.xsd">
+  <naziv_organa sediste=""/>
+  <informacije_o_podnosiocu>
+    <lice>
+      <osoba>
+        <ime/>
+        <prezime/>
+      </osoba>
+    </lice>
+    <adresa>
+      <mesto/>
+      <ulica broj="0"/>
+    </adresa>
+  </informacije_o_podnosiocu>
+  <naslov/>
+  <podnaslov/>
+  <tekst_zahteva>
+    <clan broj="16">
+      <stav broj="1"/>
+    </clan>
+    <godina>2000</godina>
+    <opis_trazene_informacije/>
+    <dan>2000-12-12</dan>
+    <vreme>12</vreme>
+    <radno_vreme>12<pocetak>12</pocetak>
+      <kraj>12</kraj>
+    </radno_vreme>
+    <adresa>
+      <mesto/>
+      <ulica/>
+    </adresa>
+    <broj_kancelarije>1</broj_kancelarije>
+    <opis_troskova>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+      <cena valuta="dinar">100,00</cena>
+    </opis_troskova>
+    <ukupan_trosak>
+      <iznos>0,00</iznos>
+      <broj_racuna>840-742328-843-30</broj_racuna>
+      <poziv_na_broj>97</poziv_na_broj>
+    </ukupan_trosak>
+  </tekst_zahteva>
+  <opcija_dostave>
+    <opcija izabran="false"/>
+    <opcija izabran="false"/>
+  </opcija_dostave>
+</oba:obavestenje>

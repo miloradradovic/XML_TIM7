@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><zc:zalba xmlns:zc="http://www.zalbacutanje" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" datum="2000-12-12" mjesto="" xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd">
+  <naziv/>
+  <podaci_o_primaocu>
+    <uloga/>
+    <adresa>
+      <mesto/>
+      <ulica broj="0"/>
+    </adresa>
+  </podaci_o_primaocu>
+  <sadrzaj_zalbe>
+    <clan broj="22"/>
+    <ciljani_organ_vlasti/>
+    <razlog_zalbe>
+      <opcija izabran="false"/>
+      <opcija izabran="false"/>
+      <opcija izabran="false"/>
+    </razlog_zalbe>
+    <datum>2000-12-12</datum>
+    <podaci_o_zahtjevu_i_informacijama/>
+    <napomena/>
+  </sadrzaj_zalbe>
+  <podaci_o_podnosiocu>
+    <osoba>
+      <ime/>
+      <prezime/>
+    </osoba>
+    <adresa>
+      <mesto/>
+      <ulica/>
+    </adresa>
+    <drugi_podaci_za_kontakt/>
+  </podaci_o_podnosiocu>
+</zc:zalba>

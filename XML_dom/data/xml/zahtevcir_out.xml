@@ -4,6 +4,26 @@
     <sediste_organa/>
   </ciljani_organ_vlasti>
   <naziv/>
+  <tekst_zahteva>
+    <clan broj="15">
+      <stav broj="1"/>
+    </clan>
+    <opcije>
+      <opcija izabran="false"/>
+      <opcija izabran="false"/>
+      <opcija izabran="false"/>
+      <opcija izabran="false"/>
+      <nacini_dostave>
+        <nacin_dostave izabran="false"/>
+        <nacin_dostave izabran="false"/>
+        <nacin_dostave izabran="false"/>
+        <nacin_dostave izabran="false">
+          <nacin_dostave_input/>
+        </nacin_dostave>
+      </nacini_dostave>
+    </opcije>
+    <informacija_o_zahtevu/>
+  </tekst_zahteva>
   <informacije_o_traziocu>
     <lice>
       <osoba>

@@ -57,100 +57,101 @@ public class WriterZahtevcir {
 	public void generateDOM() {
 
 		// Kreiranje i postavljanje korenskog elementa
-				Element zahtevcir = document.createElementNS(TARGET_NAMESPACE,  "zcir:zahtev");
-				document.appendChild(zahtevcir);
+		Element zahtevcir = document.createElementNS(TARGET_NAMESPACE,  "zcir:zahtev");
+		document.appendChild(zahtevcir);
 
-				zahtevcir.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "http://www.zahtevcir ../xsd/zahtevcir.xsd");
+		zahtevcir.setAttributeNS(XSI_NAMESPACE, "xsi:schemaLocation", "http://www.zahtevcir ../xsd/zahtevcir.xsd");
 
-				zahtevcir.setAttribute("mesto", "");
-				zahtevcir.setAttribute("datum", "2000-12-12");
+		zahtevcir.setAttribute("mesto", "");
+		zahtevcir.setAttribute("datum", "2000-12-12");
 
-				Element ciljaniOrganVlasti = document.createElement("ciljani_organ_vlasti");
+		Element ciljaniOrganVlasti = document.createElement("ciljani_organ_vlasti");
 				
-				Element nazivOrgana = document.createElement("naziv_organa");
-				Element sedisteOrgana = document.createElement("sediste_organa");
-				ciljaniOrganVlasti.appendChild(nazivOrgana);
-				ciljaniOrganVlasti.appendChild(sedisteOrgana);
-				zahtevcir.appendChild(ciljaniOrganVlasti);
+		Element nazivOrgana = document.createElement("naziv_organa");
+		Element sedisteOrgana = document.createElement("sediste_organa");
+		ciljaniOrganVlasti.appendChild(nazivOrgana);
+		ciljaniOrganVlasti.appendChild(sedisteOrgana);
+		zahtevcir.appendChild(ciljaniOrganVlasti);
 
 				
 
-				Element naziv = document.createElement("naziv");
-				zahtevcir.appendChild(naziv);
-				Element tekstZahteva = document.createElement("tekst_zahteva");
-				Element clan = document.createElement("clan");
-				clan.setAttribute("broj", "15");
-				Element stav = document.createElement("stav");
-				stav.setAttribute("broj", "1");
-				clan.appendChild(stav);
-				tekstZahteva.appendChild(clan);
+		Element naziv = document.createElement("naziv");
+		zahtevcir.appendChild(naziv);
+		Element tekstZahteva = document.createElement("tekst_zahteva");
+		Element clan = document.createElement("clan");
+		clan.setAttribute("broj", "15");
+		Element stav = document.createElement("stav");
+		stav.setAttribute("broj", "1");
+		clan.appendChild(stav);
+		tekstZahteva.appendChild(clan);
 				
-				Element opcije = document.createElement("opcije");
-				Element opcija1 = document.createElement("opcija");
-				opcija1.setAttribute("izabran", "false");
-				Element opcija2 = document.createElement("opcija");
-				opcija2.setAttribute("izabran", "false");
-				Element opcija3 = document.createElement("opcija");
-				opcija3.setAttribute("izabran", "false");
-				Element opcija4 = document.createElement("opcija");
-				opcija4.setAttribute("izabran", "false");
-				opcije.appendChild(opcija1);
-				opcije.appendChild(opcija2);
-				opcije.appendChild(opcija3);
-				opcije.appendChild(opcija4);
-				Element naciniDostave = document.createElement("nacini_dostave");
-				Element nacinDostave1 = document.createElement("nacin_dostave");
-				nacinDostave1.setAttribute("izabran", "false");
-				Element nacinDostave2 = document.createElement("nacin_dostave");
-				nacinDostave2.setAttribute("izabran", "false");
-				Element nacinDostave3 = document.createElement("nacin_dostave");
-				nacinDostave3.setAttribute("izabran", "false");
-				Element nacinDostave4 = document.createElement("nacin_dostave");
-				nacinDostave4.setAttribute("izabran", "false");
-				Element nacinDostaveInput = document.createElement("nacin_dostave_input");
-				nacinDostave4.appendChild(nacinDostaveInput);
-				naciniDostave.appendChild(nacinDostave1);
-				naciniDostave.appendChild(nacinDostave2);
-				naciniDostave.appendChild(nacinDostave3);
-				naciniDostave.appendChild(nacinDostave4);
-				opcije.appendChild(naciniDostave);
-				tekstZahteva.appendChild(opcije);
+		Element opcije = document.createElement("opcije");
+		Element opcija1 = document.createElement("opcija");
+		opcija1.setAttribute("izabran", "false");
+		Element opcija2 = document.createElement("opcija");
+		opcija2.setAttribute("izabran", "false");
+		Element opcija3 = document.createElement("opcija");
+		opcija3.setAttribute("izabran", "false");
+		Element opcija4 = document.createElement("opcija");
+		opcija4.setAttribute("izabran", "false");
+		opcije.appendChild(opcija1);
+		opcije.appendChild(opcija2);
+		opcije.appendChild(opcija3);
+		opcije.appendChild(opcija4);
+		Element naciniDostave = document.createElement("nacini_dostave");
+		Element nacinDostave1 = document.createElement("nacin_dostave");
+		nacinDostave1.setAttribute("izabran", "false");
+		Element nacinDostave2 = document.createElement("nacin_dostave");
+		nacinDostave2.setAttribute("izabran", "false");
+		Element nacinDostave3 = document.createElement("nacin_dostave");
+		nacinDostave3.setAttribute("izabran", "false");
+		Element nacinDostave4 = document.createElement("nacin_dostave");
+		nacinDostave4.setAttribute("izabran", "false");
+		Element nacinDostaveInput = document.createElement("nacin_dostave_input");
+		nacinDostave4.appendChild(nacinDostaveInput);
+		naciniDostave.appendChild(nacinDostave1);
+		naciniDostave.appendChild(nacinDostave2);
+		naciniDostave.appendChild(nacinDostave3);
+		naciniDostave.appendChild(nacinDostave4);
+		opcije.appendChild(naciniDostave);
+		tekstZahteva.appendChild(opcije);
 				
-				Element informacijaOZahtevu = document.createElement("informacija_o_zahtevu");
-				tekstZahteva.appendChild(informacijaOZahtevu);
+		Element informacijaOZahtevu = document.createElement("informacija_o_zahtevu");
+		tekstZahteva.appendChild(informacijaOZahtevu);
 				
-				Element informacijeOTraziocu = document.createElement("informacije_o_traziocu");
-				Element lice = document.createElement("lice");
-				Element osoba = document.createElement("osoba");
-				Element ime = document.createElement("ime");
-				Element prezime = document.createElement("prezime");
-				osoba.appendChild(ime);
-				osoba.appendChild(prezime);
-				lice.appendChild(osoba);
-				informacijeOTraziocu.appendChild(lice);
-				Element adresa = document.createElement("adresa");
-				Element mesto = document.createElement("mesto");
-				Element ulica = document.createElement("ulica");
-				ulica.setAttribute("broj", "0");
-				adresa.appendChild(mesto);
-				adresa.appendChild(ulica);
-				informacijeOTraziocu.appendChild(adresa);
+		zahtevcir.appendChild(tekstZahteva);
 				
-				Element drugiPodaciZaKontakt = document.createElement("drugi_podaci_za_kontakt");
-				informacijeOTraziocu.appendChild(drugiPodaciZaKontakt);
+		Element informacijeOTraziocu = document.createElement("informacije_o_traziocu");
+		Element lice = document.createElement("lice");
+		Element osoba = document.createElement("osoba");
+		Element ime = document.createElement("ime");
+		Element prezime = document.createElement("prezime");
+		osoba.appendChild(ime);
+		osoba.appendChild(prezime);
+		lice.appendChild(osoba);
+		informacijeOTraziocu.appendChild(lice);
+		Element adresa = document.createElement("adresa");
+		Element mesto = document.createElement("mesto");
+		Element ulica = document.createElement("ulica");
+		ulica.setAttribute("broj", "0");
+		adresa.appendChild(mesto);
+		adresa.appendChild(ulica);
+		informacijeOTraziocu.appendChild(adresa);
 				
-				zahtevcir.appendChild(informacijeOTraziocu);
+		Element drugiPodaciZaKontakt = document.createElement("drugi_podaci_za_kontakt");
+		informacijeOTraziocu.appendChild(drugiPodaciZaKontakt);
 				
-				Element fusnote = document.createElement("fusnote");
-				Element fusnota1 = document.createElement("fusnota");
-				Element fusnota2 = document.createElement("fusnota");
-				Element fusnota3 = document.createElement("fusnota");
-				fusnote.appendChild(fusnota1);
-				fusnote.appendChild(fusnota2);
-				fusnote.appendChild(fusnota3);
+		zahtevcir.appendChild(informacijeOTraziocu);
 				
-				zahtevcir.appendChild(fusnote);
+		Element fusnote = document.createElement("fusnote");
+		Element fusnota1 = document.createElement("fusnota");
+		Element fusnota2 = document.createElement("fusnota");
+		Element fusnota3 = document.createElement("fusnota");
+		fusnote.appendChild(fusnota1);
+		fusnote.appendChild(fusnota2);
+		fusnote.appendChild(fusnota3);
 		
+		zahtevcir.appendChild(fusnote);		
 
 	}
 

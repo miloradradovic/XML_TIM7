@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zc:zalba 
+<zc:zalba_cutanje 
     xmlns:zc="http://www.zalbacutanje" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -43,4 +43,4 @@
         </adresa>
         <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
     </podaci_o_podnosiocu>
-</zc:zalba>
+</zc:zalba_cutanje>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resenja xmlns="http://resenja/resenje"
+<resenje xmlns="http://resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://resenja/resenje resenje.xsd">
-    <resenje broj="071-01-1114/2020-03" tip_resenja="жалба је основана" datum="09.06.2020.">
+    xsi:schemaLocation="http://resenje resenje.xsd"
+    
+    broj="071-01-1114/2020-03" tip_resenja="жалба је основана" datum="09.06.2020.">
         <uvodne_informacije>
             Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби
             коју је изјавио AA, због непоступања <lice>Учитељског факултета у Призрену</lice>са привременим седиштем 
@@ -97,6 +98,4 @@
             </odluka>
         </podaci_o_obrazlozenju>
         <poverenik>Милан Мариновић</poverenik>
-    </resenje>
-  
-</resenja>
+</resenje>

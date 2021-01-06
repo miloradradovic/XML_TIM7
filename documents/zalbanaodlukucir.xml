@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<zoc:zalba
+<zoc:zalba_odluka
     xmlns:zoc="http://www.zalbanaodlukucir" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -87,4 +87,4 @@
              као и копију одлуке органа која се оспорава жалбом.      
         </tacka>                 
     </napomena>
-</zoc:zalba>
+</zoc:zalba_odluka>

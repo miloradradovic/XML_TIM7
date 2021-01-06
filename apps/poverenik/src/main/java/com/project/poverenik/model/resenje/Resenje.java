@@ -47,16 +47,16 @@ import javax.xml.bind.annotation.XmlType;
     "podaciOObrazlozenju",
     "poverenik"
 })
-@XmlRootElement(name = "resenje", namespace = "http://resenje")
+@XmlRootElement(name = "resenje")
 public class Resenje {
 
-    @XmlElement(name = "uvodne_informacije", namespace = "http://resenje", required = true)
+    @XmlElement(name = "uvodne_informacije", required = true)
     protected TuvodneInformacije uvodneInformacije;
-    @XmlElement(name = "podaci_o_resenju", namespace = "http://resenje", required = true)
+    @XmlElement(name = "podaci_o_resenju", required = true)
     protected TpodaciOResenju podaciOResenju;
-    @XmlElement(name = "podaci_o_obrazlozenju", namespace = "http://resenje", required = true)
+    @XmlElement(name = "podaci_o_obrazlozenju", required = true)
     protected TpodaciOObrazlozenju podaciOObrazlozenju;
-    @XmlElement(namespace = "http://resenje", required = true)
+    @XmlElement(required = true)
     protected String poverenik;
     @XmlAttribute(name = "datum")
     protected String datum;

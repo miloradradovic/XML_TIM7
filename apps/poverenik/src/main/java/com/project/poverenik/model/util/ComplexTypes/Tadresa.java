@@ -44,9 +44,9 @@ import javax.xml.bind.annotation.XmlValue;
 })
 public class Tadresa {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String mesto;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa.Ulica ulica;
 
     /**

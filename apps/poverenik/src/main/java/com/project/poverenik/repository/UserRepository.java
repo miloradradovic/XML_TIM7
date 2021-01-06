@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
 
 @Repository
 public class UserRepository {
@@ -14,40 +15,36 @@ public class UserRepository {
     @Autowired
     public ExistManager existManager;
 
-    private final String collectionUri = "/db/proverenik/xml/users";
+    private final String collectionUri = "db/proverenik/xml/users";
 
     private final String TARGET_NAMESPACE = "http://user";
 
     public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-            + "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
+            + "\" xmlns:u=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
             + "</xu:modifications>";
     public final  String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-            + "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
+            + "\" xmlns:u=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
             + "</xu:modifications>";
 
-    public void create(User user) throws XMLDBException {
-        existManager.store(collectionUri, user.getUsername(), user);
+    public boolean create(User user) throws XMLDBException {
+        return existManager.store(collectionUri, user.getEmail(), user);
     }
 
-    public ResourceSet getOne(String username) throws XMLDBException {
-
-        return existManager.retrieve(collectionUri, String.format("/*[local-name()='user'][username[text()='%s']]", username), TARGET_NAMESPACE);
+    public XMLResource getOne(String email) throws XMLDBException {
+        return existManager.load(collectionUri, email);
     }
 
     public ResourceSet getAll() throws XMLDBException {
-        return existManager.retrieve(collectionUri, "/*[local-name()='user']", TARGET_NAMESPACE);
+        return existManager.retrieve(collectionUri, "/user", TARGET_NAMESPACE);
     }
 
-    public void update(){
-
+    public boolean delete(String email) throws XMLDBException {
+        return existManager.remove(collectionUri, email);
     }
 
-    public void delete(){
+    public boolean update(String email, String xmlEntity) throws XMLDBException {
 
+        String xpath =  String.format("/u:user[u:email='%s']", email);
+        return existManager.update(collectionUri, email, xpath, xmlEntity, UPDATE);
     }
-
-    public void append(){
-
-    }
-
 }

@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TpodaciPovereniku {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String uloga;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa adresa;
 
     /**

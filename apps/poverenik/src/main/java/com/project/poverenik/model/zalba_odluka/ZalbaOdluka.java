@@ -55,21 +55,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "zalba_odluka", namespace = "http://www.zalbanaodlukucir")
 public class ZalbaOdluka {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected String naslov;
-    @XmlElement(name = "podaci_povereniku", required = true)
+    @XmlElement(name = "podaci_povereniku", namespace = "http://www.zalbanaodlukucir", required = true)
     protected TpodaciPovereniku podaciPovereniku;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected String podnaslov;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected Tzalilac zalilac;
-    @XmlElement(name = "protiv_resenja_zakljucka", required = true)
+    @XmlElement(name = "protiv_resenja_zakljucka", namespace = "http://www.zalbanaodlukucir", required = true)
     protected TprotivResenjaZakljucka protivResenjaZakljucka;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected Tsadrzaj sadrzaj;
-    @XmlElement(name = "podaci_o_podnosiocu_zalbe", required = true)
+    @XmlElement(name = "podaci_o_podnosiocu_zalbe", namespace = "http://www.zalbanaodlukucir", required = true)
     protected TpodaciOPodnosiocu podaciOPodnosiocuZalbe;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected Tnapomena napomena;
     @XmlAttribute(name = "mesto")
     protected String mesto;

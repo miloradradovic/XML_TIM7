@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tstav", namespace = "http://resenje", propOrder = {
+@XmlType(name = "Tstav", propOrder = {
     "content"
 })
 public class Tstav {

@@ -47,7 +47,7 @@ import javax.xml.bind.annotation.XmlValue;
 })
 public class TopisTroskova {
 
-    @XmlElementRef(name = "cena", type = JAXBElement.class)
+    @XmlElementRef(name = "cena", namespace = "http://www.reusability", type = JAXBElement.class)
     @XmlMixed
     protected List<Serializable> content;
 

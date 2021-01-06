@@ -49,13 +49,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "zalba_cutanje", namespace = "http://www.zalbacutanje")
 public class ZalbaCutanje {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.zalbacutanje", required = true)
     protected String naziv;
-    @XmlElement(name = "podaci_o_primaocu", required = true)
+    @XmlElement(name = "podaci_o_primaocu", namespace = "http://www.zalbacutanje", required = true)
     protected TpodaciPovereniku podaciOPrimaocu;
-    @XmlElement(name = "sadrzaj_zalbe", required = true)
+    @XmlElement(name = "sadrzaj_zalbe", namespace = "http://www.zalbacutanje", required = true)
     protected TsadrzajZalbe sadrzajZalbe;
-    @XmlElement(name = "podaci_o_podnosiocu", required = true)
+    @XmlElement(name = "podaci_o_podnosiocu", namespace = "http://www.zalbacutanje", required = true)
     protected TpodaciOPodnosiocu podaciOPodnosiocu;
     @XmlAttribute(name = "mjesto")
     protected String mjesto;

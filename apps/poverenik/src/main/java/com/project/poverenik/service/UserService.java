@@ -28,8 +28,7 @@ public class UserService {
 
     public boolean create(User user) throws XMLDBException {
         if (jaxB.validate(user.getClass(), user)){
-            userRepository.create(user);
-            return true;
+            return userRepository.create(user);
         }
         return false;
     }
@@ -42,6 +41,8 @@ public class UserService {
 
         while (resourceIterator.hasMoreResources()){
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
             JAXBContext context = JAXBContext.newInstance(User.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             User user = (User) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
@@ -50,17 +51,28 @@ public class UserService {
         return new UserList(users);
     }
 
-    public User getOne(String username) throws XMLDBException, JAXBException {
-        ResourceSet resourceSet = userRepository.getOne(username);
-        ResourceIterator resourceIterator = resourceSet.getIterator();
+    public User getOne(String email) throws XMLDBException, JAXBException {
+        XMLResource xmlResource = userRepository.getOne(email);
+
+        if(xmlResource == null)
+            return null;
+
         User user = null;
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            JAXBContext context = JAXBContext.newInstance(User.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            user = (User) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-        }
+        JAXBContext context = JAXBContext.newInstance(User.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        user = (User) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+
         return user;
+    }
+
+    public boolean delete(String email) throws XMLDBException {
+        return userRepository.delete(email);
+    }
+
+    public boolean update(User user) throws JAXBException, XMLDBException {
+        String patch = jaxB.marshall(user.getClass(), user);
+        patch = patch.substring(patch.lastIndexOf("<u:email>"), patch.indexOf("</u:password>") + "</u:password>".length());
+        return userRepository.update(user.getEmail(), patch);
     }
 }

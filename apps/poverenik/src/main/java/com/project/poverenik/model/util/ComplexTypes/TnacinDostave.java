@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TnacinDostave {
 
-    @XmlElementRef(name = "nacin_dostave_input", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "nacin_dostave_input", namespace = "http://www.reusability", type = JAXBElement.class, required = false)
     @XmlMixed
     protected List<Serializable> content;
     @XmlAttribute(name = "izabran")

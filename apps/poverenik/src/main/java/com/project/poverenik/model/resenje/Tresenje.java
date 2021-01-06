@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tresenje", namespace = "http://resenje")
+@XmlType(name = "Tresenje")
 public class Tresenje {
 
 

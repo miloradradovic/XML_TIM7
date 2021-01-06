@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TciljaniOrganVlasti {
 
-    @XmlElement(name = "naziv_organa", required = true)
+    @XmlElement(name = "naziv_organa", namespace = "http://www.reusability", required = true)
     protected String nazivOrgana;
-    @XmlElement(name = "sediste_organa", required = true)
+    @XmlElement(name = "sediste_organa", namespace = "http://www.reusability", required = true)
     protected String sedisteOrgana;
 
     /**

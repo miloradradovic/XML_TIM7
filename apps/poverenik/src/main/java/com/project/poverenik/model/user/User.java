@@ -18,8 +18,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="email">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;pattern value="[^@]+@[^\.]+\..+"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
  *         &lt;element name="password">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -38,46 +43,19 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "username",
     "email",
     "password",
     "role"
 })
-@XmlRootElement(name = "user")
+@XmlRootElement(name = "user", namespace = "http://user")
 public class User {
 
-    @XmlElement(required = true)
-    protected String username;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://user", required = true)
     protected String email;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://user", required = true)
     protected String password;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://user", required = true)
     protected String role;
-
-    /**
-     * Gets the value of the username property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Sets the value of the username property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUsername(String value) {
-        this.username = value;
-    }
 
     /**
      * Gets the value of the email property.

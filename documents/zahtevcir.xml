@@ -6,60 +6,60 @@
     xsi:schemaLocation="http://www.zahtevcir zahtevcir.xsd" 
     mesto="" datum="2000-12-12">
     
-    <ciljani_organ_vlasti>
-        <naziv_organa></naziv_organa>
-        <sediste_organa></sediste_organa>
-    </ciljani_organ_vlasti>
+    <zcir:ciljani_organ_vlasti>
+        <re:naziv_organa></re:naziv_organa>
+        <re:sediste_organa></re:sediste_organa>
+    </zcir:ciljani_organ_vlasti>
  
-    <naziv>
+    <zcir:naziv>
         З А Х Т Е В
         за приступ информацији од јавног значаја
-    </naziv>
+    </zcir:naziv>
     
-    <tekst_zahteva>
-        На основу <clan broj="15">члана 15. <stav broj="1">ст. 1.</stav></clan> Закона о слободном приступу информацијама од јавног значаја
+    <zcir:tekst_zahteva>
+        На основу <re:clan broj="15">члана 15. <re:stav broj="1">ст. 1.</re:stav></re:clan> Закона о слободном приступу информацијама од јавног значаја
         („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), од горе 
         наведеног органа захтевам:*
-        <opcije>
-            <opcija izabran="false">oбавештење да ли поседује тражену информацију;</opcija>
-            <opcija izabran="false">увид у документ који садржи тражену информацију;</opcija>
-            <opcija izabran="false">копију документа који садржи тражену информацију;</opcija>
-            <opcija izabran="false">достављање копије документа који садржи тражену информацију:**</opcija>
-            <nacini_dostave>
-                <nacin_dostave izabran="false">поштом</nacin_dostave>
-                <nacin_dostave izabran="false">електронском поштом</nacin_dostave>
-                <nacin_dostave izabran="false">факсом</nacin_dostave>
-                <nacin_dostave>на други начин:***
-                    <nacin_dostave_input></nacin_dostave_input>
-                </nacin_dostave>
-            </nacini_dostave>
-        </opcije>
+        <re:opcije>
+            <re:opcija izabran="false">oбавештење да ли поседује тражену информацију;</re:opcija>
+            <re:opcija izabran="false">увид у документ који садржи тражену информацију;</re:opcija>
+            <re:opcija izabran="false">копију документа који садржи тражену информацију;</re:opcija>
+            <re:opcija izabran="false">достављање копије документа који садржи тражену информацију:**</re:opcija>
+            <re:nacini_dostave>
+                <re:nacin_dostave izabran="false">поштом</re:nacin_dostave>
+                <re:nacin_dostave izabran="false">електронском поштом</re:nacin_dostave>
+                <re:nacin_dostave izabran="false">факсом</re:nacin_dostave>
+                <re:nacin_dostave>на други начин:***
+                    <re:nacin_dostave_input></re:nacin_dostave_input>
+                </re:nacin_dostave>
+            </re:nacini_dostave>
+        </re:opcije>
         Овај захтев се односи на следеће информације:
-        <informacija_o_zahtevu>
-        </informacija_o_zahtevu>
-    </tekst_zahteva>
+        <re:informacija_o_zahtevu>
+        </re:informacija_o_zahtevu>
+    </zcir:tekst_zahteva>
     
-    <informacije_o_traziocu>
-        <lice>
-        <osoba>
-            <ime></ime>
-            <prezime></prezime>
-        </osoba>
-        </lice>
-        <adresa>
-            <mesto>
+    <zcir:informacije_o_traziocu>
+        <re:lice>
+            <re:osoba>
+                <re:ime></re:ime>
+                <re:prezime></re:prezime>
+        </re:osoba>
+        </re:lice>
+        <re:adresa>
+            <re:mesto>
                 
-            </mesto>
-            <ulica broj="0"></ulica>
+            </re:mesto>
+            <re:ulica broj="0"></re:ulica>
             
-        </adresa>
-        <drugi_podaci_za_kontakt></drugi_podaci_za_kontakt>
-    </informacije_o_traziocu>
+        </re:adresa>
+        <re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt>
+    </zcir:informacije_o_traziocu>
     
-    <fusnote>
-        <fusnota>* У кућици означити која законска права на приступ информацијама желите да остварите.</fusnota>
-        <fusnota>** У кућици означити начин достављања копије докумената.</fusnota>
-        <fusnota>*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</fusnota>
-    </fusnote>
+    <zcir:fusnote>
+        <re:fusnota>* У кућици означити која законска права на приступ информацијама желите да остварите.</re:fusnota>
+        <re:fusnota>** У кућици означити начин достављања копије докумената.</re:fusnota>
+        <re:fusnota>*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</re:fusnota>
+    </zcir:fusnote>
     
 </zcir:zahtev>

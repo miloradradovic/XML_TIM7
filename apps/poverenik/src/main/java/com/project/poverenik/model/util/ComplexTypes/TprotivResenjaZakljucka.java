@@ -44,12 +44,12 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TprotivResenjaZakljucka {
 
-    @XmlElement(name = "naziv_organa_koji_je_doneo_odluku", required = true)
+    @XmlElement(name = "naziv_organa_koji_je_doneo_odluku", namespace = "http://www.reusability", required = true)
     protected String nazivOrganaKojiJeDoneoOdluku;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger broj;
-    @XmlElement(name = "od_godine", required = true)
+    @XmlElement(name = "od_godine", namespace = "http://www.reusability", required = true)
     protected String odGodine;
 
     /**

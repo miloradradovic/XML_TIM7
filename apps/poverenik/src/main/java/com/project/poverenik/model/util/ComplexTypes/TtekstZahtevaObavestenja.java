@@ -62,16 +62,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class TtekstZahtevaObavestenja {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "adresa", type = JAXBElement.class),
-        @XmlElementRef(name = "godina", type = JAXBElement.class),
-        @XmlElementRef(name = "vreme", type = JAXBElement.class),
-        @XmlElementRef(name = "broj_kancelarije", type = JAXBElement.class),
-        @XmlElementRef(name = "radno_vreme", type = JAXBElement.class),
-        @XmlElementRef(name = "opis_troskova", type = JAXBElement.class),
-        @XmlElementRef(name = "opis_trazene_informacije", type = JAXBElement.class),
-        @XmlElementRef(name = "ukupan_trosak", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", type = JAXBElement.class),
-        @XmlElementRef(name = "dan", type = JAXBElement.class)
+        @XmlElementRef(name = "opis_trazene_informacije", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "broj_kancelarije", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "radno_vreme", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "opis_troskova", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "godina", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "adresa", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "dan", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "vreme", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "ukupan_trosak", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -94,17 +94,17 @@ public class TtekstZahtevaObavestenja {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Tadresa }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
      * {@link JAXBElement }{@code <}{@link TradnoVreme }{@code >}
-     * {@link JAXBElement }{@code <}{@link TopisTroskova }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link TukupanTrosak }{@code >}
      * {@link String }
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link TopisTroskova }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tadresa }{@code >}
      * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link TukupanTrosak }{@code >}
      * 
      * 
      */

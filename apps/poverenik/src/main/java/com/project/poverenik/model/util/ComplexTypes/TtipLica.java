@@ -3,6 +3,7 @@ package com.project.poverenik.model.util.ComplexTypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -33,7 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TtipLica {
 
+    @XmlElement(namespace = "http://www.reusability")
     protected Tosoba osoba;
+    @XmlElement(namespace = "http://www.reusability")
     protected String preduzece;
 
     /**

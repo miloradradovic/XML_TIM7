@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlValue;
 })
 public class Topcije {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<Topcije.Opcija> opcija;
 
     /**

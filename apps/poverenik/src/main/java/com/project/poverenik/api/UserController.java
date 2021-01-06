@@ -28,14 +28,37 @@ public class UserController {
 
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<UserList> getUsers() throws XMLDBException, JAXBException {
-        return new ResponseEntity(userService.getAll(), HttpStatus.OK);
+        UserList users = userService.getAll();
+
+        if(users != null)
+            return new ResponseEntity(users, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value="/{username}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> getUser(@PathVariable String username) throws XMLDBException, JAXBException {
-        User user = userService.getOne(username);
+    @RequestMapping(value="/{email}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getUser(@PathVariable String email) throws XMLDBException, JAXBException {
+        User user = userService.getOne(email);
         if(user != null)
             return new ResponseEntity(user, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value="/{email}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity delete(@PathVariable String email) throws XMLDBException, JAXBException {
+        boolean isDeleted = userService.delete(email);
+        if(isDeleted)
+            return new ResponseEntity(HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity update(@RequestBody User user) throws XMLDBException, JAXBException {
+        boolean isUpdated = userService.update(user);
+        if(isUpdated)
+            return new ResponseEntity(HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

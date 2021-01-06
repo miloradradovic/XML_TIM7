@@ -36,16 +36,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tuvodne_informacije", namespace = "http://resenje", propOrder = {
+@XmlType(name = "Tuvodne_informacije", propOrder = {
     "content"
 })
 public class TuvodneInformacije {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "adresa", namespace = "http://resenje", type = JAXBElement.class)
+        @XmlElementRef(name = "adresa", namespace = "http://resenje", type = JAXBElement.class),
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -68,11 +68,11 @@ public class TuvodneInformacije {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link Tadresa }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link String }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tadresa }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * 
      * 
      */

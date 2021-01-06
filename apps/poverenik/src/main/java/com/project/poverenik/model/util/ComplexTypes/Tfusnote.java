@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Tfusnote {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<String> fusnota;
 
     /**

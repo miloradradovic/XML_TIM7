@@ -45,12 +45,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class TsadrzajZalbe {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "ciljani_organ_vlasti", type = JAXBElement.class),
-        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", type = JAXBElement.class),
-        @XmlElementRef(name = "napomena", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", type = JAXBElement.class),
-        @XmlElementRef(name = "razlog_zalbe", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", type = JAXBElement.class)
+        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "ciljani_organ_vlasti", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "razlog_zalbe", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "napomena", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -73,13 +73,13 @@ public class TsadrzajZalbe {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link String }
+     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Topcije }{@code >}
-     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
-     * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */

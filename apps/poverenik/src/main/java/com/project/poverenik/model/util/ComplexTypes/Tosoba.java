@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Tosoba {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String ime;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String prezime;
 
     /**

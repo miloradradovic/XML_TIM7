@@ -41,9 +41,9 @@ import javax.xml.bind.annotation.XmlType;
 public class TtekstZahtevaZahtevcir {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "informacija_o_zahtevu", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", type = JAXBElement.class),
-        @XmlElementRef(name = "opcije", type = JAXBElement.class)
+        @XmlElementRef(name = "informacija_o_zahtevu", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "opcije", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -66,9 +66,9 @@ public class TtekstZahtevaZahtevcir {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link String }
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link TopcijeDostave }{@code >}
      * 
      * 

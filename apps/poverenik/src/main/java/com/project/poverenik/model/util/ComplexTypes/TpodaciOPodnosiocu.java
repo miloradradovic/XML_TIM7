@@ -36,11 +36,11 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TpodaciOPodnosiocu {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tosoba osoba;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa adresa;
-    @XmlElement(name = "drugi_podaci_za_kontakt", required = true)
+    @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.reusability", required = true)
     protected String drugiPodaciZaKontakt;
 
     /**

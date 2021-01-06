@@ -95,14 +95,17 @@ public class ExistManager {
     }
 
     //create new
-    public void store(String collectionId, String documentId, Object xml) throws XMLDBException {
+    public boolean store(String collectionUri, String documentId, Object xml) throws XMLDBException {
         createConnection();
         Collection collection = null;
         XMLResource res = null;
         OutputStream os = new ByteArrayOutputStream();
 
+        if(this.load(collectionUri, documentId) != null)
+            return false;
+
         try {
-            collection = getOrCreateCollection(collectionId, 0);
+            collection = getOrCreateCollection(collectionUri, 0);
             res = (XMLResource) collection.createResource(documentId, XMLResource.RESOURCE_TYPE);
 
             JAXBContext context = JAXBContext.newInstance(xml.getClass());
@@ -118,8 +121,10 @@ public class ExistManager {
         }finally {
             closeConnection(collection, res);
         }
+        return true;
     }
 
+    //get one
     public XMLResource load(String collectionUri, String documentId) throws XMLDBException {
         createConnection();
         Collection collection = null;
@@ -129,9 +134,6 @@ public class ExistManager {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
             collection.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) collection.getResource(documentId);
-
-            if (res == null)
-                System.out.println("[WARNING] Document '" + documentId + "' can not be found!");
 
             return res;
         }finally {
@@ -145,7 +147,7 @@ public class ExistManager {
         }
     }
 
-    //get one or all
+    //get all
     public ResourceSet retrieve(String collectionUri, String xPathExp, String TARGET_NAMESPACE) throws XMLDBException {
         createConnection();
         Collection collection = null;
@@ -173,7 +175,8 @@ public class ExistManager {
         return res;
     }
 
-    public void remove(String collectionUri, String documentId) throws XMLDBException {
+    //delete
+    public boolean remove(String collectionUri, String documentId) throws XMLDBException {
         createConnection();
 
         Collection collection = null;
@@ -181,6 +184,9 @@ public class ExistManager {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(),
                     authenticationManager.getPassword());
             Resource foundFile = collection.getResource(documentId);
+
+            if(foundFile == null)
+                return false;
 
             collection.removeResource(foundFile);
 
@@ -194,18 +200,24 @@ public class ExistManager {
                 }
             }
         }
+
+        return true;
     }
 
-    public void update(String collectionUri, String document, String contextXPath, String patch, String UPDATE) throws XMLDBException {
+    public boolean update(String collectionUri, String documentId, String contextXPath, String patch, String UPDATE) throws XMLDBException {
         createConnection();
         Collection collection = null;
         try {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
 
+            Resource foundFile = collection.getResource(documentId);
+            if(foundFile == null)
+                return false;
+
             XUpdateQueryService service = (XUpdateQueryService) collection.getService("XUpdateQueryService", "1.0");
             service.setProperty(OutputKeys.INDENT, "yes");
 
-            service.updateResource(document, String.format(UPDATE, contextXPath, patch));
+            long mods = service.updateResource(documentId, String.format(UPDATE, contextXPath, patch));
         }finally {
             if (collection != null) {
                 try {
@@ -215,6 +227,7 @@ public class ExistManager {
                 }
             }
         }
+        return true;
     }
 
     public void append(String collectionUri, String document, String contextXPath, String patch, String APPEND) throws XMLDBException {
@@ -226,7 +239,7 @@ public class ExistManager {
             XUpdateQueryService service = (XUpdateQueryService) collection.getService("XUpdateQueryService", "1.0");
             service.setProperty(OutputKeys.INDENT, "yes");
 
-            service.updateResource(document, String.format(APPEND, contextXPath, patch));
+             service.updateResource(document, String.format(APPEND, contextXPath, patch));
         }finally {
             if (collection != null)
                 collection.close();
@@ -234,13 +247,13 @@ public class ExistManager {
     }
 
     // for adding from file
-    public void storeFromFile(String collectionId, String documentId, String filePath) throws XMLDBException {
+    public void storeFromFile(String collectionUri, String documentId, String filePath) throws XMLDBException {
         createConnection();
         Collection collection = null;
         XMLResource res = null;
 
         try {
-            collection = getOrCreateCollection(collectionId, 0);
+            collection = getOrCreateCollection(collectionUri, 0);
             res = (XMLResource) collection.createResource(documentId, XMLResource.RESOURCE_TYPE);
             File f = new File(filePath);
 

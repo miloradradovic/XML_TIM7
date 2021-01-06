@@ -54,9 +54,9 @@ import javax.xml.bind.annotation.XmlType;
 public class TukupanTrosak {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "broj_racuna", type = JAXBElement.class),
-        @XmlElementRef(name = "iznos", type = JAXBElement.class),
-        @XmlElementRef(name = "poziv_na_broj", type = JAXBElement.class)
+        @XmlElementRef(name = "broj_racuna", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "iznos", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "poziv_na_broj", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -80,9 +80,9 @@ public class TukupanTrosak {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link String }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
-     * {@link String }
      * 
      * 
      */

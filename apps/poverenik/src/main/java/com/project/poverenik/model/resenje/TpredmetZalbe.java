@@ -35,15 +35,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tpredmet_zalbe", namespace = "http://resenje", propOrder = {
+@XmlType(name = "Tpredmet_zalbe", propOrder = {
     "content"
 })
 public class TpredmetZalbe {
 
     @XmlElementRefs({
         @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;

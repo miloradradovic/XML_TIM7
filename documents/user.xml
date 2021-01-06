@@ -3,8 +3,7 @@
     xmlns:u="http://user"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://user user.xsd">
-    <username></username>
-    <email></email>
-    <password>12345678</password>
-    <role></role>
+    <u:email></u:email>
+    <u:password>12345678</u:password>
+    <u:role></u:role>
 </u:user>

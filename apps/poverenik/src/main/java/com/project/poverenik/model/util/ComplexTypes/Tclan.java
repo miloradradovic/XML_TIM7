@@ -50,7 +50,7 @@ import javax.xml.bind.annotation.XmlValue;
 })
 public class Tclan {
 
-    @XmlElementRef(name = "stav", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "stav", namespace = "http://www.reusability", type = JAXBElement.class, required = false)
     @XmlMixed
     protected List<Serializable> content;
     @XmlAttribute(name = "broj")
@@ -75,8 +75,8 @@ public class Tclan {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
      * {@link JAXBElement }{@code <}{@link Tclan.Stav }{@code >}
+     * {@link String }
      * 
      * 
      */

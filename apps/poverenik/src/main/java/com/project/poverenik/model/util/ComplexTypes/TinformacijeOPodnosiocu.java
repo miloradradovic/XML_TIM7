@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TinformacijeOPodnosiocu {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected TtipLica lice;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa adresa;
 
     /**

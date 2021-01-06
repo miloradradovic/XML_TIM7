@@ -36,9 +36,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Tnapomena {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String naslov;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<String> tacka;
 
     /**

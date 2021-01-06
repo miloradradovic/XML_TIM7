@@ -44,18 +44,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Todluka", namespace = "http://resenje", propOrder = {
+@XmlType(name = "Todluka", propOrder = {
     "content"
 })
 public class Todluka {
 
     @XmlElementRefs({
         @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "iznos", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class)
+        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class),
+        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -80,11 +80,11 @@ public class Todluka {
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
      * 
      * 
      */

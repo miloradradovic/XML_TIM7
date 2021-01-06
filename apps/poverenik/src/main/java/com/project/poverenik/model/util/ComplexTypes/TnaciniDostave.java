@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TnaciniDostave {
 
-    @XmlElement(name = "nacin_dostave", required = true)
+    @XmlElement(name = "nacin_dostave", namespace = "http://www.reusability", required = true)
     protected List<TnacinDostave> nacinDostave;
 
     /**

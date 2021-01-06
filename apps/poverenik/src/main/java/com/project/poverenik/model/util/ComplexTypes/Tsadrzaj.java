@@ -42,9 +42,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class Tsadrzaj {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "clan", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", type = JAXBElement.class),
-        @XmlElementRef(name = "osnova_za_zalbu", type = JAXBElement.class)
+        @XmlElementRef(name = "osnova_za_zalbu", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -67,10 +67,10 @@ public class Tsadrzaj {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * 
      * 
      */

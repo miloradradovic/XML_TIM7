@@ -1,7 +1,5 @@
 
-package com.project.poverenik.model.util;
-
-import com.project.poverenik.model.util.Tosoba;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

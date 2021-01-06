@@ -1,5 +1,5 @@
 
-package com.project.poverenik.model.util;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

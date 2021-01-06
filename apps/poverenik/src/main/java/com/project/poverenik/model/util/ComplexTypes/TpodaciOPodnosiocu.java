@@ -1,5 +1,5 @@
 
-package com.project.poverenik.model.util;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,18 +8,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Tzalilac complex type.
+ * <p>Java class for Tpodaci_o_podnosiocu complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tzalilac">
+ * &lt;complexType name="Tpodaci_o_podnosiocu">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="tip_lica" type="{http://www.reusability}Ttip_lica"/>
+ *         &lt;element name="osoba" type="{http://www.reusability}Tosoba"/>
  *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
- *         &lt;element name="sediste_zalioca" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="drugi_podaci_za_kontakt" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,42 +29,42 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tzalilac", namespace = "http://www.reusability", propOrder = {
-    "tipLica",
+@XmlType(name = "Tpodaci_o_podnosiocu", namespace = "http://www.reusability", propOrder = {
+    "osoba",
     "adresa",
-    "sedisteZalioca"
+    "drugiPodaciZaKontakt"
 })
-public class Tzalilac {
+public class TpodaciOPodnosiocu {
 
-    @XmlElement(name = "tip_lica", required = true)
-    protected TtipLica tipLica;
+    @XmlElement(required = true)
+    protected Tosoba osoba;
     @XmlElement(required = true)
     protected Tadresa adresa;
-    @XmlElement(name = "sediste_zalioca", required = true)
-    protected String sedisteZalioca;
+    @XmlElement(name = "drugi_podaci_za_kontakt", required = true)
+    protected String drugiPodaciZaKontakt;
 
     /**
-     * Gets the value of the tipLica property.
+     * Gets the value of the osoba property.
      * 
      * @return
      *     possible object is
-     *     {@link TtipLica }
+     *     {@link Tosoba }
      *     
      */
-    public TtipLica getTipLica() {
-        return tipLica;
+    public Tosoba getOsoba() {
+        return osoba;
     }
 
     /**
-     * Sets the value of the tipLica property.
+     * Sets the value of the osoba property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TtipLica }
+     *     {@link Tosoba }
      *     
      */
-    public void setTipLica(TtipLica value) {
-        this.tipLica = value;
+    public void setOsoba(Tosoba value) {
+        this.osoba = value;
     }
 
     /**
@@ -92,27 +92,27 @@ public class Tzalilac {
     }
 
     /**
-     * Gets the value of the sedisteZalioca property.
+     * Gets the value of the drugiPodaciZaKontakt property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getSedisteZalioca() {
-        return sedisteZalioca;
+    public String getDrugiPodaciZaKontakt() {
+        return drugiPodaciZaKontakt;
     }
 
     /**
-     * Sets the value of the sedisteZalioca property.
+     * Sets the value of the drugiPodaciZaKontakt property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSedisteZalioca(String value) {
-        this.sedisteZalioca = value;
+    public void setDrugiPodaciZaKontakt(String value) {
+        this.drugiPodaciZaKontakt = value;
     }
 
 }

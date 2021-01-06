@@ -1,5 +1,5 @@
 
-package com.project.poverenik.model.util;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,32 +11,25 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for Tradno_vreme complex type.
+ * <p>Java class for Tsadrzaj_zalbe complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tradno_vreme">
+ * &lt;complexType name="Tsadrzaj_zalbe">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="pocetak">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;pattern value="([0-9]|1[0-9]|2[0-4])"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="kraj">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;pattern value="([0-9]|1[0-9]|2[0-4])"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
+ *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/>
+ *         &lt;element name="ciljani_organ_vlasti" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="razlog_zalbe" type="{http://www.reusability}Topcije"/>
+ *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="podaci_o_zahtjevu_i_informacijama" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="napomena" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,14 +39,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tradno_vreme", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tsadrzaj_zalbe", namespace = "http://www.reusability", propOrder = {
     "content"
 })
-public class TradnoVreme {
+public class TsadrzajZalbe {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "kraj", type = JAXBElement.class),
-        @XmlElementRef(name = "pocetak", type = JAXBElement.class)
+        @XmlElementRef(name = "ciljani_organ_vlasti", type = JAXBElement.class),
+        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", type = JAXBElement.class),
+        @XmlElementRef(name = "napomena", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", type = JAXBElement.class),
+        @XmlElementRef(name = "razlog_zalbe", type = JAXBElement.class),
+        @XmlElementRef(name = "datum", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -77,8 +74,12 @@ public class TradnoVreme {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link String }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link Topcije }{@code >}
+     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     * {@link String }
      * 
      * 
      */

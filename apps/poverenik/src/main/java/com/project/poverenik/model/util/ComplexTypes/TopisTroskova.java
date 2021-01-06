@@ -1,36 +1,38 @@
 
-package com.project.poverenik.model.util;
+package com.project.poverenik.model.util.ComplexTypes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for Topcije_dostave complex type.
+ * <p>Java class for Topis_troskova complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Topcije_dostave">
+ * &lt;complexType name="Topis_troskova">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="opcija" maxOccurs="unbounded">
+ *         &lt;element name="cena" maxOccurs="unbounded">
  *           &lt;complexType>
  *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;attribute name="izabran" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *               &lt;extension base="&lt;http://www.reusability>Tcena">
+ *                 &lt;attribute name="valuta" type="{http://www.w3.org/2001/XMLSchema}string" />
  *               &lt;/extension>
  *             &lt;/simpleContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="nacini_dostave" type="{http://www.reusability}Tnacini_dostave"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,68 +42,43 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Topcije_dostave", namespace = "http://www.reusability", propOrder = {
-    "opcija",
-    "naciniDostave"
+@XmlType(name = "Topis_troskova", namespace = "http://www.reusability", propOrder = {
+    "content"
 })
-public class TopcijeDostave {
+public class TopisTroskova {
 
-    @XmlElement(required = true)
-    protected List<TopcijeDostave.Opcija> opcija;
-    @XmlElement(name = "nacini_dostave", required = true)
-    protected TnaciniDostave naciniDostave;
+    @XmlElementRef(name = "cena", type = JAXBElement.class)
+    @XmlMixed
+    protected List<Serializable> content;
 
     /**
-     * Gets the value of the opcija property.
+     * Gets the value of the content property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the opcija property.
+     * This is why there is not a <CODE>set</CODE> method for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getOpcija().add(newItem);
+     *    getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TopcijeDostave.Opcija }
+     * {@link JAXBElement }{@code <}{@link TopisTroskova.Cena }{@code >}
+     * {@link String }
      * 
      * 
      */
-    public List<TopcijeDostave.Opcija> getOpcija() {
-        if (opcija == null) {
-            opcija = new ArrayList<TopcijeDostave.Opcija>();
+    public List<Serializable> getContent() {
+        if (content == null) {
+            content = new ArrayList<Serializable>();
         }
-        return this.opcija;
-    }
-
-    /**
-     * Gets the value of the naciniDostave property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TnaciniDostave }
-     *     
-     */
-    public TnaciniDostave getNaciniDostave() {
-        return naciniDostave;
-    }
-
-    /**
-     * Sets the value of the naciniDostave property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TnaciniDostave }
-     *     
-     */
-    public void setNaciniDostave(TnaciniDostave value) {
-        this.naciniDostave = value;
+        return this.content;
     }
 
 
@@ -113,8 +90,8 @@ public class TopcijeDostave {
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;attribute name="izabran" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+     *     &lt;extension base="&lt;http://www.reusability>Tcena">
+     *       &lt;attribute name="valuta" type="{http://www.w3.org/2001/XMLSchema}string" />
      *     &lt;/extension>
      *   &lt;/simpleContent>
      * &lt;/complexType>
@@ -126,12 +103,12 @@ public class TopcijeDostave {
     @XmlType(name = "", propOrder = {
         "value"
     })
-    public static class Opcija {
+    public static class Cena {
 
         @XmlValue
         protected String value;
-        @XmlAttribute(name = "izabran")
-        protected Boolean izabran;
+        @XmlAttribute(name = "valuta")
+        protected String valuta;
 
         /**
          * Gets the value of the value property.
@@ -158,27 +135,27 @@ public class TopcijeDostave {
         }
 
         /**
-         * Gets the value of the izabran property.
+         * Gets the value of the valuta property.
          * 
          * @return
          *     possible object is
-         *     {@link Boolean }
+         *     {@link String }
          *     
          */
-        public Boolean isIzabran() {
-            return izabran;
+        public String getValuta() {
+            return valuta;
         }
 
         /**
-         * Sets the value of the izabran property.
+         * Sets the value of the valuta property.
          * 
          * @param value
          *     allowed object is
-         *     {@link Boolean }
+         *     {@link String }
          *     
          */
-        public void setIzabran(Boolean value) {
-            this.izabran = value;
+        public void setValuta(String value) {
+            this.valuta = value;
         }
 
     }

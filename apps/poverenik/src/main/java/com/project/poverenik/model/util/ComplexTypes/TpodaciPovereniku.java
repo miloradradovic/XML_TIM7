@@ -1,5 +1,5 @@
 
-package com.project.poverenik.model.util;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Tinformacije_o_podnosiocu complex type.
+ * <p>Java class for Tpodaci_povereniku complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tinformacije_o_podnosiocu">
+ * &lt;complexType name="Tpodaci_povereniku">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="lice" type="{http://www.reusability}Ttip_lica"/>
+ *         &lt;element name="uloga" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -28,39 +28,39 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tinformacije_o_podnosiocu", namespace = "http://www.reusability", propOrder = {
-    "lice",
+@XmlType(name = "Tpodaci_povereniku", namespace = "http://www.reusability", propOrder = {
+    "uloga",
     "adresa"
 })
-public class TinformacijeOPodnosiocu {
+public class TpodaciPovereniku {
 
     @XmlElement(required = true)
-    protected TtipLica lice;
+    protected String uloga;
     @XmlElement(required = true)
     protected Tadresa adresa;
 
     /**
-     * Gets the value of the lice property.
+     * Gets the value of the uloga property.
      * 
      * @return
      *     possible object is
-     *     {@link TtipLica }
+     *     {@link String }
      *     
      */
-    public TtipLica getLice() {
-        return lice;
+    public String getUloga() {
+        return uloga;
     }
 
     /**
-     * Sets the value of the lice property.
+     * Sets the value of the uloga property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TtipLica }
+     *     {@link String }
      *     
      */
-    public void setLice(TtipLica value) {
-        this.lice = value;
+    public void setUloga(String value) {
+        this.uloga = value;
     }
 
     /**

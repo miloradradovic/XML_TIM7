@@ -43,16 +43,16 @@ import javax.xml.bind.annotation.XmlType;
     "password",
     "role"
 })
-@XmlRootElement(name = "user", namespace = "http://user")
+@XmlRootElement(name = "user")
 public class User {
 
-    @XmlElement(namespace = "http://user", required = true)
+    @XmlElement(required = true)
     protected String username;
-    @XmlElement(namespace = "http://user", required = true)
+    @XmlElement(required = true)
     protected String email;
-    @XmlElement(namespace = "http://user", required = true)
+    @XmlElement(required = true)
     protected String password;
-    @XmlElement(namespace = "http://user", required = true)
+    @XmlElement(required = true)
     protected String role;
 
     /**

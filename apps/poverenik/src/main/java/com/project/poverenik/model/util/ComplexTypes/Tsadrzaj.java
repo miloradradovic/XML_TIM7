@@ -1,8 +1,5 @@
 
-package com.project.poverenik.model.util;
-
-import com.project.poverenik.model.util.Tclan;
-import com.project.poverenik.model.util.Topcije;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,21 +15,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for Tsadrzaj_zalbe complex type.
+ * <p>Java class for Tsadrzaj complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tsadrzaj_zalbe">
+ * &lt;complexType name="Tsadrzaj">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/>
- *         &lt;element name="ciljani_organ_vlasti" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="razlog_zalbe" type="{http://www.reusability}Topcije"/>
  *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="podaci_o_zahtjevu_i_informacijama" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="napomena" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="osnova_za_zalbu" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,18 +36,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tsadrzaj_zalbe", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tsadrzaj", namespace = "http://www.reusability", propOrder = {
     "content"
 })
-public class TsadrzajZalbe {
+public class Tsadrzaj {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "ciljani_organ_vlasti", type = JAXBElement.class),
-        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", type = JAXBElement.class),
-        @XmlElementRef(name = "napomena", type = JAXBElement.class),
         @XmlElementRef(name = "clan", type = JAXBElement.class),
-        @XmlElementRef(name = "razlog_zalbe", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", type = JAXBElement.class)
+        @XmlElementRef(name = "datum", type = JAXBElement.class),
+        @XmlElementRef(name = "osnova_za_zalbu", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -76,12 +67,9 @@ public class TsadrzajZalbe {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
-     * {@link JAXBElement }{@code <}{@link Topcije }{@code >}
      * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
      * 
      * 

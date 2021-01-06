@@ -1,7 +1,5 @@
 
-package com.project.poverenik.model.util;
-
-import com.project.poverenik.model.util.TnacinDostave;
+package com.project.poverenik.model.util.ComplexTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Tnacini_dostave complex type.
+ * <p>Java class for Tfusnote complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tnacini_dostave">
+ * &lt;complexType name="Tfusnote">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nacin_dostave" type="{http://www.reusability}Tnacin_dostave" maxOccurs="unbounded"/>
+ *         &lt;element name="fusnota" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tnacini_dostave", namespace = "http://www.reusability", propOrder = {
-    "nacinDostave"
+@XmlType(name = "Tfusnote", namespace = "http://www.reusability", propOrder = {
+    "fusnota"
 })
-public class TnaciniDostave {
+public class Tfusnote {
 
-    @XmlElement(name = "nacin_dostave", required = true)
-    protected List<TnacinDostave> nacinDostave;
+    @XmlElement(required = true)
+    protected List<String> fusnota;
 
     /**
-     * Gets the value of the nacinDostave property.
+     * Gets the value of the fusnota property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the nacinDostave property.
+     * This is why there is not a <CODE>set</CODE> method for the fusnota property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNacinDostave().add(newItem);
+     *    getFusnota().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TnacinDostave }
+     * {@link String }
      * 
      * 
      */
-    public List<TnacinDostave> getNacinDostave() {
-        if (nacinDostave == null) {
-            nacinDostave = new ArrayList<TnacinDostave>();
+    public List<String> getFusnota() {
+        if (fusnota == null) {
+            fusnota = new ArrayList<String>();
         }
-        return this.nacinDostave;
+        return this.fusnota;
     }
 
 }

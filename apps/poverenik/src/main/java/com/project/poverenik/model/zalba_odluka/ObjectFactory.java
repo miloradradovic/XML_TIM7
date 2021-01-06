@@ -1,7 +1,7 @@
 
 package com.project.poverenik.model.zalba_odluka;
 
-import com.project.poverenik.model.util.*;
+import com.project.poverenik.model.util.ComplexTypes.*;
 
 import java.math.BigInteger;
 import javax.xml.bind.JAXBElement;

@@ -1,9 +1,9 @@
 
 package com.project.poverenik.model.zalba_cutanje;
 
-import com.project.poverenik.model.util.TpodaciOPodnosiocu;
-import com.project.poverenik.model.util.TpodaciPovereniku;
-import com.project.poverenik.model.util.TsadrzajZalbe;
+import com.project.poverenik.model.util.ComplexTypes.TpodaciOPodnosiocu;
+import com.project.poverenik.model.util.ComplexTypes.TpodaciPovereniku;
+import com.project.poverenik.model.util.ComplexTypes.TsadrzajZalbe;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

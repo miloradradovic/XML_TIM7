@@ -27,16 +27,6 @@ public class ExistManager {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    private static final String TARGET_NAMESPACE = "http://user";
-
-    public static final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-            + "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
-            + "</xu:modifications>";
-    public static final String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-            + "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
-            + "</xu:modifications>";
-
-
     public void createConnection() throws XMLDBException {
         Database db = new DatabaseImpl();
         db.setProperty("create-database", "true");
@@ -118,7 +108,6 @@ public class ExistManager {
             JAXBContext context = JAXBContext.newInstance(xml.getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
             marshaller.marshal(xml, os);
 
             res.setContent(os);
@@ -156,7 +145,8 @@ public class ExistManager {
         }
     }
 
-    public ResourceSet retrieve(String collectionUri, String xPathExp) throws XMLDBException {
+    //get one or all
+    public ResourceSet retrieve(String collectionUri, String xPathExp, String TARGET_NAMESPACE) throws XMLDBException {
         createConnection();
         Collection collection = null;
         ResourceSet res = null;
@@ -206,7 +196,7 @@ public class ExistManager {
         }
     }
 
-    public void update(String collectionUri, String document, String contextXPath, String patch) throws XMLDBException {
+    public void update(String collectionUri, String document, String contextXPath, String patch, String UPDATE) throws XMLDBException {
         createConnection();
         Collection collection = null;
         try {
@@ -227,7 +217,7 @@ public class ExistManager {
         }
     }
 
-    public void append(String collectionUri, String document, String contextXPath, String patch) throws XMLDBException {
+    public void append(String collectionUri, String document, String contextXPath, String patch, String APPEND) throws XMLDBException {
         createConnection();
         Collection collection = null;
         try {

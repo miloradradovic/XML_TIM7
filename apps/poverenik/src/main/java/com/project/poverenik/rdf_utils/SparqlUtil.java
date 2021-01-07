@@ -1,4 +1,4 @@
-package com.project.poverenik.rdf;
+package com.project.poverenik.rdf_utils;
 
 public class SparqlUtil {
 

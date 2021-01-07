@@ -14,6 +14,7 @@
             </xs:sequence>
             <xs:attribute name="mjesto" type="xs:string"/>
             <xs:attribute name="datum" type="xs:date"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

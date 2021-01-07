@@ -1,4 +1,4 @@
-package com.project.poverenik.rdf;
+package com.project.poverenik.rdf_utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +30,7 @@ public class MetadataExtractor {
 	
 	private TransformerFactory transformerFactory;
 
-	private static final String XSLT_FILE = "src/main/java/com/project/poverenik/rdf/grddl.xsl";
+	private static final String XSLT_FILE = "src/main/resources/xsl/grddl.xsl";
 	
 	public MetadataExtractor() throws SAXException, IOException {
 		
@@ -67,28 +67,5 @@ public class MetadataExtractor {
 		grddlTransformer.transform(source, result);
 		
 	}
-	
-	
-	/*public void test() throws Exception {
-
-		System.out.println("[INFO] " + MetadataExtractor.class.getSimpleName());
-		
-		String filePath = "gen/grddl_metadata.rdf";
-		
-		InputStream in = new FileInputStream(new File("data/rdfa/contacts.xml")); 
-
-		OutputStream out = new FileOutputStream(filePath);
-		
-		extractMetadata(in, out);
-		
-		System.out.println("[INFO] File \"" + filePath + "\" generated successfully.");
-		
-		System.out.println("[INFO] End.");
-
-	}
-
-	public static void main(String[] args) throws Exception {
-		new MetadataExtractor().test();
-	}*/
 
 }

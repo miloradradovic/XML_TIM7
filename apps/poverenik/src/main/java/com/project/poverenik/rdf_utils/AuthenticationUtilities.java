@@ -1,4 +1,4 @@
-package com.project.poverenik.rdf;
+package com.project.poverenik.rdf_utils;
 
 import java.io.IOException;
 import java.io.InputStream;

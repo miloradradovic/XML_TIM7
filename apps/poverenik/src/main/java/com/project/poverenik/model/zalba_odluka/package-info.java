@@ -3,7 +3,8 @@
         namespace="http://www.zalbanaodlukucir",
         xmlns={@XmlNs(prefix="zoc",
                 namespaceURI="http://www.zalbanaodlukucir"),
-                @XmlNs(prefix="re", namespaceURI = "http://www.reusability")})
+                @XmlNs(prefix="re", namespaceURI = "http://www.reusability"),
+                @XmlNs(prefix="pred", namespaceURI = "http://examples/predicate/")})
 package com.project.poverenik.model.zalba_odluka;
 
 import javax.xml.bind.annotation.XmlNs;

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
@@ -35,16 +36,18 @@ public class MetadataService {
 
 	private static final String SPARQL_NAMED_GRAPH_URI = "/tim7/metadata";
 	
-	public void extractMetadata(String graph, InputStream xmlDocument) throws XMLDBException, JAXBException, IOException, SAXException, TransformerException {
+	public void extractMetadata(String graph, OutputStream os) throws XMLDBException, JAXBException, IOException, SAXException, TransformerException {
 	
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 		
 		MetadataExtractor metadataExtractor = new MetadataExtractor();
 		
 		String rdfFilePath = "src/main/resources/rdf_data/output.rdf";
-				
+
+		ByteArrayInputStream inStream = new ByteArrayInputStream( ((ByteArrayOutputStream) os).toByteArray() );
+
 		metadataExtractor.extractMetadata(
-				xmlDocument, 
+				inStream,
 				new FileOutputStream(new File(rdfFilePath)));
 		
 		Model model = ModelFactory.createDefaultModel();

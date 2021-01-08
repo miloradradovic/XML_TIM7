@@ -12,17 +12,29 @@ import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XPathQueryService;
 import org.xmldb.api.modules.XUpdateQueryService;
 
+import com.project.poverenik.model.resenje.Resenje;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
+import com.project.poverenik.service.MetadataService;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 import javax.xml.transform.OutputKeys;
+
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 
 @Component
 public class ExistManager {
+	
+	@Autowired
+	private MetadataService metadataService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -111,11 +123,20 @@ public class ExistManager {
             JAXBContext context = JAXBContext.newInstance(xml.getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.setProperty("com.sun.xml.bind.xmlHeaders", 
+            	    " <?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            marshaller.setProperty("com.sun.xml.bind.xmlHeaders", 
+            	    "<?xml-stylesheet type=\"text/xsl\" href=\"../xsl/grddl.xsl\"?>");
             marshaller.marshal(xml, os);
-
+           
             res.setContent(os);
             collection.storeResource(res);
-
+            
+            if (xml instanceof Resenje)
+            	metadataService.extractMetadata("/resenja", os);
+            else
+            	metadataService.extractMetadata("/zalbe", os);
+           
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

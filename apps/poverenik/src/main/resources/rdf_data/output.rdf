@@ -1,23 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:responseTo xmlns:pred="http://examples/predicate/" rdf:resource="http://zalbe/2"/>
+  <rdf:Description rdf:about="http://zalbe/6">
+    <pred:datum xmlns:pred="http://examples/predicate/" rdf:datatype="date">2000-12-12</pred:datum>
   </rdf:Description>
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:datum xmlns:pred="http://examples/predicate/" rdf:datatype="date">2020-06-11</pred:datum>
+  <rdf:Description rdf:about="http://zalbe/6">
+    <pred:mesto xmlns:pred="http://examples/predicate/" rdf:datatype="string">Београд</pred:mesto>
   </rdf:Description>
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:trazilac xmlns:pred="http://examples/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">1</pred:trazilac>
+  <rdf:Description rdf:about="http://zalbe/6">
+    <pred:podnosilac xmlns:pred="http://examples/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">2</pred:podnosilac>
   </rdf:Description>
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:organVlasti xmlns:pred="http://examples/predicate/" rdf:datatype="string">Учитељски факултет у Призрену</pred:organVlasti>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:mesto xmlns:pred="http://examples/predicate/" rdf:datatype="string">Лепосавићу</pred:mesto>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:taksa xmlns:pred="http://examples/predicate/" rdf:datatype="double">390,00</pred:taksa>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://resenja/071-01-1115/2020-03">
-    <pred:poverenik xmlns:pred="http://examples/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">2</pred:poverenik>
+  <rdf:Description rdf:about="http://zalbe/6">
+    <pred:organ_vlasti xmlns:pred="http://examples/predicate/" rdf:datatype="string"/>
   </rdf:Description>
 </rdf:RDF>

@@ -62,6 +62,8 @@ public class ZalbaCutanje {
     protected TsadrzajZalbe sadrzajZalbe;
     @XmlElement(name = "podaci_o_podnosiocu", namespace = "http://www.zalbacutanje", required = true)
     protected TpodaciOPodnosiocu podaciOPodnosiocu;
+    @XmlAttribute(name = "id")
+    protected String id;
     @XmlAttribute(name = "mjesto")
     protected String mjesto;
     @XmlAttribute(name = "datum")
@@ -92,6 +94,14 @@ public class ZalbaCutanje {
      */
     public void setNaziv(String value) {
         this.naziv = value;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**

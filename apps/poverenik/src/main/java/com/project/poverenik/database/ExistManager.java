@@ -132,6 +132,9 @@ public class ExistManager {
 
         try {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
+            if(collection == null){
+                return null;
+            }
             collection.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) collection.getResource(documentId);
 

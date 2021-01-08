@@ -12,6 +12,7 @@
                 <xs:element name="sadrzaj_zalbe" type="re:Tsadrzaj_zalbe"/>
                 <xs:element name="podaci_o_podnosiocu" type="re:Tpodaci_o_podnosiocu"/>
             </xs:sequence>
+            <xs:attribute name="id" type="xs:string"/>
             <xs:attribute name="mjesto" type="xs:string"/>
             <xs:attribute name="datum" type="xs:date"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>

@@ -2,7 +2,8 @@
         elementFormDefault = XmlNsForm.QUALIFIED,
         namespace = "http://www.zalbacutanje",
         xmlns={@XmlNs(prefix="zc",
-                namespaceURI="http://www.zalbacutanje")})
+                namespaceURI="http://www.zalbacutanje"),
+        @XmlNs(prefix="re", namespaceURI = "http://www.reusability")})
 package com.project.poverenik.model.zalba_cutanje;
 
 import javax.xml.bind.annotation.XmlNs;

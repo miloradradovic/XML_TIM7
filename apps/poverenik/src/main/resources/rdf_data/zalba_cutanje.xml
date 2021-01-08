@@ -10,7 +10,7 @@
 	vocab="http://examples/predicate/"
 	about="http://zalbe/1"
 	
-    mjesto="" datum="2000-12-12" property="pred:datum" datatype="xs:date" content="2000-12-12">
+    id = "1" mjesto="" datum="2000-12-12" property="pred:datum" datatype="xs:date" content="2000-12-12">
     <zc:naziv>
         ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)
     </zc:naziv>

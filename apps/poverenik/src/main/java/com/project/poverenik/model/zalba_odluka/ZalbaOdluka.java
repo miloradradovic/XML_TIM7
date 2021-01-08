@@ -3,14 +3,18 @@ package com.project.poverenik.model.zalba_odluka;
 
 import com.project.poverenik.model.util.ComplexTypes.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -34,6 +38,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;/sequence>
  *       &lt;attribute name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" />
+ *       &lt;anyAttribute processContents='lax'/>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -76,6 +81,8 @@ public class ZalbaOdluka {
     @XmlAttribute(name = "datum")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datum;
+    @XmlAnyAttribute
+    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     /**
      * Gets the value of the naslov property.
@@ -315,6 +322,24 @@ public class ZalbaOdluka {
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
+    }
+
+    /**
+     * Gets a map that contains attributes that aren't bound to any typed property on this class.
+     * 
+     * <p>
+     * the map is keyed by the name of the attribute and 
+     * the value is the string value of the attribute.
+     * 
+     * the map returned by this method is live, and you can add new attribute
+     * by updating the map directly. Because of this design, there's no setter.
+     * 
+     * 
+     * @return
+     *     always non-null
+     */
+    public Map<QName, String> getOtherAttributes() {
+        return otherAttributes;
     }
 
 }

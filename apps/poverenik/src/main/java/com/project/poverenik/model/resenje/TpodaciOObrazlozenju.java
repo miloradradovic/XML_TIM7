@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tpodaci_o_obrazlozenju", propOrder = {
+@XmlType(name = "Tpodaci_o_obrazlozenju", namespace = "http://resenje", propOrder = {
     "naslov",
     "predmetZalbe",
     "postupakPoverenika",
@@ -38,13 +38,13 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TpodaciOObrazlozenju {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://resenje", required = true)
     protected String naslov;
-    @XmlElement(name = "predmet_zalbe", required = true)
+    @XmlElement(name = "predmet_zalbe", namespace = "http://resenje", required = true)
     protected TpredmetZalbe predmetZalbe;
-    @XmlElement(name = "postupak_poverenika", required = true)
+    @XmlElement(name = "postupak_poverenika", namespace = "http://resenje", required = true)
     protected TppostupakPoverenika postupakPoverenika;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://resenje", required = true)
     protected Object odluka;
 
     /**

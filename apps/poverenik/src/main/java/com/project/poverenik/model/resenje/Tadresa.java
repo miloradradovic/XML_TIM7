@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tadresa", propOrder = {
+@XmlType(name = "Tadresa", namespace = "http://resenje", propOrder = {
     "content"
 })
 public class Tadresa {
@@ -74,9 +74,9 @@ public class Tadresa {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tadresa.Ulica }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link String }
      * 
      * 
      */

@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="last_name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="email">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -43,6 +45,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "name",
+    "lastName",
     "email",
     "password",
     "role"
@@ -51,11 +55,63 @@ import javax.xml.bind.annotation.XmlType;
 public class User {
 
     @XmlElement(namespace = "http://user", required = true)
+    protected String name;
+    @XmlElement(name = "last_name", namespace = "http://user", required = true)
+    protected String lastName;
+    @XmlElement(namespace = "http://user", required = true)
     protected String email;
     @XmlElement(namespace = "http://user", required = true)
     protected String password;
     @XmlElement(namespace = "http://user", required = true)
     protected String role;
+
+    /**
+     * Gets the value of the name property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the value of the name property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    /**
+     * Gets the value of the lastName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Sets the value of the lastName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLastName(String value) {
+        this.lastName = value;
+    }
 
     /**
      * Gets the value of the email property.

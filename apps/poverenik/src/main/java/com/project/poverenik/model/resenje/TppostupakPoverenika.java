@@ -36,15 +36,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tppostupak_poverenika", propOrder = {
+@XmlType(name = "Tppostupak_poverenika", namespace = "http://resenje", propOrder = {
     "content"
 })
 public class TppostupakPoverenika {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
         @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class)
     })
     @XmlMixed
@@ -68,10 +68,10 @@ public class TppostupakPoverenika {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 

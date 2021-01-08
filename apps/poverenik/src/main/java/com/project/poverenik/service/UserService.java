@@ -72,7 +72,8 @@ public class UserService {
 
     public boolean update(User user) throws JAXBException, XMLDBException {
         String patch = jaxB.marshall(user.getClass(), user);
-        patch = patch.substring(patch.lastIndexOf("<u:email>"), patch.indexOf("</u:password>") + "</u:password>".length());
+        //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
+        patch = patch.substring(patch.lastIndexOf("<u:name>"), patch.indexOf("</u:role>") + "</u:role>".length());
         return userRepository.update(user.getEmail(), patch);
     }
 }

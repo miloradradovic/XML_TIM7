@@ -1,12 +1,16 @@
 
 package com.project.poverenik.model.util.ComplexTypes;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -19,7 +23,15 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="mesto">
+ *           &lt;complexType>
+ *             &lt;simpleContent>
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *                 &lt;anyAttribute processContents='lax'/>
+ *               &lt;/extension>
+ *             &lt;/simpleContent>
+ *           &lt;/complexType>
+ *         &lt;/element>
  *         &lt;element name="ulica">
  *           &lt;complexType>
  *             &lt;simpleContent>
@@ -45,7 +57,7 @@ import javax.xml.bind.annotation.XmlValue;
 public class Tadresa {
 
     @XmlElement(namespace = "http://www.reusability", required = true)
-    protected String mesto;
+    protected Tadresa.Mesto mesto;
     @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa.Ulica ulica;
 
@@ -54,10 +66,10 @@ public class Tadresa {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Tadresa.Mesto }
      *     
      */
-    public String getMesto() {
+    public Tadresa.Mesto getMesto() {
         return mesto;
     }
 
@@ -66,10 +78,10 @@ public class Tadresa {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Tadresa.Mesto }
      *     
      */
-    public void setMesto(String value) {
+    public void setMesto(Tadresa.Mesto value) {
         this.mesto = value;
     }
 
@@ -95,6 +107,79 @@ public class Tadresa {
      */
     public void setUlica(Tadresa.Ulica value) {
         this.ulica = value;
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType>
+     *   &lt;simpleContent>
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+     *       &lt;anyAttribute processContents='lax'/>
+     *     &lt;/extension>
+     *   &lt;/simpleContent>
+     * &lt;/complexType>
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class Mesto {
+
+        @XmlValue
+        protected String value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
     }
 
 

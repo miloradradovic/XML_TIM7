@@ -24,45 +24,22 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _TadresaUlica_QNAME = new QName("http://resenje", "ulica");
+    private final static QName _TadresaMesto_QNAME = new QName("http://resenje", "mesto");
     private final static QName _TclanStav_QNAME = new QName("http://resenje", "stav");
     private final static QName _TclanTacka_QNAME = new QName("http://resenje", "tacka");
+    private final static QName _TodlukaTrazilac_QNAME = new QName("http://resenje", "trazilac");
     private final static QName _TodlukaIznos_QNAME = new QName("http://resenje", "iznos");
     private final static QName _TodlukaDatum_QNAME = new QName("http://resenje", "datum");
     private final static QName _TodlukaLice_QNAME = new QName("http://resenje", "lice");
-    private final static QName _TodlukaMesto_QNAME = new QName("http://resenje", "mesto");
     private final static QName _TodlukaClan_QNAME = new QName("http://resenje", "clan");
     private final static QName _TuvodneInformacijeAdresa_QNAME = new QName("http://resenje", "adresa");
-    private final static QName _TadresaUlica_QNAME = new QName("http://resenje", "ulica");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.project.poverenik.model.resenje
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Tstav }
-     * 
-     */
-    public Tstav createTstav() {
-        return new Tstav();
-    }
-
-    /**
-     * Create an instance of {@link Tclan }
-     * 
-     */
-    public Tclan createTclan() {
-        return new Tclan();
-    }
-
-    /**
-     * Create an instance of {@link Tadresa }
-     * 
-     */
-    public Tadresa createTadresa() {
-        return new Tadresa();
     }
 
     /**
@@ -74,43 +51,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TuvodneInformacije }
+     * Create an instance of {@link Ttacka }
      * 
      */
-    public TuvodneInformacije createTuvodneInformacije() {
-        return new TuvodneInformacije();
+    public Ttacka createTtacka() {
+        return new Ttacka();
     }
 
     /**
-     * Create an instance of {@link TpodaciOResenju }
+     * Create an instance of {@link Tstav }
      * 
      */
-    public TpodaciOResenju createTpodaciOResenju() {
-        return new TpodaciOResenju();
-    }
-
-    /**
-     * Create an instance of {@link TpodaciOObrazlozenju }
-     * 
-     */
-    public TpodaciOObrazlozenju createTpodaciOObrazlozenju() {
-        return new TpodaciOObrazlozenju();
-    }
-
-    /**
-     * Create an instance of {@link Todluka }
-     * 
-     */
-    public Todluka createTodluka() {
-        return new Todluka();
-    }
-
-    /**
-     * Create an instance of {@link Tresenje }
-     * 
-     */
-    public Tresenje createTresenje() {
-        return new Tresenje();
+    public Tstav createTstav() {
+        return new Tstav();
     }
 
     /**
@@ -122,6 +75,70 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Tclan }
+     * 
+     */
+    public Tclan createTclan() {
+        return new Tclan();
+    }
+
+    /**
+     * Create an instance of {@link Todluka }
+     * 
+     */
+    public Todluka createTodluka() {
+        return new Todluka();
+    }
+
+    /**
+     * Create an instance of {@link Tadresa }
+     * 
+     */
+    public Tadresa createTadresa() {
+        return new Tadresa();
+    }
+
+    /**
+     * Create an instance of {@link TpodaciOResenju }
+     * 
+     */
+    public TpodaciOResenju createTpodaciOResenju() {
+        return new TpodaciOResenju();
+    }
+
+    /**
+     * Create an instance of {@link TuvodneInformacije }
+     * 
+     */
+    public TuvodneInformacije createTuvodneInformacije() {
+        return new TuvodneInformacije();
+    }
+
+    /**
+     * Create an instance of {@link TpodaciOObrazlozenju }
+     * 
+     */
+    public TpodaciOObrazlozenju createTpodaciOObrazlozenju() {
+        return new TpodaciOObrazlozenju();
+    }
+
+    /**
+     * Create an instance of {@link Resenje.Poverenik }
+     * 
+     */
+    public Resenje.Poverenik createResenjePoverenik() {
+        return new Resenje.Poverenik();
+    }
+
+    /**
+     * Create an instance of {@link Tresenje }
+     * 
+     */
+    public Tresenje createTresenje() {
+        return new Tresenje();
+    }
+
+    /**
      * Create an instance of {@link TppostupakPoverenika }
      * 
      */
@@ -130,11 +147,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Ttacka }
+     * Create an instance of {@link Ttacka.Trazilac }
      * 
      */
-    public Ttacka createTtacka() {
-        return new Ttacka();
+    public Ttacka.Trazilac createTtackaTrazilac() {
+        return new Ttacka.Trazilac();
     }
 
     /**
@@ -146,6 +163,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link TpredmetZalbe.Trazilac }
+     * 
+     */
+    public TpredmetZalbe.Trazilac createTpredmetZalbeTrazilac() {
+        return new TpredmetZalbe.Trazilac();
+    }
+
+    /**
      * Create an instance of {@link Tclan.Tacka }
      * 
      */
@@ -154,11 +179,53 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Todluka.Trazilac }
+     * 
+     */
+    public Todluka.Trazilac createTodlukaTrazilac() {
+        return new Todluka.Trazilac();
+    }
+
+    /**
      * Create an instance of {@link Tadresa.Ulica }
      * 
      */
     public Tadresa.Ulica createTadresaUlica() {
         return new Tadresa.Ulica();
+    }
+
+    /**
+     * Create an instance of {@link TpodaciOResenju.Naslov }
+     * 
+     */
+    public TpodaciOResenju.Naslov createTpodaciOResenjuNaslov() {
+        return new TpodaciOResenju.Naslov();
+    }
+
+    /**
+     * Create an instance of {@link TuvodneInformacije.Trazilac }
+     * 
+     */
+    public TuvodneInformacije.Trazilac createTuvodneInformacijeTrazilac() {
+        return new TuvodneInformacije.Trazilac();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Tadresa.Ulica }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "ulica", scope = Tadresa.class)
+    public JAXBElement<Tadresa.Ulica> createTadresaUlica(Tadresa.Ulica value) {
+        return new JAXBElement<Tadresa.Ulica>(_TadresaUlica_QNAME, Tadresa.Ulica.class, Tadresa.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = Tadresa.class)
+    public JAXBElement<String> createTadresaMesto(String value) {
+        return new JAXBElement<String>(_TadresaMesto_QNAME, String.class, Tadresa.class, value);
     }
 
     /**
@@ -177,6 +244,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://resenje", name = "tacka", scope = Tclan.class)
     public JAXBElement<Tclan.Tacka> createTclanTacka(Tclan.Tacka value) {
         return new JAXBElement<Tclan.Tacka>(_TclanTacka_QNAME, Tclan.Tacka.class, Tclan.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Todluka.Trazilac }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "trazilac", scope = Todluka.class)
+    public JAXBElement<Todluka.Trazilac> createTodlukaTrazilac(Todluka.Trazilac value) {
+        return new JAXBElement<Todluka.Trazilac>(_TodlukaTrazilac_QNAME, Todluka.Trazilac.class, Todluka.class, value);
     }
 
     /**
@@ -221,7 +297,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = Todluka.class)
     public JAXBElement<String> createTodlukaMesto(String value) {
-        return new JAXBElement<String>(_TodlukaMesto_QNAME, String.class, Todluka.class, value);
+        return new JAXBElement<String>(_TadresaMesto_QNAME, String.class, Todluka.class, value);
     }
 
     /**
@@ -231,6 +307,78 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://resenje", name = "clan", scope = Todluka.class)
     public JAXBElement<Tclan> createTodlukaClan(Tclan value) {
         return new JAXBElement<Tclan>(_TodlukaClan_QNAME, Tclan.class, Todluka.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Ttacka.Trazilac }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "trazilac", scope = Ttacka.class)
+    public JAXBElement<Ttacka.Trazilac> createTtackaTrazilac(Ttacka.Trazilac value) {
+        return new JAXBElement<Ttacka.Trazilac>(_TodlukaTrazilac_QNAME, Ttacka.Trazilac.class, Ttacka.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "lice", scope = Ttacka.class)
+    public JAXBElement<String> createTtackaLice(String value) {
+        return new JAXBElement<String>(_TodlukaLice_QNAME, String.class, Ttacka.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = Ttacka.class)
+    public JAXBElement<String> createTtackaMesto(String value) {
+        return new JAXBElement<String>(_TadresaMesto_QNAME, String.class, Ttacka.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Tstav.Tacka }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "tacka", scope = Tstav.class)
+    public JAXBElement<Tstav.Tacka> createTstavTacka(Tstav.Tacka value) {
+        return new JAXBElement<Tstav.Tacka>(_TclanTacka_QNAME, Tstav.Tacka.class, Tstav.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TpredmetZalbe.Trazilac }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "trazilac", scope = TpredmetZalbe.class)
+    public JAXBElement<TpredmetZalbe.Trazilac> createTpredmetZalbeTrazilac(TpredmetZalbe.Trazilac value) {
+        return new JAXBElement<TpredmetZalbe.Trazilac>(_TodlukaTrazilac_QNAME, TpredmetZalbe.Trazilac.class, TpredmetZalbe.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "datum", scope = TpredmetZalbe.class)
+    public JAXBElement<String> createTpredmetZalbeDatum(String value) {
+        return new JAXBElement<String>(_TodlukaDatum_QNAME, String.class, TpredmetZalbe.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "lice", scope = TpredmetZalbe.class)
+    public JAXBElement<String> createTpredmetZalbeLice(String value) {
+        return new JAXBElement<String>(_TodlukaLice_QNAME, String.class, TpredmetZalbe.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = TpredmetZalbe.class)
+    public JAXBElement<String> createTpredmetZalbeMesto(String value) {
+        return new JAXBElement<String>(_TadresaMesto_QNAME, String.class, TpredmetZalbe.class, value);
     }
 
     /**
@@ -257,7 +405,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = TppostupakPoverenika.class)
     public JAXBElement<String> createTppostupakPoverenikaMesto(String value) {
-        return new JAXBElement<String>(_TodlukaMesto_QNAME, String.class, TppostupakPoverenika.class, value);
+        return new JAXBElement<String>(_TadresaMesto_QNAME, String.class, TppostupakPoverenika.class, value);
     }
 
     /**
@@ -270,21 +418,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link TuvodneInformacije.Trazilac }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://resenje", name = "lice", scope = Ttacka.class)
-    public JAXBElement<String> createTtackaLice(String value) {
-        return new JAXBElement<String>(_TodlukaLice_QNAME, String.class, Ttacka.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = Ttacka.class)
-    public JAXBElement<String> createTtackaMesto(String value) {
-        return new JAXBElement<String>(_TodlukaMesto_QNAME, String.class, Ttacka.class, value);
+    @XmlElementDecl(namespace = "http://resenje", name = "trazilac", scope = TuvodneInformacije.class)
+    public JAXBElement<TuvodneInformacije.Trazilac> createTuvodneInformacijeTrazilac(TuvodneInformacije.Trazilac value) {
+        return new JAXBElement<TuvodneInformacije.Trazilac>(_TodlukaTrazilac_QNAME, TuvodneInformacije.Trazilac.class, TuvodneInformacije.class, value);
     }
 
     /**
@@ -321,60 +460,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://resenje", name = "clan", scope = TuvodneInformacije.class)
     public JAXBElement<Tclan> createTuvodneInformacijeClan(Tclan value) {
         return new JAXBElement<Tclan>(_TodlukaClan_QNAME, Tclan.class, TuvodneInformacije.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Tstav.Tacka }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "tacka", scope = Tstav.class)
-    public JAXBElement<Tstav.Tacka> createTstavTacka(Tstav.Tacka value) {
-        return new JAXBElement<Tstav.Tacka>(_TclanTacka_QNAME, Tstav.Tacka.class, Tstav.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Tadresa.Ulica }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "ulica", scope = Tadresa.class)
-    public JAXBElement<Tadresa.Ulica> createTadresaUlica(Tadresa.Ulica value) {
-        return new JAXBElement<Tadresa.Ulica>(_TadresaUlica_QNAME, Tadresa.Ulica.class, Tadresa.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = Tadresa.class)
-    public JAXBElement<String> createTadresaMesto(String value) {
-        return new JAXBElement<String>(_TodlukaMesto_QNAME, String.class, Tadresa.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "datum", scope = TpredmetZalbe.class)
-    public JAXBElement<String> createTpredmetZalbeDatum(String value) {
-        return new JAXBElement<String>(_TodlukaDatum_QNAME, String.class, TpredmetZalbe.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "lice", scope = TpredmetZalbe.class)
-    public JAXBElement<String> createTpredmetZalbeLice(String value) {
-        return new JAXBElement<String>(_TodlukaLice_QNAME, String.class, TpredmetZalbe.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://resenje", name = "mesto", scope = TpredmetZalbe.class)
-    public JAXBElement<String> createTpredmetZalbeMesto(String value) {
-        return new JAXBElement<String>(_TodlukaMesto_QNAME, String.class, TpredmetZalbe.class, value);
     }
 
 }

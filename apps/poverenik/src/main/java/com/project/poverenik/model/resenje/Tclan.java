@@ -45,14 +45,14 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tclan", propOrder = {
+@XmlType(name = "Tclan", namespace = "http://resenje", propOrder = {
     "content"
 })
 public class Tclan {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "tacka", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "tacka", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -77,9 +77,9 @@ public class Tclan {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link Tclan.Tacka }{@code >}
      * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link Tclan.Tacka }{@code >}
      * 
      * 
      */

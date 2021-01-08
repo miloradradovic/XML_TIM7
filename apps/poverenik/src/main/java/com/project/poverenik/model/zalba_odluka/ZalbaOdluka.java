@@ -76,6 +76,8 @@ public class ZalbaOdluka {
     protected TpodaciOPodnosiocu podaciOPodnosiocuZalbe;
     @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected Tnapomena napomena;
+    @XmlAttribute
+    protected String id;
     @XmlAttribute(name = "mesto")
     protected String mesto;
     @XmlAttribute(name = "datum")
@@ -116,6 +118,15 @@ public class ZalbaOdluka {
      *     {@link TpodaciPovereniku }
      *     
      */
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public TpodaciPovereniku getPodaciPovereniku() {
         return podaciPovereniku;
     }

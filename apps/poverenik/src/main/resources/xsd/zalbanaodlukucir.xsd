@@ -16,6 +16,7 @@
                 <xs:element name="podaci_o_podnosiocu_zalbe" type="re:Tpodaci_o_podnosiocu"/>
                 <xs:element name="napomena" type="re:Tnapomena"/>
             </xs:sequence>
+            <xs:attribute name="id" type="xs:string"/>
             <xs:attribute name="mesto" type="xs:string"/>
             <xs:attribute name="datum" type="xs:date"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>

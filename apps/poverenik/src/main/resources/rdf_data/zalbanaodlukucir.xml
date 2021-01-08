@@ -10,7 +10,7 @@
 	vocab="http://examples/predicate/"
 	about="http://zalbe/2"
 	
-    mesto="" datum="2000-12-12" property="pred:datum" datatype="xs:date" content="2000-12-12">
+    id="1" mesto="" datum="2000-12-12" property="pred:datum" datatype="xs:date" content="2000-12-12">
     <zoc:naslov>
         
         ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ 

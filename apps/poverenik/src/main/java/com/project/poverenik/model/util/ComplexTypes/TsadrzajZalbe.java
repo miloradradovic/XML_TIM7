@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -125,6 +126,7 @@ public class TsadrzajZalbe {
     @XmlType(name = "", propOrder = {
         "value"
     })
+
     public static class CiljaniOrganVlasti {
 
         @XmlValue

@@ -4,7 +4,7 @@
     xmlns:oba="http://www.obavestenje" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.obavestenje obavestenje.xsd" 
+    xsi:schemaLocation="http://www.obavestenje ../xsd/obavestenje.xsd" 
     xmlns:pred="http://examples/predicate/"
     vocab="http://examples/predicate/"
     about="http://obavestenja/1"

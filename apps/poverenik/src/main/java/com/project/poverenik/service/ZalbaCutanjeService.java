@@ -50,6 +50,7 @@ public class ZalbaCutanjeService {
         return "0";
     }
 
+    //TODO
     public boolean create(ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
         if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);

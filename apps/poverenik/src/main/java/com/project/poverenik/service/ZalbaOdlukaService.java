@@ -76,6 +76,8 @@ public class ZalbaOdlukaService {
         	zalbaOdluka.getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("content"), idUlogovanog);
         	zalbaOdluka.getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("property"), "pred:organ_vlasti");
         	zalbaOdluka.getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("datatype"), "xs:string");
+        	zalbaOdluka.getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("rel"), "pred:referenceTo");
+        	zalbaOdluka.getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("href"), "http://"+zalbaOdluka.getProtivResenjaZakljucka().getBroj().getValue());
 
         	zalbaOdluka.getSadrzaj().getContent().set(0, "Наведеном одлуком органа власти (решењем, закључком, обавештењем у писаној форми са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који сам поднео/ла-упутио/ла дана");
         	zalbaOdluka.getSadrzaj().getContent().set(2, "године и тако ми ускраћено-онемогућено остваривање уставног и законског права на слободан приступ информацијама од јавног значаја. Oдлуку побијам у целости, односно у делу којим");

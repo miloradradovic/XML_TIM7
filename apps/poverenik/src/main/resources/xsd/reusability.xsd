@@ -61,7 +61,15 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="broj" type="xs:positiveInteger"/>
+            <xs:element name="broj">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="od_godine">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">

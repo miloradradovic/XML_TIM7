@@ -59,9 +59,8 @@ public class TprotivResenjaZakljucka {
 
     @XmlElement(name = "naziv_organa_koji_je_doneo_odluku", namespace = "http://www.reusability", required = true)
     protected TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku nazivOrganaKojiJeDoneoOdluku;
-    @XmlElement(namespace = "http://www.reusability", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger broj;
+    @XmlElement(name = "broj", namespace = "http://www.reusability", required = true)
+    protected TprotivResenjaZakljucka.Broj broj;
     @XmlElement(name = "od_godine", namespace = "http://www.reusability", required = true)
     protected String odGodine;
 
@@ -97,7 +96,7 @@ public class TprotivResenjaZakljucka {
      *     {@link BigInteger }
      *     
      */
-    public BigInteger getBroj() {
+    public TprotivResenjaZakljucka.Broj getBroj() {
         return broj;
     }
 
@@ -106,10 +105,10 @@ public class TprotivResenjaZakljucka {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link String }
      *     
      */
-    public void setBroj(BigInteger value) {
+    public void setBroj(TprotivResenjaZakljucka.Broj value) {
         this.broj = value;
     }
 
@@ -160,6 +159,78 @@ public class TprotivResenjaZakljucka {
         "value"
     })
     public static class NazivOrganaKojiJeDoneoOdluku {
+
+        @XmlValue
+        protected String value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+    
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType>
+     *   &lt;simpleContent>
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+     *       &lt;anyAttribute processContents='lax'/>
+     *     &lt;/extension>
+     *   &lt;/simpleContent>
+     * &lt;/complexType>
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class Broj {
 
         @XmlValue
         protected String value;

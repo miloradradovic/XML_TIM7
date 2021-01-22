@@ -1,7 +1,7 @@
-package com.project.poverenik.repository;
+package com.project.organ_vlasti.repository;
 
-import com.project.poverenik.database.ExistManager;
-import com.project.poverenik.model.user.User;
+import com.project.organ_vlasti.database.ExistManager;
+import com.project.organ_vlasti.model.user.User;
 import org.exist.xupdate.XUpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,7 @@ public class UserRepository {
     @Autowired
     public ExistManager existManager;
 
-    private final String collectionUri = "db/poverenik/xml/users";
+    private final String collectionUri = "db/organ_vlasti/xml/users";
 
     private final String TARGET_NAMESPACE = "http://user";
 

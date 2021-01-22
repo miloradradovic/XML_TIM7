@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.zalbanaodlukucir" xmlns:re="http://www.reusability"
+    xmlns:zoc="http://www.zalbanaodlukucir">
+
+    <xs:import namespace="http://www.reusability" schemaLocation="reusability.xsd"/>
+    <xs:element name="zalba_odluka">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="naslov" type="xs:string" minOccurs="0"/>
+                <xs:element name="podaci_povereniku" type="re:Tpodaci_povereniku" minOccurs="0"/>
+                <xs:element name="podnaslov" type="xs:string" minOccurs="0"/>
+                <xs:element name="zalilac" type="re:Tzalilac"/>
+                <xs:element name="protiv_resenja_zakljucka" type="re:Tprotiv_resenja_zakljucka"/>
+                <xs:element name="sadrzaj" type="re:Tsadrzaj"/>
+                <xs:element name="podaci_o_podnosiocu_zalbe" type="re:Tpodaci_o_podnosiocu"/>
+                <xs:element name="napomena" type="re:Tnapomena" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string"/>
+            <xs:attribute name="mesto" type="xs:string"/>
+            <xs:attribute name="datum" type="xs:date"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

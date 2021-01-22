@@ -1,0 +1,30 @@
+<zc:zalba_cutanje 
+    xmlns:zc="http://www.zalbacutanje" 
+    xmlns:re="http://www.reusability"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"
+    mjesto="" datum="2000-12-12">
+    <zc:sadrzaj_zalbe>
+        <re:clan broj="22">чланом 22.</re:clan>
+        <re:ciljani_organ_vlasti property="pred:organ_vlasti" datatype="xs:string">Organ vlasti placeholder</re:ciljani_organ_vlasti>
+        <re:razlog_zalbe>
+            <re:opcija izabran="false">није поступио</re:opcija>
+            <re:opcija izabran="false">није поступио у целости</re:opcija> 
+            <re:opcija izabran="false">у законском року</re:opcija> 
+        </re:razlog_zalbe>
+        <re:datum>2000-12-12</re:datum>
+        <re:podaci_o_zahtjevu_i_informacijama>J</re:podaci_o_zahtjevu_i_informacijama>
+        <re:napomena>Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.</re:napomena>
+    </zc:sadrzaj_zalbe>
+    <zc:podaci_o_podnosiocu>
+        <re:osoba>
+            <re:ime>A</re:ime>
+            <re:prezime>A</re:prezime>
+        </re:osoba>
+        <re:adresa>
+            <re:mesto>T</re:mesto>
+            <re:ulica broj="0">I</re:ulica>
+        </re:adresa>
+        <re:drugi_podaci_za_kontakt>O</re:drugi_podaci_za_kontakt>
+    </zc:podaci_o_podnosiocu>
+</zc:zalba_cutanje>

@@ -54,9 +54,9 @@ import javax.xml.namespace.QName;
 @XmlRootElement(name = "zalba_cutanje", namespace = "http://www.zalbacutanje")
 public class ZalbaCutanje {
 
-    @XmlElement(namespace = "http://www.zalbacutanje", required = true)
+    @XmlElement(namespace = "http://www.zalbacutanje", required = false)
     protected String naziv;
-    @XmlElement(name = "podaci_o_primaocu", namespace = "http://www.zalbacutanje", required = true)
+    @XmlElement(name = "podaci_o_primaocu", namespace = "http://www.zalbacutanje", required = false)
     protected TpodaciPovereniku podaciOPrimaocu;
     @XmlElement(name = "sadrzaj_zalbe", namespace = "http://www.zalbacutanje", required = true)
     protected TsadrzajZalbe sadrzajZalbe;

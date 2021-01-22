@@ -4,13 +4,13 @@
 
     <xs:complexType name="Tpodaci_povereniku">
         <xs:sequence>
-            <xs:element name="uloga" type="xs:string"/>
-            <xs:element name="adresa" type="re:Tadresa"/>
+            <xs:element name="uloga" type="xs:string" minOccurs="0"/>
+            <xs:element name="adresa" type="re:Tadresa" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="Tadresa">
         <xs:sequence>
-            <xs:element name="mesto">
+            <xs:element name="mesto" minOccurs="0">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
@@ -19,7 +19,7 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="ulica">
+            <xs:element name="ulica" minOccurs="0">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
@@ -61,7 +61,15 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="broj" type="xs:positiveInteger"/>
+            <xs:element name="broj">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="od_godine">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -125,7 +133,15 @@
     </xs:complexType>
     <xs:complexType name="Tciljani_organ_vlasti">
         <xs:sequence>
-            <xs:element name="naziv_organa" type="xs:string"/>
+            <xs:element name="naziv_organa">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="sediste_organa" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>

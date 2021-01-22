@@ -6,10 +6,10 @@
     
 	xmlns:pred="http://examples/predicate/"
 	vocab="http://examples/predicate/"
-	about="http://resenja/071-01-1114/2020-03"
+	about="http://resenja/071-01-1114-2020-03"
 	rel="pred:responseTo" 
     href="http://zalbe/1"
-    broj="071-01-1114/2020-03" tip_resenja="жалба је основана" datum="09.06.2020." property="pred:datum" datatype="xs:date" content="2020-06-09">
+    broj="071-01-1114-2020-03" idZalbe="1" datum="2020-06-09" property="pred:datum" datatype="xs:date" content="2020-06-09">
         <uvodne_informacije>
             Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби
             коју је изјавио <trazilac id="1" property="pred:trazilac" content="1">AA</trazilac>, због непоступања <lice>Учитељског факултета у Призрену</lice>са привременим седиштем 
@@ -57,7 +57,7 @@
                 чега није добио одговор.
             
             </postupak_poverenika>
-            <odluka>
+            <odluka tip_resenja="основана" property="pred:tip" datatype="xs:string" content="основана">
                 
                 По разматрању жалбе и осталих списа овог предмета, донета је одлука као у диспозитиву
                 решења из следећих разлога:

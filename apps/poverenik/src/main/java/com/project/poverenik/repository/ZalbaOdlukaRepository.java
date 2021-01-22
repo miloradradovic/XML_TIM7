@@ -51,4 +51,9 @@ public class ZalbaOdlukaRepository {
         String xpath =  String.format("/zalba_odluka[@id='%s']", id);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
+    
+    public ResourceSet getMaxId() throws XMLDBException  {
+    	String xpath = "/zalba_odluka[@id = max(/zalba_odluka/@id)]";
+    	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

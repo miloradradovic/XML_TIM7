@@ -20,7 +20,7 @@ public class ZalbaOdlukaController {
     ZalbaOdlukaService zalbaOdlukaService;
 
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException {
+    public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, NumberFormatException, JAXBException {
         if (zalbaOdlukaService.create(zalbaOdluka)){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

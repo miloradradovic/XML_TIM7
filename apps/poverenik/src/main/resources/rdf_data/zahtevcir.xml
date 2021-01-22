@@ -4,7 +4,7 @@
     xmlns:zcir="http://www.zahtevcir" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.zahtevcir zahtevcir.xsd" 
+    xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd" 
     xmlns:pred="http://examples/predicate/"
     vocab="http://examples/predicate/"
     about="http://zahtevi/1"

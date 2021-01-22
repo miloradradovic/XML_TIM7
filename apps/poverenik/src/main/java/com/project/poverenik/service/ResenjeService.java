@@ -14,6 +14,8 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,15 @@ public class ResenjeService {
 
     public boolean create(Resenje resenje) throws XMLDBException {
         if (jaxB.validate(resenje.getClass(), resenje)){
+        	        	
+        	resenje.getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getBroj());
+        	resenje.getOtherAttributes().put(new QName("rel"),"pred:responseTo");
+        	resenje.getOtherAttributes().put(new QName("href"),"http://examples/predicate/");
+        	resenje.getOtherAttributes().put(new QName("vocab"),"http://zalbe/" + resenje.getOtherAttributes().get("idZalbe"));
+        	resenje.getOtherAttributes().put(new QName("property"),"pred:datum");
+        	resenje.getOtherAttributes().put(new QName("datatype"),"xs:date");
+        	resenje.getOtherAttributes().put(new QName("content"),resenje.getDatum().toString());
+        	
             return resenjeRepository.create(resenje);
         }
         return false;

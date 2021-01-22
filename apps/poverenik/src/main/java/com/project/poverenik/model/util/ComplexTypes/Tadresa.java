@@ -56,9 +56,9 @@ import javax.xml.namespace.QName;
 })
 public class Tadresa {
 
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(namespace = "http://www.reusability", required = false)
     protected Tadresa.Mesto mesto;
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(namespace = "http://www.reusability", required = false)
     protected Tadresa.Ulica ulica;
 
     /**

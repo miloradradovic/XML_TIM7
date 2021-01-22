@@ -60,13 +60,13 @@ import javax.xml.namespace.QName;
 @XmlRootElement(name = "zalba_odluka", namespace = "http://www.zalbanaodlukucir")
 public class ZalbaOdluka {
 
-    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = false)
     protected String naslov;
     @XmlElement(name = "podaci_povereniku", namespace = "http://www.zalbanaodlukucir", required = true)
     protected TpodaciPovereniku podaciPovereniku;
-    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = false)
     protected String podnaslov;
-    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = false)
     protected Tzalilac zalilac;
     @XmlElement(name = "protiv_resenja_zakljucka", namespace = "http://www.zalbanaodlukucir", required = true)
     protected TprotivResenjaZakljucka protivResenjaZakljucka;
@@ -74,7 +74,7 @@ public class ZalbaOdluka {
     protected Tsadrzaj sadrzaj;
     @XmlElement(name = "podaci_o_podnosiocu_zalbe", namespace = "http://www.zalbanaodlukucir", required = true)
     protected TpodaciOPodnosiocu podaciOPodnosiocuZalbe;
-    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = false)
     protected Tnapomena napomena;
     @XmlAttribute
     protected String id;

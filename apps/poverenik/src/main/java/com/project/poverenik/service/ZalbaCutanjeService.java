@@ -2,17 +2,21 @@ package com.project.poverenik.service;
 
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.model.util.ComplexTypes.Tadresa;
+import com.project.poverenik.model.util.ComplexTypes.Tclan;
 import com.project.poverenik.model.util.ComplexTypes.TpodaciPovereniku;
 import com.project.poverenik.model.util.ComplexTypes.TsadrzajZalbe;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.repository.ZalbaCutanjeRepository;
+import org.omg.CORBA.TCKind;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
+
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 
@@ -22,6 +26,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,15 +56,18 @@ public class ZalbaCutanjeService {
     }
 
     //TODO
-    public boolean create(ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
-        if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
+    public boolean create(ZalbaCutanje zalbaCutanjeDTO) throws XMLDBException, JAXBException {
+        if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)){
+
+            ZalbaCutanje zalbaCutanje = new ZalbaCutanje();
+
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
         	zalbaCutanje.setId(id);
         	zalbaCutanje.getOtherAttributes().put(new QName("about"), "http://zalbe/" + id);
         	zalbaCutanje.getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
         	zalbaCutanje.getOtherAttributes().put(new QName("property"),"pred:datum");
         	zalbaCutanje.getOtherAttributes().put(new QName("datatype"),"xs:date");
-        	zalbaCutanje.getOtherAttributes().put(new QName("content"),zalbaCutanje.getDatum().toString());
+        	zalbaCutanje.getOtherAttributes().put(new QName("content"),zalbaCutanjeDTO.getDatum().toString());
         	zalbaCutanje.setNaziv("ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)");
         	zalbaCutanje.setPodaciOPrimaocu(new TpodaciPovereniku());
         	zalbaCutanje.getPodaciOPrimaocu().setAdresa(new Tadresa());
@@ -72,19 +80,35 @@ public class ZalbaCutanjeService {
         	zalbaCutanje.getPodaciOPrimaocu().getAdresa().getUlica().setValue("Булевар краља Александрa");
         	zalbaCutanje.getPodaciOPrimaocu().getAdresa().getUlica().setBroj(15);
 
+        	zalbaCutanje.setSadrzajZalbe(zalbaCutanjeDTO.getSadrzajZalbe());
             zalbaCutanje.getSadrzajZalbe().getContent().set(0, "У складу са ");
+
+            JAXBElement<Tclan> JaxbClan = (JAXBElement<Tclan>) zalbaCutanje.getSadrzajZalbe().getContent().get(1);
+            JaxbClan.getValue().getContent().add("clan 22");
+            JaxbClan.getValue().setBroj(BigInteger.valueOf(22));
+            zalbaCutanje.getSadrzajZalbe().getContent().set(1, JaxbClan);
             zalbaCutanje.getSadrzajZalbe().getContent().set(2, " Закона о слободном приступу информацијама од јавног значаја подносим: Ж А Л Б У против ");
+            //zalbaCutanje.getSadrzajZalbe().getContent().set(3, zalbaCutanjeDTO.getSadrzajZalbe().getContent().get(3));
             zalbaCutanje.getSadrzajZalbe().getContent().set(4, " ( навести назив органа) због тога што орган власти: ");
+            //zalbaCutanje.getSadrzajZalbe().getContent().set(5, zalbaCutanjeDTO.getSadrzajZalbe().getContent().get(5));
             zalbaCutanje.getSadrzajZalbe().getContent().set(6, "(подвући  због чега се изјављује жалба) по мом захтеву  за слободан приступ информацијама од јавног значаја који сам поднео  том органу  дана ");
+            //zalbaCutanje.getSadrzajZalbe().getContent().set(7, zalbaCutanjeDTO.getSadrzajZalbe().getContent().get(7));
             zalbaCutanje.getSadrzajZalbe().getContent().set(8, " године, а којим сам тражио/ла да ми се у складу са Законом о слободном приступу информацијама од јавног значаја омогући увид- копија документа који садржи информације  о /у вези са : ");
+            //zalbaCutanje.getSadrzajZalbe().getContent().set(9, zalbaCutanjeDTO.getSadrzajZalbe().getContent().get(9));
             zalbaCutanje.getSadrzajZalbe().getContent().set(10, "На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми приступ траженој/им  информацији/ма. Као доказ , уз жалбу достављам копију захтева са доказом о предаји органу власти.");
+            //zalbaCutanje.getSadrzajZalbe().getContent().set(11, zalbaCutanjeDTO.getSadrzajZalbe().getContent().get(11));
 
             String idUlogovanog = "1";
+            zalbaCutanje.setPodaciOPodnosiocu(zalbaCutanjeDTO.getPodaciOPodnosiocu());
             zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("id"), idUlogovanog);
             zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
             zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("content"), idUlogovanog);
-            
-            return zalbaCutanjeRepository.create(zalbaCutanje);
+
+            if(jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
+                return zalbaCutanjeRepository.create(zalbaCutanje);
+            }else {
+                return false;
+            }
         }
         return false;
     }

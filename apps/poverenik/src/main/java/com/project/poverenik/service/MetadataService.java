@@ -1,5 +1,6 @@
 package com.project.poverenik.service;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -7,7 +8,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
@@ -42,16 +48,30 @@ public class MetadataService {
 		
 		MetadataExtractor metadataExtractor = new MetadataExtractor();
 		
-		String rdfFilePath = "src/main/resources/rdf_data/output.rdf";
-
 		ByteArrayInputStream inStream = new ByteArrayInputStream( ((ByteArrayOutputStream) os).toByteArray() );
-
+		
+	
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		metadataExtractor.extractMetadata(
 				inStream,
-				new FileOutputStream(new File(rdfFilePath)));
-		
+				outStream);
+		ByteArrayInputStream rdfStream = new ByteArrayInputStream( ((ByteArrayOutputStream) outStream).toByteArray() );
+
+
+
+	    StringBuilder textBuilder = new StringBuilder();
+	    try (Reader reader = new BufferedReader(new InputStreamReader
+	      (rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+	        int c = 0;
+	        while ((c = reader.read()) != -1) {
+	            textBuilder.append((char) c);
+	        }
+	    }
+	    String rdf = textBuilder.toString();
+
 		Model model = ModelFactory.createDefaultModel();
-		model.read(rdfFilePath);
+		model.read(new StringReader(rdf),
+				   "TURTLE");
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		
@@ -72,8 +92,7 @@ public class MetadataService {
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, conn.updateEndpoint);
 		processor.execute();
 		
-		
-		
+
 		// Read the triples from the named graph
 		System.out.println();
 		System.out.println("[INFO] Retrieving triples from RDF store.");

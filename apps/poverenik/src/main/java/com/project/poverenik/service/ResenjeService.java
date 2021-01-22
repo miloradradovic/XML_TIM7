@@ -34,8 +34,8 @@ public class ResenjeService {
         	        	
         	resenje.getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getBroj());
         	resenje.getOtherAttributes().put(new QName("rel"),"pred:responseTo");
-        	resenje.getOtherAttributes().put(new QName("href"),"http://examples/predicate/");
-        	resenje.getOtherAttributes().put(new QName("vocab"),"http://zalbe/" + resenje.getOtherAttributes().get("idZalbe"));
+        	resenje.getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
+        	resenje.getOtherAttributes().put(new QName("href"),"http://zalbe/" + resenje.getOtherAttributes().get(new QName("idZalbe")));
         	resenje.getOtherAttributes().put(new QName("property"),"pred:datum");
         	resenje.getOtherAttributes().put(new QName("datatype"),"xs:date");
         	resenje.getOtherAttributes().put(new QName("content"),resenje.getDatum().toString());

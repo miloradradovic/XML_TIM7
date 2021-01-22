@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.obavestenje" xmlns:oba="http://www.obavestenje"
+    xmlns:re="http://www.reusability">
+
+    <xs:import namespace="http://www.reusability" schemaLocation="reusability.xsd"/>
+    <xs:element name="obavestenje">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="naziv_organa">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="sediste" type="xs:string"/>
+                                <xs:anyAttribute namespace="##any" processContents="lax"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="informacije_o_podnosiocu" type="re:Tinformacije_o_podnosiocu"/>
+                <xs:element name="naslov" type="xs:string"/>
+                <xs:element name="podnaslov" type="xs:string"/>
+                <xs:element name="tekst_zahteva" type="re:Ttekst_zahteva_obavestenja"/>
+                <xs:element name="opcija_dostave" type="re:Topcije"/>
+            </xs:sequence>
+            <xs:attribute name="br_predmeta" type="xs:string"/>
+            <xs:attribute name="datum" type="xs:date"/>
+            <xs:attribute name="id" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

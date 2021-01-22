@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.reusability" xmlns:re="http://www.reusability">
+
+    <xs:complexType name="Tpodaci_povereniku">
+        <xs:sequence>
+            <xs:element name="uloga" type="xs:string" minOccurs="0"/>
+            <xs:element name="adresa" type="re:Tadresa" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tadresa">
+        <xs:sequence>
+            <xs:element name="mesto" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ulica" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="broj" type="xs:int"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tzalilac">
+        <xs:sequence>
+            <xs:element name="tip_lica" type="re:Ttip_lica"/>
+            <xs:element name="adresa" type="re:Tadresa"/>
+            <xs:element name="sediste_zalioca" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Ttip_lica">
+        <xs:choice>
+            <xs:element name="osoba" type="re:Tosoba"/>
+            <xs:element name="preduzece" type="xs:string"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="Tosoba">
+        <xs:sequence>
+            <xs:element name="ime" type="xs:string"/>
+            <xs:element name="prezime" type="xs:string"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
+    <xs:complexType name="Tprotiv_resenja_zakljucka">
+        <xs:sequence>
+            <xs:element name="naziv_organa_koji_je_doneo_odluku">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="broj">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="od_godine">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]{4}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tsadrzaj">
+        <xs:sequence>
+            <xs:element name="datum" type="xs:date"/>
+            <xs:element name="osnova_za_zalbu" type="xs:string"/>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tclan">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="stav">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="broj" type="xs:int"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="broj" type="xs:positiveInteger"/>
+    </xs:complexType>
+    <xs:complexType name="Tpodaci_o_podnosiocu">
+        <xs:sequence>
+            <xs:element name="osoba" type="re:Tosoba"/>
+            <xs:element name="adresa" type="re:Tadresa"/>
+            <xs:element name="drugi_podaci_za_kontakt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tnapomena">
+        <xs:sequence>
+            <xs:element name="naslov" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="tacka" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tsadrzaj_zalbe">
+        <xs:sequence>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
+            <xs:element name="ciljani_organ_vlasti">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="razlog_zalbe" type="re:Topcije"/>
+            <xs:element name="datum" type="xs:date"/>
+            <xs:element name="podaci_o_zahtjevu_i_informacijama" type="xs:string"/>
+            <xs:element name="napomena" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tciljani_organ_vlasti">
+        <xs:sequence>
+            <xs:element name="naziv_organa">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sediste_organa" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Ttekst_zahteva_zahtevcir">
+        <xs:sequence>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
+            <xs:element name="opcije" type="re:Topcije_dostave"/>
+            <xs:element name="informacija_o_zahtevu" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Topcije_dostave">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="opcija">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="izabran" type="xs:boolean"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="nacini_dostave" type="re:Tnacini_dostave" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tnacini_dostave">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="nacin_dostave"
+                type="re:Tnacin_dostave"> </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tnacin_dostave" mixed="true">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="nacin_dostave_input" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="izabran" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:complexType name="Tinformacije_o_traziocu">
+        <xs:sequence>
+            <xs:element name="lice" type="re:Ttip_lica"/>
+            <xs:element name="adresa" type="re:Tadresa"/>
+            <xs:element name="drugi_podaci_za_kontakt" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tfusnote">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="fusnota" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tinformacije_o_podnosiocu">
+        <xs:sequence>
+            <xs:element name="lice" type="re:Ttip_lica"/>
+            <xs:element name="adresa" type="re:Tadresa"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Ttekst_zahteva_obavestenja">
+        <xs:sequence>
+            <xs:element name="clan" type="re:Tclan" minOccurs="0"/>
+            <xs:element name="godina">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]{4}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="opis_trazene_informacije" type="xs:string"/>
+            <xs:element name="dan" type="xs:date"/>
+            <xs:element name="vreme">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="([0-9]|1[0-9]|2[0-4])"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="radno_vreme" type="re:Tradno_vreme"/>
+            <xs:element name="adresa" type="re:Tadresa"/>
+            <xs:element name="broj_kancelarije" type="xs:positiveInteger"/>
+            <xs:element name="opis_troskova" type="re:Topis_troskova"/>
+            <xs:element name="ukupan_trosak" type="re:Tukupan_trosak"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tradno_vreme">
+        <xs:sequence>
+            <xs:element name="pocetak">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="([0-9]|1[0-9]|2[0-4])"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="kraj">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="([0-9]|1[0-9]|2[0-4])"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Topis_troskova">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="cena">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="re:Tcena">
+                            <xs:attribute name="valuta" type="xs:string"> </xs:attribute>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Tukupan_trosak">
+        <xs:sequence>
+            <xs:element name="iznos">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]+,[0-9]{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="broj_racuna" type="xs:string"/>
+            <xs:element name="poziv_na_broj">
+                <xs:simpleType>
+                    <xs:restriction base="xs:positiveInteger">
+                        <xs:pattern value="[0-9]{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Topcije">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="opcija">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="izabran" type="xs:boolean"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="Tcena">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+,[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

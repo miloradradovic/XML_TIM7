@@ -137,7 +137,7 @@ public class Tclan {
 
         @XmlValue
         protected String value;
-        @XmlAttribute(name = "broj")
+        @XmlAttribute(name = "broj", required=false)
         protected Integer broj;
 
         /**

@@ -5,8 +5,8 @@
     xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"
     mjesto="" datum="2000-12-12">
     <zc:sadrzaj_zalbe>
-        <re:clan broj="22">чланом 22.</re:clan>
-        <re:ciljani_organ_vlasti property="pred:organ_vlasti" datatype="xs:string">Organ vlasti placeholder</re:ciljani_organ_vlasti>
+        <re:clan></re:clan>
+        <re:ciljani_organ_vlasti>Organ vlasti placeholder</re:ciljani_organ_vlasti>
         <re:razlog_zalbe>
             <re:opcija izabran="false">није поступио</re:opcija>
             <re:opcija izabran="false">није поступио у целости</re:opcija> 
@@ -14,7 +14,7 @@
         </re:razlog_zalbe>
         <re:datum>2000-12-12</re:datum>
         <re:podaci_o_zahtjevu_i_informacijama>J</re:podaci_o_zahtjevu_i_informacijama>
-        <re:napomena>Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.</re:napomena>
+        <re:napomena></re:napomena>
     </zc:sadrzaj_zalbe>
     <zc:podaci_o_podnosiocu>
         <re:osoba>

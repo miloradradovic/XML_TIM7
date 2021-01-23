@@ -28,7 +28,7 @@
     <zoc:sadrzaj>
         <re:datum>2000-12-12</re:datum>
         <re:osnova_za_zalbu>O</re:osnova_za_zalbu>
-        <re:clan broj="22">члану 22. <re:stav broj="1">ст. 1.</re:stav> </re:clan>
+        <re:clan><re:stav></re:stav></re:clan>
     </zoc:sadrzaj>
     
     <zoc:podaci_o_podnosiocu_zalbe>

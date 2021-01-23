@@ -98,7 +98,7 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="broj" type="xs:positiveInteger"/>
+        <xs:attribute name="broj" type="xs:positiveInteger" use="optional"/>
     </xs:complexType>
     <xs:complexType name="Tpodaci_o_podnosiocu">
         <xs:sequence>
@@ -128,7 +128,7 @@
             <xs:element name="razlog_zalbe" type="re:Topcije"/>
             <xs:element name="datum" type="xs:date"/>
             <xs:element name="podaci_o_zahtjevu_i_informacijama" type="xs:string"/>
-            <xs:element name="napomena" type="xs:string"/>
+            <xs:element name="napomena" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="Tciljani_organ_vlasti">

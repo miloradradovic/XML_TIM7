@@ -1,7 +1,11 @@
 package com.project.poverenik.service;
 
 import com.project.poverenik.jaxb.JaxB;
+import com.project.poverenik.mappers.ResenjeMapper;
 import com.project.poverenik.model.resenje.Resenje;
+import com.project.poverenik.model.resenje.Tadresa;
+import com.project.poverenik.model.resenje.TuvodneInformacije;
+import com.project.poverenik.model.util.ComplexTypes.Tclan;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.repository.ResenjeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
@@ -29,18 +34,16 @@ public class ResenjeService {
     private ResenjeRepository resenjeRepository;
 
 
-    public boolean create(Resenje resenje) throws XMLDBException {
-        if (jaxB.validate(resenje.getClass(), resenje)){
-        	        	/*
-        	resenje.getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getBroj());
-        	resenje.getOtherAttributes().put(new QName("rel"),"pred:responseTo");
-        	resenje.getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
-        	resenje.getOtherAttributes().put(new QName("href"),"http://zalbe/" + resenje.getOtherAttributes().get(new QName("idZalbe")));
-        	resenje.getOtherAttributes().put(new QName("property"),"pred:datum");
-        	resenje.getOtherAttributes().put(new QName("datatype"),"xs:date");
-        	resenje.getOtherAttributes().put(new QName("content"),resenje.getDatum().toString());
-        	*/
-            return resenjeRepository.create(resenje);
+    public boolean create(Resenje resenjeDTO) throws XMLDBException {
+        if (jaxB.validate(resenjeDTO.getClass(), resenjeDTO)){
+        	 
+        	Resenje resenje = ResenjeMapper.mapFromDTO(resenjeDTO);
+        	
+        	if(jaxB.validate(resenje.getClass(), resenje)){
+                return resenjeRepository.create(resenje);
+            }else {
+                return false;
+            }
         }
         return false;
     }

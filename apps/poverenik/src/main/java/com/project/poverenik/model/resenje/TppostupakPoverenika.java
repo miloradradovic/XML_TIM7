@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="clan" type="{http://resenje}Tclan" maxOccurs="unbounded"/>
+ *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="clan" type="{http://resenje}Tclan" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,10 +42,10 @@ import javax.xml.bind.annotation.XmlType;
 public class TppostupakPoverenika {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class)
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -68,11 +68,11 @@ public class TppostupakPoverenika {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */

@@ -2,10 +2,7 @@ package com.project.poverenik.api;
 
 import com.project.poverenik.model.resenje.Resenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
-import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
-import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.ResenjeService;
-import com.project.poverenik.service.ZalbaOdlukaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,8 +1,8 @@
 package com.project.poverenik.database;
 
+import com.project.poverenik.model.resenje.Resenje;
 import org.exist.xmldb.DatabaseImpl;
 import org.exist.xmldb.EXistResource;
-import org.exist.xupdate.XUpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xmldb.api.DatabaseManager;
@@ -12,23 +12,15 @@ import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XPathQueryService;
 import org.xmldb.api.modules.XUpdateQueryService;
 
-import com.project.poverenik.model.resenje.Resenje;
-import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.service.MetadataService;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import javax.xml.transform.OutputKeys;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 
 @Component
 public class ExistManager {

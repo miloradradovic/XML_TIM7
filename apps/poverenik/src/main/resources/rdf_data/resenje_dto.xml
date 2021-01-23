@@ -2,6 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd"
     broj="071-01-1119-2020-32" idZalbe="1" datum="2020-06-10">
+    <tip_resenja>основана</tip_resenja>
         <uvodne_informacije>
             Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби
             коју је изјавио <trazilac id="1" property="pred:trazilac" content="1">AA</trazilac>, због непоступања <lice>Учитељског факултета у Призрену</lice>са привременим седиштем 

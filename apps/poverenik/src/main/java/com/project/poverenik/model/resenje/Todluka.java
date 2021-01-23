@@ -3,14 +3,10 @@ package com.project.poverenik.model.resenje;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
@@ -18,7 +14,6 @@ import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
 
 
 /**
@@ -31,7 +26,7 @@ import javax.xml.namespace.QName;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="trazilac">
+ *         &lt;element name="trazilac" minOccurs="0">
  *           &lt;complexType>
  *             &lt;simpleContent>
  *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
@@ -40,12 +35,12 @@ import javax.xml.namespace.QName;
  *             &lt;/simpleContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
- *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
- *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="clan" type="{http://resenje}Tclan"/>
- *         &lt;element name="stav" type="{http://resenje}Tstav"/>
- *         &lt;element name="iznos">
+ *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="clan" type="{http://resenje}Tclan" minOccurs="0"/>
+ *         &lt;element name="stav" type="{http://resenje}Tstav" minOccurs="0"/>
+ *         &lt;element name="iznos" minOccurs="0">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *               &lt;pattern value="[0-9]+,[0-9]{2}"/>
@@ -67,17 +62,17 @@ import javax.xml.namespace.QName;
 public class Todluka {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "iznos", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class)
+        @XmlElementRef(name = "iznos", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
-    
+
     /**
      * Gets the value of the content property.
      * 
@@ -97,13 +92,13 @@ public class Todluka {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link String }
+     * {@link JAXBElement }{@code <}{@link Todluka.Trazilac }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link String }
-     * {@link JAXBElement }{@code <}{@link Todluka.Trazilac }{@code >}
      * 
      * 
      */

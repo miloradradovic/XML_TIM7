@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;choice maxOccurs="unbounded">
- *         &lt;element name="trazilac">
+ *         &lt;element name="trazilac" minOccurs="0">
  *           &lt;complexType>
  *             &lt;simpleContent>
  *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
@@ -35,9 +35,9 @@ import javax.xml.bind.annotation.XmlValue;
  *             &lt;/simpleContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
- *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -53,9 +53,9 @@ import javax.xml.bind.annotation.XmlValue;
 public class TpredmetZalbe {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
@@ -79,11 +79,11 @@ public class TpredmetZalbe {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link TpredmetZalbe.Trazilac }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link String }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link String }
      * 
      * 
      */

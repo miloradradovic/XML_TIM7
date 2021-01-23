@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="lice" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="trazilac" minOccurs="0">
  *           &lt;complexType>
@@ -53,9 +53,9 @@ import javax.xml.bind.annotation.XmlValue;
 public class Ttacka {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class)
+        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -81,8 +81,8 @@ public class Ttacka {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Ttacka.Trazilac }{@code >}
      * 
      * 

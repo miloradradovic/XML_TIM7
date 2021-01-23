@@ -25,6 +25,15 @@ import javax.xml.namespace.QName;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="tip_resenja">
+ *           &lt;complexType>
+ *             &lt;simpleContent>
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *                 &lt;anyAttribute processContents='lax'/>
+ *               &lt;/extension>
+ *             &lt;/simpleContent>
+ *           &lt;/complexType>
+ *         &lt;/element>
  *         &lt;element name="uvodne_informacije" type="{http://resenje}Tuvodne_informacije"/>
  *         &lt;element name="podaci_o_resenju" type="{http://resenje}Tpodaci_o_resenju"/>
  *         &lt;element name="podaci_o_obrazlozenju" type="{http://resenje}Tpodaci_o_obrazlozenju"/>
@@ -40,11 +49,10 @@ import javax.xml.namespace.QName;
  *         &lt;/element>
  *       &lt;/sequence>
  *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="tip_resenja" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="broj">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;pattern value="[0-9]{3}\-[0-9]{2}\-[0-9]{4}\/[0-9]{4}\-[0-9]{2}"/>
+ *             &lt;pattern value="[0-9]{3}\-[0-9]{2}\-[0-9]{4}\-[0-9]{4}\-[0-9]{2}"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -58,6 +66,7 @@ import javax.xml.namespace.QName;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "tipResenja",
     "uvodneInformacije",
     "podaciOResenju",
     "podaciOObrazlozenju",
@@ -66,6 +75,8 @@ import javax.xml.namespace.QName;
 @XmlRootElement(name = "resenje", namespace = "http://resenje")
 public class Resenje {
 
+    @XmlElement(name = "tip_resenja", namespace = "http://resenje", required = true)
+    protected Resenje.TipResenja tipResenja;
     @XmlElement(name = "uvodne_informacije", namespace = "http://resenje", required = true)
     protected TuvodneInformacije uvodneInformacije;
     @XmlElement(name = "podaci_o_resenju", namespace = "http://resenje", required = true)
@@ -76,12 +87,34 @@ public class Resenje {
     protected Resenje.Poverenik poverenik;
     @XmlAttribute(name = "datum")
     protected String datum;
-    @XmlAttribute(name = "tip_resenja")
-    protected String tipResenja;
     @XmlAttribute(name = "broj")
     protected String broj;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+    /**
+     * Gets the value of the tipResenja property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Resenje.TipResenja }
+     *     
+     */
+    public Resenje.TipResenja getTipResenja() {
+        return tipResenja;
+    }
+
+    /**
+     * Sets the value of the tipResenja property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Resenje.TipResenja }
+     *     
+     */
+    public void setTipResenja(Resenje.TipResenja value) {
+        this.tipResenja = value;
+    }
 
     /**
      * Gets the value of the uvodneInformacije property.
@@ -201,30 +234,6 @@ public class Resenje {
      */
     public void setDatum(String value) {
         this.datum = value;
-    }
-
-    /**
-     * Gets the value of the tipResenja property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTipResenja() {
-        return tipResenja;
-    }
-
-    /**
-     * Sets the value of the tipResenja property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTipResenja(String value) {
-        this.tipResenja = value;
     }
 
     /**
@@ -348,6 +357,79 @@ public class Resenje {
          */
         public void setId(String value) {
             this.id = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType>
+     *   &lt;simpleContent>
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+     *       &lt;anyAttribute processContents='lax'/>
+     *     &lt;/extension>
+     *   &lt;/simpleContent>
+     * &lt;/complexType>
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class TipResenja {
+
+        @XmlValue
+        protected String value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setValue(String value) {
+            this.value = value;
         }
 
         /**

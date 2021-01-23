@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlValue;
  *             &lt;/simpleContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="tacka" type="{http://resenje}Ttacka" maxOccurs="unbounded"/>
+ *         &lt;element name="tacka" type="{http://resenje}Ttacka" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -49,7 +49,7 @@ public class TpodaciOResenju {
 
     @XmlElement(namespace = "http://resenje", required = true)
     protected TpodaciOResenju.Naslov naslov;
-    @XmlElement(namespace = "http://resenje", required = true)
+    @XmlElement(namespace = "http://resenje")
     protected List<Ttacka> tacka;
 
     /**

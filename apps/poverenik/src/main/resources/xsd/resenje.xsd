@@ -4,6 +4,15 @@
     <xs:element name="resenje">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="tip_resenja">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:anyAttribute namespace="##any" processContents="lax"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="uvodne_informacije" type="ra:Tuvodne_informacije"/>
                 <xs:element name="podaci_o_resenju" type="ra:Tpodaci_o_resenju"/>
                 <xs:element name="podaci_o_obrazlozenju" type="ra:Tpodaci_o_obrazlozenju"/>
@@ -19,7 +28,6 @@
                 </xs:element>
             </xs:sequence>
             <xs:attribute name="datum" type="xs:string"/>
-            <xs:attribute name="tip_resenja" type="xs:string"/>
             <xs:attribute name="broj">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -43,10 +51,19 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="lice" type="xs:string"/>
+            <xs:element name="lice">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="adresa" type="ra:Tadresa"/>
             <xs:element name="datum" type="xs:string"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="clan" type="ra:Tclan"/>
+            <xs:element minOccurs="0" name="broj_odluke" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="Tpodaci_o_resenju">
@@ -60,7 +77,7 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element maxOccurs="unbounded" name="tacka" type="ra:Ttacka"/>
+            <xs:element maxOccurs="unbounded" name="tacka" type="ra:Ttacka" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="Tpodaci_o_obrazlozenju">
@@ -73,8 +90,16 @@
     </xs:complexType>
     <xs:complexType mixed="true" name="Tadresa">
         <xs:sequence>
-            <xs:element name="mesto" type="xs:string"/>
-            <xs:element name="ulica">
+            <xs:element name="mesto">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ulica" minOccurs="0">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
@@ -116,7 +141,7 @@
     </xs:complexType>
     <xs:complexType mixed="true" name="Ttacka">
         <xs:sequence>
-            <xs:element name="lice" type="xs:string"/>
+            <xs:element name="lice" type="xs:string" minOccurs="0"/>
             <xs:element maxOccurs="1" minOccurs="0" name="mesto" type="xs:string"/>
             <xs:element minOccurs="0" name="trazilac">
                 <xs:complexType>
@@ -132,7 +157,7 @@
     </xs:complexType>
     <xs:complexType mixed="true" name="Tpredmet_zalbe">
         <xs:choice maxOccurs="unbounded">
-            <xs:element name="trazilac">
+            <xs:element name="trazilac" minOccurs="0">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
@@ -141,22 +166,22 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element maxOccurs="unbounded" name="datum" type="xs:string"/>
-            <xs:element name="lice" type="xs:string"/>
-            <xs:element name="mesto" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="datum" type="xs:string" minOccurs="0"/>
+            <xs:element name="lice" type="xs:string" minOccurs="0"/>
+            <xs:element name="mesto" type="xs:string" minOccurs="0"/>
         </xs:choice>
     </xs:complexType>
     <xs:complexType name="Tppostupak_poverenika" mixed="true">
         <xs:sequence>
-            <xs:element name="datum" type="xs:string"/>
-            <xs:element name="lice" type="xs:string"/>
-            <xs:element name="mesto" type="xs:string"/>
-            <xs:element name="clan" type="ra:Tclan" maxOccurs="unbounded"/>
+            <xs:element name="datum" type="xs:string" minOccurs="0"/>
+            <xs:element name="lice" type="xs:string" minOccurs="0"/>
+            <xs:element name="mesto" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="clan" type="ra:Tclan" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType mixed="true" name="Todluka">
         <xs:sequence>
-            <xs:element name="trazilac">
+            <xs:element name="trazilac" minOccurs="0">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
@@ -165,12 +190,12 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element maxOccurs="unbounded" name="datum" type="xs:string"/>
-            <xs:element maxOccurs="unbounded" name="lice" type="xs:string"/>
-            <xs:element name="mesto" type="xs:string"/>
-            <xs:element name="clan" type="ra:Tclan"/>
-            <xs:element name="stav" type="ra:Tstav"/>
-            <xs:element name="iznos">
+            <xs:element maxOccurs="unbounded" name="datum" type="xs:string" minOccurs="0"/>
+            <xs:element maxOccurs="unbounded" name="lice" type="xs:string" minOccurs="0"/>
+            <xs:element name="mesto" type="xs:string" minOccurs="0"/>
+            <xs:element name="clan" type="ra:Tclan" minOccurs="0"/>
+            <xs:element name="stav" type="ra:Tstav" minOccurs="0"/>
+            <xs:element name="iznos" minOccurs="0">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="[0-9]+,[0-9]{2}"/>

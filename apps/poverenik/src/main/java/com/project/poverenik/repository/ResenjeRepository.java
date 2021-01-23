@@ -2,7 +2,6 @@ package com.project.poverenik.repository;
 
 import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.model.resenje.Resenje;
-import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import org.exist.xupdate.XUpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

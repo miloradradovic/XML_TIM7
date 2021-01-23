@@ -31,7 +31,7 @@ public class ResenjeService {
 
     public boolean create(Resenje resenje) throws XMLDBException {
         if (jaxB.validate(resenje.getClass(), resenje)){
-        	        	
+        	        	/*
         	resenje.getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getBroj());
         	resenje.getOtherAttributes().put(new QName("rel"),"pred:responseTo");
         	resenje.getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
@@ -39,7 +39,7 @@ public class ResenjeService {
         	resenje.getOtherAttributes().put(new QName("property"),"pred:datum");
         	resenje.getOtherAttributes().put(new QName("datatype"),"xs:date");
         	resenje.getOtherAttributes().put(new QName("content"),resenje.getDatum().toString());
-        	
+        	*/
             return resenjeRepository.create(resenje);
         }
         return false;

@@ -1,8 +1,6 @@
 package com.project.poverenik.model.util.lists;
 
 import com.project.poverenik.model.resenje.Resenje;
-import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
-import org.apache.regexp.RE;
 
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;

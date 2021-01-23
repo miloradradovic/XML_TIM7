@@ -78,8 +78,8 @@ public class Tclan {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link Tclan.Tacka }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
      * 
      * 
      */

@@ -17,8 +17,23 @@ import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 
 public class ResenjeMapper {
 	
-	public static Resenje mapFromDTO(Resenje resenje) {
+	public static Resenje mapFromDTO(Resenje resenje, String id) {
 
+		resenje.setId(id);
+		switch (id.length()){
+			case 1:
+				id = "000" + id;
+				break;
+			case 2:
+				id = "00" + id;
+				break;
+			case 3:
+				id = "0" + id;
+				break;
+			default:
+				break;
+		}
+		resenje.setBroj("071-01-" + id + "-" + resenje.getDatum().toString().substring(0, 7));
 		resenje.getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getBroj());
     	resenje.getOtherAttributes().put(new QName("rel"),"pred:responseTo");
     	resenje.getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
@@ -26,6 +41,7 @@ public class ResenjeMapper {
     	resenje.getOtherAttributes().put(new QName("property"),"pred:datum");
     	resenje.getOtherAttributes().put(new QName("datatype"),"xs:date");
     	resenje.getOtherAttributes().put(new QName("content"),resenje.getDatum().toString());
+
     	
     	resenje.getTipResenja().getOtherAttributes().put(new QName("property"), "pred:tip");
     	resenje.getTipResenja().getOtherAttributes().put(new QName("datatype"), "xs:string");

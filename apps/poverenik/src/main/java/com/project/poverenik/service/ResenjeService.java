@@ -7,6 +7,7 @@ import com.project.poverenik.model.resenje.Tadresa;
 import com.project.poverenik.model.resenje.TuvodneInformacije;
 import com.project.poverenik.model.util.ComplexTypes.Tclan;
 import com.project.poverenik.model.util.lists.ResenjeList;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.repository.ResenjeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,11 +34,27 @@ public class ResenjeService {
     @Autowired
     private ResenjeRepository resenjeRepository;
 
+    private String getMaxId() throws XMLDBException, JAXBException {
+        ResourceSet max = resenjeRepository.getMaxId();
+        ResourceIterator resourceIterator = max.getIterator();
 
-    public boolean create(Resenje resenjeDTO) throws XMLDBException {
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return "0000";
+            JAXBContext context = JAXBContext.newInstance(Resenje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Resenje resenjeMax = (Resenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            return resenjeMax.getId();
+        }
+        return "0000";
+    }
+
+
+    public boolean create(Resenje resenjeDTO) throws XMLDBException, JAXBException {
         if (jaxB.validate(resenjeDTO.getClass(), resenjeDTO)){
-        	 
-        	Resenje resenje = ResenjeMapper.mapFromDTO(resenjeDTO);
+            String id = String.valueOf(Integer.parseInt(getMaxId())+1);
+        	Resenje resenje = ResenjeMapper.mapFromDTO(resenjeDTO, id);
         	
         	if(jaxB.validate(resenje.getClass(), resenje)){
                 return resenjeRepository.create(resenje);
@@ -49,6 +66,7 @@ public class ResenjeService {
     }
 
     public ResenjeList getAll() throws XMLDBException, JAXBException {
+
         List<Resenje> resenjeList = new ArrayList<>();
 
         ResourceSet resourceSet = resenjeRepository.getAll();

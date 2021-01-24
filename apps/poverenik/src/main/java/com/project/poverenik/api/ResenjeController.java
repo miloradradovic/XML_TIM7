@@ -22,7 +22,7 @@ public class ResenjeController {
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException {
+    public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException, JAXBException {
         if (resenjeService.create(resenje)){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

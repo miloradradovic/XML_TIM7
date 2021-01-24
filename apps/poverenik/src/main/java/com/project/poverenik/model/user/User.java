@@ -1,11 +1,18 @@
 
 package com.project.poverenik.model.user;
 
+import com.project.poverenik.model.util.Authority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -52,7 +59,7 @@ import javax.xml.bind.annotation.XmlType;
     "role"
 })
 @XmlRootElement(name = "user", namespace = "http://user")
-public class User {
+public class User implements UserDetails {
 
     @XmlElement(namespace = "http://user", required = true)
     protected String name;
@@ -185,4 +192,38 @@ public class User {
         this.role = value;
     }
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Authority auth = new Authority();
+        auth.setName(this.role);
+        List<Authority> auths = new ArrayList();
+        auths.add(auth);
+        return auths;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

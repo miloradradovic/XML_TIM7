@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -19,6 +20,7 @@ public class ZalbaOdlukaController {
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, NumberFormatException, JAXBException {
         if (zalbaOdlukaService.create(zalbaOdluka)){
@@ -27,6 +29,7 @@ public class ZalbaOdlukaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaList() throws XMLDBException, JAXBException {
         ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getAll();
@@ -37,6 +40,7 @@ public class ZalbaOdlukaController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER' || 'POVERENIK')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaOdluka(@PathVariable String id) throws XMLDBException, JAXBException {
         ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(id);
@@ -45,6 +49,7 @@ public class ZalbaOdlukaController {
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity delete(@PathVariable String id) throws XMLDBException, JAXBException {

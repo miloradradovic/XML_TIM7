@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -19,6 +20,7 @@ public class ResenjeController {
     @Autowired
     ResenjeService resenjeService;
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException {
         if (resenjeService.create(resenje)){
@@ -27,6 +29,7 @@ public class ResenjeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ResenjeList> getResenjeList() throws XMLDBException, JAXBException {
         ResenjeList resenjeList = resenjeService.getAll();
@@ -37,6 +40,7 @@ public class ResenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK' || 'ROLE_USER')")
     @RequestMapping(value="/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws XMLDBException, JAXBException {
         Resenje resenje = resenjeService.getOne(broj);
@@ -46,6 +50,7 @@ public class ResenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{broj}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity delete(@PathVariable String broj) throws XMLDBException, JAXBException {
         boolean isDeleted = resenjeService.delete(broj);
@@ -55,6 +60,7 @@ public class ResenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody Resenje resenje) throws XMLDBException, JAXBException {
         boolean isUpdated = resenjeService.update(resenje);

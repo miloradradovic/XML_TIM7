@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -19,6 +20,7 @@ public class ZahtevController {
     @Autowired
     ZahtevService zahtevService;
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZahtev(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
         if (zahtevService.create(zahtev)){
@@ -27,6 +29,7 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZahtevList> getZahtevList() throws XMLDBException, JAXBException {
         ZahtevList zahtevList = zahtevService.getAll();
@@ -37,6 +40,7 @@ public class ZahtevController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZahtev(@PathVariable String id) throws XMLDBException, JAXBException {
         Zahtev zahtev = zahtevService.getOne(id);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -19,6 +20,7 @@ public class ObavestenjeController {
     @Autowired
     ObavestenjeService obavestenjeService;
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createObavestenje(@RequestBody Obavestenje obavestenje) throws XMLDBException, JAXBException {
         if (obavestenjeService.create(obavestenje)){
@@ -27,6 +29,7 @@ public class ObavestenjeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ObavestenjeList> getObavestenjeList() throws XMLDBException, JAXBException {
         ObavestenjeList obavestenjeList = obavestenjeService.getAll();
@@ -37,6 +40,7 @@ public class ObavestenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI' || 'ROLE_USER')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getObavestenje(@PathVariable String id) throws XMLDBException, JAXBException {
         Obavestenje obavestenje = obavestenjeService.getOne(id);

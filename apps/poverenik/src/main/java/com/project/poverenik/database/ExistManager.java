@@ -170,7 +170,7 @@ public class ExistManager {
         ResourceSet res = null;
 
         try {
-            collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
+            collection = getOrCreateCollection(collectionUri, 0);
 
             XPathQueryService xPathQueryService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
 

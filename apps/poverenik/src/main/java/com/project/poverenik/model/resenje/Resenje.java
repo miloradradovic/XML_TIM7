@@ -87,6 +87,8 @@ public class Resenje {
     protected Resenje.Poverenik poverenik;
     @XmlAttribute(name = "datum")
     protected String datum;
+    @XmlAttribute(name = "id")
+    protected String id;
     @XmlAttribute(name = "broj")
     protected String broj;
     @XmlAnyAttribute
@@ -234,6 +236,30 @@ public class Resenje {
      */
     public void setDatum(String value) {
         this.datum = value;
+    }
+
+    /**
+     * Gets the value of the datum property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the datum property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setId(String value) {
+        this.id = value;
     }
 
     /**

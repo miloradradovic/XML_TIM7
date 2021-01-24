@@ -15,7 +15,7 @@ public class ZalbaCutanjeRepository {
     @Autowired
     public ExistManager existManager;
 
-    private final String collectionUri = "db/proverenik/xml/zalba-cutanje";
+    private final String collectionUri = "db/poverenik/xml/zalba-cutanje";
 
     private final String TARGET_NAMESPACE = "http://www.zalbacutanje";
 /*

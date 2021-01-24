@@ -72,6 +72,14 @@ public class JaxB {
                 path = "classpath:xsd/user.xsd";
                 break;
             }
+            case("Zahtev"):{
+                path = "classpath:xsd/zahtevcir.xsd";
+                break;
+            }
+            case("Obavestenje"):{
+                path = "classpath:xsd/obavestenje.xsd";
+                break;
+            }
             /*
             case("Resenje"):{
                 path = "classpath:xsd/resenje.xsd";

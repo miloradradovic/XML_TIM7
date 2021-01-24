@@ -36,6 +36,7 @@ import javax.xml.namespace.QName;
  *         &lt;element name="informacije_o_traziocu" type="{http://www.reusability}Tinformacije_o_traziocu"/>
  *         &lt;element name="fusnote" type="{http://www.reusability}Tfusnote"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" />
  *       &lt;anyAttribute processContents='lax'/>
@@ -67,6 +68,8 @@ public class Zahtev {
     protected TinformacijeOTraziocu informacijeOTraziocu;
     @XmlElement(namespace = "http://www.zahtevcir", required = true)
     protected Tfusnote fusnote;
+    @XmlAttribute(name = "id")
+    protected String id;
     @XmlAttribute(name = "mesto")
     protected String mesto;
     @XmlAttribute(name = "datum")
@@ -193,6 +196,30 @@ public class Zahtev {
      */
     public void setFusnote(Tfusnote value) {
         this.fusnote = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setId(String value) {
+        this.id = value;
     }
 
     /**

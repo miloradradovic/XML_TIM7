@@ -1,5 +1,7 @@
 package com.project.organ_vlasti.database;
 
+import com.project.organ_vlasti.model.obavestenje.Obavestenje;
+import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.MetadataService;
 import org.exist.xmldb.DatabaseImpl;
 import org.exist.xmldb.EXistResource;
@@ -119,13 +121,12 @@ public class ExistManager {
 
             res.setContent(os);
             collection.storeResource(res);
-            /*
-            if (xml instanceof Resenje)
-                metadataService.extractMetadata("/resenja", os);
-            else
-                metadataService.extractMetadata("/zalbe", os);
 
-             */
+            if (xml instanceof Obavestenje)
+                metadataService.extractMetadata("/obavestenja", os);
+            else if(xml instanceof Zahtev)
+                metadataService.extractMetadata("/zahtevi", os);
+
 
         } catch (Exception e) {
             e.printStackTrace();

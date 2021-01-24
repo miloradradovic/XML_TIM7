@@ -3,14 +3,12 @@ package com.project.organ_vlasti.mappers;
 import java.math.BigInteger;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 
 import com.project.organ_vlasti.model.util.ComplexTypes.Tclan;
 import com.project.organ_vlasti.model.util.ComplexTypes.Tfusnote;
 import com.project.organ_vlasti.model.util.ComplexTypes.Topcije;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
-
 
 
 public class ZahtevMapper {

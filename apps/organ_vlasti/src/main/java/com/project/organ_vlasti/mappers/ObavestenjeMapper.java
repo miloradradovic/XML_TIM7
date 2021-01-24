@@ -9,13 +9,9 @@ import javax.xml.namespace.QName;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.ComplexTypes.Tadresa;
 import com.project.organ_vlasti.model.util.ComplexTypes.Tclan;
-import com.project.organ_vlasti.model.util.ComplexTypes.Tfusnote;
-import com.project.organ_vlasti.model.util.ComplexTypes.Topcije;
 import com.project.organ_vlasti.model.util.ComplexTypes.TopisTroskova;
 import com.project.organ_vlasti.model.util.ComplexTypes.TradnoVreme;
 import com.project.organ_vlasti.model.util.ComplexTypes.TukupanTrosak;
-import com.project.organ_vlasti.model.zahtev.Zahtev;
-
 
 
 public class ObavestenjeMapper {

@@ -1,6 +1,5 @@
 package com.project.organ_vlasti.model.util.lists;
 
-import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 
 import javax.xml.bind.annotation.XmlAnyElement;

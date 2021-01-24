@@ -28,19 +28,19 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _TtekstZahtevaZahtevcirOpcije_QNAME = new QName("http://www.reusability", "opcije");
-    private final static QName _TtekstZahtevaZahtevcirInformacijaOZahtevu_QNAME = new QName("http://www.reusability", "informacija_o_zahtevu");
-    private final static QName _TtekstZahtevaZahtevcirClan_QNAME = new QName("http://www.reusability", "clan");
-    private final static QName _TsadrzajDatum_QNAME = new QName("http://www.reusability", "datum");
-    private final static QName _TsadrzajOsnovaZaZalbu_QNAME = new QName("http://www.reusability", "osnova_za_zalbu");
-    private final static QName _TnacinDostaveNacinDostaveInput_QNAME = new QName("http://www.reusability", "nacin_dostave_input");
     private final static QName _TukupanTrosakIznos_QNAME = new QName("http://www.reusability", "iznos");
     private final static QName _TukupanTrosakBrojRacuna_QNAME = new QName("http://www.reusability", "broj_racuna");
     private final static QName _TukupanTrosakPozivNaBroj_QNAME = new QName("http://www.reusability", "poziv_na_broj");
     private final static QName _TsadrzajZalbeCiljaniOrganVlasti_QNAME = new QName("http://www.reusability", "ciljani_organ_vlasti");
+    private final static QName _TsadrzajZalbeDatum_QNAME = new QName("http://www.reusability", "datum");
     private final static QName _TsadrzajZalbeNapomena_QNAME = new QName("http://www.reusability", "napomena");
     private final static QName _TsadrzajZalbeRazlogZalbe_QNAME = new QName("http://www.reusability", "razlog_zalbe");
+    private final static QName _TsadrzajZalbeClan_QNAME = new QName("http://www.reusability", "clan");
     private final static QName _TsadrzajZalbePodaciOZahtjevuIInformacijama_QNAME = new QName("http://www.reusability", "podaci_o_zahtjevu_i_informacijama");
+    private final static QName _TsadrzajOsnovaZaZalbu_QNAME = new QName("http://www.reusability", "osnova_za_zalbu");
+    private final static QName _TtekstZahtevaZahtevcirOpcije_QNAME = new QName("http://www.reusability", "opcije");
+    private final static QName _TtekstZahtevaZahtevcirInformacijaOZahtevu_QNAME = new QName("http://www.reusability", "informacija_o_zahtevu");
+    private final static QName _TopisTroskovaCena_QNAME = new QName("http://www.reusability", "cena");
     private final static QName _TtekstZahtevaObavestenjaDan_QNAME = new QName("http://www.reusability", "dan");
     private final static QName _TtekstZahtevaObavestenjaVreme_QNAME = new QName("http://www.reusability", "vreme");
     private final static QName _TtekstZahtevaObavestenjaRadnoVreme_QNAME = new QName("http://www.reusability", "radno_vreme");
@@ -50,16 +50,24 @@ public class ObjectFactory {
     private final static QName _TtekstZahtevaObavestenjaOpisTrazeneInformacije_QNAME = new QName("http://www.reusability", "opis_trazene_informacije");
     private final static QName _TtekstZahtevaObavestenjaGodina_QNAME = new QName("http://www.reusability", "godina");
     private final static QName _TtekstZahtevaObavestenjaOpisTroskova_QNAME = new QName("http://www.reusability", "opis_troskova");
-    private final static QName _TopisTroskovaCena_QNAME = new QName("http://www.reusability", "cena");
-    private final static QName _TclanStav_QNAME = new QName("http://www.reusability", "stav");
     private final static QName _TradnoVremeKraj_QNAME = new QName("http://www.reusability", "kraj");
     private final static QName _TradnoVremePocetak_QNAME = new QName("http://www.reusability", "pocetak");
+    private final static QName _TnacinDostaveNacinDostaveInput_QNAME = new QName("http://www.reusability", "nacin_dostave_input");
+    private final static QName _TclanStav_QNAME = new QName("http://www.reusability", "stav");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.project.organ_vlasti.model.zahtev
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link Zahtev }
+     * 
+     */
+    public Zahtev createZahtev() {
+        return new Zahtev();
     }
 
     /**
@@ -127,11 +135,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Zahtev }
+     * Create an instance of {@link Zahtev.Mesto }
      * 
      */
-    public Zahtev createZahtev() {
-        return new Zahtev();
+    public Zahtev.Mesto createZahtevMesto() {
+        return new Zahtev.Mesto();
     }
 
     /**
@@ -343,69 +351,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TopcijeDostave }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "opcije", scope = TtekstZahtevaZahtevcir.class)
-    public JAXBElement<TopcijeDostave> createTtekstZahtevaZahtevcirOpcije(TopcijeDostave value) {
-        return new JAXBElement<TopcijeDostave>(_TtekstZahtevaZahtevcirOpcije_QNAME, TopcijeDostave.class, TtekstZahtevaZahtevcir.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "informacija_o_zahtevu", scope = TtekstZahtevaZahtevcir.class)
-    public JAXBElement<String> createTtekstZahtevaZahtevcirInformacijaOZahtevu(String value) {
-        return new JAXBElement<String>(_TtekstZahtevaZahtevcirInformacijaOZahtevu_QNAME, String.class, TtekstZahtevaZahtevcir.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TtekstZahtevaZahtevcir.class)
-    public JAXBElement<Tclan> createTtekstZahtevaZahtevcirClan(Tclan value) {
-        return new JAXBElement<Tclan>(_TtekstZahtevaZahtevcirClan_QNAME, Tclan.class, TtekstZahtevaZahtevcir.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "datum", scope = Tsadrzaj.class)
-    public JAXBElement<XMLGregorianCalendar> createTsadrzajDatum(XMLGregorianCalendar value) {
-        return new JAXBElement<XMLGregorianCalendar>(_TsadrzajDatum_QNAME, XMLGregorianCalendar.class, Tsadrzaj.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "osnova_za_zalbu", scope = Tsadrzaj.class)
-    public JAXBElement<String> createTsadrzajOsnovaZaZalbu(String value) {
-        return new JAXBElement<String>(_TsadrzajOsnovaZaZalbu_QNAME, String.class, Tsadrzaj.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = Tsadrzaj.class)
-    public JAXBElement<Tclan> createTsadrzajClan(Tclan value) {
-        return new JAXBElement<Tclan>(_TtekstZahtevaZahtevcirClan_QNAME, Tclan.class, Tsadrzaj.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "nacin_dostave_input", scope = TnacinDostave.class)
-    public JAXBElement<String> createTnacinDostaveNacinDostaveInput(String value) {
-        return new JAXBElement<String>(_TnacinDostaveNacinDostaveInput_QNAME, String.class, TnacinDostave.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
@@ -447,7 +392,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "datum", scope = TsadrzajZalbe.class)
     public JAXBElement<XMLGregorianCalendar> createTsadrzajZalbeDatum(XMLGregorianCalendar value) {
-        return new JAXBElement<XMLGregorianCalendar>(_TsadrzajDatum_QNAME, XMLGregorianCalendar.class, TsadrzajZalbe.class, value);
+        return new JAXBElement<XMLGregorianCalendar>(_TsadrzajZalbeDatum_QNAME, XMLGregorianCalendar.class, TsadrzajZalbe.class, value);
     }
 
     /**
@@ -474,7 +419,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TsadrzajZalbe.class)
     public JAXBElement<Tclan> createTsadrzajZalbeClan(Tclan value) {
-        return new JAXBElement<Tclan>(_TtekstZahtevaZahtevcirClan_QNAME, Tclan.class, TsadrzajZalbe.class, value);
+        return new JAXBElement<Tclan>(_TsadrzajZalbeClan_QNAME, Tclan.class, TsadrzajZalbe.class, value);
     }
 
     /**
@@ -484,6 +429,69 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.reusability", name = "podaci_o_zahtjevu_i_informacijama", scope = TsadrzajZalbe.class)
     public JAXBElement<String> createTsadrzajZalbePodaciOZahtjevuIInformacijama(String value) {
         return new JAXBElement<String>(_TsadrzajZalbePodaciOZahtjevuIInformacijama_QNAME, String.class, TsadrzajZalbe.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "datum", scope = Tsadrzaj.class)
+    public JAXBElement<XMLGregorianCalendar> createTsadrzajDatum(XMLGregorianCalendar value) {
+        return new JAXBElement<XMLGregorianCalendar>(_TsadrzajZalbeDatum_QNAME, XMLGregorianCalendar.class, Tsadrzaj.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "osnova_za_zalbu", scope = Tsadrzaj.class)
+    public JAXBElement<String> createTsadrzajOsnovaZaZalbu(String value) {
+        return new JAXBElement<String>(_TsadrzajOsnovaZaZalbu_QNAME, String.class, Tsadrzaj.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = Tsadrzaj.class)
+    public JAXBElement<Tclan> createTsadrzajClan(Tclan value) {
+        return new JAXBElement<Tclan>(_TsadrzajZalbeClan_QNAME, Tclan.class, Tsadrzaj.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TopcijeDostave }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "opcije", scope = TtekstZahtevaZahtevcir.class)
+    public JAXBElement<TopcijeDostave> createTtekstZahtevaZahtevcirOpcije(TopcijeDostave value) {
+        return new JAXBElement<TopcijeDostave>(_TtekstZahtevaZahtevcirOpcije_QNAME, TopcijeDostave.class, TtekstZahtevaZahtevcir.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "informacija_o_zahtevu", scope = TtekstZahtevaZahtevcir.class)
+    public JAXBElement<String> createTtekstZahtevaZahtevcirInformacijaOZahtevu(String value) {
+        return new JAXBElement<String>(_TtekstZahtevaZahtevcirInformacijaOZahtevu_QNAME, String.class, TtekstZahtevaZahtevcir.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TtekstZahtevaZahtevcir.class)
+    public JAXBElement<Tclan> createTtekstZahtevaZahtevcirClan(Tclan value) {
+        return new JAXBElement<Tclan>(_TsadrzajZalbeClan_QNAME, Tclan.class, TtekstZahtevaZahtevcir.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TopisTroskova.Cena }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "cena", scope = TopisTroskova.class)
+    public JAXBElement<TopisTroskova.Cena> createTopisTroskovaCena(TopisTroskova.Cena value) {
+        return new JAXBElement<TopisTroskova.Cena>(_TopisTroskovaCena_QNAME, TopisTroskova.Cena.class, TopisTroskova.class, value);
     }
 
     /**
@@ -528,7 +536,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<Tclan> createTtekstZahtevaObavestenjaClan(Tclan value) {
-        return new JAXBElement<Tclan>(_TtekstZahtevaZahtevcirClan_QNAME, Tclan.class, TtekstZahtevaObavestenja.class, value);
+        return new JAXBElement<Tclan>(_TsadrzajZalbeClan_QNAME, Tclan.class, TtekstZahtevaObavestenja.class, value);
     }
 
     /**
@@ -577,24 +585,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TopisTroskova.Cena }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "cena", scope = TopisTroskova.class)
-    public JAXBElement<TopisTroskova.Cena> createTopisTroskovaCena(TopisTroskova.Cena value) {
-        return new JAXBElement<TopisTroskova.Cena>(_TopisTroskovaCena_QNAME, TopisTroskova.Cena.class, TopisTroskova.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Tclan.Stav }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.reusability", name = "stav", scope = Tclan.class)
-    public JAXBElement<Tclan.Stav> createTclanStav(Tclan.Stav value) {
-        return new JAXBElement<Tclan.Stav>(_TclanStav_QNAME, Tclan.Stav.class, Tclan.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
@@ -610,6 +600,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.reusability", name = "pocetak", scope = TradnoVreme.class)
     public JAXBElement<String> createTradnoVremePocetak(String value) {
         return new JAXBElement<String>(_TradnoVremePocetak_QNAME, String.class, TradnoVreme.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "nacin_dostave_input", scope = TnacinDostave.class)
+    public JAXBElement<String> createTnacinDostaveNacinDostaveInput(String value) {
+        return new JAXBElement<String>(_TnacinDostaveNacinDostaveInput_QNAME, String.class, TnacinDostave.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Tclan.Stav }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.reusability", name = "stav", scope = Tclan.class)
+    public JAXBElement<Tclan.Stav> createTclanStav(Tclan.Stav value) {
+        return new JAXBElement<Tclan.Stav>(_TclanStav_QNAME, Tclan.Stav.class, Tclan.class, value);
     }
 
 }

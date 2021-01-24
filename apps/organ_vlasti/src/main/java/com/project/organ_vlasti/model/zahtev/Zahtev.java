@@ -31,14 +31,22 @@ import javax.xml.namespace.QName;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="mesto">
+ *           &lt;complexType>
+ *             &lt;simpleContent>
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *                 &lt;anyAttribute processContents='lax'/>
+ *               &lt;/extension>
+ *             &lt;/simpleContent>
+ *           &lt;/complexType>
+ *         &lt;/element>
  *         &lt;element name="ciljani_organ_vlasti" type="{http://www.reusability}Tciljani_organ_vlasti"/>
- *         &lt;element name="naziv" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="naziv" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="tekst_zahteva" type="{http://www.reusability}Ttekst_zahteva_zahtevcir"/>
  *         &lt;element name="informacije_o_traziocu" type="{http://www.reusability}Tinformacije_o_traziocu"/>
- *         &lt;element name="fusnote" type="{http://www.reusability}Tfusnote"/>
+ *         &lt;element name="fusnote" type="{http://www.reusability}Tfusnote" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="mesto" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" />
  *       &lt;anyAttribute processContents='lax'/>
  *     &lt;/restriction>
@@ -50,6 +58,7 @@ import javax.xml.namespace.QName;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "mesto",
     "ciljaniOrganVlasti",
     "naziv",
     "tekstZahteva",
@@ -59,17 +68,17 @@ import javax.xml.namespace.QName;
 @XmlRootElement(name = "zahtev", namespace = "http://www.zahtevcir")
 public class Zahtev {
 
-	@XmlElement(namespace = "http://www.zahtevcir", required = true)
+    @XmlElement(namespace = "http://www.zahtevcir", required = true)
     protected Zahtev.Mesto mesto;
     @XmlElement(name = "ciljani_organ_vlasti", namespace = "http://www.zahtevcir", required = true)
     protected TciljaniOrganVlasti ciljaniOrganVlasti;
-    @XmlElement(namespace = "http://www.zahtevcir", required = false)
+    @XmlElement(namespace = "http://www.zahtevcir")
     protected String naziv;
     @XmlElement(name = "tekst_zahteva", namespace = "http://www.zahtevcir", required = true)
     protected TtekstZahtevaZahtevcir tekstZahteva;
     @XmlElement(name = "informacije_o_traziocu", namespace = "http://www.zahtevcir", required = true)
     protected TinformacijeOTraziocu informacijeOTraziocu;
-    @XmlElement(namespace = "http://www.zahtevcir", required = false)
+    @XmlElement(namespace = "http://www.zahtevcir")
     protected Tfusnote fusnote;
     @XmlAttribute(name = "id")
     protected String id;
@@ -78,6 +87,30 @@ public class Zahtev {
     protected XMLGregorianCalendar datum;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+    /**
+     * Gets the value of the mesto property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Zahtev.Mesto }
+     *     
+     */
+    public Zahtev.Mesto getMesto() {
+        return mesto;
+    }
+
+    /**
+     * Sets the value of the mesto property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Zahtev.Mesto }
+     *     
+     */
+    public void setMesto(Zahtev.Mesto value) {
+        this.mesto = value;
+    }
 
     /**
      * Gets the value of the ciljaniOrganVlasti property.
@@ -247,15 +280,7 @@ public class Zahtev {
         this.datum = value;
     }
 
-    public Zahtev.Mesto getMesto() {
-		return mesto;
-	}
-
-	public void setMesto(Zahtev.Mesto mesto) {
-		this.mesto = mesto;
-	}
-
-	/**
+    /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
      * 
      * <p>
@@ -272,7 +297,25 @@ public class Zahtev {
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
     }
-    
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType>
+     *   &lt;simpleContent>
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+     *       &lt;anyAttribute processContents='lax'/>
+     *     &lt;/extension>
+     *   &lt;/simpleContent>
+     * &lt;/complexType>
+     * </pre>
+     * 
+     * 
+     */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "value"

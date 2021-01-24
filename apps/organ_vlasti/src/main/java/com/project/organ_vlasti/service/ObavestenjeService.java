@@ -4,8 +4,6 @@ import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
-import com.project.organ_vlasti.model.util.lists.ZahtevList;
-import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.repository.ObavestenjeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

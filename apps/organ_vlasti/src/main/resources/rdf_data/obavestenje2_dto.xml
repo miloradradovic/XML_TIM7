@@ -5,10 +5,8 @@
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.obavestenje ../xsd/obavestenje.xsd" 
-    id="111-11-1111-1111-11" idZahteva="1" datum="2000-12-12">
-    
+    broj="331-11-1111-1111-11" idZahteva="1" datum="2000-12-12">
     <oba:naziv_organa sediste="A"></oba:naziv_organa>
-    
     <oba:informacije_o_podnosiocu>
         <re:lice>
             <re:osoba>
@@ -39,7 +37,7 @@
            <re:cena valuta="dinar">00,00</re:cena>
 		   <re:cena valuta="dinar">00,00</re:cena>
 	       <re:cena valuta="dinar">00,00</re:cena>
-	       <re:cena valuta="dinar">00,00</re:cena>
+           <re:cena valuta="dinar">00,00</re:cena>
 	       <re:cena valuta="dinar">00,00</re:cena>
        </re:opis_troskova><re:ukupan_trosak>
             <re:iznos>0,00</re:iznos>
@@ -47,10 +45,8 @@
             <re:poziv_na_broj>97</re:poziv_na_broj>
         </re:ukupan_trosak>
     </oba:tekst_zahteva>
-    
     <oba:opcija_dostave>
         <re:opcija izabran="false">Именованом</re:opcija>
         <re:opcija izabran="false">Архиви</re:opcija>
     </oba:opcija_dostave>
-    
 </oba:obavestenje>

@@ -16,12 +16,26 @@ import com.project.organ_vlasti.model.util.ComplexTypes.TukupanTrosak;
 
 public class ObavestenjeMapper {
 
-	public static Obavestenje mapFromDTO(Obavestenje obavestenjeDTO) {
+	public static Obavestenje mapFromDTO(Obavestenje obavestenjeDTO, String id) {
 		Obavestenje obavestenje = new Obavestenje();
-
-		obavestenje.setId(obavestenjeDTO.getId());
+		
+		obavestenje.setId(id);
+		switch (id.length()){
+			case 1:
+				id = "000" + id;
+				break;
+			case 2:
+				id = "00" + id;
+				break;
+			case 3:
+				id = "0" + id;
+				break;
+			default:
+				break;
+		}
+		obavestenje.setBroj("071-01-" + id + "-" + obavestenjeDTO.getDatum().toString().substring(0, 7));
 		obavestenje.setIdZahteva(obavestenjeDTO.getIdzahteva());
-		obavestenje.getOtherAttributes().put(new QName("about"), "http://obavestenja/" + obavestenjeDTO.getId());
+		obavestenje.getOtherAttributes().put(new QName("about"), "http://obavestenja/" + obavestenje.getBroj());
 		obavestenje.getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
 		obavestenje.getOtherAttributes().put(new QName("rel"),"pred:responseTo");
 		obavestenje.getOtherAttributes().put(new QName("href"),"http://zahtevi/" + obavestenjeDTO.getIdzahteva());

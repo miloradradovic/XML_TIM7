@@ -5,15 +5,12 @@
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd" 
-    id="1"
     datum="2000-12-12">
     <zcir:mesto>A</zcir:mesto>
     <zcir:ciljani_organ_vlasti>
-        <re:naziv_organa></re:naziv_organa>
-        <re:sediste_organa></re:sediste_organa>
-    </zcir:ciljani_organ_vlasti>
-
-    
+        <re:naziv_organa>A</re:naziv_organa>
+        <re:sediste_organa>A</re:sediste_organa>
+    </zcir:ciljani_organ_vlasti> 
     <zcir:tekst_zahteva>
         <re:clan><re:stav></re:stav></re:clan>
         <re:opcije>
@@ -33,7 +30,6 @@
         <re:informacija_o_zahtevu>
         </re:informacija_o_zahtevu>
     </zcir:tekst_zahteva>
-    
     <zcir:informacije_o_traziocu>
         <re:lice>
             <re:osoba>
@@ -42,11 +38,8 @@
         </re:osoba>
         </re:lice>
         <re:adresa>
-            <re:mesto>
-                
-            </re:mesto>
+            <re:mesto></re:mesto>
             <re:ulica broj="0"></re:ulica>
-            
         </re:adresa>
         <re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt>
     </zcir:informacije_o_traziocu>

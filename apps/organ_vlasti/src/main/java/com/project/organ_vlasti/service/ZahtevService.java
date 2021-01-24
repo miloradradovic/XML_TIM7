@@ -55,6 +55,8 @@ public class ZahtevService {
         	}{
         		return false;
         	}
+            //return zahtevRepository.create(zahtev);
+
         }else{
             return false;
         }

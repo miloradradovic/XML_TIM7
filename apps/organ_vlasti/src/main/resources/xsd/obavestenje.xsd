@@ -26,6 +26,7 @@
             <xs:attribute name="datum" type="xs:date"/>
             <xs:attribute name="id" type="xs:string"/>
             <xs:attribute name="idZahteva" type="xs:string"/>
+            <xs:attribute name="broj" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>

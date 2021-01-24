@@ -23,7 +23,9 @@ public class ZahtevMapper {
 		zahtev.getOtherAttributes().put(new QName("datatype"),"xs:date");
 		zahtev.getOtherAttributes().put(new QName("content"),zahtevDTO.getDatum().toString());
 		
-		zahtev.setMesto(zahtev.getMesto());
+		zahtev.setMesto(zahtevDTO.getMesto());
+		zahtev.getMesto().getOtherAttributes().put(new QName("property"),"pred:mesto");
+		zahtev.getMesto().getOtherAttributes().put(new QName("datatypw"),"xs:string");
 		
 		zahtev.setCiljaniOrganVlasti(zahtevDTO.getCiljaniOrganVlasti());
 		zahtev.getCiljaniOrganVlasti().getNazivOrgana().getOtherAttributes().put(new QName("property"),"pred:organ_vlasti");

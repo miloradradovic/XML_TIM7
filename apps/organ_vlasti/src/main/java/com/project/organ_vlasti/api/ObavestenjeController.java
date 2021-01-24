@@ -38,8 +38,8 @@ public class ObavestenjeController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> getObavestenje(@PathVariable String id) throws XMLDBException, JAXBException {
-        Obavestenje obavestenje = obavestenjeService.getOne(id);
+    public ResponseEntity<?> getObavestenje(@PathVariable String broj) throws XMLDBException, JAXBException {
+        Obavestenje obavestenje = obavestenjeService.getOne(broj);
         if(obavestenje != null)
             return new ResponseEntity(obavestenje, HttpStatus.OK);
 
@@ -47,8 +47,8 @@ public class ObavestenjeController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity delete(@PathVariable String id) throws XMLDBException, JAXBException {
-        boolean isDeleted = obavestenjeService.delete(id);
+    public ResponseEntity delete(@PathVariable String broj) throws XMLDBException, JAXBException {
+        boolean isDeleted = obavestenjeService.delete(broj);
         if(isDeleted)
             return new ResponseEntity(HttpStatus.OK);
 

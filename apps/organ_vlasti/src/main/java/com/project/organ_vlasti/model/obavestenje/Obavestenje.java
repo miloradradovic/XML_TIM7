@@ -86,12 +86,28 @@ public class Obavestenje {
     protected XMLGregorianCalendar datum;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "broj")
+    protected String broj;
     @XmlAttribute(name = "idZahteva")
     protected String idZahteva;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+    
+    
 
-    /**
+    public String getBroj() {
+		return broj;
+	}
+
+	public void setBroj(String broj) {
+		this.broj = broj;
+	}
+
+	public String getIdZahteva() {
+		return idZahteva;
+	}
+
+	/**
      * Gets the value of the nazivOrgana property.
      * 
      * @return

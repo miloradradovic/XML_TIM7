@@ -1,11 +1,11 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://obavestenja/332-22-2222-2222-22">
+  <rdf:Description rdf:about="http://obavestenja/071-01-0002-2000-12">
     <pred:responseTo xmlns:pred="http://examples/predicate/" rdf:resource="http://zahtevi/1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://obavestenja/332-22-2222-2222-22">
+  <rdf:Description rdf:about="http://obavestenja/071-01-0002-2000-12">
     <pred:datum xmlns:pred="http://examples/predicate/" rdf:datatype="date">2000-12-12</pred:datum>
   </rdf:Description>
-  <rdf:Description rdf:about="http://obavestenja/332-22-2222-2222-22">
+  <rdf:Description rdf:about="http://obavestenja/071-01-0002-2000-12">
     <pred:organVlasti xmlns:pred="http://examples/predicate/" rdf:datatype="string"/>
   </rdf:Description>
 </rdf:RDF>

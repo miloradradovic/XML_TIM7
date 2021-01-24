@@ -45,17 +45,16 @@ public class ZahtevService {
     }
      
 
-    public boolean create(Zahtev zahtevDTO) throws XMLDBException, JAXBException {
+    public boolean create(Zahtev zahtevDTO, String userEmail) throws XMLDBException, JAXBException {
         if(jaxB.validate(zahtevDTO.getClass(), zahtevDTO)){
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
         	
-        	Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id);
+        	Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id, userEmail);
         	if(jaxB.validate(zahtev.getClass(), zahtev)) {
                 return zahtevRepository.create(zahtev);
         	}{
         		return false;
         	}
-            //return zahtevRepository.create(zahtev);
 
         }else{
             return false;

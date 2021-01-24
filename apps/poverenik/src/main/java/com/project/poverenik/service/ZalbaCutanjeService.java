@@ -60,11 +60,11 @@ public class ZalbaCutanjeService {
         return "0";
     }
 
-    public boolean create(ZalbaCutanje zalbaCutanjeDTO) throws XMLDBException, JAXBException {
+    public boolean create(ZalbaCutanje zalbaCutanjeDTO, String userEmail) throws XMLDBException, JAXBException {
         if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)){
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
 
-        	ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id);
+        	ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, userEmail);
         	
             if(jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
                 return zalbaCutanjeRepository.create(zalbaCutanje);

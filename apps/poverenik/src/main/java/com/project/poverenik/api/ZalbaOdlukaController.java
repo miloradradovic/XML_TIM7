@@ -1,5 +1,6 @@
 package com.project.poverenik.api;
 
+import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.ZalbaOdlukaService;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -23,7 +26,9 @@ public class ZalbaOdlukaController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, NumberFormatException, JAXBException {
-        if (zalbaOdlukaService.create(zalbaOdluka)){
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) authentication.getPrincipal();
+        if (zalbaOdlukaService.create(zalbaOdluka, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

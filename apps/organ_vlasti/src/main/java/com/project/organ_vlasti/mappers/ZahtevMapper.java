@@ -13,7 +13,7 @@ import com.project.organ_vlasti.model.zahtev.Zahtev;
 
 public class ZahtevMapper {
 
-	public static Zahtev mapFromDTO(Zahtev zahtevDTO, String id) {
+	public static Zahtev mapFromDTO(Zahtev zahtevDTO, String id, String userEmail) {
 		Zahtev zahtev = new Zahtev();
 
 		zahtev.setId(id);
@@ -48,10 +48,9 @@ public class ZahtevMapper {
         zahtev.getTekstZahteva().getContent().set(5, (JAXBElement<String>) zahtev.getTekstZahteva().getContent().get(5));
         
         zahtev.setInformacijeOTraziocu(zahtevDTO.getInformacijeOTraziocu());
-        String idUlogovanog = "1";
-        zahtev.getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), idUlogovanog);
+        zahtev.getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
         zahtev.getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("property"),"pred:podnosilac");
-        zahtev.getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("content"), idUlogovanog.toString());
+        zahtev.getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
         
         Tfusnote fusnote = new Tfusnote();
         fusnote.getFusnota().add("* У кућици означити која законска права на приступ информацијама желите да остварите.");

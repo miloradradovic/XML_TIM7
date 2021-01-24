@@ -15,7 +15,7 @@ import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 
 public class ZalbaCutanjeMapper {
 	
-	public static ZalbaCutanje mapFromDTO(ZalbaCutanje zalbaCutanjeDTO, String id) {
+	public static ZalbaCutanje mapFromDTO(ZalbaCutanje zalbaCutanjeDTO, String id, String userEmail) {
 		ZalbaCutanje zalbaCutanje = new ZalbaCutanje();
 
 		zalbaCutanje.setId(id);
@@ -58,11 +58,10 @@ public class ZalbaCutanjeMapper {
         JaxbNapomena.setValue("Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.");
         zalbaCutanje.getSadrzajZalbe().getContent().set(11, JaxbNapomena);
         
-        String idUlogovanog = "1";
         zalbaCutanje.setPodaciOPodnosiocu(zalbaCutanjeDTO.getPodaciOPodnosiocu());
-        zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("id"), idUlogovanog);
+        zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
         zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
-        zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("content"), idUlogovanog);
+        zalbaCutanje.getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
         
         return zalbaCutanje;
 

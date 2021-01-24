@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -25,7 +27,9 @@ public class ZalbaCutanjeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
-        if (zalbaCutanjeService.create(zalbaCutanje)){
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) authentication.getPrincipal();
+        if (zalbaCutanjeService.create(zalbaCutanje, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

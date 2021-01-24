@@ -1,13 +1,17 @@
 package com.project.organ_vlasti.api;
 
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
+import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.service.ObavestenjeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 

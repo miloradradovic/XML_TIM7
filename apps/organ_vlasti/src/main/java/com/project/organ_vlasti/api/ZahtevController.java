@@ -1,5 +1,6 @@
 package com.project.organ_vlasti.api;
 
+import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.ZahtevService;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -23,7 +26,9 @@ public class ZahtevController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZahtev(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
-        if (zahtevService.create(zahtev)){
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) authentication.getPrincipal();
+        if (zahtevService.create(zahtev, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

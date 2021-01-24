@@ -18,7 +18,7 @@ import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 
 public class ZalbaOdlukaMapper {
 	
-	public static ZalbaOdluka mapFromDTO(ZalbaOdluka zalbaOdluka, String id) {
+	public static ZalbaOdluka mapFromDTO(ZalbaOdluka zalbaOdluka, String id, String userEmail) {
 		
 		zalbaOdluka.setId(id);
     	zalbaOdluka.getOtherAttributes().put(new QName("about"), "http://zalbe/odluka/" + id);
@@ -38,10 +38,9 @@ public class ZalbaOdlukaMapper {
     	zalbaOdluka.getPodaciPovereniku().getAdresa().getUlica().setValue("Булевар краља Александрa");
     	zalbaOdluka.getPodaciPovereniku().getAdresa().getUlica().setBroj(15);
     	zalbaOdluka.setPodnaslov("Ж А Л Б А ");
-    	String idUlogovanog = "2";
-    	zalbaOdluka.getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("id"), idUlogovanog);
+    	zalbaOdluka.getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
     	zalbaOdluka.getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
-    	zalbaOdluka.getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("content"), idUlogovanog);
+    	zalbaOdluka.getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
     	zalbaOdluka.getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("property"), "pred:organ_vlasti");
     	zalbaOdluka.getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("datatype"), "xs:string");
     	zalbaOdluka.getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("rel"), "pred:referenceTo");

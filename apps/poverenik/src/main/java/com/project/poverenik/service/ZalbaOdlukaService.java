@@ -50,12 +50,12 @@ public class ZalbaOdlukaService {
         return "0";
     }
 
-    public boolean create(ZalbaOdluka zalbaOdlukaDTO) throws XMLDBException, NumberFormatException, JAXBException {
+    public boolean create(ZalbaOdluka zalbaOdlukaDTO, String userEmail) throws XMLDBException, NumberFormatException, JAXBException {
         if (jaxB.validate(zalbaOdlukaDTO.getClass(), zalbaOdlukaDTO)){
         	
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
         	
-        	ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id);
+        	ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id, userEmail);
         	
             if(jaxB.validate(zalbaOdluka.getClass(), zalbaOdluka)){
                 return zalbaOdlukaRepository.create(zalbaOdluka);

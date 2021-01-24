@@ -16,7 +16,7 @@ import com.project.organ_vlasti.model.util.ComplexTypes.TukupanTrosak;
 
 public class ObavestenjeMapper {
 
-	public static Obavestenje mapFromDTO(Obavestenje obavestenjeDTO, String id) {
+	public static Obavestenje mapFromDTO(Obavestenje obavestenjeDTO, String id, String userEmail) {
 		Obavestenje obavestenje = new Obavestenje();
 		
 		obavestenje.setId(id);
@@ -47,11 +47,10 @@ public class ObavestenjeMapper {
 		obavestenje.getNazivOrgana().getOtherAttributes().put(new QName("property"),"pred:organVlasti");
 		obavestenje.getNazivOrgana().getOtherAttributes().put(new QName("datatype"),"xs:string");
 		
-		String idUlogovanog = "1";
 		obavestenje.setInformacijeOPodnosiocu(obavestenjeDTO.getInformacijeOPodnosiocu());
-		obavestenje.getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), idUlogovanog);
-		obavestenje.getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("propery"), "pred:podnosilac");
-		obavestenje.getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("content"), idUlogovanog);
+		obavestenje.getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
+		obavestenje.getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
+		obavestenje.getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
 		
 		obavestenje.setNaslov("ОБАВЕШТЕЊЕ");
 		obavestenje.setPodnaslov("о стављању на увид документа који садржи тражену информацију и о изради копије");

@@ -48,7 +48,10 @@ public class ObavestenjeService {
         
         if (jaxB.validate(obavestenjeDTO.getClass(), obavestenjeDTO)){
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
-            Obavestenje obavestenje = ObavestenjeMapper.mapFromDTO(obavestenjeDTO, id);
+        	
+        	//email usera koji je podnio zahtjev na koji se odnosi obavjestenje
+        	String userEmail = ""; 
+            Obavestenje obavestenje = ObavestenjeMapper.mapFromDTO(obavestenjeDTO, id, userEmail);
 
             if(jaxB.validate(obavestenje.getClass(), obavestenje)){
             	 return obavestenjeRepository.create(obavestenje);

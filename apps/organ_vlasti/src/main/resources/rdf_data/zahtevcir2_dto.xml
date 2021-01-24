@@ -5,26 +5,17 @@
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd" 
-    xmlns:pred="http://examples/predicate/"
-    vocab="http://examples/predicate/"
-    about="http://zahtevi/1"
     id="1"
-    datum="2000-12-12" property="pred:datum" datatype="xs:date" content="2000-12-12">
-    <zcir:mesto property="pred:mesto" datatype="xs:string">A</zcir:mesto>
+    datum="2000-12-12">
+    <zcir:mesto>A</zcir:mesto>
     <zcir:ciljani_organ_vlasti>
-        <re:naziv_organa property="pred:organ_vlasti" datatype="xs:string"></re:naziv_organa>
+        <re:naziv_organa></re:naziv_organa>
         <re:sediste_organa></re:sediste_organa>
     </zcir:ciljani_organ_vlasti>
- 
-    <zcir:naziv>
-        З А Х Т Е В
-        за приступ информацији од јавног значаја
-    </zcir:naziv>
+
     
     <zcir:tekst_zahteva>
-        На основу <re:clan broj="15">члана 15. <re:stav broj="1">ст. 1.</re:stav></re:clan> Закона о слободном приступу информацијама од јавног значаја
-        („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), од горе 
-        наведеног органа захтевам:*
+        <re:clan><re:stav></re:stav></re:clan>
         <re:opcije>
             <re:opcija izabran="false">oбавештење да ли поседује тражену информацију;</re:opcija>
             <re:opcija izabran="false">увид у документ који садржи тражену информацију;</re:opcija>
@@ -39,14 +30,13 @@
                 </re:nacin_dostave>
             </re:nacini_dostave>
         </re:opcije>
-        Овај захтев се односи на следеће информације:
         <re:informacija_o_zahtevu>
         </re:informacija_o_zahtevu>
     </zcir:tekst_zahteva>
     
     <zcir:informacije_o_traziocu>
         <re:lice>
-            <re:osoba id="1" property="pred:podnosilac" content="1">
+            <re:osoba>
                 <re:ime></re:ime>
                 <re:prezime></re:prezime>
         </re:osoba>
@@ -60,11 +50,4 @@
         </re:adresa>
         <re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt>
     </zcir:informacije_o_traziocu>
-    
-    <zcir:fusnote>
-        <re:fusnota>* У кућици означити која законска права на приступ информацијама желите да остварите.</re:fusnota>
-        <re:fusnota>** У кућици означити начин достављања копије докумената.</re:fusnota>
-        <re:fusnota>*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.</re:fusnota>
-    </zcir:fusnote>
-    
 </zcir:zahtev>

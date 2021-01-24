@@ -1,6 +1,7 @@
 package com.project.organ_vlasti.service;
 
 import com.project.organ_vlasti.jaxb.JaxB;
+import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
@@ -28,44 +29,20 @@ public class ObavestenjeService {
     @Autowired
     private ObavestenjeRepository obavestenjeRepository;
 
-    /*
-    private String getMaxId() throws XMLDBException, JAXBException {
-        ResourceSet max = zalbaCutanjeRepository.getMaxId();
-        ResourceIterator resourceIterator = max.getIterator();
+    public boolean create(Obavestenje obavestenjeDTO) throws XMLDBException, JAXBException {
+        
+        if (jaxB.validate(obavestenjeDTO.getClass(), obavestenjeDTO)){
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
-                return "0";
-            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            ZalbaCutanje zalbaCutanjeMax = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zalbaCutanjeMax.getId();
-        }
-        return "0";
-    }
-     */
+            Obavestenje obavestenje = ObavestenjeMapper.mapFromDTO(obavestenjeDTO);
 
-    public boolean create(Obavestenje obavestenje) throws XMLDBException, JAXBException {
-        /*
-        if (jaxB.validate(obavestenje.getClass(), obavestenje)){
-            String id = String.valueOf(Integer.parseInt(getMaxId())+1);
-
-            ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id);
-
-            if(jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
-                return zalbaCutanjeRepository.create(zalbaCutanje);
+            if(jaxB.validate(obavestenje.getClass(), obavestenje)){
+            	 return obavestenjeRepository.create(obavestenje);
             }else {
                 return false;
             }
         }
         return false;
-         */
-        if(jaxB.validate(obavestenje.getClass(), obavestenje)){
-            return obavestenjeRepository.create(obavestenje);
-        }else{
-            return false;
-        }
+         
     }
 
     public ObavestenjeList getAll() throws XMLDBException, JAXBException {

@@ -218,7 +218,7 @@
             <xs:element name="radno_vreme" type="re:Tradno_vreme"/>
             <xs:element name="adresa" type="re:Tadresa"/>
             <xs:element name="broj_kancelarije" type="xs:positiveInteger"/>
-            <xs:element name="opis_troskova" type="re:Topis_troskova"/>
+            <xs:element name="opis_troskova" type="re:Topis_troskova" minOccurs="0"/>
             <xs:element name="ukupan_trosak" type="re:Tukupan_trosak"/>
         </xs:sequence>
     </xs:complexType>

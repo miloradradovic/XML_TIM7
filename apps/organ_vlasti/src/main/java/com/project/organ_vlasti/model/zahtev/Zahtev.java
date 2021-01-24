@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 
@@ -58,20 +59,20 @@ import javax.xml.namespace.QName;
 @XmlRootElement(name = "zahtev", namespace = "http://www.zahtevcir")
 public class Zahtev {
 
+	@XmlElement(namespace = "http://www.zahtevcir", required = true)
+    protected Zahtev.Mesto mesto;
     @XmlElement(name = "ciljani_organ_vlasti", namespace = "http://www.zahtevcir", required = true)
     protected TciljaniOrganVlasti ciljaniOrganVlasti;
-    @XmlElement(namespace = "http://www.zahtevcir", required = true)
+    @XmlElement(namespace = "http://www.zahtevcir", required = false)
     protected String naziv;
     @XmlElement(name = "tekst_zahteva", namespace = "http://www.zahtevcir", required = true)
     protected TtekstZahtevaZahtevcir tekstZahteva;
     @XmlElement(name = "informacije_o_traziocu", namespace = "http://www.zahtevcir", required = true)
     protected TinformacijeOTraziocu informacijeOTraziocu;
-    @XmlElement(namespace = "http://www.zahtevcir", required = true)
+    @XmlElement(namespace = "http://www.zahtevcir", required = false)
     protected Tfusnote fusnote;
     @XmlAttribute(name = "id")
     protected String id;
-    @XmlAttribute(name = "mesto")
-    protected String mesto;
     @XmlAttribute(name = "datum")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datum;
@@ -223,30 +224,6 @@ public class Zahtev {
     }
 
     /**
-     * Gets the value of the mesto property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMesto() {
-        return mesto;
-    }
-
-    /**
-     * Sets the value of the mesto property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMesto(String value) {
-        this.mesto = value;
-    }
-
-    /**
      * Gets the value of the datum property.
      * 
      * @return
@@ -270,7 +247,15 @@ public class Zahtev {
         this.datum = value;
     }
 
-    /**
+    public Zahtev.Mesto getMesto() {
+		return mesto;
+	}
+
+	public void setMesto(Zahtev.Mesto mesto) {
+		this.mesto = mesto;
+	}
+
+	/**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
      * 
      * <p>
@@ -286,6 +271,61 @@ public class Zahtev {
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
+    }
+    
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class Mesto {
+
+        @XmlValue
+        protected String value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
     }
 
 }

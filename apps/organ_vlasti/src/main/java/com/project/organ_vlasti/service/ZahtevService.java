@@ -1,6 +1,7 @@
 package com.project.organ_vlasti.service;
 
 import com.project.organ_vlasti.jaxb.JaxB;
+import com.project.organ_vlasti.mappers.ZahtevMapper;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.repository.ZahtevRepository;
@@ -26,41 +27,34 @@ public class ZahtevService {
     @Autowired
     private ZahtevRepository zahtevRepository;
 
-    /*
+    
     private String getMaxId() throws XMLDBException, JAXBException {
-        ResourceSet max = zalbaCutanjeRepository.getMaxId();
+        ResourceSet max = zahtevRepository.getMaxId();
         ResourceIterator resourceIterator = max.getIterator();
 
         while (resourceIterator.hasMoreResources()){
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
             if(xmlResource == null)
                 return "0";
-            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            ZalbaCutanje zalbaCutanjeMax = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zalbaCutanjeMax.getId();
+            Zahtev zahteveMax = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            return zahteveMax.getId();
         }
         return "0";
     }
-     */
+     
 
-    public boolean create(Zahtev zahtev) throws XMLDBException, JAXBException {
-        /*
-        if (jaxB.validate(obavestenje.getClass(), obavestenje)){
-            String id = String.valueOf(Integer.parseInt(getMaxId())+1);
-
-            ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id);
-
-            if(jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
-                return zalbaCutanjeRepository.create(zalbaCutanje);
-            }else {
-                return false;
-            }
-        }
-        return false;
-         */
-        if(jaxB.validate(zahtev.getClass(), zahtev)){
-            return zahtevRepository.create(zahtev);
+    public boolean create(Zahtev zahtevDTO) throws XMLDBException, JAXBException {
+        if(jaxB.validate(zahtevDTO.getClass(), zahtevDTO)){
+        	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
+        	
+        	Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id);
+        	if(jaxB.validate(zahtev.getClass(), zahtev)) {
+                return zahtevRepository.create(zahtev);
+        	}{
+        		return false;
+        	}
         }else{
             return false;
         }

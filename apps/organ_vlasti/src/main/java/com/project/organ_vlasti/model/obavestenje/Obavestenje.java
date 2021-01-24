@@ -73,21 +73,21 @@ public class Obavestenje {
     protected Obavestenje.NazivOrgana nazivOrgana;
     @XmlElement(name = "informacije_o_podnosiocu", namespace = "http://www.obavestenje", required = true)
     protected TinformacijeOPodnosiocu informacijeOPodnosiocu;
-    @XmlElement(namespace = "http://www.obavestenje", required = true)
+    @XmlElement(namespace = "http://www.obavestenje", required = false)
     protected String naslov;
-    @XmlElement(namespace = "http://www.obavestenje", required = true)
+    @XmlElement(namespace = "http://www.obavestenje", required = false)
     protected String podnaslov;
     @XmlElement(name = "tekst_zahteva", namespace = "http://www.obavestenje", required = true)
     protected TtekstZahtevaObavestenja tekstZahteva;
     @XmlElement(name = "opcija_dostave", namespace = "http://www.obavestenje", required = true)
     protected Topcije opcijaDostave;
-    @XmlAttribute(name = "br_predmeta")
-    protected String brPredmeta;
     @XmlAttribute(name = "datum")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datum;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "idZahteva")
+    protected String idZahteva;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
@@ -235,29 +235,7 @@ public class Obavestenje {
         this.opcijaDostave = value;
     }
 
-    /**
-     * Gets the value of the brPredmeta property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBrPredmeta() {
-        return brPredmeta;
-    }
 
-    /**
-     * Sets the value of the brPredmeta property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBrPredmeta(String value) {
-        this.brPredmeta = value;
-    }
 
     /**
      * Gets the value of the datum property.
@@ -281,6 +259,30 @@ public class Obavestenje {
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
+    }
+    
+    /**
+     * Gets the value of the idZahteva property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdzahteva() {
+        return idZahteva;
+    }
+
+    /**
+     * Sets the value of the idZahteva property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdZahteva(String value) {
+        this.idZahteva = value;
     }
 
     /**

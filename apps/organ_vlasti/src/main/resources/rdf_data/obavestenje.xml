@@ -10,7 +10,7 @@
     about="http://obavestenja/1"
     rel="pred:responseTo" 
     href="http://zahtevi/1"
-    id="1" br_predmeta="" datum="2000-12-12" property="pred:datum" datatype="xs:date" content="2000-12-12">
+    id="1" datum="2000-12-12" idZahteva="1" property="pred:datum" datatype="xs:date" content="2000-12-12">
     
     <oba:naziv_organa property="pred:organ_vlasti" datatype="xs:string" sediste=""></oba:naziv_organa>
     
@@ -57,9 +57,7 @@
            то: копија стране А4 формата износи <re:cena valuta="dinar">3,00</re:cena> динара, А3 формата <re:cena valuta="dinar">6,00</re:cena> динара, CD <re:cena valuta="dinar">35,00</re:cena> динара,
            дискете <re:cena valuta="dinar">20,00</re:cena> динара, DVD <re:cena valuta="dinar">40,00</re:cena> динара, аудио-касета -<re:cena valuta="dinar">150,00</re:cena> динара, видео-касета <re:cena valuta="dinar">300,00</re:cena> динара,
            претварање једне стране документа из физичком у електронски облик - <re:cena valuta="dinar">30,00</re:cena> динара.
-       </re:opis_troskova>
-        
-        <re:ukupan_trosak>
+       </re:opis_troskova><re:ukupan_trosak>
             Износ укупних трошкова израде копије докумената по вашем захтеву износи <re:iznos>0,00</re:iznos>
             динара и уплаћује се на жиро-рачун Буџета Републиек Србије бр. <re:broj_racuna>840-742328-843-30</re:broj_racuna>,
             с позивом на број <re:poziv_na_broj>97</re:poziv_na_broj> - ознака шифре општине/града где се налази орган власти

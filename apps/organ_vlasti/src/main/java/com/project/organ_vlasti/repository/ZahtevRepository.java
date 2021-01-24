@@ -47,5 +47,10 @@ public class ZahtevRepository {
         String xpath =  String.format("/zahtev[@id='%s']", id);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
+    
+    public ResourceSet getMaxId() throws XMLDBException  {
+    	String xpath = "/zahtev[@id = max(/zahtev/@id)]";
+    	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 
 }

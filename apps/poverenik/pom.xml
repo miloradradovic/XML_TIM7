@@ -147,6 +147,7 @@
 									<extraargs>
 										<extraarg>-impl</extraarg> <!-- Ima i drugih dodatniha<extraarg>-client</extraarg> -->
 										<extraarg>-verbose</extraarg>
+										<extraarg>-client</extraarg>
 									</extraargs>
 									<wsdlLocation>classpath:wsdl/Resenje.wsdl</wsdlLocation>
 								</wsdlOption>

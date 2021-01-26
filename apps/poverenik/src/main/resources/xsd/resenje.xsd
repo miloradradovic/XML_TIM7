@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://resenje" xmlns:ra="http://resenje">
-    <xs:element name="resenje">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="tip_resenja">
-                    <xs:complexType>
-                        <xs:simpleContent>
-                            <xs:extension base="xs:string">
-                                <xs:anyAttribute namespace="##any" processContents="lax"/>
-                            </xs:extension>
-                        </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="uvodne_informacije" type="ra:Tuvodne_informacije"/>
-                <xs:element name="podaci_o_resenju" type="ra:Tpodaci_o_resenju"/>
-                <xs:element name="podaci_o_obrazlozenju" type="ra:Tpodaci_o_obrazlozenju"/>
-                <xs:element name="poverenik">
-                    <xs:complexType>
-                        <xs:simpleContent>
-                            <xs:extension base="xs:string">
-                                <xs:attribute name="id"/>
-                                <xs:anyAttribute namespace="##any" processContents="lax"/>
-                            </xs:extension>
-                        </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-            <xs:attribute name="datum" type="xs:string"/>
-            <xs:attribute name="broj">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[0-9]{3}\-[0-9]{2}\-[0-9]{4}\-[0-9]{4}\-[0-9]{2}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="id" type="xs:string"/>
-            <xs:anyAttribute namespace="##any" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="Tresenje"> </xs:complexType>
+    <xs:element name="resenje" type="ra:Tresenje"> </xs:element>
+    <xs:complexType name="Tresenje">
+        <xs:sequence>
+            <xs:element name="tip_resenja">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uvodne_informacije" type="ra:Tuvodne_informacije"/>
+            <xs:element name="podaci_o_resenju" type="ra:Tpodaci_o_resenju"/>
+            <xs:element name="podaci_o_obrazlozenju" type="ra:Tpodaci_o_obrazlozenju"/>
+            <xs:element name="poverenik">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="id"/>
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="datum" type="xs:string"/>
+        <xs:attribute name="broj">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[0-9]{3}\-[0-9]{2}\-[0-9]{4}\-[0-9]{4}\-[0-9]{2}"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
     <xs:complexType mixed="true" name="Tuvodne_informacije">
         <xs:sequence>
             <xs:element name="trazilac">

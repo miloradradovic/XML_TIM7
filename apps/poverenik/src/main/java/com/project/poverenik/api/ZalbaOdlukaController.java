@@ -16,7 +16,7 @@ import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
 
-@CrossOrigin(origins = "https://localhost:4200")
+@CrossOrigin(origins = "https://localhost:4201")
 @RestController
 @RequestMapping(value = "/zalba-odluka", produces = MediaType.APPLICATION_XML_VALUE)
 public class ZalbaOdlukaController {

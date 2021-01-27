@@ -19,7 +19,7 @@ import org.xmldb.api.base.XMLDBException;
 import javax.servlet.http.HttpServletResponse;
 
 //123qweASD
-@CrossOrigin(origins = "https://localhost:4200")
+@CrossOrigin(origins = "https://localhost:4201")
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_XML_VALUE)
 public class AuthenticationController {

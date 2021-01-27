@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 import javax.xml.bind.JAXBException;
 
+@CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping(value = "/users", produces = MediaType.APPLICATION_XML_VALUE)
 public class UserController {

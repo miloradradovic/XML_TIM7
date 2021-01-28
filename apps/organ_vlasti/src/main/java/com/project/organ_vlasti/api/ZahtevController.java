@@ -16,6 +16,7 @@ import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
 
+@CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping(value = "/zahtev", produces = MediaType.APPLICATION_XML_VALUE)
 public class ZahtevController {

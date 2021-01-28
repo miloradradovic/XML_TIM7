@@ -147,9 +147,26 @@
 									<extraargs>
 										<extraarg>-impl</extraarg> <!-- Ima i drugih dodatniha<extraarg>-client</extraarg> -->
 										<extraarg>-verbose</extraarg>
-										<extraarg>-client</extraarg>
 									</extraargs>
 									<wsdlLocation>classpath:wsdl/Resenje.wsdl</wsdlLocation>
+								</wsdlOption>
+
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/ZalbaCutanje.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-impl</extraarg> <!-- Ima i drugih dodatniha<extraarg>-client</extraarg> -->
+										<extraarg>-verbose</extraarg>
+									</extraargs>
+									<wsdlLocation>classpath:wsdl/ZalbaCutanje.wsdl</wsdlLocation>
+								</wsdlOption>
+
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/ZalbaOdluka.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-impl</extraarg> <!-- Ima i drugih dodatniha<extraarg>-client</extraarg> -->
+										<extraarg>-verbose</extraarg>
+									</extraargs>
+									<wsdlLocation>classpath:wsdl/ZalbaOdluka.wsdl</wsdlLocation>
 								</wsdlOption>
 
 							</wsdlOptions>

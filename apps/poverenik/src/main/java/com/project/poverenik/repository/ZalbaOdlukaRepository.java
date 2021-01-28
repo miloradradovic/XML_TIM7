@@ -32,7 +32,7 @@ public class ZalbaOdlukaRepository {
 
 
     public boolean create(ZalbaOdluka zalbaOdluka) throws XMLDBException {
-        return existManager.store(collectionUri, zalbaOdluka.getId(), zalbaOdluka);
+        return existManager.store(collectionUri, zalbaOdluka.getZalbaOdlukaBody().getId(), zalbaOdluka);
     }
 
     public ResourceSet getAll() throws XMLDBException {
@@ -48,12 +48,12 @@ public class ZalbaOdlukaRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zalba_odluka[@id='%s']", id);
+        String xpath =  String.format("/zalba_odluka/zalba_odluka_body[@id='%s']/ancestor::zalba_odluka", id);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
     
     public ResourceSet getMaxId() throws XMLDBException  {
-    	String xpath = "/zalba_odluka[@id = max(/zalba_odluka/@id)]";
+    	String xpath = "/zalba_odluka/zalba_odluka_body[@id = max(/zalba_odluka/zalba_odluka_body/@id)]/ancestor::zalba_odluka";
     	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

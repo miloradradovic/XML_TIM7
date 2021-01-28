@@ -1,7 +1,6 @@
 package com.project.poverenik.api;
 
 import com.project.poverenik.model.user.User;
-import com.project.poverenik.model.util.lists.UserList;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.service.ZalbaCutanjeService;
@@ -35,7 +34,7 @@ public class ZalbaCutanjeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaCutanjeList> getZalbaCutanjeList() throws XMLDBException, JAXBException {
         ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getAll();

@@ -1,6 +1,5 @@
 package com.project.poverenik.model.util.lists;
 
-import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 
 import javax.xml.bind.annotation.XmlAnyElement;

@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -43,7 +42,7 @@ import javax.xml.namespace.QName;
  *         &lt;element name="razlog_zalbe" type="{http://www.reusability}Topcije"/>
  *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="podaci_o_zahtjevu_i_informacijama" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="napomena" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="napomena" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -59,12 +58,12 @@ import javax.xml.namespace.QName;
 public class TsadrzajZalbe {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "razlog_zalbe", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "napomena", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "ciljani_organ_vlasti", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -87,13 +86,13 @@ public class TsadrzajZalbe {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link Topcije }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link TsadrzajZalbe.CiljaniOrganVlasti }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link TsadrzajZalbe.CiljaniOrganVlasti }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */
@@ -126,7 +125,6 @@ public class TsadrzajZalbe {
     @XmlType(name = "", propOrder = {
         "value"
     })
-
     public static class CiljaniOrganVlasti {
 
         @XmlValue

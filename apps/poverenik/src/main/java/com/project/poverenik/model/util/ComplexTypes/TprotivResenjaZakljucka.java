@@ -1,14 +1,12 @@
 
 package com.project.poverenik.model.util.ComplexTypes;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
@@ -33,7 +31,15 @@ import javax.xml.namespace.QName;
  *             &lt;/simpleContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="broj" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
+ *         &lt;element name="broj">
+ *           &lt;complexType>
+ *             &lt;simpleContent>
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *                 &lt;anyAttribute processContents='lax'/>
+ *               &lt;/extension>
+ *             &lt;/simpleContent>
+ *           &lt;/complexType>
+ *         &lt;/element>
  *         &lt;element name="od_godine">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -59,7 +65,7 @@ public class TprotivResenjaZakljucka {
 
     @XmlElement(name = "naziv_organa_koji_je_doneo_odluku", namespace = "http://www.reusability", required = true)
     protected TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku nazivOrganaKojiJeDoneoOdluku;
-    @XmlElement(name = "broj", namespace = "http://www.reusability", required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected TprotivResenjaZakljucka.Broj broj;
     @XmlElement(name = "od_godine", namespace = "http://www.reusability", required = true)
     protected String odGodine;
@@ -93,7 +99,7 @@ public class TprotivResenjaZakljucka {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link TprotivResenjaZakljucka.Broj }
      *     
      */
     public TprotivResenjaZakljucka.Broj getBroj() {
@@ -105,7 +111,7 @@ public class TprotivResenjaZakljucka {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link TprotivResenjaZakljucka.Broj }
      *     
      */
     public void setBroj(TprotivResenjaZakljucka.Broj value) {
@@ -158,7 +164,7 @@ public class TprotivResenjaZakljucka {
     @XmlType(name = "", propOrder = {
         "value"
     })
-    public static class NazivOrganaKojiJeDoneoOdluku {
+    public static class Broj {
 
         @XmlValue
         protected String value;
@@ -208,7 +214,8 @@ public class TprotivResenjaZakljucka {
         }
 
     }
-    
+
+
     /**
      * <p>Java class for anonymous complex type.
      * 
@@ -230,7 +237,7 @@ public class TprotivResenjaZakljucka {
     @XmlType(name = "", propOrder = {
         "value"
     })
-    public static class Broj {
+    public static class NazivOrganaKojiJeDoneoOdluku {
 
         @XmlValue
         protected String value;

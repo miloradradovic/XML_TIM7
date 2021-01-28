@@ -7,15 +7,20 @@
     <xs:element name="zalba_cutanje">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="naziv" type="xs:string" minOccurs="0"/>
-                <xs:element name="podaci_o_primaocu" type="re:Tpodaci_povereniku" minOccurs="0"/>
-                <xs:element name="sadrzaj_zalbe" type="re:Tsadrzaj_zalbe"/>
-                <xs:element name="podaci_o_podnosiocu" type="re:Tpodaci_o_podnosiocu"/>
+                <xs:element name="zalba_cutanje_body" type="zc:Tzalba"/>
             </xs:sequence>
-            <xs:attribute name="id" type="xs:string"/>
-            <xs:attribute name="mjesto" type="xs:string"/>
-            <xs:attribute name="datum" type="xs:date"/>
-            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="Tzalba">
+        <xs:sequence>
+            <xs:element name="naziv" type="xs:string" minOccurs="0"/>
+            <xs:element name="podaci_o_primaocu" type="re:Tpodaci_povereniku" minOccurs="0"/>
+            <xs:element name="sadrzaj_zalbe" type="re:Tsadrzaj_zalbe"/>
+            <xs:element name="podaci_o_podnosiocu" type="re:Tpodaci_o_podnosiocu"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="mjesto" type="xs:string"/>
+        <xs:attribute name="datum" type="xs:date"/>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
 </xs:schema>

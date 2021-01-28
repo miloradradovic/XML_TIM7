@@ -1,247 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="ResenjeService"
-	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-	xmlns:inf="http://resenje/ws" xmlns:ra="http://resenje"
-	targetNamespace="http://resenje/ws">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  targetNamespace="http://resenje"
+				  xmlns:tns="http://resenje"
+				  name="ResenjeService">
 	<wsdl:types>
-		<xs:schema elementFormDefault="qualified"
-	    targetNamespace="http://resenje"
-	    xmlns:ra="http://resenje">
-			<xs:element name="resenje" type="ra:Tresenje"> </xs:element>
-			<xs:complexType name="Tresenje">
-				<xs:sequence>
-					<xs:element name="tip_resenja">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:anyAttribute namespace="##any" processContents="lax"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="uvodne_informacije" type="ra:Tuvodne_informacije"/>
-					<xs:element name="podaci_o_resenju" type="ra:Tpodaci_o_resenju"/>
-					<xs:element name="podaci_o_obrazlozenju" type="ra:Tpodaci_o_obrazlozenju"/>
-					<xs:element name="poverenik">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="id"/>
-									<xs:anyAttribute namespace="##any" processContents="lax"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="datum" type="xs:string"/>
-				<xs:attribute name="broj">
-					<xs:simpleType>
-						<xs:restriction base="xs:string">
-							<xs:pattern value="[0-9]{3}\-[0-9]{2}\-[0-9]{4}\-[0-9]{4}\-[0-9]{2}"/>
-						</xs:restriction>
-					</xs:simpleType>
-				</xs:attribute>
-				<xs:attribute name="id" type="xs:string"/>
-				<xs:anyAttribute namespace="##any" processContents="lax"/>
-			</xs:complexType>
-			<xs:complexType mixed="true" name="Tuvodne_informacije">
-				<xs:sequence>
-					<xs:element name="trazilac">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="id"/>
-									<xs:anyAttribute namespace="##any" processContents="lax"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="lice">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:anyAttribute namespace="##any" processContents="lax"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="adresa" type="ra:Tadresa"/>
-					<xs:element name="datum" type="xs:string"/>
-					<xs:element maxOccurs="unbounded" minOccurs="0" name="clan" type="ra:Tclan"/>
-					<xs:element minOccurs="0" name="broj_odluke" type="xs:string"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Tpodaci_o_resenju">
-				<xs:sequence>
-					<xs:element name="naslov">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="id"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element maxOccurs="unbounded" name="tacka" type="ra:Ttacka" minOccurs="0"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Tpodaci_o_obrazlozenju">
-				<xs:sequence>
-					<xs:element name="naslov" type="xs:string"/>
-					<xs:element name="predmet_zalbe" type="ra:Tpredmet_zalbe"/>
-					<xs:element name="postupak_poverenika" type="ra:Tppostupak_poverenika"/>
-					<xs:element name="odluka"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType mixed="true" name="Tadresa">
-				<xs:sequence>
-					<xs:element name="mesto">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:anyAttribute namespace="##any" processContents="lax"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="ulica" minOccurs="0">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="broj" type="xs:string"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType mixed="true" name="Tclan">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="stav" type="ra:Tstav"/>
-					<xs:element maxOccurs="unbounded" minOccurs="0" name="tacka">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="broj" type="xs:int"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="broj" type="xs:int"/>
-			</xs:complexType>
-			<xs:complexType name="Tstav" mixed="true">
-				<xs:sequence>
-					<xs:element minOccurs="0" name="tacka">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="broj" type="xs:int"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="broj" type="xs:int"/>
-			</xs:complexType>
-			<xs:complexType mixed="true" name="Ttacka">
-				<xs:sequence>
-					<xs:element name="lice" type="xs:string" minOccurs="0"/>
-					<xs:element maxOccurs="1" minOccurs="0" name="mesto" type="xs:string"/>
-					<xs:element minOccurs="0" name="trazilac">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="id"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-				<xs:attribute name="broj" type="xs:int"/>
-			</xs:complexType>
-			<xs:complexType mixed="true" name="Tpredmet_zalbe">
-				<xs:choice maxOccurs="unbounded">
-					<xs:element name="trazilac" minOccurs="0">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="id"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element maxOccurs="unbounded" name="datum" type="xs:string" minOccurs="0"/>
-					<xs:element name="lice" type="xs:string" minOccurs="0"/>
-					<xs:element name="mesto" type="xs:string" minOccurs="0"/>
-				</xs:choice>
-			</xs:complexType>
-			<xs:complexType name="Tppostupak_poverenika" mixed="true">
-				<xs:sequence>
-					<xs:element name="datum" type="xs:string" minOccurs="0"/>
-					<xs:element name="lice" type="xs:string" minOccurs="0"/>
-					<xs:element name="mesto" type="xs:string" maxOccurs="1" minOccurs="0"/>
-					<xs:element name="clan" type="ra:Tclan" maxOccurs="unbounded" minOccurs="0"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType mixed="true" name="Todluka">
-				<xs:sequence>
-					<xs:element name="trazilac" minOccurs="0">
-						<xs:complexType>
-							<xs:simpleContent>
-								<xs:extension base="xs:string">
-									<xs:attribute name="id"/>
-								</xs:extension>
-							</xs:simpleContent>
-						</xs:complexType>
-					</xs:element>
-					<xs:element maxOccurs="unbounded" name="datum" type="xs:string" minOccurs="0"/>
-					<xs:element maxOccurs="unbounded" name="lice" type="xs:string" minOccurs="0"/>
-					<xs:element name="mesto" type="xs:string" minOccurs="0"/>
-					<xs:element name="clan" type="ra:Tclan" minOccurs="0"/>
-					<xs:element name="stav" type="ra:Tstav" minOccurs="0"/>
-					<xs:element name="iznos" minOccurs="0">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-								<xs:pattern value="[0-9]+,[0-9]{2}"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-				</xs:sequence>
-			</xs:complexType>
-		</xs:schema>
+		<xsd:schema>
+			<xsd:import namespace="http://resenje" schemaLocation="../xsd/resenje.xsd"/>
+		</xsd:schema>
 	</wsdl:types>
+
 	<wsdl:message name="getResenjeRequest">
-		<wsdl:part name="broj" type="xs:string" />
+		<wsdl:part name="broj" type="xsd:string" />
 	</wsdl:message>
 	<wsdl:message name="getResenjeResponse">
-		<wsdl:part name="result" type="ra:Tresenje" />
+		<wsdl:part name="result" type="tns:Tresenje" />
 	</wsdl:message>
-	<wsdl:portType name="ResenjePortType">
-		<wsdl:operation name="getResenje">
-			<wsdl:input message="inf:getResenjeRequest" />
-			<wsdl:output message="inf:getResenjeResponse" />
+
+	<wsdl:portType name="ResenjeServicePortType">
+		<wsdl:operation name="getResenjeByBroj">
+			<wsdl:input message="tns:getResenjeRequest" />
+			<wsdl:output message="tns:getResenjeResponse" />
 		</wsdl:operation>
 	</wsdl:portType>
-	<wsdl:binding name="ResenjeServiceSoapBinding" type="inf:ResenjePortType">
-		<soap:binding style="rpc"
-			transport="http://schemas.xmlsoap.org/soap/http" />
-		<wsdl:operation name="getResenje">
-			<soap:operation soapAction="" />
+
+	<wsdl:binding name="ResenjeServiceSoapBinding" type="tns:ResenjeServicePortType">
+		<soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getResenjeByBroj">
+			<soap:operation soapAction="http://resenje/ws/getResenjeByBroj" />
 			<wsdl:input>
-				<soap:body use="literal"
-					namespace="http://resenje/ws" />
+				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output>
-				<soap:body use="literal"
-					namespace="http://resenje/ws" />
+				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="ResenjeService">
-		<wsdl:port name="ResenjePort" binding="inf:ResenjeServiceSoapBinding">
+		<wsdl:port name="ResenjeServiceSoapBinding" binding="tns:ResenjeServiceSoapBinding">
 			<soap:address location="http://localhost:8085/resenjePort" />
 		</wsdl:port>
 	</wsdl:service>

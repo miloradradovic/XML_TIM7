@@ -42,10 +42,10 @@ import javax.xml.bind.annotation.XmlType;
 public class TppostupakPoverenika {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -68,11 +68,11 @@ public class TppostupakPoverenika {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */

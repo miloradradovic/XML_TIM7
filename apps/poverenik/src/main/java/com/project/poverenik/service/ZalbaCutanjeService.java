@@ -2,16 +2,9 @@ package com.project.poverenik.service;
 
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaCutanjeMapper;
-import com.project.poverenik.model.util.ComplexTypes.Tadresa;
-import com.project.poverenik.model.util.ComplexTypes.TciljaniOrganVlasti;
-import com.project.poverenik.model.util.ComplexTypes.Tclan;
-import com.project.poverenik.model.util.ComplexTypes.Topcije;
-import com.project.poverenik.model.util.ComplexTypes.TpodaciPovereniku;
-import com.project.poverenik.model.util.ComplexTypes.TsadrzajZalbe;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.repository.ZalbaCutanjeRepository;
-import org.omg.CORBA.TCKind;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -19,20 +12,12 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.datatype.XMLGregorianCalendar;
 
-import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,7 +40,7 @@ public class ZalbaCutanjeService {
             JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             ZalbaCutanje zalbaCutanjeMax = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zalbaCutanjeMax.getId();
+            return zalbaCutanjeMax.getZalbaCutanjeBody().getId();
         }
         return "0";
     }
@@ -116,6 +101,6 @@ public class ZalbaCutanjeService {
         String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<zc:naziv>"), patch.indexOf("</zc:podaci_o_podnosiocu>") + "</zc:podaci_o_podnosiocu>".length());
-        return zalbaCutanjeRepository.update(zalbaCutanje.getId(), patch);
+        return zalbaCutanjeRepository.update(zalbaCutanje.getZalbaCutanjeBody().getId(), patch);
     }
 }

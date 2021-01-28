@@ -3,11 +3,7 @@ package com.project.poverenik.service;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ResenjeMapper;
 import com.project.poverenik.model.resenje.Resenje;
-import com.project.poverenik.model.resenje.Tadresa;
-import com.project.poverenik.model.resenje.TuvodneInformacije;
-import com.project.poverenik.model.util.ComplexTypes.Tclan;
 import com.project.poverenik.model.util.lists.ResenjeList;
-import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.repository.ResenjeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +16,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +40,7 @@ public class ResenjeService {
             JAXBContext context = JAXBContext.newInstance(Resenje.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             Resenje resenjeMax = (Resenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return resenjeMax.getId();
+            return resenjeMax.getResenjeBody().getId();
         }
         return "0000";
     }
@@ -54,7 +49,7 @@ public class ResenjeService {
     public boolean create(Resenje resenjeDTO) throws XMLDBException, JAXBException {
         if (jaxB.validate(resenjeDTO.getClass(), resenjeDTO)){
             String id = String.valueOf(Integer.parseInt(getMaxId())+1);
-        	Resenje resenje = ResenjeMapper.mapFromDTO(resenjeDTO, id);
+            Resenje resenje = ResenjeMapper.mapFromDTO(resenjeDTO, id);
         	
         	if(jaxB.validate(resenje.getClass(), resenje)){
                 return resenjeRepository.create(resenje);
@@ -108,6 +103,6 @@ public class ResenjeService {
         String patch = jaxB.marshall(resenje.getClass(), resenje);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<uvodne_informacije>"), patch.indexOf("</poverenik>") + "</poverenik>".length());
-        return resenjeRepository.update(resenje.getBroj(), patch);
+        return resenjeRepository.update(resenje.getResenjeBody().getBroj(), patch);
     }
 }

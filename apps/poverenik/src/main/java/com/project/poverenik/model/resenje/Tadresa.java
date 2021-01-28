@@ -86,9 +86,9 @@ public class Tadresa {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
      * {@link JAXBElement }{@code <}{@link Tadresa.Mesto }{@code >}
      * {@link JAXBElement }{@code <}{@link Tadresa.Ulica }{@code >}
+     * {@link String }
      * 
      * 
      */

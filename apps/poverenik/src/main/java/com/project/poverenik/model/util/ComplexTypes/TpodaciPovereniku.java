@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="uloga" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
+ *         &lt;element name="uloga" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="adresa" type="{http://www.reusability}Tadresa" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,9 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TpodaciPovereniku {
 
-    @XmlElement(namespace = "http://www.reusability", required = false)
+    @XmlElement(namespace = "http://www.reusability")
     protected String uloga;
-    @XmlElement(namespace = "http://www.reusability", required = false)
+    @XmlElement(namespace = "http://www.reusability")
     protected Tadresa adresa;
 
     /**

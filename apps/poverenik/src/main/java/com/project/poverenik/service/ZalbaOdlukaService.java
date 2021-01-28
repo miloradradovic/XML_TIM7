@@ -1,13 +1,8 @@
 package com.project.poverenik.service;
 
 import com.project.poverenik.jaxb.JaxB;
-import com.project.poverenik.mappers.ZalbaCutanjeMapper;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
-import com.project.poverenik.model.util.ComplexTypes.Tadresa;
-import com.project.poverenik.model.util.ComplexTypes.Tnapomena;
-import com.project.poverenik.model.util.ComplexTypes.TpodaciPovereniku;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
-import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.repository.ZalbaOdlukaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +15,6 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +39,7 @@ public class ZalbaOdlukaService {
             JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             ZalbaOdluka zalbaOdlukaMax = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zalbaOdlukaMax.getId();
+            return zalbaOdlukaMax.getZalbaOdlukaBody().getId();
         }
         return "0";
     }
@@ -109,6 +103,6 @@ public class ZalbaOdlukaService {
         String patch = jaxB.marshall(zalbaOdluka.getClass(), zalbaOdluka);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<zoc:naslov>"), patch.indexOf("</zoc:napomena>") + "</zoc:napomena>".length());
-        return zalbaOdlukaRepository.update(zalbaOdluka.getId(), patch);
+        return zalbaOdlukaRepository.update(zalbaOdluka.getZalbaOdlukaBody().getId(), patch);
     }
 }

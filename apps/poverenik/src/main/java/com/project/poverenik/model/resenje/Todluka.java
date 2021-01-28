@@ -62,13 +62,13 @@ import javax.xml.bind.annotation.XmlValue;
 public class Todluka {
 
     @XmlElementRefs({
+        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "iznos", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -91,13 +91,13 @@ public class Todluka {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link Todluka.Trazilac }{@code >}
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link Todluka.Trazilac }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 

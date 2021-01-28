@@ -32,7 +32,7 @@ public class ResenjeRepository {
 
 
     public boolean create(Resenje resenje) throws XMLDBException {
-        return existManager.store(collectionUri, resenje.getBroj(), resenje);
+        return existManager.store(collectionUri, resenje.getResenjeBody().getBroj(), resenje);
     }
 
     public ResourceSet getAll() throws XMLDBException {
@@ -48,13 +48,13 @@ public class ResenjeRepository {
     }
 
     public boolean update(String broj, String patch) throws XMLDBException {
-        String xpath =  String.format("/resenje[@broj='%s']", broj);
+        String xpath =  String.format("/resenje/resenje_body[@broj='%s']/ancestor::resenje", broj);
         return existManager.update(collectionUri, broj, xpath, patch, UPDATE);
     }
 
 
     public ResourceSet getMaxId() throws XMLDBException  {
-        String xpath = "/resenje[@id = max(/resenje/@id)]";
+        String xpath = "/resenje/resenje_body[@id = max(/resenje/resenje_body/@id)]/ancestor::resenje";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

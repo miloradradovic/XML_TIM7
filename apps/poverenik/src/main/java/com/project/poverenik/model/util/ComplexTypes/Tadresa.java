@@ -23,7 +23,7 @@ import javax.xml.namespace.QName;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="mesto">
+ *         &lt;element name="mesto" minOccurs="0">
  *           &lt;complexType>
  *             &lt;simpleContent>
  *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
@@ -32,7 +32,7 @@ import javax.xml.namespace.QName;
  *             &lt;/simpleContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="ulica">
+ *         &lt;element name="ulica" minOccurs="0">
  *           &lt;complexType>
  *             &lt;simpleContent>
  *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
@@ -56,9 +56,9 @@ import javax.xml.namespace.QName;
 })
 public class Tadresa {
 
-    @XmlElement(namespace = "http://www.reusability", required = false)
+    @XmlElement(namespace = "http://www.reusability")
     protected Tadresa.Mesto mesto;
-    @XmlElement(namespace = "http://www.reusability", required = false)
+    @XmlElement(namespace = "http://www.reusability")
     protected Tadresa.Ulica ulica;
 
     /**

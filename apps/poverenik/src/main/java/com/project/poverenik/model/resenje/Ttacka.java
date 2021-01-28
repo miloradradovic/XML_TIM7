@@ -53,9 +53,9 @@ import javax.xml.bind.annotation.XmlValue;
 public class Ttacka {
 
     @XmlElementRefs({
+        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -80,10 +80,10 @@ public class Ttacka {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link Ttacka.Trazilac }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link Ttacka.Trazilac }{@code >}
      * 
      * 
      */

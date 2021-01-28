@@ -55,8 +55,8 @@ public class TpredmetZalbe {
     @XmlElementRefs({
         @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -79,8 +79,8 @@ public class TpredmetZalbe {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link TpredmetZalbe.Trazilac }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link TpredmetZalbe.Trazilac }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }

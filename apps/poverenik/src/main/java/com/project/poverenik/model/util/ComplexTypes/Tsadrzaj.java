@@ -68,9 +68,9 @@ public class Tsadrzaj {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link String }
      * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link String }
      * 
      * 
      */

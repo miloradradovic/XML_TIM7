@@ -15,7 +15,9 @@ import org.xmldb.api.modules.XUpdateQueryService;
 import com.project.poverenik.service.MetadataService;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
 import javax.xml.transform.OutputKeys;
 
 import java.io.ByteArrayOutputStream;

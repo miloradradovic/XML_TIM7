@@ -40,7 +40,7 @@ public class ResenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_POVERENIK' || 'ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_USER')")
     @RequestMapping(value="/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws XMLDBException, JAXBException {
         Resenje resenje = resenjeService.getOne(broj);

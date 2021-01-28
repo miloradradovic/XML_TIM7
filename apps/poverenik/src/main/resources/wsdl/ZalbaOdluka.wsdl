@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.zalbanaodlukucir"
+                  xmlns:tns="http://www.zalbanaodlukucir"
+                  name="ZalbaOdlukaService">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://www.zalbanaodlukucir" schemaLocation="../xsd/zalbanaodlukucir.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="getZalbaOdlukaRequest">
+        <wsdl:part name="id" type="xsd:string" />
+    </wsdl:message>
+    <wsdl:message name="getZalbaOdlukaResponse">
+        <wsdl:part name="result" type="tns:Tzalba" />
+    </wsdl:message>
+
+    <wsdl:portType name="ZalbaOdlukaServicePortType">
+        <wsdl:operation name="getZalbaOdlukaById">
+            <wsdl:input message="tns:getZalbaOdlukaRequest" />
+            <wsdl:output message="tns:getZalbaOdlukaResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="ZalbaOdlukaServiceSoapBinding" type="tns:ZalbaOdlukaServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="getZalbaOdlukaById">
+            <soap:operation soapAction="http://www.zalbanaodlukucir/ws/getZalbaOdlukaById" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ZalbaOdlukaService">
+        <wsdl:port name="ZalbaOdlukaServiceSoapBinding" binding="tns:ZalbaOdlukaServiceSoapBinding">
+            <soap:address location="http://localhost:8085/zalbaOdlukaPort" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

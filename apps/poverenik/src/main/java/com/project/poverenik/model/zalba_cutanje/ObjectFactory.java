@@ -1,8 +1,6 @@
 
 package com.project.poverenik.model.zalba_cutanje;
 
-import com.project.poverenik.model.util.ComplexTypes.*;
-
 import java.math.BigInteger;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -34,19 +32,16 @@ public class ObjectFactory {
     public ObjectFactory() {
     }
 
+
+    public Tzalba createTzalba() {
+        return new Tzalba();
+    }
+
     /**
      * Create an instance of {@link ZalbaCutanje }
      * 
      */
     public ZalbaCutanje createZalbaCutanje() {
         return new ZalbaCutanje();
-    }
-
-    /**
-     * Create an instance of {@link Tzalba }
-     * 
-     */
-    public Tzalba createTzalba() {
-        return new Tzalba();
     }
 }

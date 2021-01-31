@@ -1,8 +1,6 @@
 
 package com.project.poverenik.model.zalba_odluka;
 
-import com.project.poverenik.model.util.ComplexTypes.*;
-
 import java.math.BigInteger;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -36,14 +34,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ZalbaOdluka }
-     * 
-     */
-    public ZalbaOdluka createZalbaOdluka() {
-        return new ZalbaOdluka();
-    }
-
-    /**
      * Create an instance of {@link Tzalba }
      * 
      */
@@ -51,4 +41,11 @@ public class ObjectFactory {
         return new Tzalba();
     }
 
+    /**
+     * Create an instance of {@link ZalbaOdluka }
+     * 
+     */
+    public ZalbaOdluka createZalbaOdluka() {
+        return new ZalbaOdluka();
+    }
 }

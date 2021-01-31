@@ -28,7 +28,7 @@ public class ZalbaCutanjeController {
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) authentication.getPrincipal();
+    	User user = (User) authentication.getPrincipal();
     	//User user = new User(); user.setEmail("s");
         if (zalbaCutanjeService.create(zalbaCutanje, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ZalbaCutanjeService } from 'src/app/services/zalba-cutanje-service/zalba-cutanje.service';
 
 declare const Xonomy: any;
@@ -10,7 +11,7 @@ declare const Xonomy: any;
 })
 export class ZalbaCutanjeFormComponent implements OnInit {
 
-  constructor(private zalbaCutanjeService: ZalbaCutanjeService) { }
+  constructor(private zalbaCutanjeService: ZalbaCutanjeService, public snackBar: MatSnackBar) { }
 
 
   ngOnInit(): void {
@@ -18,14 +19,12 @@ export class ZalbaCutanjeFormComponent implements OnInit {
 
   ngAfterViewInit(): void {
     let element = document.getElementById("zalbaCutanje");
-    //fali STATUS ZALBE (neobradjena, u obradi, prihvacena, odbijena, ponistena) i LINK NA ZAHTJEV (id zahtjeva)
-    //isto i kod druge zalbe
     let xmlString = 
     `<zc:zalba_cutanje 
       xmlns:zc="http://www.zalbacutanje" 
       xmlns:re="http://www.reusability"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto="" datum=""><zc:sadrzaj_zalbe><re:clan></re:clan><re:ciljani_organ_vlasti></re:ciljani_organ_vlasti><re:razlog_zalbe><re:opcija izabran="false">није поступио</re:opcija><re:opcija izabran="false">није поступио у целости</re:opcija><re:opcija izabran="false">у законском року</re:opcija></re:razlog_zalbe><re:datum></re:datum><re:podaci_o_zahtjevu_i_informacijama></re:podaci_o_zahtjevu_i_informacijama><re:napomena></re:napomena></zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
+      xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto="" datum=""><zc:zahtev></zc:zahtev><zc:sadrzaj_zalbe><re:clan></re:clan><re:ciljani_organ_vlasti></re:ciljani_organ_vlasti><re:razlog_zalbe><re:opcija izabran="false">није поступио</re:opcija><re:opcija izabran="false">није поступио у целости</re:opcija><re:opcija izabran="false">у законском року</re:opcija></re:razlog_zalbe><re:datum></re:datum><re:podaci_o_zahtjevu_i_informacijama></re:podaci_o_zahtjevu_i_informacijama><re:napomena></re:napomena></zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
     Xonomy.render(xmlString, element, {
       validate: this.zalbaCutanjeService.zalbaCutanjeSpecification.validate,
       elements: this.zalbaCutanjeService.zalbaCutanjeSpecification.elements,
@@ -64,11 +63,15 @@ export class ZalbaCutanjeFormComponent implements OnInit {
 
 
   public submit(): void {
-    //if (Xonomy.warnings.length) {return}
+    if (Xonomy.warnings.length) {
+      this.snackBar.open("Popunite sva obavezna polja!", 'Ok', { duration: 3000 });
+      return;
+    }
     console.log(Xonomy.harvest())
     let data = Xonomy.harvest();
     const mjestoAtr = data.split('mjesto=')[1].split(' datum')[0];
     const datumAtr = data.split('datum=')[1].split('><zc:sadrzaj_zalbe>')[0];
+    const zahtev = data.split('<zc:zahtev>')[1].split('</zc:zahtev>')[0];
     const ciljani_organ_vlasi = data.split('<re:ciljani_organ_vlasti>')[1].split('</re:ciljani_organ_vlasti>')[0];
     const razlog_zalbe = data.split('<re:razlog_zalbe>')[1].split('</re:razlog_zalbe>')[0];
     const datum = data.split('<re:datum>')[1].split('</re:datum>')[0];
@@ -77,7 +80,7 @@ export class ZalbaCutanjeFormComponent implements OnInit {
     xmlns:zc="http://www.zalbacutanje" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto=${mjestoAtr} datum=${datumAtr}><zc:sadrzaj_zalbe>
+    xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto=${mjestoAtr} datum=${datumAtr}><zc:zahtev>${zahtev}</zc:zahtev><zc:sadrzaj_zalbe>
         <re:clan></re:clan>
         <re:ciljani_organ_vlasti>${ciljani_organ_vlasi}</re:ciljani_organ_vlasti>
         <re:razlog_zalbe>${razlog_zalbe}</re:razlog_zalbe>
@@ -89,6 +92,8 @@ export class ZalbaCutanjeFormComponent implements OnInit {
     console.log(dataTemplate)
     this.zalbaCutanjeService.send("zalba-cutanje", dataTemplate)
       .subscribe(res => console.log(res));
+    this.snackBar.open("Uspešno ste poslali žalbu!", 'Ok', { duration: 3000 });
+
   }
 
 }

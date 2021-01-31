@@ -76,7 +76,7 @@ public class Tzalba {
 
     @XmlElement(namespace = "http://www.zalbacutanje", required = true)
     protected Tzalba.Zahtev zahtev;
-    @XmlElement(namespace = "http://www.zalbacutanje", required = true)
+    @XmlElement(namespace = "http://www.zalbacutanje")
     protected Tzalba.Status status;
     @XmlElement(namespace = "http://www.zalbacutanje")
     protected String naziv;

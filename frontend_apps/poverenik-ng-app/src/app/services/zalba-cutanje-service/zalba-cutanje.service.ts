@@ -147,12 +147,26 @@ export class ZalbaCutanjeService {
           }
         },
         menu: [],
-        //hasText: true,
       },
       "re:clan": {
         validate: function (jsElement) {
         },
         isInvisible: true,
+        menu: []
+      },
+      "zc:zahtev": {
+        displayName: "identifikator zahteva",
+        validate: function (jsElement) {
+          if (!jsElement.getText()) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "Element ne smije biti prazan."
+            }
+            );
+          }
+        },
+        asker: Xonomy.askString,
+        hasText: true,
         menu: []
       },
       "re:ciljani_organ_vlasti": {

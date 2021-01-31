@@ -12,6 +12,7 @@ import com.project.poverenik.model.util.ComplexTypes.Topcije;
 import com.project.poverenik.model.util.ComplexTypes.TpodaciPovereniku;
 import com.project.poverenik.model.util.ComplexTypes.TsadrzajZalbe;
 import com.project.poverenik.model.util.ComplexTypes.ObjectFactory;
+import com.project.poverenik.model.zalba_cutanje.Tzalba;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 
 public class ZalbaCutanjeMapper {
@@ -28,6 +29,18 @@ public class ZalbaCutanjeMapper {
     	zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("property"),"pred:datum");
     	zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("datatype"),"xs:date");
     	zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("content"),zalbaCutanjeDTO.getZalbaCutanjeBody().getDatum().toString());
+    	
+    	zalbaCutanje.getZalbaCutanjeBody().setZahtev(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev());
+    	zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("property"), "pred:zahtev");
+    	zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("datatype"), "xs:string");
+    	zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("content"), zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue());
+    	zalbaCutanje.getZalbaCutanjeBody().getZahtev().setValue("http://localhost:8085/zahtev/" + zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue());
+    	
+    	zalbaCutanje.getZalbaCutanjeBody().setStatus(new Tzalba.Status());
+    	zalbaCutanje.getZalbaCutanjeBody().getStatus().setValue("neobradjena");
+    	zalbaCutanje.getZalbaCutanjeBody().getStatus().getOtherAttributes().put(new QName("property"), "pred:status");
+    	zalbaCutanje.getZalbaCutanjeBody().getStatus().getOtherAttributes().put(new QName("datatype"), "xs:string");
+    	
     	zalbaCutanje.getZalbaCutanjeBody().setNaziv("ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)");
     	zalbaCutanje.getZalbaCutanjeBody().setPodaciOPrimaocu(of.createTpodaciPovereniku());
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().setAdresa(of.createTadresa());
@@ -35,8 +48,6 @@ public class ZalbaCutanjeMapper {
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().setUlica(of.createTadresaUlica());
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().setUloga("Повереник за информације од јавног значаја и заштиту података о личности");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().setValue("Београд");
-    	//zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().getOtherAttributes().put(new QName("property"), "pred:mesto");
-    	//zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().getOtherAttributes().put(new QName("datatype"), "xs:string");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getUlica().setValue("Булевар краља Александрa");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getUlica().setBroj(15);
 

@@ -1,5 +1,7 @@
 package com.project.poverenik.api;
 
+import com.project.poverenik.client.ZahtevClient;
+import com.project.poverenik.model.zahtev.client.getZahtevRequest;
 import com.project.poverenik.model.resenje.Resenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
@@ -34,6 +37,20 @@ public class ResenjeController {
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ResenjeList> getResenjeList() throws XMLDBException, JAXBException {
         ResenjeList resenjeList = resenjeService.getAll();
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        // this package must match the package in the <generatePackage> specified in
+        // pom.xml
+        marshaller.setContextPath("com.project.poverenik.model.zahtev.client");
+
+        ZahtevClient zc = new ZahtevClient();
+        zc.setDefaultUri("http://localhost:8090/ws");
+        zc.setMarshaller(marshaller);
+        zc.setUnmarshaller(marshaller);
+
+        getZahtevRequest zr = new getZahtevRequest();
+        zr.setId("1");
+        zc.getZahtev(zr);
 
         if(resenjeList != null)
             return new ResponseEntity(resenjeList, HttpStatus.OK);

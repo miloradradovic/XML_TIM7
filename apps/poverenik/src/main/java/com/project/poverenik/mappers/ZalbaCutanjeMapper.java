@@ -35,8 +35,8 @@ public class ZalbaCutanjeMapper {
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().setUlica(of.createTadresaUlica());
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().setUloga("Повереник за информације од јавног значаја и заштиту података о личности");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().setValue("Београд");
-    	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().getOtherAttributes().put(new QName("property"), "pred:mesto");
-    	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().getOtherAttributes().put(new QName("datatype"), "xs:string");
+    	//zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().getOtherAttributes().put(new QName("property"), "pred:mesto");
+    	//zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getMesto().getOtherAttributes().put(new QName("datatype"), "xs:string");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getUlica().setValue("Булевар краља Александрa");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPrimaocu().getAdresa().getUlica().setBroj(15);
 
@@ -66,6 +66,9 @@ public class ZalbaCutanjeMapper {
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
+        
+        zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getAdresa().getMesto().getOtherAttributes().put(new QName("property"), "pred:mesto");
+    	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getAdresa().getMesto().getOtherAttributes().put(new QName("datatype"), "xs:string");
         
         return zalbaCutanje;
 

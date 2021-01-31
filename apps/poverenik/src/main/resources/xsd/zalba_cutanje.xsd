@@ -13,6 +13,24 @@
     </xs:element>
     <xs:complexType name="Tzalba">
         <xs:sequence>
+            <xs:element name="zahtev">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="status">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="naziv" type="xs:string" minOccurs="0"/>
             <xs:element name="podaci_o_primaocu" type="re:Tpodaci_povereniku" minOccurs="0"/>
             <xs:element name="sadrzaj_zalbe" type="re:Tsadrzaj_zalbe"/>

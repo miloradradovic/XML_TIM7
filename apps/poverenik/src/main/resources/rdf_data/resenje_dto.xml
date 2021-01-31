@@ -99,3 +99,26 @@
             <poverenik id="2">Милан Мариновић</poverenik>
     </resenje_body>
 </resenje>
+
+
+
+<!--
+<resenje xmlns="http://resenje"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd"><resenje_body idZalbe="1" datum="2020-06-10"><tip_resenja></tip_resenja><uvodne_informacije>
+                <trazilac id=""></trazilac>
+                <lice></lice>
+            	  <adresa><mesto></mesto><ulica broj="0"></ulica></adresa>
+                <datum></datum>
+            </uvodne_informacije><podaci_o_resenju>
+                <naslov>Р Е Ш Е Њ Е</naslov>
+            </podaci_o_resenju><podaci_o_obrazlozenju>
+                <naslov>О б р а з л о ж е њ е</naslov>
+                <predmet_zalbe>
+                </predmet_zalbe>
+                <postupak_poverenika>
+                </postupak_poverenika>
+                <odluka>
+                </odluka>
+            </podaci_o_obrazlozenju><poverenik id=""></poverenik></resenje_body></resenje>
+-->

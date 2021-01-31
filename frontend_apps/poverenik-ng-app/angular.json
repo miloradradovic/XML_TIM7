@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "poverenik-ng-app"
+  "defaultProject": "poverenik-ng-app",
+  "cli": {
+    "analytics": false
+  }
 }

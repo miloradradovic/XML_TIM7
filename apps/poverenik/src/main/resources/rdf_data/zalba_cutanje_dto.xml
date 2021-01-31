@@ -4,6 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd">
     <zc:zalba_cutanje_body  mjesto="" datum="2000-12-12">
+     <zc:zahtev>1</zc:zahtev>
+     <zc:status>neobradjena</zc:status>
      <zc:sadrzaj_zalbe>
          <re:clan></re:clan>
          <re:ciljani_organ_vlasti>Organ vlasti placeholder</re:ciljani_organ_vlasti>
@@ -29,3 +31,6 @@
      </zc:podaci_o_podnosiocu> 
     </zc:zalba_cutanje_body>
 </zc:zalba_cutanje>
+
+
+

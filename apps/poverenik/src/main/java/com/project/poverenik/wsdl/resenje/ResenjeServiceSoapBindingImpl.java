@@ -6,6 +6,7 @@
 package com.project.poverenik.wsdl.resenje;
 
 import com.project.poverenik.model.resenje.Tresenje;
+import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,20 @@ public class ResenjeServiceSoapBindingImpl implements ResenjeServicePortType {
             Tresenje _return = resenjeService.getOne(broj).getResenjeBody();
             return _return;
         } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see resenje.ResenjeServicePortType#getAllResenja()*
+     */
+    public ResenjeList getAllResenja() {
+        LOG.info("Executing operation getAllResenja");
+        try {
+            ResenjeList _return = resenjeService.getAll();
+            return _return;
+        } catch (java.lang.Exception ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
         }

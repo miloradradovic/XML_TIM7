@@ -38,20 +38,6 @@ public class ResenjeController {
     public ResponseEntity<ResenjeList> getResenjeList() throws XMLDBException, JAXBException {
         ResenjeList resenjeList = resenjeService.getAll();
 
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        // this package must match the package in the <generatePackage> specified in
-        // pom.xml
-        marshaller.setContextPath("com.project.poverenik.model.zahtev.client");
-
-        ZahtevClient zc = new ZahtevClient();
-        zc.setDefaultUri("http://localhost:8090/ws");
-        zc.setMarshaller(marshaller);
-        zc.setUnmarshaller(marshaller);
-
-        getZahtevRequest zr = new getZahtevRequest();
-        zr.setId("1");
-        zc.getZahtev(zr);
-
         if(resenjeList != null)
             return new ResponseEntity(resenjeList, HttpStatus.OK);
 

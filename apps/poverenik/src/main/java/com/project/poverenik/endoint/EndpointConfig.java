@@ -1,5 +1,6 @@
 package com.project.poverenik.endoint;
 
+import com.project.poverenik.wsdl.izjasnjavanje.IzjasnjavanjeServiceSoapBindingImpl;
 import com.project.poverenik.wsdl.resenje.ResenjeServiceSoapBindingImpl;
 import com.project.poverenik.wsdl.zalba_cutanje.ZalbaCutanjeServiceSoapBindingImpl;
 import com.project.poverenik.wsdl.zalba_odluka.ZalbaOdlukaServiceSoapBindingImpl;
@@ -26,6 +27,9 @@ public class EndpointConfig {
     @Autowired
     ZalbaOdlukaServiceSoapBindingImpl zalbaOdlukaServiceSoapBindingImpl;
 
+    @Autowired
+    IzjasnjavanjeServiceSoapBindingImpl izjasnjavanjeServiceSoapBindingImpl;
+
     @Bean(name="resenjeEndpointBean")
     public Endpoint resenjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, resenjeServiceSoapBindingImpl);
@@ -44,6 +48,13 @@ public class EndpointConfig {
     public Endpoint zalbaOdlukaEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, zalbaOdlukaServiceSoapBindingImpl);
         endpoint.publish("/zalba-odluka");
+        return endpoint;
+    }
+
+    @Bean(name="izjasnjavanjeEndpointBean")
+    public Endpoint izjasnjavanjeEndpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, izjasnjavanjeServiceSoapBindingImpl);
+        endpoint.publish("/izjasnjavanje");
         return endpoint;
     }
 }

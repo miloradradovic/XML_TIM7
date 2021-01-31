@@ -9,11 +9,14 @@ public class ZahtevClient extends WebServiceGatewaySupport {
 
     public getZahtevResponse getZahtev(getZahtevRequest request) {
 
-
         getZahtevResponse response = (getZahtevResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("http://localhost:8090/ws/zahtev", request,
                         new SoapActionCallback(
                                 "http://www.zahtevcir/ws/getZahtevById"));
+
+        if(response.getZahtev().getId().equals("-1")){
+            return null;
+        }
 
         return response;
     }

@@ -15,12 +15,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {routes} from './app-routing/routes';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpAuthInterceptor} from './interceptors/http.auth.interceptor';
+import { ZalbaCutanjeFormComponent } from './components/forms/zalba-cutanje-form/zalba-cutanje-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    ZalbaCutanjeFormComponent
   ],
   imports: [
     BrowserModule,

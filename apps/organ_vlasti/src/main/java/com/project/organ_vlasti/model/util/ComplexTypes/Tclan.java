@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tclan", propOrder = {
+@XmlType(name = "Tclan", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class Tclan {
@@ -75,8 +75,8 @@ public class Tclan {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Tclan.Stav }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link Tclan.Stav }{@code >}
      * 
      * 
      */

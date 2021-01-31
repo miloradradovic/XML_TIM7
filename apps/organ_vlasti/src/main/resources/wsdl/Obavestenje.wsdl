@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.obavestenje"
+                  xmlns:tns="http://www.obavestenje"
+                  name="ObavestenjeService">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://www.obavestenje" schemaLocation="../xsd/obavestenje.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="getObavestenjeRequest">
+        <wsdl:part name="id" type="xsd:string" />
+    </wsdl:message>
+    <wsdl:message name="getObavestenjeResponse">
+        <wsdl:part name="obavestenje" type="tns:Tobavestenje" />
+    </wsdl:message>
+
+    <wsdl:portType name="ObavestenjeServicePortType">
+        <wsdl:operation name="getObavestenjeByBroj">
+            <wsdl:input message="tns:getObavestenjeRequest" />
+            <wsdl:output message="tns:getObavestenjeResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="ObavestenjeServiceSoapBinding" type="tns:ObavestenjeServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="getObavestenjeByBroj">
+            <soap:operation soapAction="http://www.obavestenje/ws/getObavestenjeByBroj" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ObavestenjeService">
+        <wsdl:port name="ObavestenjeServiceSoapBinding" binding="tns:ObavestenjeServiceSoapBinding">
+            <soap:address location="http://localhost:8090/obavestenjePort" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

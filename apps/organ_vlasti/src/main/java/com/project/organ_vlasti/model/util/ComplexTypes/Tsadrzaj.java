@@ -36,15 +36,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tsadrzaj", propOrder = {
+@XmlType(name = "Tsadrzaj", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class Tsadrzaj {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "osnova_za_zalbu", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "osnova_za_zalbu", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;

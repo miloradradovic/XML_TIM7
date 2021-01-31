@@ -1,7 +1,6 @@
 package com.project.organ_vlasti.model.util.lists;
 
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
-import com.project.organ_vlasti.model.user.User;
 
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;

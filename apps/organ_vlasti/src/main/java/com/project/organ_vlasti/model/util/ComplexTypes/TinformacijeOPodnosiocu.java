@@ -28,15 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tinformacije_o_podnosiocu", propOrder = {
+@XmlType(name = "Tinformacije_o_podnosiocu", namespace = "http://www.reusability", propOrder = {
     "lice",
     "adresa"
 })
 public class TinformacijeOPodnosiocu {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected TtipLica lice;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa adresa;
 
     /**

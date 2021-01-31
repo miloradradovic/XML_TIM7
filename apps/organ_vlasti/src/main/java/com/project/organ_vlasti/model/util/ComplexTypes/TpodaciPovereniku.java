@@ -3,6 +3,7 @@ package com.project.organ_vlasti.model.util.ComplexTypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -27,13 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tpodaci_povereniku", propOrder = {
+@XmlType(name = "Tpodaci_povereniku", namespace = "http://www.reusability", propOrder = {
     "uloga",
     "adresa"
 })
 public class TpodaciPovereniku {
 
+    @XmlElement(namespace = "http://www.reusability")
     protected String uloga;
+    @XmlElement(namespace = "http://www.reusability")
     protected Tadresa adresa;
 
     /**

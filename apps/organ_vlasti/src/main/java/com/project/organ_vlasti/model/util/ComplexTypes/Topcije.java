@@ -39,12 +39,12 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Topcije", propOrder = {
+@XmlType(name = "Topcije", namespace = "http://www.reusability", propOrder = {
     "opcija"
 })
 public class Topcije {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<Topcije.Opcija> opcija;
 
     /**

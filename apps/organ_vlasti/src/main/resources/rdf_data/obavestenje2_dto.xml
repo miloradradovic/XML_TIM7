@@ -4,49 +4,50 @@
     xmlns:oba="http://www.obavestenje" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.obavestenje ../xsd/obavestenje.xsd" 
-    broj="331-11-1111-1111-11" idZahteva="1" datum="2000-12-12">
-    <oba:naziv_organa sediste="A"></oba:naziv_organa>
-    <oba:informacije_o_podnosiocu>
-        <re:lice>
-            <re:osoba>
-                 <re:ime></re:ime>
-                 <re:prezime></re:prezime>
-             </re:osoba>
-        </re:lice>
-        <re:adresa>
-            <re:mesto></re:mesto>
-            <re:ulica broj="0"></re:ulica>
-        </re:adresa>   
-    </oba:informacije_o_podnosiocu>
-    <oba:tekst_zahteva>
-        <re:clan><re:stav></re:stav></re:clan>
-		<re:godina>2000</re:godina>,
-        <re:opis_trazene_informacije></re:opis_trazene_informacije>
-        <re:dan>2000-12-12</re:dan>
-		<re:vreme>12</re:vreme>
-        <re:radno_vreme>
-            od <re:pocetak>12</re:pocetak> do <re:kraj>12</re:kraj>
-        </re:radno_vreme> 
-		<re:adresa><re:mesto>M</re:mesto> <re:ulica broj="0">K</re:ulica></re:adresa>
-        <re:broj_kancelarije>1</re:broj_kancelarije>
-       <re:opis_troskova>
-           <re:cena valuta="dinar">00,00</re:cena>
-		   <re:cena valuta="dinar">00,00</re:cena>
-           <re:cena valuta="dinar">00,00</re:cena> 
-           <re:cena valuta="dinar">00,00</re:cena>
-		   <re:cena valuta="dinar">00,00</re:cena>
-	       <re:cena valuta="dinar">00,00</re:cena>
-           <re:cena valuta="dinar">00,00</re:cena>
-	       <re:cena valuta="dinar">00,00</re:cena>
-       </re:opis_troskova><re:ukupan_trosak>
-            <re:iznos>0,00</re:iznos>
-            <re:broj_racuna>000-000000-000-00</re:broj_racuna>,
-            <re:poziv_na_broj>97</re:poziv_na_broj>
-        </re:ukupan_trosak>
-    </oba:tekst_zahteva>
-    <oba:opcija_dostave>
-        <re:opcija izabran="false">Именованом</re:opcija>
-        <re:opcija izabran="false">Архиви</re:opcija>
-    </oba:opcija_dostave>
+    xsi:schemaLocation="http://www.obavestenje ../xsd/obavestenje.xsd">
+    <oba:obavestenje_body  broj="331-11-1111-1111-11" idZahteva="1" datum="2000-12-12">
+        <oba:naziv_organa sediste="A"></oba:naziv_organa>
+        <oba:informacije_o_podnosiocu>
+            <re:lice>
+                <re:osoba>
+                     <re:ime></re:ime>
+                     <re:prezime></re:prezime>
+                 </re:osoba>
+            </re:lice>
+            <re:adresa>
+                <re:mesto></re:mesto>
+                <re:ulica broj="0"></re:ulica>
+            </re:adresa>   
+        </oba:informacije_o_podnosiocu>
+        <oba:tekst_zahteva>
+            <re:clan><re:stav></re:stav></re:clan>
+    		<re:godina>2000</re:godina>,
+            <re:opis_trazene_informacije></re:opis_trazene_informacije>
+            <re:dan>2000-12-12</re:dan>
+    		<re:vreme>12</re:vreme>
+            <re:radno_vreme>
+                od <re:pocetak>12</re:pocetak> do <re:kraj>12</re:kraj>
+            </re:radno_vreme> 
+    		<re:adresa><re:mesto>M</re:mesto> <re:ulica broj="0">K</re:ulica></re:adresa>
+            <re:broj_kancelarije>1</re:broj_kancelarije>
+           <re:opis_troskova>
+               <re:cena valuta="dinar">00,00</re:cena>
+    		   <re:cena valuta="dinar">00,00</re:cena>
+               <re:cena valuta="dinar">00,00</re:cena> 
+               <re:cena valuta="dinar">00,00</re:cena>
+    		   <re:cena valuta="dinar">00,00</re:cena>
+    	       <re:cena valuta="dinar">00,00</re:cena>
+               <re:cena valuta="dinar">00,00</re:cena>
+    	       <re:cena valuta="dinar">00,00</re:cena>
+           </re:opis_troskova><re:ukupan_trosak>
+                <re:iznos>0,00</re:iznos>
+                <re:broj_racuna>000-000000-000-00</re:broj_racuna>,
+                <re:poziv_na_broj>97</re:poziv_na_broj>
+            </re:ukupan_trosak>
+        </oba:tekst_zahteva>
+        <oba:opcija_dostave>
+            <re:opcija izabran="false">Именованом</re:opcija>
+            <re:opcija izabran="false">Архиви</re:opcija>
+        </oba:opcija_dostave>
+    </oba:obavestenje_body>
 </oba:obavestenje>

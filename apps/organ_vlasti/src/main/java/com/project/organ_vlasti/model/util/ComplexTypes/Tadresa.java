@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
@@ -49,13 +50,15 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tadresa", propOrder = {
+@XmlType(name = "Tadresa", namespace = "http://www.reusability", propOrder = {
     "mesto",
     "ulica"
 })
 public class Tadresa {
 
+    @XmlElement(namespace = "http://www.reusability")
     protected Tadresa.Mesto mesto;
+    @XmlElement(namespace = "http://www.reusability")
     protected Tadresa.Ulica ulica;
 
     /**

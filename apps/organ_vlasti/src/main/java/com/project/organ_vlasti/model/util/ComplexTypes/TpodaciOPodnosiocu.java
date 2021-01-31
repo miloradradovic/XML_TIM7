@@ -29,18 +29,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tpodaci_o_podnosiocu", propOrder = {
+@XmlType(name = "Tpodaci_o_podnosiocu", namespace = "http://www.reusability", propOrder = {
     "osoba",
     "adresa",
     "drugiPodaciZaKontakt"
 })
 public class TpodaciOPodnosiocu {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tosoba osoba;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa adresa;
-    @XmlElement(name = "drugi_podaci_za_kontakt", required = true)
+    @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.reusability", required = true)
     protected String drugiPodaciZaKontakt;
 
     /**

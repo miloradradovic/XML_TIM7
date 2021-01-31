@@ -1,15 +1,10 @@
 
 package com.project.organ_vlasti.model.util.ComplexTypes;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.namespace.QName;
 
 
 /**
@@ -34,18 +29,18 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tinformacije_o_traziocu", propOrder = {
+@XmlType(name = "Tinformacije_o_traziocu", namespace = "http://www.reusability", propOrder = {
     "lice",
     "adresa",
     "drugiPodaciZaKontakt"
 })
 public class TinformacijeOTraziocu {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected TtipLica lice;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected Tadresa adresa;
-    @XmlElement(name = "drugi_podaci_za_kontakt", required = true)
+    @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.reusability", required = true)
     protected String drugiPodaciZaKontakt;
 
     /**
@@ -119,5 +114,5 @@ public class TinformacijeOTraziocu {
     public void setDrugiPodaciZaKontakt(String value) {
         this.drugiPodaciZaKontakt = value;
     }
-    
+
 }

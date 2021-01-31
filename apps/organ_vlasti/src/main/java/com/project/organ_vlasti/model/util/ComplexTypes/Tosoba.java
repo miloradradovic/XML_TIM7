@@ -33,15 +33,15 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tosoba", propOrder = {
+@XmlType(name = "Tosoba", namespace = "http://www.reusability", propOrder = {
     "ime",
     "prezime"
 })
 public class Tosoba {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String ime;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String prezime;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();

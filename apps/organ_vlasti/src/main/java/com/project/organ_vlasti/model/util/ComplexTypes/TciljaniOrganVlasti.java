@@ -41,15 +41,15 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tciljani_organ_vlasti", propOrder = {
+@XmlType(name = "Tciljani_organ_vlasti", namespace = "http://www.reusability", propOrder = {
     "nazivOrgana",
     "sedisteOrgana"
 })
 public class TciljaniOrganVlasti {
 
-    @XmlElement(name = "naziv_organa", required = true)
+    @XmlElement(name = "naziv_organa", namespace = "http://www.reusability", required = true)
     protected TciljaniOrganVlasti.NazivOrgana nazivOrgana;
-    @XmlElement(name = "sediste_organa", required = true)
+    @XmlElement(name = "sediste_organa", namespace = "http://www.reusability", required = true)
     protected String sedisteOrgana;
 
     /**

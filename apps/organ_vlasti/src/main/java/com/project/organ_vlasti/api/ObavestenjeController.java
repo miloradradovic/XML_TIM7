@@ -1,7 +1,6 @@
 package com.project.organ_vlasti.api;
 
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
-import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.service.ObavestenjeService;
 
@@ -10,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -45,7 +42,7 @@ public class ObavestenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI' || 'ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getObavestenje(@PathVariable String broj) throws XMLDBException, JAXBException {
         Obavestenje obavestenje = obavestenjeService.getOne(broj);

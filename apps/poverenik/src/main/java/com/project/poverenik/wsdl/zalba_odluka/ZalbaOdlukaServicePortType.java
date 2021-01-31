@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 public interface ZalbaOdlukaServicePortType {
 
     @WebMethod(action = "http://www.zalbanaodlukucir/ws/getZalbaOdlukaById")
-    @WebResult(name = "result", targetNamespace = "http://www.zalbanaodlukucir", partName = "result")
+    @WebResult(name = "zalba_odluka", targetNamespace = "http://www.zalbanaodlukucir", partName = "zalba_odluka")
     public Tzalba getZalbaOdlukaById(
         @WebParam(partName = "id", name = "id")
         String id

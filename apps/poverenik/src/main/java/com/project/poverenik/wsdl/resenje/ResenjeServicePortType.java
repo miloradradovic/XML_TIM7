@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 public interface ResenjeServicePortType {
 
     @WebMethod(action = "http://resenje/ws/getResenjeByBroj")
-    @WebResult(name = "result", targetNamespace = "http://resenje", partName = "result")
+    @WebResult(name = "resenje", targetNamespace = "http://resenje", partName = "resenje")
     public Tresenje getResenjeByBroj(
         @WebParam(partName = "broj", name = "broj")
         String broj

@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tnacin_dostave", propOrder = {
+@XmlType(name = "Tnacin_dostave", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class TnacinDostave {
@@ -63,8 +63,8 @@ public class TnacinDostave {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */

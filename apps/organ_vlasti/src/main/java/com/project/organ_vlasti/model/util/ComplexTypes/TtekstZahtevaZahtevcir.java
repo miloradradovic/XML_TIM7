@@ -35,15 +35,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Ttekst_zahteva_zahtevcir", propOrder = {
+@XmlType(name = "Ttekst_zahteva_zahtevcir", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class TtekstZahtevaZahtevcir {
 
     @XmlElementRefs({
+        @XmlElementRef(name = "informacija_o_zahtevu", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "opcije", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "informacija_o_zahtevu", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -66,10 +66,10 @@ public class TtekstZahtevaZahtevcir {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link TopcijeDostave }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * 
      * 
      */

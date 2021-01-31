@@ -40,15 +40,15 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Topcije_dostave", propOrder = {
+@XmlType(name = "Topcije_dostave", namespace = "http://www.reusability", propOrder = {
     "opcija",
     "naciniDostave"
 })
 public class TopcijeDostave {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<TopcijeDostave.Opcija> opcija;
-    @XmlElement(name = "nacini_dostave", required = true)
+    @XmlElement(name = "nacini_dostave", namespace = "http://www.reusability", required = true)
     protected TnaciniDostave naciniDostave;
 
     /**

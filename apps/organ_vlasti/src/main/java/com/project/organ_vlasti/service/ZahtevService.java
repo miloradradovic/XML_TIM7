@@ -39,7 +39,7 @@ public class ZahtevService {
             JAXBContext context = JAXBContext.newInstance(Zahtev.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             Zahtev zahteveMax = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zahteveMax.getId();
+            return zahteveMax.getZahtevBody().getId();
         }
         return "0";
     }
@@ -102,6 +102,6 @@ public class ZahtevService {
         String patch = jaxB.marshall(zahtev.getClass(), zahtev);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
-        return zahtevRepository.update(zahtev.getId(), patch);
+        return zahtevRepository.update(zahtev.getZahtevBody().getId(), patch);
     }
 }

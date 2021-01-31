@@ -46,14 +46,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tradno_vreme", propOrder = {
+@XmlType(name = "Tradno_vreme", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class TradnoVreme {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "kraj", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "pocetak", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "pocetak", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "kraj", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -77,8 +77,8 @@ public class TradnoVreme {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */

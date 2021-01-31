@@ -28,7 +28,7 @@ public class ObavestenjeRepository {
 
 
     public boolean create(Obavestenje obavestenje) throws XMLDBException {
-        return existManager.store(collectionUri, obavestenje.getBroj(), obavestenje);
+        return existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje);
     }
 
     public ResourceSet getAll() throws XMLDBException {
@@ -44,12 +44,12 @@ public class ObavestenjeRepository {
     }
 
     public boolean update(String broj, String patch) throws XMLDBException {
-        String xpath =  String.format("/obavestenje[@broj='%s']", broj);
+        String xpath =  String.format("/obavestenje/obavestenje_body[@broj='%s']/ancestor::obavestenje", broj);
         return existManager.update(collectionUri, broj, xpath, patch, UPDATE);
     }
     
     public ResourceSet getMaxId() throws XMLDBException  {
-        String xpath = "/obavestenje[@id = max(/obavestenje/@id)]";
+        String xpath = "/obavestenje/obavestenje_body[@id = max(/obavestenje/obavestenje_body/@id)]/ancestor::obavestenje";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tfusnote", propOrder = {
+@XmlType(name = "Tfusnote", namespace = "http://www.reusability", propOrder = {
     "fusnota"
 })
 public class Tfusnote {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<String> fusnota;
 
     /**

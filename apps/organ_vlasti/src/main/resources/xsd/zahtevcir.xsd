@@ -7,24 +7,29 @@
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="1" name="mesto">
-                    <xs:complexType>
-                        <xs:simpleContent>
-                            <xs:extension base="xs:string">
-                                <xs:anyAttribute namespace="##any" processContents="lax"/>
-                            </xs:extension>
-                        </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="ciljani_organ_vlasti" type="re:Tciljani_organ_vlasti"/>
-                <xs:element name="naziv" type="xs:string" minOccurs="0"/>
-                <xs:element name="tekst_zahteva" type="re:Ttekst_zahteva_zahtevcir"/>
-                <xs:element name="informacije_o_traziocu" type="re:Tinformacije_o_traziocu"/>
-                <xs:element name="fusnote" type="re:Tfusnote" minOccurs="0"/>
+                <xs:element name="zahtev_body" type="zcir:Tzahtev"/>
             </xs:sequence>
-            <xs:attribute name="id" type="xs:string"/>
-            <xs:attribute name="datum" type="xs:date"/>
-            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="Tzahtev">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="mesto">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ciljani_organ_vlasti" type="re:Tciljani_organ_vlasti"/>
+            <xs:element name="naziv" type="xs:string" minOccurs="0"/>
+            <xs:element name="tekst_zahteva" type="re:Ttekst_zahteva_zahtevcir"/>
+            <xs:element name="informacije_o_traziocu" type="re:Tinformacije_o_traziocu"/>
+            <xs:element name="fusnote" type="re:Tfusnote" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="datum" type="xs:date"/>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
 </xs:schema>

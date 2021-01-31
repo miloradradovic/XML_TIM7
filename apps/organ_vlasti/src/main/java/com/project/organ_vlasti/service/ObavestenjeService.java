@@ -39,7 +39,7 @@ public class ObavestenjeService {
             JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             Obavestenje obavestenjeMax = (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return obavestenjeMax.getId();
+            return obavestenjeMax.getObavestenjeBody().getId();
         }
         return "0000";
     }
@@ -104,6 +104,6 @@ public class ObavestenjeService {
         String patch = jaxB.marshall(obavestenje.getClass(), obavestenje);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<oba:naziv_organa property=\"pred:organ_vlasti\" datatype=\"xs:string\" sediste=\"\">"), patch.indexOf("</oba:opcija_dostave>") + "</oba:opcija_dostave>".length());
-        return obavestenjeRepository.update(obavestenje.getBroj(), patch);
+        return obavestenjeRepository.update(obavestenje.getObavestenjeBody().getBroj(), patch);
     }
 }

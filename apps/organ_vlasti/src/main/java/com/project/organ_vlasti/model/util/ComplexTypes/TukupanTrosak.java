@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tukupan_trosak", propOrder = {
+@XmlType(name = "Tukupan_trosak", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class TukupanTrosak {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "iznos", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "broj_racuna", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "iznos", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "poziv_na_broj", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
@@ -80,9 +80,9 @@ public class TukupanTrosak {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */

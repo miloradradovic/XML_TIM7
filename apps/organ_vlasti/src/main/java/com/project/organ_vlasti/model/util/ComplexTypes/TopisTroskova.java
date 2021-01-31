@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Topis_troskova", propOrder = {
+@XmlType(name = "Topis_troskova", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class TopisTroskova {

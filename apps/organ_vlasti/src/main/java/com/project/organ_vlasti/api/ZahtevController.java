@@ -35,7 +35,7 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_ORGAN_VLASTI')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZahtevList> getZahtevList() throws XMLDBException, JAXBException {
         ZahtevList zahtevList = zahtevService.getAll();

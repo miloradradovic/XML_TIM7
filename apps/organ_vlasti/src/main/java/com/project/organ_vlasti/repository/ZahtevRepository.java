@@ -28,7 +28,7 @@ public class ZahtevRepository {
 
 
     public boolean create(Zahtev zahtev) throws XMLDBException {
-        return existManager.store(collectionUri, zahtev.getId(), zahtev);
+        return existManager.store(collectionUri, zahtev.getZahtevBody().getId(), zahtev);
     }
 
     public ResourceSet getAll() throws XMLDBException {
@@ -44,12 +44,12 @@ public class ZahtevRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zahtev[@id='%s']", id);
+        String xpath =  String.format("/zahtev/zahtev_body[@id='%s']/ancestor::zahtev", id);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
     
     public ResourceSet getMaxId() throws XMLDBException  {
-    	String xpath = "/zahtev[@id = max(/zahtev/@id)]";
+    	String xpath = "/zahtev/zahtev_body[@id = max(/zahtev/zahtev_body/@id)]/ancestor::zahtev";
     	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 

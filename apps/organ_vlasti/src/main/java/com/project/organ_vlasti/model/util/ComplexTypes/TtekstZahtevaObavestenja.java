@@ -45,7 +45,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="radno_vreme" type="{http://www.reusability}Tradno_vreme"/>
  *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
  *         &lt;element name="broj_kancelarije" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
- *         &lt;element name="opis_troskova" type="{http://www.reusability}Topis_troskova"/>
+ *         &lt;element name="opis_troskova" type="{http://www.reusability}Topis_troskova" minOccurs="0"/>
  *         &lt;element name="ukupan_trosak" type="{http://www.reusability}Tukupan_trosak"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -56,22 +56,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Ttekst_zahteva_obavestenja", propOrder = {
+@XmlType(name = "Ttekst_zahteva_obavestenja", namespace = "http://www.reusability", propOrder = {
     "content"
 })
 public class TtekstZahtevaObavestenja {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "godina", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "vreme", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "opis_troskova", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "radno_vreme", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "opis_trazene_informacije", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "adresa", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "broj_kancelarije", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "radno_vreme", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "opis_troskova", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "dan", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "ukupan_trosak", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "vreme", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "broj_kancelarije", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "ukupan_trosak", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "godina", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "adresa", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -95,16 +95,16 @@ public class TtekstZahtevaObavestenja {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link TopisTroskova }{@code >}
      * {@link JAXBElement }{@code <}{@link TradnoVreme }{@code >}
+     * {@link JAXBElement }{@code <}{@link TopisTroskova }{@code >}
+     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
+     * {@link JAXBElement }{@code <}{@link TukupanTrosak }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
      * {@link JAXBElement }{@code <}{@link Tadresa }{@code >}
-     * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
-     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
-     * {@link JAXBElement }{@code <}{@link TukupanTrosak }{@code >}
      * 
      * 
      */

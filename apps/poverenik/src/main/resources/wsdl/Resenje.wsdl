@@ -15,7 +15,7 @@
 		<wsdl:part name="broj" type="xsd:string" />
 	</wsdl:message>
 	<wsdl:message name="getResenjeResponse">
-		<wsdl:part name="result" type="tns:Tresenje" />
+		<wsdl:part name="resenje" type="tns:Tresenje" />
 	</wsdl:message>
 
 	<wsdl:portType name="ResenjeServicePortType">

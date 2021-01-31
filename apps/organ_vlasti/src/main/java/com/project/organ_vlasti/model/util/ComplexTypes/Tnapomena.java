@@ -30,15 +30,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tnapomena", propOrder = {
+@XmlType(name = "Tnapomena", namespace = "http://www.reusability", propOrder = {
     "naslov",
     "tacka"
 })
 public class Tnapomena {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected String naslov;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.reusability", required = true)
     protected List<String> tacka;
 
     /**

@@ -15,7 +15,7 @@
         <wsdl:part name="id" type="xsd:string" />
     </wsdl:message>
     <wsdl:message name="getZalbaCutanjeResponse">
-        <wsdl:part name="result" type="tns:Tzalba" />
+        <wsdl:part name="zalba_cutanje" type="tns:Tzalba" />
     </wsdl:message>
 
     <wsdl:portType name="ZalbaCutanjeServicePortType">

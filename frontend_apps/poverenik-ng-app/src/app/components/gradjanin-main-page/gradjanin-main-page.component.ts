@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ZalbaService} from '../../services/zalba-service/zalba.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {SignInModel} from '../../model/sign-in.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ResenjeService} from '../../services/resenje-service/resenje.service';
 
 @Component({
   selector: 'app-gradjanin-main-page',
@@ -11,20 +12,34 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class GradjaninMainPageComponent implements OnInit {
 
-  zalbe = [];
-  resenja = [];
+  zalbe = []; // lista objekata tipa {id: number}
+  resenja = []; // isto
   constructor(private zalbaService: ZalbaService,
+              private resenjeService: ResenjeService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    const newList = [];
     this.zalbaService.getZalbaCutanjeList().subscribe(
       result => {
-        console.log(result);
+        // @ts-ignore
+        const convert = require('xml-js');
+        const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const lista = zalbaCutanjeList.zalbaCutanjeList;
+        const zalbe = lista['zc:zalba_cutanje'];
+        zalbe.forEach((item, index) => {
+          const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+          const zalba = {id: idZalbe};
+          newList.push(zalba);
+        });
+        this.zalbe = newList;
       },
       error => {
         this.snackBar.open('Idk sta se desilo!', 'Ok', { duration: 2000 });
       }
     );
+    // TODO dobaviti i zalbe na odluku, to za sad ne radi!
+
   }
 
   ponistiZalba($event: number): void {

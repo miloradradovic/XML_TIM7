@@ -5,17 +5,11 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ZalbaService {
+export class ResenjeService {
   private headers = new HttpHeaders({'Content-Type': 'application/xml'});
-
   constructor(private http: HttpClient) { }
-
-  getZalbaOdlukaList(): Observable<any> {
-    return this.http.get('http://localhost:8085/zalba-odluka',
-      {headers: this.headers, responseType: 'text'});
-  }
-  getZalbaCutanjeList(): Observable<any> {
-    return this.http.get('http://localhost:8085/zalba-cutanje',
+  getResenjeList(): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje',
       {headers: this.headers, responseType: 'text'});
   }
 }

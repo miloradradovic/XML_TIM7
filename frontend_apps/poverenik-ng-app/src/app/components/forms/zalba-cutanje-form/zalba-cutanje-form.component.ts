@@ -10,9 +10,6 @@ declare const Xonomy: any;
 })
 export class ZalbaCutanjeFormComponent implements OnInit {
 
-  disabled = true;
-
-
   constructor(private zalbaCutanjeService: ZalbaCutanjeService) { }
 
 
@@ -28,18 +25,12 @@ export class ZalbaCutanjeFormComponent implements OnInit {
       xmlns:zc="http://www.zalbacutanje" 
       xmlns:re="http://www.reusability"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto="" datum=""><zc:sadrzaj_zalbe>
-          <re:clan></re:clan>
-          У складу са чланом 22. Закона о слободном приступу информацијама од јавног значаја подносим жалбу против <re:ciljani_organ_vlasti></re:ciljani_organ_vlasti>
-          због тога што орган власти<re:razlog_zalbe><re:opcija izabran="false">није поступио</re:opcija><re:opcija izabran="false">није поступио у целости</re:opcija><re:opcija izabran="false">у законском року</re:opcija></re:razlog_zalbe>
-          по мом захтеву за слободан приступ информацијама од јавног значаја који сам поднео  том органу  дана<re:datum></re:datum>
-          године, а којим сам тражио/ла да ми се у складу са Законом о слободном приступу информацијама од јавног значаја омогући увид- копија документа који садржи информације  о /у вези са <re:podaci_o_zahtjevu_i_informacijama></re:podaci_o_zahtjevu_i_informacijama>
-          На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми приступ траженој/им  информацији/ма. Као доказ , уз жалбу достављам копију захтева са доказом о предаји органу власти. Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.<re:napomena></re:napomena>
-      </zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
+      xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto="" datum=""><zc:sadrzaj_zalbe><re:clan></re:clan><re:ciljani_organ_vlasti></re:ciljani_organ_vlasti><re:razlog_zalbe><re:opcija izabran="false">није поступио</re:opcija><re:opcija izabran="false">није поступио у целости</re:opcija><re:opcija izabran="false">у законском року</re:opcija></re:razlog_zalbe><re:datum></re:datum><re:podaci_o_zahtjevu_i_informacijama></re:podaci_o_zahtjevu_i_informacijama><re:napomena></re:napomena></zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
     Xonomy.render(xmlString, element, {
       validate: this.zalbaCutanjeService.zalbaCutanjeSpecification.validate,
       elements: this.zalbaCutanjeService.zalbaCutanjeSpecification.elements,
-      onchange: () => { this.disabled = !!Xonomy.warnings.length }
+      onchange: () => { 
+      }
     });
 
     //PRIMJER ZA RJESENJE
@@ -71,18 +62,32 @@ export class ZalbaCutanjeFormComponent implements OnInit {
 
   }
 
+
   public submit(): void {
     //if (Xonomy.warnings.length) {return}
     console.log(Xonomy.harvest())
     let data = Xonomy.harvest();
-    let replacedData = data.replace("У складу са чланом 22. Закона о слободном приступу информацијама од јавног значаја подносим жалбу против ", "")
-    .replace("због тога што орган власти ", "")
-    .replace("по мом захтеву за слободан приступ информацијама од јавног значаја који сам поднео  том органу  дана", "")
-    .replace("године, а којим сам тражио/ла да ми се у складу са Законом о слободном приступу информацијама од јавног значаја омогући увид- копија документа који садржи информације  о /у вези са", "")
-    .replace("На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми приступ траженој/им  информацији/ма. Као доказ , уз жалбу достављам копију захтева са доказом о предаји органу власти. Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.", "")
-    
-    console.log(replacedData)
-    this.zalbaCutanjeService.send("zalba-cutanje", replacedData)
+    const mjestoAtr = data.split('mjesto=')[1].split(' datum')[0];
+    const datumAtr = data.split('datum=')[1].split('><zc:sadrzaj_zalbe>')[0];
+    const ciljani_organ_vlasi = data.split('<re:ciljani_organ_vlasti>')[1].split('</re:ciljani_organ_vlasti>')[0];
+    const razlog_zalbe = data.split('<re:razlog_zalbe>')[1].split('</re:razlog_zalbe>')[0];
+    const datum = data.split('<re:datum>')[1].split('</re:datum>')[0];
+    const podaci_o_zahtjevu_i_informacijama = data.split('<re:podaci_o_zahtjevu_i_informacijama>')[1].split('</re:podaci_o_zahtjevu_i_informacijama>')[0];
+    let dataTemplate = `<zc:zalba_cutanje 
+    xmlns:zc="http://www.zalbacutanje" 
+    xmlns:re="http://www.reusability"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto=${mjestoAtr} datum=${datumAtr}><zc:sadrzaj_zalbe>
+        <re:clan></re:clan>
+        <re:ciljani_organ_vlasti>${ciljani_organ_vlasi}</re:ciljani_organ_vlasti>
+        <re:razlog_zalbe>${razlog_zalbe}</re:razlog_zalbe>
+        <re:datum>${datum}</re:datum>
+        <re:podaci_o_zahtjevu_i_informacijama>${podaci_o_zahtjevu_i_informacijama}</re:podaci_o_zahtjevu_i_informacijama>
+        <re:napomena></re:napomena>
+    </zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
+  
+    console.log(dataTemplate)
+    this.zalbaCutanjeService.send("zalba-cutanje", dataTemplate)
       .subscribe(res => console.log(res));
   }
 

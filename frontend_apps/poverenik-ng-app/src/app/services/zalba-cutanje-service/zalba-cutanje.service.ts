@@ -147,7 +147,7 @@ export class ZalbaCutanjeService {
           }
         },
         menu: [],
-        hasText: true,
+        //hasText: true,
       },
       "re:clan": {
         validate: function (jsElement) {
@@ -176,7 +176,7 @@ export class ZalbaCutanjeService {
         menu: []
       },
       "re:opcija": {
-        displayName: "",
+        displayName: "opcija",
         validate: function (jsElement) {
         },
         attributes: {
@@ -264,6 +264,7 @@ export class ZalbaCutanjeService {
         displayName: "drugi podaci za kontakt",
         validate: function (jsElement) {
         },
+        hasText: true,
         menu: []
       },
       "re:adresa": {

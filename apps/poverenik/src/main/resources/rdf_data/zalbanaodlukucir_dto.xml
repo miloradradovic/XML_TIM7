@@ -5,6 +5,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.zalbanaodlukucir ../xsd/zalbanaodlukucir.xsd">
     <zoc:zalba_odluka_body mesto="" datum="2000-12-12">
+     <zoc:zahtev>1</zoc:zahtev>
+     <zoc:status>neobradjena</zoc:status>
      <zoc:zalilac>
          <re:tip_lica>
              <re:osoba>

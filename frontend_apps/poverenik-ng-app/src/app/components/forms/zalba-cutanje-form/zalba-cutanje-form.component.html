@@ -1,9 +1,23 @@
 <h1 class="mat-display-1;" style="text-align: center;  margin-top: 1%;">Подношење жалбе на ћутање управе</h1>
 <h3 class="mat-display-1;" style="text-align: center;  margin-top: 1%;">ЖАЛБА КАДА ОРГАН ВЛАСТИ НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)</h3>
 
-<div style="padding-left: 10%;padding-right: 10%;padding-bottom: 2%">
-    <div id="zalbaCutanje"></div>
-    <button [disabled]="disabled" style="margin-left: 45%;margin-right: 45%" type="submit" mat-raised-button color="primary" (click)="submit()">Pošаlji</button>
+<div style="padding-left: 5%;padding-right: 5%;padding-bottom: 2%">
+    <table>
+        <tr>
+            <td style="width:55%">
+                <div id="zalbaCutanje"></div>
+            </td>
+            <td style="width:40%;vertical-align:top">
+                <div style="padding-left: 2%;padding-right: 2%;margin-top:2%">
+                    <img style="max-width:600px" src="assets/zalba-cutanje-primjer.png"/>
+                    <p style="text-align:center">Пример жалбе</p>
+                </div>
+            </td>
+        </tr>
+        <tr colspan="2">
+            <button style="margin-left: 85%;margin-right: 45%" type="submit" mat-raised-button color="primary" (click)="submit()">Pošаlji</button>
+        </tr>
+    </table>
 </div>
 
 

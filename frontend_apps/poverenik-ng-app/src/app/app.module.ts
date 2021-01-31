@@ -16,13 +16,30 @@ import {routes} from './app-routing/routes';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpAuthInterceptor} from './interceptors/http.auth.interceptor';
 import { ZalbaCutanjeFormComponent } from './components/forms/zalba-cutanje-form/zalba-cutanje-form.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
+import { NavigationPoverenikComponent } from './navigation/navigation-poverenik/navigation-poverenik.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { GradjaninMainPageComponent } from './components/gradjanin-main-page/gradjanin-main-page.component';
+import { PoverenikMainPageComponent } from './components/poverenik-main-page/poverenik-main-page.component';
+import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
+import { TableComponent } from './components/table/table.component';
+import {MatColumnDef, MatTable, MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    ZalbaCutanjeFormComponent
+    ZalbaCutanjeFormComponent,
+    NavigationComponent,
+    NavigationGradjaninComponent,
+    NavigationPoverenikComponent,
+    GradjaninMainPageComponent,
+    PoverenikMainPageComponent,
+    NavigationNonSignedInComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +48,13 @@ import { ZalbaCutanjeFormComponent } from './components/forms/zalba-cutanje-form
     MatSnackBarModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatTableModule,
     MatInputModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

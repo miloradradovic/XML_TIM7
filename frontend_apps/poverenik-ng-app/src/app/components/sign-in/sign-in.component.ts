@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SignInService} from '../../services/sign-in-service/sign-in.service';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit{
 
   form: FormGroup;
   error = '';
@@ -55,14 +55,22 @@ export class SignInComponent implements OnInit {
         const info = jwt.decodeToken(userToken.token.jwt._text);
         const email = info.email;
         const role = info.role;
-        const user = new SignInModel(email, userToken.jwt, role);
+        const user = new SignInModel(email, userToken.token.jwt._text, role);
         localStorage.setItem('user', JSON.stringify(user));
         this.snackBar.open('Successfully logged in!', 'Ok', { duration: 2000 });
-        this.router.navigate(['/']);
+        if (role === 'ROLE_USER'){
+          this.router.navigate(['/main-page-gradjanin']);
+        }else{
+          this.router.navigate(['/main-page-poverenik']);
+        }
       },
       error => {
         this.snackBar.open('Bad credentials!', 'Ok', { duration: 2000 });
       }
     );
   }
+
+  // ngOnDestroy() {
+  //   this.signInService.signIn
+  // }
 }

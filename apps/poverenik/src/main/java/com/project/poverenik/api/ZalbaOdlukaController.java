@@ -35,7 +35,7 @@ public class ZalbaOdlukaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaList() throws XMLDBException, JAXBException {
         ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getAll();

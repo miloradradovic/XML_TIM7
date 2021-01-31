@@ -1,0 +1,29 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="{{columnsToDisplay[i]}}" *ngFor="let column of columnsToIterate; let i = index">
+      <th mat-header-cell *matHeaderCellDef> {{columnsToDisplay[i]}} </th>
+      <td id="row{{element.id}}" mat-cell *matCellDef="let element" (click)="clicked(element.id)" (dblclick)="doubleClicked(element.id)"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="ponisti">
+      <th mat-header-cell *matHeaderCellDef> ponisti </th>
+      <td mat-cell *matCellDef="let element">  <button mat-raised-button color="warn" (click)="ponisti(element.id)" id="{{element.id}}">Ponisti</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="xhtml">
+      <th mat-header-cell *matHeaderCellDef> xhtml </th>
+      <td mat-cell *matCellDef="let element">  <button mat-raised-button color="warn" (click)="xhtml(element.id)">XHTML</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pdf">
+      <th mat-header-cell *matHeaderCellDef> pdf </th>
+      <td mat-cell *matCellDef="let element">  <button mat-raised-button color="warn" (click)="pdf(element.id)">PDF</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+</div>

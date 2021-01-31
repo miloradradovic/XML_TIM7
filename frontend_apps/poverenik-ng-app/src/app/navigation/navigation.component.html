@@ -1,0 +1,11 @@
+<div *ngIf="role === 'ROLE_USER'">
+  <app-navigation-gradjanin (signOut)="signOut($event)"></app-navigation-gradjanin>
+</div>
+
+<div *ngIf="role === 'ROLE_POVERENIK'">
+  <app-navigation-poverenik (signOut)="signOut($event)"></app-navigation-poverenik>
+</div>
+
+<div *ngIf="role === ''">
+  <app-navigation-non-signed-in></app-navigation-non-signed-in>
+</div>

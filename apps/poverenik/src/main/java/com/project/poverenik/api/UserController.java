@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    // @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));

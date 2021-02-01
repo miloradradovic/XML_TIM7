@@ -56,4 +56,9 @@ public class ZalbaCutanjeRepository {
     	String xpath = "/zalba_cutanje/zalba_cutanje_body[@id = max(/zalba_cutanje/zalba_cutanje_body/@id)]/ancestor::zalba_cutanje";
     	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+
+    public ResourceSet getAllByUser(String email) throws XMLDBException {
+        String xpath = "sth";
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

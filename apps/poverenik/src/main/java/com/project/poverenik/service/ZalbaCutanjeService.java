@@ -103,4 +103,23 @@ public class ZalbaCutanjeService {
         patch = patch.substring(patch.lastIndexOf("<zc:naziv>"), patch.indexOf("</zc:podaci_o_podnosiocu>") + "</zc:podaci_o_podnosiocu>".length());
         return zalbaCutanjeRepository.update(zalbaCutanje.getZalbaCutanjeBody().getId(), patch);
     }
+
+    public ZalbaCutanjeList getByUser(String email) throws XMLDBException, JAXBException {
+        List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaCutanjeList.add(zalbaCutanje);
+        }
+        return new ZalbaCutanjeList(zalbaCutanjeList);
+    }
+
 }

@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ZalbaService} from '../../services/zalba-service/zalba.service';
+import {ZalbaService} from '../../../services/zalba-service/zalba.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {SignInModel} from '../../model/sign-in.model';
+import {SignInModel} from '../../../model/sign-in.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ResenjeService} from '../../services/resenje-service/resenje.service';
+import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 
 @Component({
   selector: 'app-gradjanin-main-page',
@@ -35,10 +35,12 @@ export class GradjaninMainPageComponent implements OnInit {
         this.zalbe = newList;
       },
       error => {
-        this.snackBar.open('Idk sta se desilo!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
       }
     );
+    // TODO ispraviti ovo gore da vrati sve zalbe cutanje za konkretnog gradjanina
     // TODO dobaviti i zalbe na odluku, to za sad ne radi!
+    // TODO dobaviti i resenja za konkretnog gradjanina
 
   }
 

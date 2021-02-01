@@ -2,6 +2,7 @@ package com.project.organ_vlasti.endpoint;
 
 import com.project.organ_vlasti.wsdl.izjasnjavanje.IzjasnjavanjeServiceSoapBindingImpl;
 import com.project.organ_vlasti.wsdl.obavestenje.ObavestenjeServiceSoapBindingImpl;
+import com.project.organ_vlasti.wsdl.resenje_ref.ResenjeRefServiceSoapBindingImpl;
 import com.project.organ_vlasti.wsdl.zahtev.ZahtevServiceSoapBindingImpl;
 import org.apache.cxf.Bus;
 import org.apache.cxf.jaxws.EndpointImpl;
@@ -26,6 +27,9 @@ public class EndpointConfig {
     @Autowired
     IzjasnjavanjeServiceSoapBindingImpl izjasnjavanjeServiceSoapBindingImpl;
 
+    @Autowired
+    ResenjeRefServiceSoapBindingImpl resenjeRefServiceSoapBindingImpl;
+
     @Bean(name="obavestenjeEndpointBean")
     public Endpoint obavestenjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, obavestenjeServiceSoapBindingImpl);
@@ -44,6 +48,13 @@ public class EndpointConfig {
     public Endpoint izjasnjavanjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izjasnjavanjeServiceSoapBindingImpl);
         endpoint.publish("/izjasnjavanje");
+        return endpoint;
+    }
+
+    @Bean(name="resenjeRefEndpointBean")
+    public Endpoint resenjeRefEndpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, resenjeRefServiceSoapBindingImpl);
+        endpoint.publish("/resenjeRef");
         return endpoint;
     }
 }

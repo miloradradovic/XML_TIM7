@@ -46,7 +46,7 @@ public class ResenjeService {
     }
 
 
-    public boolean create(Resenje resenjeDTO) throws XMLDBException, JAXBException {
+    public String create(Resenje resenjeDTO) throws XMLDBException, JAXBException {
         if (jaxB.validate(resenjeDTO.getClass(), resenjeDTO)){
             String id = String.valueOf(Integer.parseInt(getMaxId())+1);
             Resenje resenje = ResenjeMapper.mapFromDTO(resenjeDTO, id);
@@ -54,10 +54,10 @@ public class ResenjeService {
         	if(jaxB.validate(resenje.getClass(), resenje)){
                 return resenjeRepository.create(resenje);
             }else {
-                return false;
+                return null;
             }
         }
-        return false;
+        return null;
     }
 
     public ResenjeList getAll() throws XMLDBException, JAXBException {

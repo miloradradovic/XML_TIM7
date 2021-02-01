@@ -2,6 +2,7 @@ package com.project.poverenik.wsdl.resenje;
 
 import com.project.poverenik.model.resenje.ObjectFactory;
 import com.project.poverenik.model.resenje.Tresenje;
+import com.project.poverenik.model.util.lists.ResenjeList;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -27,4 +28,8 @@ public interface ResenjeServicePortType {
         @WebParam(partName = "broj", name = "broj")
         String broj
     );
+
+    @WebMethod(action = "http://resenje/ws/getAllResenja")
+    @WebResult(name = "resenjeList", targetNamespace = "http://resenje", partName = "resenjeList")
+    public ResenjeList getAllResenja();
 }

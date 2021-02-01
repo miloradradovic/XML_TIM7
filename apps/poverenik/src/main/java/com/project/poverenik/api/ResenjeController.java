@@ -1,5 +1,7 @@
 package com.project.poverenik.api;
 
+import com.project.poverenik.client.ZahtevClient;
+import com.project.poverenik.model.zahtev.client.getZahtevRequest;
 import com.project.poverenik.model.resenje.Resenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;

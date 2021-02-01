@@ -80,7 +80,6 @@ public class ResenjeService {
     }
 
     public Resenje getOne(String broj) throws JAXBException, XMLDBException {
-    	//Object s = resenjeRepository.getMaxBroj();
         XMLResource xmlResource = resenjeRepository.getOne(broj);
 
         if(xmlResource == null)

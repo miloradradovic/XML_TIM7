@@ -6,6 +6,7 @@
 
 package com.project.organ_vlasti.wsdl.zahtev;
 
+import com.project.organ_vlasti.model.zahtev.ObjectFactory;
 import com.project.organ_vlasti.model.zahtev.Tzahtev;
 import com.project.organ_vlasti.service.ZahtevService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,14 @@ public class ZahtevServiceSoapBindingImpl implements ZahtevServicePortType {
      */
     public Tzahtev getZahtevById(String id) {
         LOG.info("Executing operation getZahtevById");
-        System.out.println(id);
         try {
             Tzahtev _return = zahtevService.getOne(id).getZahtevBody();
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            ObjectFactory objectFactory = new ObjectFactory();
+            Tzahtev tzahtev = objectFactory.createTzahtev();
+            tzahtev.setId("-1");
+           return tzahtev;
         }
     }
 

@@ -154,6 +154,15 @@
 									<wsdlLocation>classpath:wsdl/Zahtev.wsdl</wsdlLocation>
 								</wsdlOption>
 
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/Izjasnjavanje.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-impl</extraarg> <!-- Ima i drugih dodatniha<extraarg>-client</extraarg> -->
+										<extraarg>-verbose</extraarg>
+									</extraargs>
+									<wsdlLocation>classpath:wsdl/Izjasnjavanje.wsdl</wsdlLocation>
+								</wsdlOption>
+
 							</wsdlOptions>
 						</configuration>
 						<goals>

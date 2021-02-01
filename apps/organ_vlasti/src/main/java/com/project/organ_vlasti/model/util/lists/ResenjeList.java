@@ -1,6 +1,6 @@
-package com.project.poverenik.model.util.lists;
+package com.project.organ_vlasti.model.util.lists;
 
-import com.project.poverenik.model.resenje.Resenje;
+import com.project.organ_vlasti.model.resenje.Resenje;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;

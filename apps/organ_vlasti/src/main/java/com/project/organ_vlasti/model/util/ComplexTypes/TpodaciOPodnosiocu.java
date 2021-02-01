@@ -13,34 +13,34 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tpodaci_o_podnosiocu">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="osoba" type="{http://www.reusability}Tosoba"/>
- *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
- *         &lt;element name="drugi_podaci_za_kontakt" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tpodaci_o_podnosiocu"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="osoba" type="{http://www.reusability}Tosoba"/&gt;
+ *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/&gt;
+ *         &lt;element name="drugi_podaci_za_kontakt" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tpodaci_o_podnosiocu", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tpodaci_o_podnosiocu", propOrder = {
     "osoba",
     "adresa",
     "drugiPodaciZaKontakt"
 })
 public class TpodaciOPodnosiocu {
 
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(required = true)
     protected Tosoba osoba;
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(required = true)
     protected Tadresa adresa;
-    @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.reusability", required = true)
+    @XmlElement(name = "drugi_podaci_za_kontakt", required = true)
     protected String drugiPodaciZaKontakt;
 
     /**

@@ -18,38 +18,38 @@ import javax.xml.namespace.QName;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tciljani_organ_vlasti">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="naziv_organa">
- *           &lt;complexType>
- *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;anyAttribute processContents='lax'/>
- *               &lt;/extension>
- *             &lt;/simpleContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="sediste_organa" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tciljani_organ_vlasti"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="naziv_organa"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="sediste_organa" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tciljani_organ_vlasti", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tciljani_organ_vlasti", propOrder = {
     "nazivOrgana",
     "sedisteOrgana"
 })
 public class TciljaniOrganVlasti {
 
-    @XmlElement(name = "naziv_organa", namespace = "http://www.reusability", required = true)
-    protected TciljaniOrganVlasti.NazivOrgana nazivOrgana;
-    @XmlElement(name = "sediste_organa", namespace = "http://www.reusability", required = true)
+    @XmlElement(name = "naziv_organa", required = true)
+    protected NazivOrgana nazivOrgana;
+    @XmlElement(name = "sediste_organa", required = true)
     protected String sedisteOrgana;
 
     /**
@@ -57,10 +57,10 @@ public class TciljaniOrganVlasti {
      * 
      * @return
      *     possible object is
-     *     {@link TciljaniOrganVlasti.NazivOrgana }
+     *     {@link NazivOrgana }
      *     
      */
-    public TciljaniOrganVlasti.NazivOrgana getNazivOrgana() {
+    public NazivOrgana getNazivOrgana() {
         return nazivOrgana;
     }
 
@@ -69,10 +69,10 @@ public class TciljaniOrganVlasti {
      * 
      * @param value
      *     allowed object is
-     *     {@link TciljaniOrganVlasti.NazivOrgana }
+     *     {@link NazivOrgana }
      *     
      */
-    public void setNazivOrgana(TciljaniOrganVlasti.NazivOrgana value) {
+    public void setNazivOrgana(NazivOrgana value) {
         this.nazivOrgana = value;
     }
 
@@ -107,13 +107,13 @@ public class TciljaniOrganVlasti {
      * <p>The following schema fragment specifies the expected content contained within this class.
      * 
      * <pre>
-     * &lt;complexType>
-     *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;anyAttribute processContents='lax'/>
-     *     &lt;/extension>
-     *   &lt;/simpleContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
      * 
      * 

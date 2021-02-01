@@ -25,45 +25,45 @@ import javax.xml.namespace.QName;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tsadrzaj_zalbe">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/>
- *         &lt;element name="ciljani_organ_vlasti">
- *           &lt;complexType>
- *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;anyAttribute processContents='lax'/>
- *               &lt;/extension>
- *             &lt;/simpleContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="razlog_zalbe" type="{http://www.reusability}Topcije"/>
- *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="podaci_o_zahtjevu_i_informacijama" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="napomena" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tsadrzaj_zalbe"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/&gt;
+ *         &lt;element name="ciljani_organ_vlasti"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="razlog_zalbe" type="{http://www.reusability}Topcije"/&gt;
+ *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
+ *         &lt;element name="podaci_o_zahtjevu_i_informacijama" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="napomena" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tsadrzaj_zalbe", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tsadrzaj_zalbe", propOrder = {
     "content"
 })
 public class TsadrzajZalbe {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "razlog_zalbe", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "ciljani_organ_vlasti", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "napomena", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "datum", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "napomena", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "razlog_zalbe", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "podaci_o_zahtjevu_i_informacijama", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -86,13 +86,13 @@ public class TsadrzajZalbe {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
-     * {@link JAXBElement }{@code <}{@link Topcije }{@code >}
-     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link TsadrzajZalbe.CiljaniOrganVlasti }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
+     * {@link JAXBElement }{@code <}{@link CiljaniOrganVlasti }{@code >}
+     * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link JAXBElement }{@code <}{@link Topcije }{@code >}
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * 
      */
@@ -110,13 +110,13 @@ public class TsadrzajZalbe {
      * <p>The following schema fragment specifies the expected content contained within this class.
      * 
      * <pre>
-     * &lt;complexType>
-     *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;anyAttribute processContents='lax'/>
-     *     &lt;/extension>
-     *   &lt;/simpleContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
      * 
      * 

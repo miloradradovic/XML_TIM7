@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.message" xmlns:tns="http://www.message">
+    <xs:element name="message">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="body">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="tns:Tbody">
+                                <xs:attribute name="id" type="xs:string"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tbody">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+</xs:schema>

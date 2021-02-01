@@ -15,26 +15,26 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tnacini_dostave">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="nacin_dostave" type="{http://www.reusability}Tnacin_dostave" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tnacini_dostave"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="nacin_dostave" type="{http://www.reusability}Tnacin_dostave" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tnacini_dostave", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tnacini_dostave", propOrder = {
     "nacinDostave"
 })
 public class TnaciniDostave {
 
-    @XmlElement(name = "nacin_dostave", namespace = "http://www.reusability", required = true)
+    @XmlElement(name = "nacin_dostave", required = true)
     protected List<TnacinDostave> nacinDostave;
 
     /**

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.message"
+                  xmlns:tns="http://www.message"
+                  name="IzjasnjavanjeService">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.message"
+            xmlns:tns="http://www.message"
+            elementFormDefault="qualified">
+            <xsd:element name="message">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="body">
+                            <xsd:complexType>
+                                <xsd:simpleContent>
+                                    <xsd:extension base="tns:Tbody">
+                                        <xsd:attribute name="id" type="xsd:string"/>
+                                    </xsd:extension>
+                                </xsd:simpleContent>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:simpleType name="Tbody">
+                <xsd:restriction base="xsd:string"/>
+            </xsd:simpleType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="setIzjasnjavanjeRequest">
+        <wsdl:part name="message" type="tns:Tbody" />
+    </wsdl:message>
+    <wsdl:message name="setIzjasnjavanjeResponse">
+        <wsdl:part name="response" type="xsd:string" />
+    </wsdl:message>
+
+    <wsdl:portType name="IzjasnjavanjeServicePortType">
+        <wsdl:operation name="setIzjasnjavanje">
+            <wsdl:input message="tns:setIzjasnjavanjeRequest" />
+            <wsdl:output message="tns:setIzjasnjavanjeResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="IzjasnjavanjeServiceSoapBinding" type="tns:IzjasnjavanjeServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="setIzjasnjavanje">
+            <soap:operation soapAction="http://www.message/ws/setIzjasnjavanje" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="IzjasnjavanjeService">
+        <wsdl:port name="IzjasnjavanjeServiceSoapBinding" binding="tns:IzjasnjavanjeServiceSoapBinding">
+            <soap:address location="http://localhost:8090/izjasnjavanjePort" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

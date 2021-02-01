@@ -43,7 +43,7 @@ public class ObavestenjeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
-    @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    @RequestMapping(value="/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getObavestenje(@PathVariable String broj) throws XMLDBException, JAXBException {
         Obavestenje obavestenje = obavestenjeService.getOne(broj);
         if(obavestenje != null)
@@ -52,7 +52,7 @@ public class ObavestenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
+    @RequestMapping(value="/{broj}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity delete(@PathVariable String broj) throws XMLDBException, JAXBException {
         boolean isDeleted = obavestenjeService.delete(broj);
         if(isDeleted)

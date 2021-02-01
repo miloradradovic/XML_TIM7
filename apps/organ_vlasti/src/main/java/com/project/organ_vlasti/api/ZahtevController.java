@@ -29,6 +29,7 @@ public class ZahtevController {
     public ResponseEntity<?> createZahtev(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) authentication.getPrincipal();
+    	//User user = new User(); user.setEmail("s");
         if (zahtevService.create(zahtev, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

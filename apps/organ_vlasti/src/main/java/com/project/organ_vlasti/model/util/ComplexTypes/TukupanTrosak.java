@@ -20,43 +20,43 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tukupan_trosak">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="iznos">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;pattern value="[0-9]+,[0-9]{2}"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="broj_racuna" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="poziv_na_broj">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}positiveInteger">
- *               &lt;pattern value="[0-9]{2}"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tukupan_trosak"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="iznos"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *               &lt;pattern value="[0-9]+,[0-9]{2}"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="broj_racuna" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="poziv_na_broj"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}positiveInteger"&gt;
+ *               &lt;pattern value="[0-9]{2}"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tukupan_trosak", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tukupan_trosak", propOrder = {
     "content"
 })
 public class TukupanTrosak {
 
     @XmlElementRefs({
+        @XmlElementRef(name = "poziv_na_broj", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "broj_racuna", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "iznos", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "poziv_na_broj", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "iznos", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -80,9 +80,9 @@ public class TukupanTrosak {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link String }
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
-     * {@link String }
      * 
      * 
      */

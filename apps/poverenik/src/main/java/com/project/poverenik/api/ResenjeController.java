@@ -1,5 +1,7 @@
 package com.project.poverenik.api;
 
+import com.project.poverenik.client.ResenjeRefClient;
+import com.project.poverenik.model.resenje.database.client.SetResenjeRef;
 import com.project.poverenik.model.resenje.Resenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
@@ -24,8 +27,13 @@ public class ResenjeController {
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException, JAXBException {
-        if (resenjeService.create(resenje)){
-            return new ResponseEntity<>(HttpStatus.CREATED);
+        String broj = resenjeService.create(resenje);
+        if (broj != null){
+
+            if(sendToOrganVlasti(broj) && sendToUser(broj)){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -69,5 +77,25 @@ public class ResenjeController {
             return new ResponseEntity(HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    private boolean sendToOrganVlasti(String broj){
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.poverenik.model.resenje.database.client");
+
+        ResenjeRefClient resenjeRefClient = new ResenjeRefClient();
+        resenjeRefClient.setDefaultUri("http://localhost:8090/ws");
+        resenjeRefClient.setMarshaller(marshaller);
+        resenjeRefClient.setUnmarshaller(marshaller);
+
+        SetResenjeRef setResenjeRef = new SetResenjeRef();
+        setResenjeRef.setResenje_ref(broj);
+        return resenjeRefClient.sendResenjeRef(setResenjeRef);
+
+    }
+
+    private boolean sendToUser(String broj){
+        return true;
     }
 }

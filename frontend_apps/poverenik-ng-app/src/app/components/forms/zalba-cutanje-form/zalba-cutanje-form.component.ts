@@ -80,6 +80,7 @@ export class ZalbaCutanjeFormComponent implements OnInit {
     xmlns:zc="http://www.zalbacutanje" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema#"
     xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto=${mjestoAtr} datum=${datumAtr}><zc:zahtev>${zahtev}</zc:zahtev><zc:sadrzaj_zalbe>
         <re:clan></re:clan>
         <re:ciljani_organ_vlasti>${ciljani_organ_vlasi}</re:ciljani_organ_vlasti>

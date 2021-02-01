@@ -2,28 +2,30 @@ package com.project.poverenik.model.util.lists;
 
 import com.project.poverenik.model.resenje.Resenje;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement(namespace = "http://resenje")
 @XmlSeeAlso({Resenje.class})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "resenjeList", propOrder = {
+        "any"
+})
 public class ResenjeList {
 
-    private final List<Resenje> resenjeList;
+    @XmlAnyElement
+    private final List<Resenje> any;
 
     public ResenjeList() {
-        this.resenjeList = new ArrayList<>();
+        this.any = new ArrayList<>();
     }
 
-    public ResenjeList(List<Resenje> resenjeList) {
-        this.resenjeList = resenjeList;
+    public ResenjeList(List<Resenje> any) {
+        this.any = any;
     }
 
-    @XmlAnyElement
-    public List<Resenje> getResenjeList() {
-        return resenjeList;
+    public List<Resenje> getAny() {
+        return any;
     }
 }

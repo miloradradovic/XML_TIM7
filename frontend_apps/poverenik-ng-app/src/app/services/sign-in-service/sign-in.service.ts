@@ -17,9 +17,8 @@ export class SignInService {
       auth, {headers: this.headers, responseType: 'text'});
   }
 
-  signOut(): Observable<any> {
-    // TODO
-    return this.http.get('api/logOut', {headers: this.headers, responseType: 'text'});
+  signOut(): void{
+    localStorage.removeItem('user');
   }
 
   isLoggedIn(): boolean {

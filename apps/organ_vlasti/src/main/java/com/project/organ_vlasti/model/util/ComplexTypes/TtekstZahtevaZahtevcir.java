@@ -19,31 +19,31 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Ttekst_zahteva_zahtevcir">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/>
- *         &lt;element name="opcije" type="{http://www.reusability}Topcije_dostave"/>
- *         &lt;element name="informacija_o_zahtevu" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Ttekst_zahteva_zahtevcir"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="clan" type="{http://www.reusability}Tclan" minOccurs="0"/&gt;
+ *         &lt;element name="opcije" type="{http://www.reusability}Topcije_dostave"/&gt;
+ *         &lt;element name="informacija_o_zahtevu" type="{http://www.reusability}Topis"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Ttekst_zahteva_zahtevcir", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Ttekst_zahteva_zahtevcir", propOrder = {
     "content"
 })
 public class TtekstZahtevaZahtevcir {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "informacija_o_zahtevu", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
         @XmlElementRef(name = "opcije", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "informacija_o_zahtevu", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -66,10 +66,10 @@ public class TtekstZahtevaZahtevcir {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
      * {@link JAXBElement }{@code <}{@link TopcijeDostave }{@code >}
      * {@link String }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
+     * {@link JAXBElement }{@code <}{@link Topis }{@code >}
      * 
      * 
      */

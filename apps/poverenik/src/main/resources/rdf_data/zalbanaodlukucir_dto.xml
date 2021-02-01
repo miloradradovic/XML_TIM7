@@ -3,6 +3,7 @@
     xmlns:zoc="http://www.zalbanaodlukucir" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#"
     xsi:schemaLocation="http://www.zalbanaodlukucir ../xsd/zalbanaodlukucir.xsd">
     <zoc:zalba_odluka_body mesto="" datum="2000-12-12">
      <zoc:zahtev>1</zoc:zahtev>
@@ -23,7 +24,7 @@
      
      <zoc:protiv_resenja_zakljucka>
          <re:naziv_organa_koji_je_doneo_odluku>O</re:naziv_organa_koji_je_doneo_odluku>
-         <re:broj>zalbe/1</re:broj>
+         <re:broj>1</re:broj>
          <re:od_godine>2000</re:od_godine>
      </zoc:protiv_resenja_zakljucka>
      

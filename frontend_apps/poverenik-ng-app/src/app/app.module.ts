@@ -16,13 +16,40 @@ import {routes} from './app-routing/routes';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpAuthInterceptor} from './interceptors/http.auth.interceptor';
 import { ZalbaCutanjeFormComponent } from './components/forms/zalba-cutanje-form/zalba-cutanje-form.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
+import { NavigationPoverenikComponent } from './navigation/navigation-poverenik/navigation-poverenik.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { GradjaninMainPageComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
+import { PoverenikMainPageComponent } from './components/poverenik/poverenik-main-page/poverenik-main-page.component';
+import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
+import { TableComponent } from './components/table/table.component';
+import {MatColumnDef, MatTable, MatTableModule} from '@angular/material/table';
+import { PoverenikSveZalbeComponent } from './components/poverenik/poverenik-sve-zalbe/poverenik-sve-zalbe.component';
+import { PoverenikSvaResenjaComponent } from './components/poverenik/poverenik-sva-resenja/poverenik-sva-resenja.component';
+import { PoverenikSviIzvestajiComponent } from './components/poverenik/poverenik-svi-izvestaji/poverenik-svi-izvestaji.component';
+import { PoverenikIzjasnjavanjaComponent } from './components/poverenik/poverenik-izjasnjavanja/poverenik-izjasnjavanja.component';
+import { AddPoverenikFormComponent } from './components/forms/add-poverenik-form/add-poverenik-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    ZalbaCutanjeFormComponent
+    ZalbaCutanjeFormComponent,
+    NavigationComponent,
+    NavigationGradjaninComponent,
+    NavigationPoverenikComponent,
+    GradjaninMainPageComponent,
+    PoverenikMainPageComponent,
+    NavigationNonSignedInComponent,
+    TableComponent,
+    PoverenikSveZalbeComponent,
+    PoverenikSvaResenjaComponent,
+    PoverenikSviIzvestajiComponent,
+    PoverenikIzjasnjavanjaComponent,
+    AddPoverenikFormComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +58,13 @@ import { ZalbaCutanjeFormComponent } from './components/forms/zalba-cutanje-form
     MatSnackBarModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatTableModule,
     MatInputModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

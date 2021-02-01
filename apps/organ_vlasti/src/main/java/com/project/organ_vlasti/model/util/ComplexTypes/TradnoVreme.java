@@ -19,41 +19,41 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tradno_vreme">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="pocetak">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;pattern value="([0-9]|1[0-9]|2[0-4])"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="kraj">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;pattern value="([0-9]|1[0-9]|2[0-4])"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tradno_vreme"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="pocetak"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *               &lt;pattern value="([0-9]|1[0-9]|2[0-4])"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="kraj"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *               &lt;pattern value="([0-9]|1[0-9]|2[0-4])"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tradno_vreme", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tradno_vreme", propOrder = {
     "content"
 })
 public class TradnoVreme {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "pocetak", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "kraj", namespace = "http://www.reusability", type = JAXBElement.class)
+        @XmlElementRef(name = "kraj", namespace = "http://www.reusability", type = JAXBElement.class),
+        @XmlElementRef(name = "pocetak", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;

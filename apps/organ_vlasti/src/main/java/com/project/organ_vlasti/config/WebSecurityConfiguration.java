@@ -68,6 +68,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
                 // svim korisnicima dopusti da pristupe putanji /auth/**
+
                 .authorizeRequests().antMatchers("/auth/**", "/ws/**", "/obavestenje/toPdf").permitAll()
 
                 // za svaki drugi zahtev korisnik mora biti autentifikovan

@@ -75,8 +75,8 @@ public class ZalbaCutanjeMapper {
         
         zalbaCutanje.getZalbaCutanjeBody().setPodaciOPodnosiocu(zalbaCutanjeDTO.getZalbaCutanjeBody().getPodaciOPodnosiocu());
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
-        zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
-        zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
+        zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("rel"), "pred:podnosilac");
+        zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("href"), "http://users/" + userEmail);
         
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getAdresa().getMesto().getOtherAttributes().put(new QName("property"), "pred:mesto");
     	zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getAdresa().getMesto().getOtherAttributes().put(new QName("datatype"), "xs:string");

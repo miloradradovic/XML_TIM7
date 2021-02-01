@@ -43,19 +43,19 @@ public class ZalbaCutanjeController {
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
     
-    @RequestMapping(value="/korisnik", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    /*@RequestMapping(value="/korisnik", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaCutanjeList> getZalbeByUser() throws XMLDBException, JAXBException, IOException {
 
     	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getZalbeByUser("s");
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
-    }
+    }*/
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    //@PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	User user = (User) authentication.getPrincipal();
-    	//User user = new User(); user.setEmail("s");
+    	//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	//User user = (User) authentication.getPrincipal();
+    	User user = new User(); user.setEmail("s");
         if (zalbaCutanjeService.create(zalbaCutanje, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

@@ -2,9 +2,21 @@ package com.project.poverenik.service;
 
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
+import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
+import com.project.poverenik.rdf_utils.AuthenticationUtilities;
+import com.project.poverenik.rdf_utils.FileUtil;
+import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.poverenik.repository.ZalbaOdlukaRepository;
+
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -16,8 +28,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ZalbaOdlukaService {
@@ -105,4 +121,70 @@ public class ZalbaOdlukaService {
         patch = patch.substring(patch.lastIndexOf("<zoc:naslov>"), patch.indexOf("</zoc:napomena>") + "</zoc:napomena>".length());
         return zalbaOdlukaRepository.update(zalbaOdluka.getZalbaOdlukaBody().getId(), patch);
     }
+    
+    public ZalbaOdlukaList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
+			String mesto) throws IOException, JAXBException, XMLDBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		if (datumAfter.equals("")) {
+			datumAfter = "1000-01-01";
+		}
+		if (datumBefore.equals("")) {
+			datumAfter = "9999-12-31";
+		}
+
+		System.out.println(datumAfter + datumBefore + status + organ_vlasti + mesto);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("datumAfter", datumAfter);
+		params.put("datumBefore", datumBefore);
+		params.put("status", status);
+		params.put("organ_vlasti", organ_vlasti);
+		params.put("mesto", mesto);
+		
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+
+		String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore, status, organ_vlasti, mesto);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		RDFNode id;
+
+		ZalbaOdlukaList zcList = null;
+
+		while (results.hasNext()) {
+
+			QuerySolution querySolution = results.next();
+			List<ZalbaOdluka> listZC = new ArrayList<>();
+
+			id = querySolution.get("zalba");
+			if (id.toString().contains("odluka")) {
+				String idStr = id.toString().split("zalbe/odluka/")[1];
+				ZalbaOdluka z = getOne(idStr);
+				listZC.add(z);
+			}
+
+			zcList = new ZalbaOdlukaList(listZC);
+			System.out.println();
+		}
+
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+
+		// ResultSetFormatter.outputAsXML(System.out, results);
+		ResultSetFormatter.out(System.out, results);
+
+		query.close();
+
+		System.out.println("[INFO] End.");
+
+		return zcList;
+
+	}
+
 }

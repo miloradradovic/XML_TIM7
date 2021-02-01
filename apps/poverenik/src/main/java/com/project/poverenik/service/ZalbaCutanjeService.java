@@ -160,10 +160,12 @@ public class ZalbaCutanjeService {
 			QuerySolution querySolution = results.next();
 			List<ZalbaCutanje> listZC = new ArrayList<>();
 
-			id = querySolution.get("zalba_cutanje");
-			String idStr = id.toString().split("zalbe/cutanje/")[1];
-			ZalbaCutanje z = getOne(idStr);
-			listZC.add(z);
+			id = querySolution.get("zalba");
+			if (id.toString().contains("cutanje")) {
+				String idStr = id.toString().split("zalbe/cutanje/")[1];
+				ZalbaCutanje z = getOne(idStr);
+				listZC.add(z);
+			}
 
 			zcList = new ZalbaCutanjeList(listZC);
 			System.out.println();
@@ -203,7 +205,7 @@ public class ZalbaCutanjeService {
 
 	}
 
-	public ZalbaCutanjeList getZalbeByUser(String userEmail) throws IOException, JAXBException, XMLDBException {
+	/*public ZalbaCutanjeList getZalbeByUser(String userEmail) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
 		Map<String, String> params = new HashMap<String, String>();
@@ -260,7 +262,7 @@ public class ZalbaCutanjeService {
 
 		return zcList;
 
-	}
+	}*/
     
    
 }

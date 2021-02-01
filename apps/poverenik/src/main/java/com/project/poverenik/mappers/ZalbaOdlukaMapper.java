@@ -9,6 +9,7 @@ import javax.xml.namespace.QName;
 import com.project.poverenik.model.util.ComplexTypes.Tclan;
 import com.project.poverenik.model.util.ComplexTypes.Tnapomena;
 import com.project.poverenik.model.util.ComplexTypes.ObjectFactory;
+import com.project.poverenik.model.zalba_odluka.Tzalba;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 
 public class ZalbaOdlukaMapper {
@@ -25,6 +26,18 @@ public class ZalbaOdlukaMapper {
     	zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("property"),"pred:datum");
     	zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("datatype"),"xs:date");
     	zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("content"),zalbaOdlukaDTO.getZalbaOdlukaBody().getDatum().toString());
+    	
+    	zalbaOdluka.getZalbaOdlukaBody().setZahtev(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev());
+    	zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("property"), "pred:zahtev");
+    	zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("datatype"), "xs:string");
+    	zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("content"), zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
+    	zalbaOdluka.getZalbaOdlukaBody().getZahtev().setValue("http://localhost:8085/zahtev/" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
+    	
+    	zalbaOdluka.getZalbaOdlukaBody().setStatus(new Tzalba.Status());
+    	zalbaOdluka.getZalbaOdlukaBody().getStatus().setValue("neobradjena");
+    	zalbaOdluka.getZalbaOdlukaBody().getStatus().getOtherAttributes().put(new QName("property"), "pred:status");
+    	zalbaOdluka.getZalbaOdlukaBody().getStatus().getOtherAttributes().put(new QName("datatype"), "xs:string");
+    	
     	zalbaOdluka.getZalbaOdlukaBody().setNaslov("ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАХТЕВ ЗА ПРИСТУП ИНФОРМАЦИЈИ");
     	zalbaOdluka.getZalbaOdlukaBody().setPodaciPovereniku(of.createTpodaciPovereniku());
     	zalbaOdluka.getZalbaOdlukaBody().getPodaciPovereniku().setAdresa(of.createTadresa());
@@ -40,14 +53,14 @@ public class ZalbaOdlukaMapper {
 
     	zalbaOdluka.getZalbaOdlukaBody().setZalilac(zalbaOdlukaDTO.getZalbaOdlukaBody().getZalilac());
     	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
-    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
-    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
+    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("rel"), "pred:podnosilac");
+    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("href"), "http://users/" + userEmail);
 
     	zalbaOdluka.getZalbaOdlukaBody().setProtivResenjaZakljucka(zalbaOdlukaDTO.getZalbaOdlukaBody().getProtivResenjaZakljucka());
     	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("property"), "pred:organ_vlasti");
     	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("datatype"), "xs:string");
-    	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("rel"), "pred:referenceTo");
-    	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("href"), "http://"+zalbaOdlukaDTO.getZalbaOdlukaBody().getProtivResenjaZakljucka().getBroj().getValue());
+    	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("rel"), "pred:obavjestenje");
+    	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getBroj().getOtherAttributes().put(new QName("href"), "http://obavestenja/"+zalbaOdlukaDTO.getZalbaOdlukaBody().getProtivResenjaZakljucka().getBroj().getValue());
 
     	zalbaOdluka.getZalbaOdlukaBody().setSadrzaj(zalbaOdlukaDTO.getZalbaOdlukaBody().getSadrzaj());
     	zalbaOdluka.getZalbaOdlukaBody().getSadrzaj().getContent().set(0, "Наведеном одлуком органа власти (решењем, закључком, обавештењем у писаној форми са елементима одлуке) , супротно закону, одбијен-одбачен је мој захтев који сам поднео/ла-упутио/ла дана");

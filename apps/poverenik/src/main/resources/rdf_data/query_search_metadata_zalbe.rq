@@ -1,0 +1,17 @@
+PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
+
+SELECT * FROM <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/zalbe>
+WHERE { 
+	?zalba_cutanje <http://examples/predicate/datum> ?datum . 
+	?zalba_cutanje <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
+	?zalba_cutanje <http://examples/predicate/zahtev> ?zahtev . 
+	?zalba_cutanje <http://examples/predicate/status> ?status . 
+	?zalba_cutanje <http://examples/predicate/podnosilac> ?podnosilac . 
+	?zalba_cutanje <http://examples/predicate/mesto> ?mesto . 
+	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#date> 
+	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#date>
+	&& regex(UCASE(str(?status)), UCASE(".*%s.*"))
+	&& regex(UCASE(str(?organ_vlasti)), UCASE(".*%s.*"))
+	&& regex(UCASE(str(?mesto)), UCASE(".*%s.*"))
+	)
+}

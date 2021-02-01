@@ -34,12 +34,12 @@ public class ZalbaOdlukaController {
     	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
     }
 
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, NumberFormatException, JAXBException {
-    	//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		//User user = (User) authentication.getPrincipal();
-    	User user = new User(); user.setEmail("s");
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) authentication.getPrincipal();
+    	//User user = new User(); user.setEmail("s");
         if (zalbaOdlukaService.create(zalbaOdluka, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

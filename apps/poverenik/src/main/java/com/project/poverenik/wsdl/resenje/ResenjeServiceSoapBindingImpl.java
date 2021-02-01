@@ -5,6 +5,7 @@
 
 package com.project.poverenik.wsdl.resenje;
 
+import com.project.poverenik.model.resenje.ObjectFactory;
 import com.project.poverenik.model.resenje.Tresenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
@@ -49,8 +50,10 @@ public class ResenjeServiceSoapBindingImpl implements ResenjeServicePortType {
             Tresenje _return = resenjeService.getOne(broj).getResenjeBody();
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            ObjectFactory objectFactory = new ObjectFactory();
+            Tresenje tresenje = objectFactory.createTresenje();
+            tresenje.setBroj("-1");
+            return tresenje;
         }
     }
 

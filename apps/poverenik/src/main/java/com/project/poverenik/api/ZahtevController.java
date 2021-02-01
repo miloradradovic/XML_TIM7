@@ -25,8 +25,8 @@ import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 public class ZahtevController {
 	
 	@PreAuthorize("hasRole('ROLE_POVERENIK')")
-    @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> getZahtevSoap(@PathVariable String id) throws XMLDBException, JAXBException {
+    @RequestMapping(value ="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZahtevSoap(@PathVariable String id) {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.poverenik.model.zahtev.client");
 
@@ -39,7 +39,7 @@ public class ZahtevController {
         zahtevRequest.setId(id);
         getZahtevResponse zahtevResponse = zahtevClient.getZahtev(zahtevRequest);
         if(zahtevResponse != null){
-            return new ResponseEntity(zahtevResponse.getZahtev(), HttpStatus.OK);
+            return new ResponseEntity(zahtevResponse, HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);

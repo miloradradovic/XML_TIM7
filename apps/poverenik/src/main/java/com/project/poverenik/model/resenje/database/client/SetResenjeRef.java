@@ -6,7 +6,7 @@
 //
 
 
-package com.project.organ_vlasti.model.resenje.client;
+package com.project.poverenik.model.resenje.database.client;
 
 import javax.xml.bind.annotation.*;
 
@@ -31,8 +31,37 @@ import javax.xml.bind.annotation.*;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "getAllResenjaRequest")
-public class getAllResenjaRequest {
+@XmlType(name = "", propOrder = {
+    "resenje_ref"
+})
+@XmlRootElement(name = "setResenjeRef")
+public class SetResenjeRef {
 
+    @XmlElement(required = true)
+    protected String resenje_ref;
+
+    /**
+     * Gets the value of the name property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getResenje_ref() {
+        return resenje_ref;
+    }
+
+    /**
+     * Sets the value of the name property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setResenje_ref(String value) {
+        this.resenje_ref = value;
+    }
 
 }

@@ -31,8 +31,11 @@ public class ResenjeRepository {
             + "</xu:modifications>";
 
 
-    public boolean create(Resenje resenje) throws XMLDBException {
-        return existManager.store(collectionUri, resenje.getResenjeBody().getBroj(), resenje);
+    public String create(Resenje resenje) throws XMLDBException {
+        if(existManager.store(collectionUri, resenje.getResenjeBody().getBroj(), resenje)){
+            return resenje.getResenjeBody().getBroj();
+        }
+        return null;
     }
 
     public ResourceSet getAll() throws XMLDBException {

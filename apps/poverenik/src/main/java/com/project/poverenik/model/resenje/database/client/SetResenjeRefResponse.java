@@ -6,9 +6,7 @@
 //
 
 
-package com.project.organ_vlasti.model.resenje.client;
-
-import com.project.organ_vlasti.model.util.lists.ResenjeList;
+package com.project.poverenik.model.resenje.database.client;
 
 import javax.xml.bind.annotation.*;
 
@@ -34,24 +32,24 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resenjeList"
+    "response"
 })
-@XmlRootElement(name = "getAllResenjaResponse", namespace = "http://resenje")
-public class getAllResenjaResponse {
+@XmlRootElement(name = "setResenjeRefResponse", namespace = "http://resenje")
+public class SetResenjeRefResponse {
 
-    @XmlElement(name = "resenjeList", required = true)
-    protected ResenjeList resenjeList;
+    @XmlElement(name = "response", required = true)
+    protected String response;
 
     /**
      * Gets the value of the student property.
      * 
      * @return
      *     possible object is
-     *     {@link ResenjeList }
+     *     {@link String }
      *     
      */
-    public ResenjeList getResenjeList() {
-        return resenjeList;
+    public String getResponse() {
+        return response;
     }
 
     /**
@@ -59,11 +57,11 @@ public class getAllResenjaResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link ResenjeList }
+     *     {@link String }
      *     
      */
-    public void setResenjeList(ResenjeList  value) {
-        this.resenjeList = value;
+    public void setResponse(String  value) {
+        this.response = value;
     }
 
 }

@@ -3,6 +3,7 @@ package com.project.poverenik.api;
 import com.project.poverenik.client.ResenjeRefClient;
 import com.project.poverenik.model.resenje.database.client.SetResenjeRef;
 import com.project.poverenik.model.resenje.Resenje;
+import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -42,6 +45,19 @@ public class ResenjeController {
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ResenjeList> getResenjeList() throws XMLDBException, JAXBException {
         ResenjeList resenjeList = resenjeService.getAll();
+
+        if(resenjeList != null)
+            return new ResponseEntity(resenjeList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_USER')")
+    @RequestMapping(value = "/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeList> getResenjeListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ResenjeList resenjeList = resenjeService.getByUser(user.getEmail());
 
         if(resenjeList != null)
             return new ResponseEntity(resenjeList, HttpStatus.OK);

@@ -56,6 +56,7 @@ export class SignInComponent implements OnInit {
         const email = info.email;
         const role = info.role;
         const user = new SignInModel(email, userToken.jwt, role);
+        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         this.snackBar.open('Successfully logged in!', 'Ok', { duration: 2000 });
         this.router.navigate(['/']);

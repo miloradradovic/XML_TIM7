@@ -58,7 +58,7 @@ public class ZalbaCutanjeRepository {
     }
 
     public ResourceSet getAllByUser(String email) throws XMLDBException {
-        String xpath = "sth";
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::podaci_o_podnosiocu/*[1]/@id[.='%s']/ancestor::zalba_cutanje", email);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
@@ -67,6 +67,11 @@ public class ZalbaCutanjeRepository {
     	String xpath = String.format(
 				"/zalba_cutanje/zalba_cutanje_body/sadrzaj_zalbe/podaci_o_zahtjevu_i_informacijama[.='%s']/ancestor::zalba_cutanje",
 				text, text);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getAllByObradaOrNeobradjena() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s' or .='%s']/ancestor::zalba_cutanje", "neobradjena", "u obradi");
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

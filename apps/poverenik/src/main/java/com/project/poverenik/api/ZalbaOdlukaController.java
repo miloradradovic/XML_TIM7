@@ -57,6 +57,29 @@ public class ZalbaOdlukaController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByUser(user.getEmail());
+
+        if(zalbaOdlukaList != null)
+            return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZalbaOdlukaListObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByObradaOrNeobradjena();
+        if(zalbaOdlukaList != null)
+            return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     @PreAuthorize("hasRole('ROLE_USER' || 'POVERENIK')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaOdluka(@PathVariable String id) throws XMLDBException, JAXBException {

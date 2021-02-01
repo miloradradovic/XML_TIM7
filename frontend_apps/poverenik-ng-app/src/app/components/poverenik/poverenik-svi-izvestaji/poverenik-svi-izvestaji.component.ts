@@ -15,4 +15,11 @@ export class PoverenikSviIzvestajiComponent implements OnInit {
     // treba dobaviti sve izvestaje
   }
 
+  convertToPDF($event: number) {
+
+  }
+
+  convertToXHTML($event: number) {
+
+  }
 }

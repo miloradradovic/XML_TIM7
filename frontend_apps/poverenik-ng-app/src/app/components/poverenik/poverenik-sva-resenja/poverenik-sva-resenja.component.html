@@ -1,5 +1,5 @@
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Id resenja']"
+  <app-table [columnsToDisplay]="['Id resenja', 'xhtml', 'pdf']"
              [columnsToIterate]="['id']"
-             [dataSource]="resenja"></app-table>
+             [dataSource]="resenja" (PDF)="convertToPDF($event)" (XHTML)="convertToXHTML($event)"></app-table>
 </div>

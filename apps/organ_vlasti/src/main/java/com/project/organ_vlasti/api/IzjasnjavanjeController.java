@@ -13,10 +13,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
-@CrossOrigin(origins = "https://localhost:4201")
+@CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping(value = "/izjasnjavanje", produces = MediaType.APPLICATION_XML_VALUE)
-public class IzjasnjavanjeConstroller {
+public class IzjasnjavanjeController {
 
     @Autowired
     MessageService messageService;
@@ -25,7 +25,7 @@ public class IzjasnjavanjeConstroller {
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> setIzjasnjavanje(@RequestBody Message message) throws XMLDBException {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.message.client");
 
         IzvestavanjeClient izvestavanjeClient = new IzvestavanjeClient();
         izvestavanjeClient.setDefaultUri("http://localhost:8085/ws");

@@ -13,34 +13,34 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tzalilac">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="tip_lica" type="{http://www.reusability}Ttip_lica"/>
- *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
- *         &lt;element name="sediste_zalioca" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tzalilac"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="tip_lica" type="{http://www.reusability}Ttip_lica"/&gt;
+ *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/&gt;
+ *         &lt;element name="sediste_zalioca" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tzalilac", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tzalilac", propOrder = {
     "tipLica",
     "adresa",
     "sedisteZalioca"
 })
 public class Tzalilac {
 
-    @XmlElement(name = "tip_lica", namespace = "http://www.reusability", required = true)
+    @XmlElement(name = "tip_lica", required = true)
     protected TtipLica tipLica;
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(required = true)
     protected Tadresa adresa;
-    @XmlElement(name = "sediste_zalioca", namespace = "http://www.reusability", required = true)
+    @XmlElement(name = "sediste_zalioca", required = true)
     protected String sedisteZalioca;
 
     /**

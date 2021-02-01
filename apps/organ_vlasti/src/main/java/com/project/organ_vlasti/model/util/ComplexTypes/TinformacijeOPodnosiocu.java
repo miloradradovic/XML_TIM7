@@ -13,30 +13,30 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tinformacije_o_podnosiocu">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="lice" type="{http://www.reusability}Ttip_lica"/>
- *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tinformacije_o_podnosiocu"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="lice" type="{http://www.reusability}Ttip_lica"/&gt;
+ *         &lt;element name="adresa" type="{http://www.reusability}Tadresa"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tinformacije_o_podnosiocu", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tinformacije_o_podnosiocu", propOrder = {
     "lice",
     "adresa"
 })
 public class TinformacijeOPodnosiocu {
 
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(required = true)
     protected TtipLica lice;
-    @XmlElement(namespace = "http://www.reusability", required = true)
+    @XmlElement(required = true)
     protected Tadresa adresa;
 
     /**

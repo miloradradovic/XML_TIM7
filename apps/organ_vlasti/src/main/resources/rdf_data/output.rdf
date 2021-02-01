@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://zahtevi/4">
+  <rdf:Description rdf:about="http://zahtevi/13">
     <pred:datum xmlns:pred="http://examples/predicate/" rdf:datatype="date">2000-12-12</pred:datum>
   </rdf:Description>
-  <rdf:Description rdf:about="http://zahtevi/4">
+  <rdf:Description rdf:about="http://zahtevi/13">
     <pred:mesto xmlns:pred="http://examples/predicate/" rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">A</pred:mesto>
   </rdf:Description>
-  <rdf:Description rdf:about="http://zahtevi/4">
+  <rdf:Description rdf:about="http://zahtevi/13">
     <pred:organ_vlasti xmlns:pred="http://examples/predicate/" rdf:datatype="string">A</pred:organ_vlasti>
   </rdf:Description>
-  <rdf:Description rdf:about="http://zahtevi/4">
+  <rdf:Description rdf:about="http://zahtevi/13">
     <pred:podnosilac xmlns:pred="http://examples/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">email1@email.com</pred:podnosilac>
   </rdf:Description>
 </rdf:RDF>

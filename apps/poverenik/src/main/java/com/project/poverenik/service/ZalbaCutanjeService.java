@@ -205,64 +205,7 @@ public class ZalbaCutanjeService {
 
 	}
 
-	/*public ZalbaCutanjeList getZalbeByUser(String userEmail) throws IOException, JAXBException, XMLDBException {
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
-
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("user", "<http://users/" + userEmail + ">");
-
-		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_zalbe_gradjanina.rq",
-				StandardCharsets.UTF_8);
-		System.out.println(sparqlQueryTemplate);
-		// String sparqlQuery = StringSubstitutor.replace(sparqlQueryTemplate, params,
-		// "{{", "}}");
-		String sparqlQuery = String.format(sparqlQueryTemplate, userEmail);
-		System.out.println(sparqlQuery);
-
-		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
-
-		// Query the SPARQL endpoint, iterate over the result set...
-		System.out.println("[INFO] Showing the results for SPARQL query using the result handler.\n");
-		ResultSet results = query.execSelect();
-
-		RDFNode id;
-
-		ZalbaCutanjeList zcList = null;
-
-		while (results.hasNext()) {
-
-			// A single answer from a SELECT query
-			QuerySolution querySolution = results.next();
-			List<ZalbaCutanje> listZC = new ArrayList<>();
-
-			id = querySolution.get("zalba_cutanje");
-			String idStr = id.toString().split("zalbe/cutanje/")[1];
-			ZalbaCutanje z = getOne(idStr);
-			listZC.add(z);
-
-			zcList = new ZalbaCutanjeList(listZC);
-			System.out.println();
-		}
-
-		// Issuing the same query once again...
-
-		// Create a QueryExecution that will access a SPARQL service over HTTP
-		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
-
-		// Query the collection, dump output response as XML
-		System.out.println("[INFO] Showing the results for SPARQL query in native SPARQL XML format.\n");
-		results = query.execSelect();
-
-		// ResultSetFormatter.outputAsXML(System.out, results);
-		ResultSetFormatter.out(System.out, results);
-
-		query.close();
-
-		System.out.println("[INFO] End.");
-
-		return zcList;
-
-	}*/
+	
     
    
 }

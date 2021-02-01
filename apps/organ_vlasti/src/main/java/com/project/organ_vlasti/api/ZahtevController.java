@@ -24,11 +24,12 @@ public class ZahtevController {
     @Autowired
     ZahtevService zahtevService;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    //@PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZahtev(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) authentication.getPrincipal();
+    	//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//User user = (User) authentication.getPrincipal();
+    	User user = new User(); user.setEmail("s");
         if (zahtevService.create(zahtev, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

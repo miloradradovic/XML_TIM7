@@ -24,15 +24,15 @@ public class ResenjeController {
     @Autowired
     ResenjeService resenjeService;
 
-    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    //@PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException, JAXBException {
         String broj = resenjeService.create(resenje);
         if (broj != null){
 
-            if(sendToOrganVlasti(broj) && sendToUser(broj)){
+            //if(sendToOrganVlasti(broj) && sendToUser(broj)){
                 return new ResponseEntity<>(HttpStatus.OK);
-            }
+            //}
 
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

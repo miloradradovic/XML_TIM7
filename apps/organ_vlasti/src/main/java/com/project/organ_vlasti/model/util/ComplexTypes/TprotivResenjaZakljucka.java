@@ -18,56 +18,56 @@ import javax.xml.namespace.QName;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Tprotiv_resenja_zakljucka">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="naziv_organa_koji_je_doneo_odluku">
- *           &lt;complexType>
- *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;anyAttribute processContents='lax'/>
- *               &lt;/extension>
- *             &lt;/simpleContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="broj">
- *           &lt;complexType>
- *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;anyAttribute processContents='lax'/>
- *               &lt;/extension>
- *             &lt;/simpleContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="od_godine">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;pattern value="[0-9]{4}"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tprotiv_resenja_zakljucka"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="naziv_organa_koji_je_doneo_odluku"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="broj"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="od_godine"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *               &lt;pattern value="[0-9]{4}"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tprotiv_resenja_zakljucka", namespace = "http://www.reusability", propOrder = {
+@XmlType(name = "Tprotiv_resenja_zakljucka", propOrder = {
     "nazivOrganaKojiJeDoneoOdluku",
     "broj",
     "odGodine"
 })
 public class TprotivResenjaZakljucka {
 
-    @XmlElement(name = "naziv_organa_koji_je_doneo_odluku", namespace = "http://www.reusability", required = true)
-    protected TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku nazivOrganaKojiJeDoneoOdluku;
-    @XmlElement(namespace = "http://www.reusability", required = true)
-    protected TprotivResenjaZakljucka.Broj broj;
-    @XmlElement(name = "od_godine", namespace = "http://www.reusability", required = true)
+    @XmlElement(name = "naziv_organa_koji_je_doneo_odluku", required = true)
+    protected NazivOrganaKojiJeDoneoOdluku nazivOrganaKojiJeDoneoOdluku;
+    @XmlElement(required = true)
+    protected Broj broj;
+    @XmlElement(name = "od_godine", required = true)
     protected String odGodine;
 
     /**
@@ -75,10 +75,10 @@ public class TprotivResenjaZakljucka {
      * 
      * @return
      *     possible object is
-     *     {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
+     *     {@link NazivOrganaKojiJeDoneoOdluku }
      *     
      */
-    public TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku getNazivOrganaKojiJeDoneoOdluku() {
+    public NazivOrganaKojiJeDoneoOdluku getNazivOrganaKojiJeDoneoOdluku() {
         return nazivOrganaKojiJeDoneoOdluku;
     }
 
@@ -87,10 +87,10 @@ public class TprotivResenjaZakljucka {
      * 
      * @param value
      *     allowed object is
-     *     {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
+     *     {@link NazivOrganaKojiJeDoneoOdluku }
      *     
      */
-    public void setNazivOrganaKojiJeDoneoOdluku(TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku value) {
+    public void setNazivOrganaKojiJeDoneoOdluku(NazivOrganaKojiJeDoneoOdluku value) {
         this.nazivOrganaKojiJeDoneoOdluku = value;
     }
 
@@ -99,10 +99,10 @@ public class TprotivResenjaZakljucka {
      * 
      * @return
      *     possible object is
-     *     {@link TprotivResenjaZakljucka.Broj }
+     *     {@link Broj }
      *     
      */
-    public TprotivResenjaZakljucka.Broj getBroj() {
+    public Broj getBroj() {
         return broj;
     }
 
@@ -111,10 +111,10 @@ public class TprotivResenjaZakljucka {
      * 
      * @param value
      *     allowed object is
-     *     {@link TprotivResenjaZakljucka.Broj }
+     *     {@link Broj }
      *     
      */
-    public void setBroj(TprotivResenjaZakljucka.Broj value) {
+    public void setBroj(Broj value) {
         this.broj = value;
     }
 
@@ -149,13 +149,13 @@ public class TprotivResenjaZakljucka {
      * <p>The following schema fragment specifies the expected content contained within this class.
      * 
      * <pre>
-     * &lt;complexType>
-     *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;anyAttribute processContents='lax'/>
-     *     &lt;/extension>
-     *   &lt;/simpleContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
      * 
      * 
@@ -222,13 +222,13 @@ public class TprotivResenjaZakljucka {
      * <p>The following schema fragment specifies the expected content contained within this class.
      * 
      * <pre>
-     * &lt;complexType>
-     *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;anyAttribute processContents='lax'/>
-     *     &lt;/extension>
-     *   &lt;/simpleContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
      * 
      * 

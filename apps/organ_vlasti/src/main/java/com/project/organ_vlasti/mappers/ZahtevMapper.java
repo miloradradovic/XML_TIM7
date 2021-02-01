@@ -3,6 +3,7 @@ package com.project.organ_vlasti.mappers;
 import com.project.organ_vlasti.model.util.ComplexTypes.Tclan;
 import com.project.organ_vlasti.model.util.ComplexTypes.Tfusnote;
 import com.project.organ_vlasti.model.util.ComplexTypes.Topcije;
+import com.project.organ_vlasti.model.util.ComplexTypes.Topis;
 import com.project.organ_vlasti.model.zahtev.ObjectFactory;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 
@@ -49,8 +50,9 @@ public class ZahtevMapper {
         zahtev.getZahtevBody().getTekstZahteva().getContent().set(2, " Закона о слободном приступу информацијама од јавног значаја („Службени гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10), од горе наведеног органа захтевам:*");
         zahtev.getZahtevBody().getTekstZahteva().getContent().set(3, (JAXBElement<Topcije>) zahtev.getZahtevBody().getTekstZahteva().getContent().get(3));
 		zahtev.getZahtevBody().getTekstZahteva().getContent().set(4, "Овај захтев се односи на следеће информације:");
-        zahtev.getZahtevBody().getTekstZahteva().getContent().set(5, (JAXBElement<String>) zahtev.getZahtevBody().getTekstZahteva().getContent().get(5));
-        
+        zahtev.getZahtevBody().getTekstZahteva().getContent().set(5, (JAXBElement<Topis>) zahtev.getZahtevBody().getTekstZahteva().getContent().get(5));
+       // zahtev.getZahtevBody().getTekstZahteva().
+
         zahtev.getZahtevBody().setInformacijeOTraziocu(zahtevDTO.getZahtevBody().getInformacijeOTraziocu());
         zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
         zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("property"),"pred:podnosilac");

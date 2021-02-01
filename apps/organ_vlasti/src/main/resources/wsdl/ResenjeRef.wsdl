@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://resenje"
+                  xmlns:tns="http://resenje"
+                  name="ResenjeRefService">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://resenje"
+            xmlns:tns="http://resenje"
+            elementFormDefault="qualified">
+            <xsd:element name="resenje_ref">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="body">
+                            <xsd:complexType>
+                                <xsd:simpleContent>
+                                    <xsd:extension base="tns:Tbody">
+                                        <xsd:attribute name="broj" type="xsd:string"/>
+                                        <xsd:attribute name="procitano" type="xsd:string"/>
+                                    </xsd:extension>
+                                </xsd:simpleContent>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:simpleType name="Tbody">
+                <xsd:restriction base="xsd:string"/>
+            </xsd:simpleType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="setResenjeRefRequest">
+        <wsdl:part name="resenje_ref" type="tns:Tbody" />
+    </wsdl:message>
+    <wsdl:message name="setResenjeRefResponse">
+        <wsdl:part name="response" type="xsd:string" />
+    </wsdl:message>
+
+    <wsdl:portType name="ResenjeRefServicePortType">
+        <wsdl:operation name="setResenjeRef">
+            <wsdl:input message="tns:setResenjeRefRequest" />
+            <wsdl:output message="tns:setResenjeRefResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="ResenjeRefServiceSoapBinding" type="tns:ResenjeRefServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="setResenjeRef">
+            <soap:operation soapAction="http://resenje/ws/setResenjeRef" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ResenjeRefService">
+        <wsdl:port name="ResenjeRefServiceSoapBinding" binding="tns:ResenjeRefServiceSoapBinding">
+            <soap:address location="http://localhost:8090/resenjeRefPort" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

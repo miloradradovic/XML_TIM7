@@ -4,6 +4,7 @@ import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.service.ZalbaCutanjeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBException;
 
 @CrossOrigin(origins = "https://localhost:4201")
@@ -23,6 +26,29 @@ public class ZalbaCutanjeController {
 
     @Autowired
     ZalbaCutanjeService zalbaCutanjeService;
+    
+    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaCutanjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+
+    	System.out.println(datumAfter + datumBefore+status+organ_vlasti+mesto);
+    	System.out.println("kontroler");
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
+    	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaCutanjeList> searchText() throws XMLDBException, JAXBException, IOException {
+
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchText("У");
+    	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
+    }
+    
+    /*@RequestMapping(value="/korisnik", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaCutanjeList> getZalbeByUser() throws XMLDBException, JAXBException, IOException {
+
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getZalbeByUser("s");
+    	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
+    }*/
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)

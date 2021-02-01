@@ -15,11 +15,13 @@ import org.xmldb.api.modules.XPathQueryService;
 import org.xmldb.api.modules.XUpdateQueryService;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.OutputKeys;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
+import java.io.StringWriter;
 
 @Component
 public class ExistManager {
@@ -94,6 +96,23 @@ public class ExistManager {
         }
 
         return collection;
+    }
+
+    //export xml to outputStream
+    public String getOutputStream(Object xml){
+        StringWriter sw = new StringWriter();
+
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(xml.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(xml, sw);
+        } catch (JAXBException e) {
+            System.out.println("getOutputStream threw an error!");
+            e.printStackTrace();
+        }
+        return sw.toString();
     }
 
     //create new

@@ -69,4 +69,14 @@ public class ObavestenjeController {
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
+
+    @RequestMapping(value="/toPdf", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadObavestenje() {
+        boolean obavestenje = obavestenjeService.generateDocuments("1");
+        if(!obavestenje)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
 }

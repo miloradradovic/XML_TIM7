@@ -1,11 +1,14 @@
 package com.project.organ_vlasti.service;
 
+import com.itextpdf.text.DocumentException;
+import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.repository.ObavestenjeRepository;
 
+import com.project.organ_vlasti.transformer.PDFTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -16,6 +19,9 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +33,11 @@ public class ObavestenjeService {
 
     @Autowired
     private ObavestenjeRepository obavestenjeRepository;
+
+    @Autowired
+    private ExistManager existManager;
+
+    private PDFTransformer pdfTransformer = new PDFTransformer();
     
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = obavestenjeRepository.getMaxId();
@@ -105,5 +116,34 @@ public class ObavestenjeService {
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<oba:naziv_organa property=\"pred:organ_vlasti\" datatype=\"xs:string\" sediste=\"\">"), patch.indexOf("</oba:opcija_dostave>") + "</oba:opcija_dostave>".length());
         return obavestenjeRepository.update(obavestenje.getObavestenjeBody().getBroj(), patch);
+    }
+
+    public boolean generateDocuments(String brojObavestenja){
+        System.out.println("[INFO] " + PDFTransformer.class.getSimpleName());
+
+        // Creates parent directory if necessary
+        File pdfFile = new File("organ_vlasti/src/main/resources/generated_files/documents/bookstore.pdf");
+
+        if (!pdfFile.getParentFile().exists()) {
+            System.out.println("[INFO] A new directory is created: " + pdfFile.getParentFile().getAbsolutePath() + ".");
+            pdfFile.getParentFile().mkdir();
+        }
+
+        PDFTransformer pdfTransformer = new PDFTransformer();
+        try {
+            Obavestenje xml = getOne("1");
+            pdfTransformer.generateHTML(existManager.getOutputStream(xml),
+                    "organ_vlasti/src/main/resources/generated_files/xslt/obavestenje.xsl");
+            pdfTransformer.generatePDF("organ_vlasti/src/main/resources/generated_files/documents/bookstore.pdf");
+        } catch (XMLDBException | IOException | DocumentException | JAXBException e) {
+            e.printStackTrace();
+            return false;
+        }
+		/*pdfTransformer.generateHTML(existManager.getOutputStream(), XSL_FILE);
+		pdfTransformer.generatePDF(OUTPUT_FILE);
+*/
+        System.out.println("[INFO] File \"" + "organ_vlasti/src/main/resources/generated_files/documents/bookstore.pdf" + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
     }
 }

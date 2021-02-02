@@ -1,7 +1,6 @@
 package com.project.email.service;
 
 import com.project.email.model.Tbody;
-import com.sun.istack.internal.ByteArrayDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -10,12 +9,9 @@ import org.springframework.scheduling.annotation.Async;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.mail.util.ByteArrayDataSource;
 
 import org.springframework.mail.javamail.MimeMessageHelper;
-
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 @Service
 public class EmailService {
@@ -48,12 +44,8 @@ public class EmailService {
 		helper.setSubject(email.getSubject());
 		helper.setText(email.getContent(), true);
 
-		//String pdfName = email.getFile().split("\\|")[0];
-		//String pdf = email.getFile().split("\\|")[1];
-		Charset charset = StandardCharsets.UTF_8;
-
-		ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(email.getFile().getBytes(charset), "application/pdf");
-		helper.addAttachment("name.pdf" , byteArrayDataSource);
+		ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource((byte[]) email.getFile(), "application/pdf");
+		helper.addAttachment(email.getFileName(), byteArrayDataSource);
 		javaMailSender.send(mimeMessage);
 	}
 

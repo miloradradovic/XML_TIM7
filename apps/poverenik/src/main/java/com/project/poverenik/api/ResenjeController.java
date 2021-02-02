@@ -147,18 +147,15 @@ public class ResenjeController {
         sendAttach.getEmail().setSubject("Resenje " + broj);
 
         //TODO - pozvati transformaciju
-
-
-        String pdfName = "proba.pdf";
+        String pdfName = "верзија.pdf";
+        sendAttach.getEmail().setFileName(pdfName);
         try {
-           // File pdf = new ClassPathResource("pdf/proba.pdf").getFile();
-            //Path pdf = ResourceUtils.getFile("classpath:pdf/proba.pdf").toPath();
-            Path pdf = Paths.get("D:/proba.pdf");
-            Path pdfPath = ResourceUtils.getFile("classpath:pdf/" + pdfName).toPath();
 
+            File file = new File("src/main/resources/pdf/" + pdfName);
+            Path pdfPath = file.toPath();
             byte[] pdfBytes = Files.readAllBytes(pdfPath);
 
-            sendAttach.getEmail().setFile(pdfBytes.toString()); //pdfName + "|" +
+            sendAttach.getEmail().setFile(pdfBytes);
 
             return emailClient.sentAttach(sendAttach);
 

@@ -59,11 +59,12 @@ export class PoverenikSveZalbeComponent implements OnInit {
     );
   }
 
-  convertToXHTML($event: number) {
 
+  convertToXHTML($event: string) {
+    console.log($event);
   }
 
-  convertToPDF($event: number) {
-
+  convertToPDF($event: string) {
+    console.log($event);
   }
 }

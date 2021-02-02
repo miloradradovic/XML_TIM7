@@ -1,1 +1,9 @@
-<p>navigation-gradjanin works!</p>
+<mat-toolbar color="primary">
+
+  <a routerLink="/main-page-gradjanin" id="home-nav" style="margin-left: 0.1%;" ><mat-icon [ngStyle]="{'color':'white'}">emoji_people</mat-icon></a>
+  <span>Portal organa vlasti</span>
+  <a routerLink="/zahtev" style="margin-left: 5%;" ><button style="width: 90%;margin-bottom: 5%"mat-flat-button color="primary" id="create-zahtev">Kreiraj zahtev</button></a>
+  <span style="width: 80%"></span>
+  <a routerLink="/" style="margin-left: 0.5%;" ><mat-icon (click)="signOutUser()" [ngStyle]="{'color':'white'}">exit_to_app</mat-icon></a>
+
+</mat-toolbar>

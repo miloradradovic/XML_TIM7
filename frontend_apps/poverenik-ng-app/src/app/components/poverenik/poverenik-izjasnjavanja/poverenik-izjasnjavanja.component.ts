@@ -36,9 +36,8 @@ export class PoverenikIzjasnjavanjaComponent implements OnInit {
     );
   }
 
-  clicked($event: number): void {
-    // TODO otvori dialog izjasnjenja
-    console.log('clicked');
-  }
 
+  clicked($event: number) {
+    console.log($event);
+  }
 }

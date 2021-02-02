@@ -29,6 +29,7 @@ public class ResenjeController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value="/resenje/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws JAXBException, XMLDBException {
+        // TODO dodati za front xhtml transformacije
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
 

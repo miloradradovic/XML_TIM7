@@ -57,16 +57,16 @@ export class PoverenikMainPageComponent implements OnInit {
     );
   }
 
-  doubleClicked($event: number): void {
-    // TODO redirectuje ga na detaljni prikaz zalbe
-    console.log('double clicked');
+
+  convertToXHTML($event: string) {
+    console.log($event);
   }
 
-  convertToXHTML($event: number) {
-
+  convertToPDF($event: string) {
+    console.log($event);
   }
 
-  convertToPDF($event: number) {
-
+  doubleClicked($event: string) {
+    console.log($event);
   }
 }

@@ -5,6 +5,7 @@ import com.project.organ_vlasti.model.util.ComplexTypes.Tfusnote;
 import com.project.organ_vlasti.model.util.ComplexTypes.Topcije;
 import com.project.organ_vlasti.model.util.ComplexTypes.Topis;
 import com.project.organ_vlasti.model.zahtev.ObjectFactory;
+import com.project.organ_vlasti.model.zahtev.Tzahtev;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 
 import java.math.BigInteger;
@@ -22,6 +23,8 @@ public class ZahtevMapper {
 		zahtev.setZahtevBody(ofZ.createTzahtev());
 
 		zahtev.getZahtevBody().setId(id);
+		zahtev.getZahtevBody().setStatus(new Tzahtev.Status());
+		zahtev.getZahtevBody().getStatus().setValue("neobradjen");
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("about"), "http://zahtevi/" + id);
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("property"),"pred:datum");

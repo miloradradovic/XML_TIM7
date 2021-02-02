@@ -27,19 +27,19 @@ public class ZalbaCutanjeController {
     @Autowired
     ZalbaCutanjeService zalbaCutanjeService;
     
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaCutanjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ZalbaCutanjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
 
-    	System.out.println(datumAfter + datumBefore+status+organ_vlasti+mesto);
-    	System.out.println("kontroler");
-    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
-    
-    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaCutanjeList> searchText() throws XMLDBException, JAXBException, IOException {
 
-    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchText("У");
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaCutanjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchText(input);
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
 

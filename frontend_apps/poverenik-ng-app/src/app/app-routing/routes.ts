@@ -9,6 +9,8 @@ import {PoverenikIzjasnjavanjaComponent} from '../components/poverenik/poverenik
 import {PoverenikSvaResenjaComponent} from '../components/poverenik/poverenik-sva-resenja/poverenik-sva-resenja.component';
 import {PoverenikSviIzvestajiComponent} from '../components/poverenik/poverenik-svi-izvestaji/poverenik-svi-izvestaji.component';
 import {AddPoverenikFormComponent} from '../components/forms/add-poverenik-form/add-poverenik-form.component';
+import { ResenjeFormComponent } from '../components/forms/resenje-form/resenje-form.component';
+import { ZalbaOdlukaFormComponent } from '../components/forms/zalba-odluka-form/zalba-odluka-form.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +24,14 @@ export const routes: Routes = [
   {
     path: 'zalba-cutanje',
     component: ZalbaCutanjeFormComponent
+  },
+  {
+    path: 'zalba-odluka',
+    component: ZalbaOdlukaFormComponent
+  },
+  {
+    path: 'resenje',
+    component: ResenjeFormComponent
   },
   {
     path: 'main-page-gradjanin',

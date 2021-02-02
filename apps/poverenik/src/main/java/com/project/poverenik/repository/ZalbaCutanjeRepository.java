@@ -63,9 +63,8 @@ public class ZalbaCutanjeRepository {
     }
 
     public ResourceSet searchText(String text) throws XMLDBException {
-    	//"/zalba_cutanje[zalba_cutanje_body/sadrzaj_zalbe/ciljani_organ_vlasti[contains(text(), '%s')] or /zalba_cutanje/zalba_cutanje_body/sadrzaj_zalbe/podaci_o_zahtjevu_i_informacijama[contains(text(), '%s')]]/ancestor::zalba_cutanje"
     	String xpath = String.format(
-				"/zalba_cutanje/zalba_cutanje_body/sadrzaj_zalbe/podaci_o_zahtjevu_i_informacijama[.='%s']/ancestor::zalba_cutanje",
+				"/zalba_cutanje/zalba_cutanje_body[sadrzaj_zalbe/*[local-name()='podaci_o_zahtjevu_i_informacijama'][contains(.,'%s')] or sadrzaj_zalbe/*[local-name()='ciljani_organ_vlasti'][contains(.,'%s')]]/ancestor::zalba_cutanje",
 				text, text);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }

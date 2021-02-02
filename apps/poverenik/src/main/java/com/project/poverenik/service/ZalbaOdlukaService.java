@@ -123,29 +123,29 @@ public class ZalbaOdlukaService {
     }
     
     public ZalbaOdlukaList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
-			String mesto) throws IOException, JAXBException, XMLDBException {
+			String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
 		if (datumAfter.equals("")) {
 			datumAfter = "1000-01-01";
 		}
 		if (datumBefore.equals("")) {
-			datumAfter = "9999-12-31";
+			datumBefore = "9999-12-31";
 		}
-
-		System.out.println(datumAfter + datumBefore + status + organ_vlasti + mesto);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("datumAfter", datumAfter);
-		params.put("datumBefore", datumBefore);
-		params.put("status", status);
-		params.put("organ_vlasti", organ_vlasti);
-		params.put("mesto", mesto);
 		
 		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
 				StandardCharsets.UTF_8);
 		System.out.println(sparqlQueryTemplate);
+		
+		String user = "";
+		
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/"+userEmail+">";
+		}
 
-		String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore, status, organ_vlasti, mesto);
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
 		System.out.println(sparqlQuery);
 
 		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
@@ -155,11 +155,12 @@ public class ZalbaOdlukaService {
 		RDFNode id;
 
 		ZalbaOdlukaList zcList = null;
+		
+		List<ZalbaOdluka> listZC = new ArrayList<>();
 
 		while (results.hasNext()) {
 
 			QuerySolution querySolution = results.next();
-			List<ZalbaOdluka> listZC = new ArrayList<>();
 
 			id = querySolution.get("zalba");
 			if (id.toString().contains("odluka")) {
@@ -167,11 +168,11 @@ public class ZalbaOdlukaService {
 				ZalbaOdluka z = getOne(idStr);
 				listZC.add(z);
 			}
-
-			zcList = new ZalbaOdlukaList(listZC);
-			System.out.println();
 		}
 
+		zcList = new ZalbaOdlukaList(listZC);
+		System.out.println();
+		
 		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
 		results = query.execSelect();
@@ -222,4 +223,23 @@ public class ZalbaOdlukaService {
         }
         return new ZalbaOdlukaList(zalbaOdlukaList);
     }
+    
+    public ZalbaOdlukaList searchText(String text) throws IOException, JAXBException, XMLDBException {
+		List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+		ResourceSet resourceSet = zalbaOdlukaRepository.searchText(text);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		while (resourceIterator.hasMoreResources()) {
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				return null;
+			JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+			zalbaOdlukaList.add(zalbaOdluka);
+		}
+		return new ZalbaOdlukaList(zalbaOdlukaList);
+
+	}
 }

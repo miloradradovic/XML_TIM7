@@ -39,8 +39,9 @@ public class EmailServiceSoapBindingImpl implements EmailServicePortType {
      * @see email.EmailServicePortType#sendPlain(email.Tbody email)*
      */
     public String sendPlain(Tbody email) {
+        LOG.info("Executing operation sendPlain");
         try {
-            emailService.sendMail(email);
+            emailService.sendPlainMail(email);
             return "OK";
         } catch (Exception ex) {
             return null;
@@ -52,13 +53,11 @@ public class EmailServiceSoapBindingImpl implements EmailServicePortType {
      */
     public String sendAttach(Tbody email) {
         LOG.info("Executing operation sendAttach");
-        System.out.println(email);
         try {
-            String _return = "OK";
-            return _return;
+            emailService.sendAttachMail(email);
+            return "OK";
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            return null;
         }
     }
 

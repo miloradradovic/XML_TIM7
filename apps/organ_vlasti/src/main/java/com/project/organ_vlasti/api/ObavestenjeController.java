@@ -16,12 +16,17 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -101,7 +106,24 @@ public class ObavestenjeController {
         sendAttach.getEmail().setTo(email);
         sendAttach.getEmail().setContent("Postovani, <br/><br/> dostavljamo Vam obavestenje na Vas zahtev. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Obavestenje " + broj);
-        sendAttach.getEmail().setFile("");
-        return emailClient.sentAttach(sendAttach);
+
+
+        //TODO - pozvati transformaciju
+        String pdfName = "верзија.pdf";
+        sendAttach.getEmail().setFileName(pdfName);
+        try {
+            File file = new File("src/main/resources/pdf/" + pdfName);
+            Path pdfPath = file.toPath();
+
+            byte[] pdfBytes = Files.readAllBytes(pdfPath);
+
+            sendAttach.getEmail().setFile(pdfBytes);
+
+            return emailClient.sentAttach(sendAttach);
+
+        } catch (IOException e) {
+            e.getStackTrace();
+            return false;
+        }
     }
 }

@@ -113,4 +113,22 @@ public class ObavestenjeService {
         patch = patch.substring(patch.lastIndexOf("<oba:naziv_organa property=\"pred:organ_vlasti\" datatype=\"xs:string\" sediste=\"\">"), patch.indexOf("</oba:opcija_dostave>") + "</oba:opcija_dostave>".length());
         return obavestenjeRepository.update(obavestenje.getObavestenjeBody().getBroj(), patch);
     }
+
+    public ObavestenjeList getAllByUser(String email) throws XMLDBException, JAXBException {
+        List<Obavestenje> obavestenjeList = new ArrayList<>();
+
+        ResourceSet resourceSet = obavestenjeRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            obavestenjeList.add(obavestenje);
+        }
+        return new ObavestenjeList(obavestenjeList);
+    }
 }

@@ -71,6 +71,19 @@ public class ObavestenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ObavestenjeList> getObavestenjeListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ObavestenjeList obavestenjeList = obavestenjeService.getAllByUser(user.getEmail());
+
+        if(obavestenjeList != null)
+            return new ResponseEntity(obavestenjeList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     @RequestMapping(value="/{broj}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity delete(@PathVariable String broj) throws XMLDBException, JAXBException {
         boolean isDeleted = obavestenjeService.delete(broj);

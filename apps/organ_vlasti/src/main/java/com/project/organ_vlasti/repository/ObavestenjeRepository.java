@@ -55,4 +55,9 @@ public class ObavestenjeRepository {
         String xpath = "/obavestenje/obavestenje_body[@id = max(/obavestenje/obavestenje_body/@id)]/ancestor::obavestenje";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+
+    public ResourceSet getAllByUser(String email) throws XMLDBException {
+        String xpath = String.format("/obavestenje/obavestenje_body/child::informacije_o_podnosiocu/*[1]/*[1][@id = '%s']/ancestor::obavestenje", email);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

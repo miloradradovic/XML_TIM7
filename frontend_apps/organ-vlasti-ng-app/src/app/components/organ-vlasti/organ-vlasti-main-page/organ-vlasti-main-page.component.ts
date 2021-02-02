@@ -23,19 +23,15 @@ export class OrganVlastiMainPageComponent implements OnInit {
         const convert = require('xml-js');
         const zahtevList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         console.log(zahtevList);
-        /*
-        const lista = zalbaCutanjeList.zalbaCutanjeList;
-        const zalbe = lista['zc:zalba_odluka'];
-        if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zc:zalba_odluka_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'odluka'};
-            newList.push(zalba);
+        const lista = zahtevList.zahtevList['zcir:zahtev'];
+        if (lista !== undefined){
+          lista.forEach((item, index) => {
+            const idZahteva = item['zcir:zahtev_body']._attributes.id;
+            const zahtev = {id: idZahteva};
+            newList.push(zahtev);
           });
+          this.zahtevi = newList;
         }
-        this.zalbe = newList.concat(this.zalbe);
-
-         */
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });

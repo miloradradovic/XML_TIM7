@@ -21,19 +21,15 @@ export class IzjasnjavanjaComponent implements OnInit {
         const convert = require('xml-js');
         const izjasnjavanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         console.log(izjasnjavanjeList);
-        /*
-        const lista = zalbaCutanjeList.zalbaCutanjeList;
-        const zalbe = lista['zc:zalba_odluka'];
-        if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zc:zalba_odluka_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'odluka'};
-            newList.push(zalba);
+        const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
+        if (izjasnjavanja !== undefined){
+          izjasnjavanja.forEach((item, index) => {
+            const message = item['ns2:body']._text;
+            const messageObject = {id: message};
+            newList.push(messageObject);
           });
+          this.izjasnjavanja = newList;
         }
-        this.zalbe = newList.concat(this.zalbe);
-
-         */
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });

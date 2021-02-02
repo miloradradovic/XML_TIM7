@@ -23,7 +23,6 @@ import { TableComponent } from './components/table/table.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { GradjaninMainPageComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
-import { SluzbenikMainPageComponent } from './components/organ-vlasti/sluzbenik-main-page/sluzbenik-main-page.component';
 import { OrganVlastiMainPageComponent } from './components/organ-vlasti/organ-vlasti-main-page/organ-vlasti-main-page.component';
 import { ZahteviComponent } from './components/organ-vlasti/zahtevi/zahtevi.component';
 import { ObavestenjaComponent } from './components/organ-vlasti/obavestenja/obavestenja.component';
@@ -44,7 +43,6 @@ import {MatTableModule} from '@angular/material/table';
     NavigationOrganVlastiComponent,
     TableComponent,
     GradjaninMainPageComponent,
-    SluzbenikMainPageComponent,
     OrganVlastiMainPageComponent,
     ZahteviComponent,
     ObavestenjaComponent,

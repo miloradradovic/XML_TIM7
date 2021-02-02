@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
         if (role === 'ROLE_USER'){
           this.router.navigate(['/main-page-gradjanin']);
         }else{
-          this.router.navigate(['/main-page-sluzbenik']);
+          this.router.navigate(['/main-page-organ_vlasti']);
         }
       },
       error => {

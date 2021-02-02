@@ -9,7 +9,7 @@ import javax.xml.namespace.QName;
 
 public class ResenjeMapper {
 	
-	public static Resenje mapFromDTO(Resenje resenje, String id) {
+	public static Resenje mapFromDTO(Resenje resenje, String id, String email) {
 
 		resenje.getResenjeBody().setId(id);
 		switch (id.length()){
@@ -28,7 +28,7 @@ public class ResenjeMapper {
 		resenje.getResenjeBody().setBroj("071-01-" + id + "-" + resenje.getResenjeBody().getDatum().toString().substring(0, 7));
 		resenje.getResenjeBody().getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getResenjeBody().getBroj());
     	resenje.getResenjeBody().getOtherAttributes().put(new QName("rel"),"pred:responseTo");
-    	resenje.getResenjeBody().getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
+    	resenje.getResenjeBody().getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/"); //cutanje/1 odluka/1
     	resenje.getResenjeBody().getOtherAttributes().put(new QName("href"),"http://zalbe/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")));
     	resenje.getResenjeBody().getOtherAttributes().put(new QName("property"),"pred:datum");
     	resenje.getResenjeBody().getOtherAttributes().put(new QName("datatype"),"xs:date");
@@ -40,6 +40,7 @@ public class ResenjeMapper {
     	for (int i = 0; i < resenje.getResenjeBody().getUvodneInformacije().getContent().size(); i++) {
     		try {
         		JAXBElement<TuvodneInformacije.Trazilac> element = (JAXBElement<TuvodneInformacije.Trazilac>)resenje.getResenjeBody().getUvodneInformacije().getContent().get(i);
+				element.getValue().setId(email);
         		element.getValue().getOtherAttributes().put(new QName("rel"), "pred:trazilac");
         		element.getValue().getOtherAttributes().put(new QName("href"), "http://users/"+element.getValue().getId().toString());
     		} catch (Exception e) {}

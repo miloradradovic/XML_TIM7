@@ -223,4 +223,21 @@ public class ZalbaCutanjeService {
 
 	}
 
+    public ZalbaCutanjeList getByObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAllByObradaOrNeobradjena();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaCutanjeList.add(zalbaCutanje);
+        }
+        return new ZalbaCutanjeList(zalbaCutanjeList);
+    }
 }

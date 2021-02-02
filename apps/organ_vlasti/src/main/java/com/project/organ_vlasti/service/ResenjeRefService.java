@@ -52,10 +52,10 @@ public class ResenjeRefService {
 
     }
 
-    public ResenjeRefList getAll() throws XMLDBException, JAXBException {
+    public ResenjeRefList getAll(String procitano) throws XMLDBException, JAXBException {
         List<ResenjeRef> resenjeRefs = new ArrayList<>();
 
-        ResourceSet resourceSet = resenjeRefRepository.getAll();
+        ResourceSet resourceSet = resenjeRefRepository.getAllByProcitano(procitano);
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()){
@@ -107,9 +107,8 @@ public class ResenjeRefService {
     }
 
     public boolean update(ResenjeRef resenjeRef) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(resenjeRef.getClass(), resenjeRef);
-        //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<resenje_ref xmlns=\"http://resenje\">"), patch.indexOf("</resenje_ref>") + "</resenje_ref>".length());
-        return resenjeRefRepository.update(resenjeRef.getBody().getBroj(), patch);
+
+        delete(resenjeRef.getBody().getBroj());
+        return resenjeRefRepository.update(resenjeRef);
     }
 }

@@ -20,27 +20,68 @@ export class GradjaninMainPageComponent implements OnInit {
 
   ngOnInit(): void {
     const newList = [];
-    this.zalbaService.getZalbaCutanjeList().subscribe(
+    const newList2 = [];
+    const newList3 = [];
+    this.zalbaService.getZalbaOdlukaListByUser().subscribe(
+      result => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const lista = zalbaCutanjeList.zalbaCutanjeList;
+        const zalbe = lista['zc:zalba_odluka'];
+        if (zalbe !== undefined){
+          zalbe.forEach((item, index) => {
+            const idZalbe = item['zc:zalba_odluka_body']._attributes.id;
+            const zalba = {id: idZalbe, tip: 'odluka'};
+            newList.push(zalba);
+          });
+        }
+        this.zalbe = newList.concat(this.zalbe);
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
+    this.zalbaService.getZalbaCutanjeListByUser().subscribe(
       result => {
         // @ts-ignore
         const convert = require('xml-js');
         const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zalbaCutanjeList.zalbaCutanjeList;
         const zalbe = lista['zc:zalba_cutanje'];
-        zalbe.forEach((item, index) => {
-          const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
-          const zalba = {id: idZalbe};
-          newList.push(zalba);
-        });
-        this.zalbe = newList;
+        if (zalbe !== undefined){
+          zalbe.forEach((item, index) => {
+            const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+            const zalba = {id: idZalbe, tip: 'cutanje'};
+            newList2.push(zalba);
+          });
+          this.zalbe = newList2.concat(this.zalbe);
+        }
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
       }
     );
-    // TODO ispraviti ovo gore da vrati sve zalbe cutanje za konkretnog gradjanina
-    // TODO dobaviti i zalbe na odluku, to za sad ne radi!
-    // TODO dobaviti i resenja za konkretnog gradjanina
+    this.resenjeService.getResenjeList().subscribe(
+      result => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const resenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const lista = resenjeList;
+        const resenja = lista['ra:resenje'];
+        if (resenja !== undefined){
+          resenja.forEach((item, index) => {
+            const idResenja = item['ra:resenje_body']._attributes.id;
+            const resenje = {id: idResenja};
+            newList3.push(resenje);
+          });
+          this.resenja = newList3;
+        }
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
 
   }
 

@@ -1,7 +1,10 @@
 package com.project.poverenik.api;
 
 import com.project.poverenik.client.IzvestavanjeClient;
+import com.project.poverenik.model.util.lists.MessageList;
 import com.project.poverenik.model.util.message.client.SetIzjasnjavanje;
+import com.project.poverenik.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +18,10 @@ import javax.xml.bind.JAXBException;
 @CrossOrigin(origins = "https://localhost:4201")
 @RestController
 @RequestMapping(value = "/izjasnjavanje", produces = MediaType.APPLICATION_XML_VALUE)
-public class IzjasnjavanjeConstroller {
+public class IzjasnjavanjeController {
+
+    @Autowired
+    MessageService messageService;
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -37,6 +43,17 @@ public class IzjasnjavanjeConstroller {
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
-
     }
+
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getMessageList() throws XMLDBException, JAXBException {
+        MessageList messageList = messageService.getAll();
+
+        if(messageList != null)
+            return new ResponseEntity(messageList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
 }

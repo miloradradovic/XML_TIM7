@@ -188,4 +188,39 @@ public class ZalbaOdlukaService {
 
 	}
 
+    public ZalbaOdlukaList getByUser(String email) throws XMLDBException, JAXBException {
+        List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaOdlukaList.add(zalbaOdluka);
+        }
+        return new ZalbaOdlukaList(zalbaOdlukaList);
+    }
+
+    public ZalbaOdlukaList getByObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByObradaOrNeobradjena();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaOdlukaList.add(zalbaOdluka);
+        }
+        return new ZalbaOdlukaList(zalbaOdlukaList);
+    }
 }

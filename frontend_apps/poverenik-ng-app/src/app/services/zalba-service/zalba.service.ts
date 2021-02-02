@@ -27,11 +27,11 @@ export class ZalbaService {
       {headers: this.headers, responseType: 'text'});
   }
   getNeobradjeneAndUObradiZalbeCutanje(): Observable<any> {
-    return this.http.get('http://localhost:8085/zalba-cutanje/not-all',
+    return this.http.get('http://localhost:8085/zalba-cutanje/by-status',
       {headers: this.headers, responseType: 'text'});
   }
   getNeobradjeneAndUObradiZalbeOdluka(): Observable<any> {
-    return this.http.get('http://localhost:8085/zalba-odluka/not-all',
+    return this.http.get('http://localhost:8085/zalba-odluka/by-status',
       {headers: this.headers, responseType: 'text'});
   }
 }

@@ -48,7 +48,8 @@ public class ZalbaCutanjeRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zalba_cutanje/zalba_cutanje_body[@id='%s']/ancestor::zalba_cutanje", id);
+        String xpath =  String.format("/zalba_cutanje/zalba_cutanje_body/@id[.='%s']/ancestor::zalba_cutanje", id);
+        ResourceSet s = existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
     

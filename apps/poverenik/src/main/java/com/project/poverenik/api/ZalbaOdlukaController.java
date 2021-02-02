@@ -111,7 +111,7 @@ public class ZalbaOdlukaController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, JAXBException {
-        boolean isUpdated = zalbaOdlukaService.update(zalbaOdluka);
+        boolean isUpdated = zalbaOdlukaService.update(zalbaOdluka, "");
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 

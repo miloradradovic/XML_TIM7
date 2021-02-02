@@ -26,6 +26,7 @@ import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import java.io.IOException;
@@ -115,11 +116,13 @@ public class ZalbaOdlukaService {
         return zalbaOdlukaRepository.delete(id);
     }
 
-    public boolean update(ZalbaOdluka zalbaOdluka) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(zalbaOdluka.getClass(), zalbaOdluka);
+    public boolean update(ZalbaOdluka zalbaOdluka, String status) throws XMLDBException {
+        zalbaOdluka.getZalbaOdlukaBody().getStatus().setValue(status);
+        return zalbaOdlukaRepository.create(zalbaOdluka);
+
+        //String patch = jaxB.marshall(zalbaOdluka.getClass(), zalbaOdluka);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<zoc:naslov>"), patch.indexOf("</zoc:napomena>") + "</zoc:napomena>".length());
-        return zalbaOdlukaRepository.update(zalbaOdluka.getZalbaOdlukaBody().getId(), patch);
+        //patch = patch.substring(patch.lastIndexOf("<zoc:zalba_odluka_body"), patch.indexOf("</zoc:zalba_odluka_body>") + "</zoc:zalba_odluka_body>".length());
     }
     
     public ZalbaOdlukaList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,

@@ -72,7 +72,7 @@ public class ResenjeService {
     public String create(Resenje resenjeDTO) throws XMLDBException, JAXBException {
         if (jaxB.validate(resenjeDTO.getClass(), resenjeDTO)){
             String id = String.valueOf(Integer.parseInt(getMaxId())+1);
-
+            String status = resenjeDTO.getResenjeBody().getTipResenja().getValue();
 
             String zalba = resenjeDTO.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[0];
             String idZalbe = resenjeDTO.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[1];
@@ -80,9 +80,11 @@ public class ResenjeService {
             if(zalba.equals("cutanje")){
                 ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(idZalbe);
                 email = zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().get(new QName("id"));
+                zalbaCutanjeService.update(zalbaCutanje, status);
             }else{
                 ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
                 email = zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().get(new QName("id"));
+                zalbaOdlukaService.update(zalbaOdluka, status);
             }
 
 

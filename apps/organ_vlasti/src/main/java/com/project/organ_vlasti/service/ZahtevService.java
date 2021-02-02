@@ -98,11 +98,13 @@ public class ZahtevService {
         return zahtevRepository.delete(id);
     }
 
-    public boolean update(Zahtev zahtev) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(zahtev.getClass(), zahtev);
-        //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
-        return zahtevRepository.update(zahtev.getZahtevBody().getId(), patch);
+    public boolean update(Zahtev zahtev, String status) throws XMLDBException {
+        zahtev.getZahtevBody().getStatus().setValue(status);
+        return zahtevRepository.create(zahtev);
+        //String patch = jaxB.marshall(zahtev.getClass(), zahtev);
+        ////u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
+        //patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
+
     }
 
     public ZahtevList getAllNeobradjen() throws XMLDBException, JAXBException {

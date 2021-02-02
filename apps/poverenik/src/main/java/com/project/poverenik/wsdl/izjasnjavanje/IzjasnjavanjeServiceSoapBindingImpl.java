@@ -41,7 +41,6 @@ public class IzjasnjavanjeServiceSoapBindingImpl implements IzjasnjavanjeService
      */
     public String setIzjasnjavanje(String message) {
         LOG.info("Executing operation setIzjasnjavanje");
-        System.out.println(message);
         try {
             ObjectFactory of = new ObjectFactory();
             Message messageObj = of.createMessage();

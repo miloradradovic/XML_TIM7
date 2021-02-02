@@ -18,11 +18,7 @@ public class ZalbaOdlukaRepository {
     private final String collectionUri = "db/poverenik/xml/zalba-odluka";
 
     private final String TARGET_NAMESPACE = "http://www.zalbanaodlukucir";
-    /*
-        public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-                + "\" xmlns:zc=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
-                + "</xu:modifications>";
-      */
+
     public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS + "\" xmlns:zoc=\"" + TARGET_NAMESPACE + "\"" + " xmlns:re=\"" + "http://reusability" +  "\">" +
             "<xu:update select=\"%1$s\">%2$s</xu:update>"
             + "</xu:modifications>";
@@ -48,7 +44,8 @@ public class ZalbaOdlukaRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zalba_odluka/zalba_odluka_body[@id='%s']/ancestor::zalba_odluka", id);
+        String xpath =  String.format("/zalba_odluka/zalba_odluka_body[@id='%s' or @id[.='%s'] or @id[text()='%s']]/ancestor::zalba_odluka ", id, id, id);
+        ResourceSet s = existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
     

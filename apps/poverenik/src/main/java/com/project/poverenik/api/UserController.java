@@ -6,7 +6,12 @@ import com.project.poverenik.model.util.email.Tbody;
 import com.project.poverenik.model.util.email.client.sendAttach;
 import com.project.poverenik.model.util.email.client.sendPlain;
 import com.project.poverenik.model.util.lists.UserList;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
+import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.UserService;
+import com.project.poverenik.service.ZalbaCutanjeService;
+import com.project.poverenik.service.ZalbaOdlukaService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,6 +35,12 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    ZalbaOdlukaService zalbaOdlukaService;
+
+    @Autowired
+    ZalbaCutanjeService zalbaCutanjeService;
 
     @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -73,10 +84,33 @@ public class UserController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody User user) throws XMLDBException, JAXBException {
         boolean isUpdated = userService.update(user);
+        if(isUpdated)
+            return new ResponseEntity(HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/ponisti", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity updateZalba(@RequestBody String id) throws XMLDBException, JAXBException {
+        //id_zalbe = tip/id
+
+        String tip = id.split("/")[0];
+        String idZalbe = id.split("/")[1];
+        boolean isUpdated = false;
+
+        if(tip.equals("cutanje")){
+            ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(idZalbe);
+            isUpdated = zalbaCutanjeService.update(zalbaCutanje, "ponistena");
+        }else{
+            ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
+            isUpdated = zalbaOdlukaService.update(zalbaOdluka, "ponistena");
+        }
+
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 

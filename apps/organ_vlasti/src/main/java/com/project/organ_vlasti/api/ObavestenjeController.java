@@ -6,8 +6,10 @@ import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.email.Tbody;
 import com.project.organ_vlasti.model.util.email.client.sendAttach;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
+import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.ObavestenjeService;
 
+import com.project.organ_vlasti.service.ZahtevService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,6 +38,9 @@ public class ObavestenjeController {
     @Autowired
     ObavestenjeService obavestenjeService;
 
+    @Autowired
+    ZahtevService zahtevService;
+
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createObavestenje(@RequestBody Obavestenje obavestenje) throws XMLDBException, JAXBException {
@@ -43,6 +48,9 @@ public class ObavestenjeController {
         if (id != null){
             Obavestenje o = obavestenjeService.getOne(id);
             String email = o.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
+            String idZahteva = o.getObavestenjeBody().getIdZahteva();
+            Zahtev zahtev = zahtevService.getOne(idZahteva);
+            zahtevService.update(zahtev, "prihvacen");
             if(sendToUser(id, email)){
                 return new ResponseEntity<>(HttpStatus.OK);
             }

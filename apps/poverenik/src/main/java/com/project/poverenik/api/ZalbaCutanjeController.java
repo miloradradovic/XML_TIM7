@@ -88,7 +88,7 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaCutanjeListObradaOrNeobradjena() throws XMLDBException, JAXBException {
         ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getByObradaOrNeobradjena();
@@ -107,9 +107,10 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
-        boolean isUpdated = zalbaCutanjeService.update(zalbaCutanje);
+        boolean isUpdated = zalbaCutanjeService.update(zalbaCutanje, "");
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 

@@ -73,7 +73,7 @@ public class ZahtevController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
-        boolean isUpdated = zahtevService.update(zahtev);
+        boolean isUpdated = zahtevService.update(zahtev, "");
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 
@@ -92,6 +92,8 @@ public class ZahtevController {
 
         Zahtev zahtev = zahtevService.getOne(zahtevId);
         String email = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
+
+        zahtevService.update(zahtev, "odbijen");
 
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.util.email.client");

@@ -13,7 +13,8 @@
             <xs:element name="to" type="xs:string"/>
             <xs:element name="content" type="xs:string"/>
             <xs:element name="subject" type="xs:string"/>
-            <xs:element name="file" type="xs:string"/>
+            <xs:element name="file_name" type="xs:string"/>
+            <xs:element name="file"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

@@ -52,6 +52,30 @@ public class ZahtevController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value = "/neobradjen", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZahtevList> getZahtevListNeobradjen() throws XMLDBException, JAXBException {
+        ZahtevList zahtevList = zahtevService.getAllNeobradjen();
+
+        if(zahtevList != null)
+            return new ResponseEntity(zahtevList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZahtevList> getZahtevListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ZahtevList zahtevList = zahtevService.getAllByUser(user.getEmail());
+
+        if(zahtevList != null)
+            return new ResponseEntity(zahtevList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZahtev(@PathVariable String id) throws XMLDBException, JAXBException {

@@ -19,6 +19,18 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
 import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
 import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vlasti/navigation-organ-vlasti.component';
+import { TableComponent } from './components/table/table.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { GradjaninMainPageComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
+import { OrganVlastiMainPageComponent } from './components/organ-vlasti/organ-vlasti-main-page/organ-vlasti-main-page.component';
+import { ZahteviComponent } from './components/organ-vlasti/zahtevi/zahtevi.component';
+import { ObavestenjaComponent } from './components/organ-vlasti/obavestenja/obavestenja.component';
+import { ProcitanaResenjaComponent } from './components/organ-vlasti/procitana-resenja/procitana-resenja.component';
+import { NeprocitanaResenjaComponent } from './components/organ-vlasti/neprocitana-resenja/neprocitana-resenja.component';
+import { IzvestajiComponent } from './components/organ-vlasti/izvestaji/izvestaji.component';
+import { IzjasnjavanjaComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanja.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,7 +40,16 @@ import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vl
     NavigationComponent,
     NavigationNonSignedInComponent,
     NavigationGradjaninComponent,
-    NavigationOrganVlastiComponent
+    NavigationOrganVlastiComponent,
+    TableComponent,
+    GradjaninMainPageComponent,
+    OrganVlastiMainPageComponent,
+    ZahteviComponent,
+    ObavestenjaComponent,
+    ProcitanaResenjaComponent,
+    NeprocitanaResenjaComponent,
+    IzvestajiComponent,
+    IzjasnjavanjaComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +61,10 @@ import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vl
     MatInputModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

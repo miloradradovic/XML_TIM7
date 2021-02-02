@@ -106,4 +106,40 @@ public class ZahtevService {
         //patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
 
     }
+
+    public ZahtevList getAllNeobradjen() throws XMLDBException, JAXBException {
+        List<Zahtev> zahtevList = new ArrayList<>();
+
+        ResourceSet resourceSet = zahtevRepository.getAllNeobradjen();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zahtevList.add(zahtev);
+        }
+        return new ZahtevList(zahtevList);
+    }
+
+    public ZahtevList getAllByUser(String email) throws XMLDBException, JAXBException {
+        List<Zahtev> zahtevList = new ArrayList<>();
+
+        ResourceSet resourceSet = zahtevRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zahtevList.add(zahtev);
+        }
+        return new ZahtevList(zahtevList);
+    }
 }

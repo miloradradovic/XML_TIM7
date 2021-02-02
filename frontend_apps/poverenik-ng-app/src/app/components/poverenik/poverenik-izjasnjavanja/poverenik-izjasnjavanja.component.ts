@@ -19,7 +19,6 @@ export class PoverenikIzjasnjavanjaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const izjasnjavanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(izjasnjavanjeList);
         const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
         if (izjasnjavanja !== undefined){
           izjasnjavanja.forEach((item, index) => {
@@ -36,9 +35,8 @@ export class PoverenikIzjasnjavanjaComponent implements OnInit {
     );
   }
 
-  clicked($event: number): void {
-    // TODO otvori dialog izjasnjenja
-    console.log('clicked');
-  }
 
+  clicked($event: number) {
+    console.log($event);
+  }
 }

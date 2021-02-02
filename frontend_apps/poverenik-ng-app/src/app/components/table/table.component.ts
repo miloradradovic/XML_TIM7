@@ -11,10 +11,15 @@ export class TableComponent implements OnChanges {
   @Input() columnsToDisplay = [];
   @Input() columnsToIterate = [];
   @Output() Click = new EventEmitter<number>();
+  @Output() ClickZalba = new EventEmitter<string>();
   @Output() DoubleClick = new EventEmitter<number>();
+  @Output() DoubleClickZalba = new EventEmitter<string>();
   @Output() Ponisti = new EventEmitter<number>();
+  @Output() PonistiZalba = new EventEmitter<string>();
   @Output() XHTML = new EventEmitter<number>();
+  @Output() XHTMLZalba = new EventEmitter<string>();
   @Output() PDF = new EventEmitter<number>();
+  @Output() PDFZalba = new EventEmitter<string>();
   constructor() {
 
   }
@@ -38,23 +43,53 @@ export class TableComponent implements OnChanges {
     }
   }
 
-  clicked(id): void {
-    this.Click.emit(id);
+  doubleClicked(id, tip: any): void {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '/' + id;
+      this.DoubleClickZalba.emit(returnValue);
+    }else{
+      this.DoubleClick.emit(id);
+    }
   }
 
-  doubleClicked(id): void {
-    this.DoubleClick.emit(id);
+  ponisti(id, tip: any): void {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '/' + id;
+      this.PonistiZalba.emit(returnValue);
+    }else{
+      this.Ponisti.emit(id);
+    }
   }
 
-  ponisti(id): void {
-    this.Ponisti.emit(id);
+  xhtml(id, tip: any): void {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '/' + id;
+      this.XHTMLZalba.emit(returnValue);
+    }else{
+      this.XHTML.emit(id);
+    }
   }
 
-  xhtml(id): void {
-    this.XHTML.emit(id);
+  pdf(id, tip: any): void {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '/' + id;
+      this.PDFZalba.emit(returnValue);
+    }else{
+      this.PDF.emit(id);
+    }
   }
 
-  pdf(id): void {
-    this.PDF.emit(id);
+  clicked(id, tip: any): void {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '/' + id;
+      this.ClickZalba.emit(returnValue);
+    }else{
+      this.Click.emit(id);
+    }
   }
 }

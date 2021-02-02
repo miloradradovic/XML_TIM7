@@ -7,6 +7,8 @@
 package com.project.email.wsdl;
 
 import com.project.email.model.Tbody;
+import com.project.email.service.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
@@ -29,19 +31,19 @@ import javax.jws.WebService;
  @Service
 public class EmailServiceSoapBindingImpl implements EmailServicePortType {
 
+    @Autowired
+    EmailService emailService;
     private static final Logger LOG = Logger.getLogger(EmailServiceSoapBindingImpl.class.getName());
 
     /* (non-Javadoc)
      * @see email.EmailServicePortType#sendPlain(email.Tbody email)*
      */
     public String sendPlain(Tbody email) {
-        LOG.info("Executing operation sendPlain");
         try {
-            String _return = "OK";
-            return _return;
+            emailService.sendMail(email);
+            return "OK";
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            return null;
         }
     }
 
@@ -52,7 +54,7 @@ public class EmailServiceSoapBindingImpl implements EmailServicePortType {
         LOG.info("Executing operation sendAttach");
         System.out.println(email);
         try {
-            String _return = "";
+            String _return = "OK";
             return _return;
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -1,6 +1,10 @@
 package com.project.organ_vlasti.api;
 
+import com.project.organ_vlasti.client.EmailClient;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
+import com.project.organ_vlasti.model.user.User;
+import com.project.organ_vlasti.model.util.email.Tbody;
+import com.project.organ_vlasti.model.util.email.client.sendAttach;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.service.ObavestenjeService;
 
@@ -8,11 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -25,8 +34,13 @@ public class ObavestenjeController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createObavestenje(@RequestBody Obavestenje obavestenje) throws XMLDBException, JAXBException {
-        if (obavestenjeService.create(obavestenje)){
-            return new ResponseEntity<>(HttpStatus.CREATED);
+        String id = obavestenjeService.create(obavestenje);
+        if (id != null){
+            Obavestenje o = obavestenjeService.getOne(id);
+            String email = o.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
+            if(sendToUser(id, email)){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -68,5 +82,26 @@ public class ObavestenjeController {
             return new ResponseEntity(HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    private boolean sendToUser(String broj, String email){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.email.client");
+
+        EmailClient emailClient = new EmailClient();
+        emailClient.setDefaultUri("http://localhost:8095/ws");
+        emailClient.setMarshaller(marshaller);
+        emailClient.setUnmarshaller(marshaller);
+
+        sendAttach sendAttach = new sendAttach();
+        sendAttach.setEmail(new Tbody());
+        sendAttach.getEmail().setTo(email);
+        sendAttach.getEmail().setContent("Postovani, <br/><br/> dostavljamo Vam obavestenje na Vas zahtev. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
+        sendAttach.getEmail().setSubject("Obavestenje " + broj);
+        sendAttach.getEmail().setFile("");
+        return emailClient.sentAttach(sendAttach);
     }
 }

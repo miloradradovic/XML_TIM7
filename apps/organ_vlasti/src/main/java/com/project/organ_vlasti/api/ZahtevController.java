@@ -91,10 +91,10 @@ public class ZahtevController {
         String poruka = info.split(":")[1];
 
         Zahtev zahtev = zahtevService.getOne(zahtevId);
-        //String email = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes(new QName("id"));
+        String email = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
 
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.project.poverenik.model.util.email.client");
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.email.client");
 
         EmailClient emailClient = new EmailClient();
         emailClient.setDefaultUri("http://localhost:8095/ws");
@@ -103,8 +103,8 @@ public class ZahtevController {
 
         sendPlain sendPlain = new sendPlain();
         sendPlain.setEmail(new Tbody());
-        //sendPlain.getEmail().setTo(email);
-        sendPlain.getEmail().setContent("Postovani, " + poruka + " Srdacno,  " + user.getName() + " " + user.getLastName());
+        sendPlain.getEmail().setTo(email);
+        sendPlain.getEmail().setContent("Postovani, <br/><br/> " + poruka + " <br/><br/> Srdacno, " + user.getName() + " " + user.getLastName());
         sendPlain.getEmail().setSubject("Zahtev: " + zahtevId + " odbijen");
         sendPlain.getEmail().setFile("");
         if(emailClient.sentPlain(sendPlain)){

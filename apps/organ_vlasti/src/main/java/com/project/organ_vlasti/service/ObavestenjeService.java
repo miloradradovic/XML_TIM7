@@ -4,6 +4,7 @@ import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
+import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.repository.ObavestenjeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class ObavestenjeService {
 
     @Autowired
     private ObavestenjeRepository obavestenjeRepository;
+
+    @Autowired
+    ZahtevService zahtevService;
     
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = obavestenjeRepository.getMaxId();
@@ -44,22 +49,24 @@ public class ObavestenjeService {
         return "0000";
     }
 
-    public boolean create(Obavestenje obavestenjeDTO) throws XMLDBException, JAXBException {
+    public String create(Obavestenje obavestenjeDTO) throws XMLDBException, JAXBException {
         
         if (jaxB.validate(obavestenjeDTO.getClass(), obavestenjeDTO)){
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
         	
         	//email usera koji je podnio zahtjev na koji se odnosi obavjestenje
-        	String userEmail = ""; 
+            String zahtevId = obavestenjeDTO.getObavestenjeBody().getIdZahteva();
+            Zahtev zahtev = zahtevService.getOne(zahtevId);
+        	String userEmail = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
             Obavestenje obavestenje = ObavestenjeMapper.mapFromDTO(obavestenjeDTO, id, userEmail);
 
             if(jaxB.validate(obavestenje.getClass(), obavestenje)){
             	 return obavestenjeRepository.create(obavestenje);
             }else {
-                return false;
+                return null;
             }
         }
-        return false;
+        return null;
          
     }
 

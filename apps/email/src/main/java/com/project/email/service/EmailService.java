@@ -1,5 +1,7 @@
 package com.project.email.service;
 
+import com.project.email.model.Email;
+import com.project.email.model.Tbody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,27 +28,15 @@ public class EmailService {
 	private Environment env;
 	
 	@Async
-	public void sendMail(String email){
-	
-		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setTo(email);
-		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("Email");
-		mail.setText("Email text");
-		javaMailSender.send(mail);
-		
-		/*MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+	public void sendMail(Tbody email) throws MessagingException {
+
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-		helper.setTo(email);
+		helper.setTo(email.getTo());
 		helper.setFrom(env.getProperty("spring.mail.username"));
-		helper.setSubject("Email");
-		helper.setSentDate(new Date());
-		helper.setText("<h1>Email</h1>" + "\n\n" + "<p>Email text</p>", true);
-		javaMailSender.send(mimeMessage);*/
-
-		/*BodyPart messageBodyPart = new MimeBodyPart(); 
-		messageBodyPart.setText("Mail Body");*/
-
+		helper.setSubject(email.getSubject());
+		helper.setText(email.getContent(), true);
+		javaMailSender.send(mimeMessage);
 	}
 
 }

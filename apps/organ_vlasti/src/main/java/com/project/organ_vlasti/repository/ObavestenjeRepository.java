@@ -27,8 +27,11 @@ public class ObavestenjeRepository {
             + "</xu:modifications>";
 
 
-    public boolean create(Obavestenje obavestenje) throws XMLDBException {
-        return existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje);
+    public String create(Obavestenje obavestenje) throws XMLDBException {
+        if(existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje)){
+            return obavestenje.getObavestenjeBody().getId();
+        }
+        return null;
     }
 
     public ResourceSet getAll() throws XMLDBException {

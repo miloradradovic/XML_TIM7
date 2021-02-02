@@ -42,13 +42,6 @@ public class ZalbaCutanjeController {
     	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchText("У");
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
-    
-    @RequestMapping(value="/korisnik", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaCutanjeList> getZalbeByUser() throws XMLDBException, JAXBException, IOException {
-
-    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getZalbeByUser("s");
-    	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
-    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -79,6 +72,28 @@ public class ZalbaCutanjeController {
         ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(id);
         if(zalbaCutanje != null)
             return new ResponseEntity(zalbaCutanje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZalbaCutanjeListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getByUser(user.getEmail());
+        if(zalbaCutanjeList != null)
+            return new ResponseEntity(zalbaCutanjeList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZalbaCutanjeListObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getByObradaOrNeobradjena();
+        if(zalbaCutanjeList != null)
+            return new ResponseEntity(zalbaCutanjeList, HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

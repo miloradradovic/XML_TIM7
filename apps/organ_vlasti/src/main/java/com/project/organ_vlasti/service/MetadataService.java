@@ -3,6 +3,8 @@ package com.project.organ_vlasti.service;
 import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities;
 import com.project.organ_vlasti.rdf_utils.MetadataExtractor;
 import com.project.organ_vlasti.rdf_utils.SparqlUtil;
+import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProperties;
+
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.ResultSet;
@@ -20,6 +22,8 @@ import org.xmldb.api.base.XMLDBException;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerException;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class MetadataService {
@@ -27,62 +31,78 @@ public class MetadataService {
 
     public void extractMetadata(String graph, OutputStream os) throws XMLDBException, JAXBException, IOException, SAXException, TransformerException {
 
-        AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
-
-        MetadataExtractor metadataExtractor = new MetadataExtractor();
-
-        String rdfFilePath = "src/main/resources/rdf_data/output.rdf";
-
-        ByteArrayInputStream inStream = new ByteArrayInputStream( ((ByteArrayOutputStream) os).toByteArray() );
-
-        metadataExtractor.extractMetadata(
-                inStream,
-                new FileOutputStream(new File(rdfFilePath)));
-
-        Model model = ModelFactory.createDefaultModel();
-        model.read(rdfFilePath);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-        model.write(out, SparqlUtil.NTRIPLES);
-
-        System.out.println("[INFO] Extracted metadata as RDF/XML...");
-        model.write(System.out, SparqlUtil.RDF_XML);
-
-
-        // Writing the named graph
-        System.out.println("[INFO] Populating named graph \"" + SPARQL_NAMED_GRAPH_URI + graph + "\" with extracted metadata.");
-        String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI + graph, new String(out.toByteArray()));
-        System.out.println(sparqlUpdate);
-
-        // UpdateRequest represents a unit of execution
-        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
-
-        UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, conn.updateEndpoint);
-        processor.execute();
+    	
+    	ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		
+		MetadataExtractor metadataExtractor = new MetadataExtractor();
+		
+		ByteArrayInputStream inStream = new ByteArrayInputStream( ((ByteArrayOutputStream) os).toByteArray() );
+		
+	
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		metadataExtractor.extractMetadata(
+				inStream,
+				outStream);
+		ByteArrayInputStream rdfStream = new ByteArrayInputStream( ((ByteArrayOutputStream) outStream).toByteArray() );
 
 
 
-        // Read the triples from the named graph
-        System.out.println();
-        System.out.println("[INFO] Retrieving triples from RDF store.");
-        System.out.println("[INFO] Using \"" + SPARQL_NAMED_GRAPH_URI + graph + "\" named graph.");
+	    StringBuilder textBuilder = new StringBuilder();
+	    try (Reader reader = new BufferedReader(new InputStreamReader
+	      (rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+	        int c = 0;
+	        while ((c = reader.read()) != -1) {
+	            textBuilder.append((char) c);
+	        }
+	    }
+	    String rdf = textBuilder.toString();
 
-        System.out.println("[INFO] Selecting the triples from the named graph \"" + SPARQL_NAMED_GRAPH_URI + graph + "\".");
-        String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI + graph, "?s ?p ?o");
+		Model model = ModelFactory.createDefaultModel();
+		model.read(new StringReader(rdf),
+				   "TURTLE");
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		
+		model.write(out, SparqlUtil.NTRIPLES);
+		
+		System.out.println("[INFO] Extracted metadata as RDF/XML...");
+		model.write(System.out, SparqlUtil.RDF_XML);
 
-        // Create a QueryExecution that will access a SPARQL service over HTTP
-        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+		
+		// Writing the named graph
+		System.out.println("[INFO] Populating named graph \"" + SPARQL_NAMED_GRAPH_URI + graph + "\" with extracted metadata.");
+		String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI + graph, new String(out.toByteArray()));
+		System.out.println(sparqlUpdate);
+		
+		// UpdateRequest represents a unit of execution
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
 
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update, conn.updateEndpoint);
+		processor.execute();
+		
 
-        // Query the collection, dump output response as XML
-        ResultSet results = query.execSelect();
+		// Read the triples from the named graph
+		System.out.println();
+		System.out.println("[INFO] Retrieving triples from RDF store.");
+		System.out.println("[INFO] Using \"" + SPARQL_NAMED_GRAPH_URI + graph + "\" named graph.");
 
-        ResultSetFormatter.out(System.out, results);
+		System.out.println("[INFO] Selecting the triples from the named graph \"" + SPARQL_NAMED_GRAPH_URI + graph + "\".");
+		String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI + graph, "?s ?p ?o");
+		
+		// Create a QueryExecution that will access a SPARQL service over HTTP
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-        query.close() ;
-
-        System.out.println("[INFO] End.");
+		
+		// Query the collection, dump output response as XML
+		ResultSet results = query.execSelect();
+		
+		ResultSetFormatter.out(System.out, results);
+		
+		query.close() ;
+		
+		System.out.println("[INFO] End.");
+		
+        
 
     }
 }

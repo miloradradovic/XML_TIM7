@@ -13,10 +13,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
-@CrossOrigin(origins = "https://localhost:4201")
+@CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping(value = "/izjasnjavanje", produces = MediaType.APPLICATION_XML_VALUE)
-public class IzjasnjavanjeConstroller {
+public class IzjasnjavanjeController {
 
     @Autowired
     MessageService messageService;

@@ -1,6 +1,7 @@
 package com.project.poverenik.api;
 
 import com.project.poverenik.model.user.User;
+import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.ZalbaOdlukaService;
@@ -14,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBException;
 
 @CrossOrigin(origins = "https://localhost:4201")
@@ -23,6 +26,13 @@ public class ZalbaOdlukaController {
 
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
+    
+    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+
+    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
+    	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -36,11 +46,34 @@ public class ZalbaOdlukaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaList() throws XMLDBException, JAXBException {
         ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getAll();
 
+        if(zalbaOdlukaList != null)
+            return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByUser(user.getEmail());
+
+        if(zalbaOdlukaList != null)
+            return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZalbaOdlukaListObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByObradaOrNeobradjena();
         if(zalbaOdlukaList != null)
             return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
 

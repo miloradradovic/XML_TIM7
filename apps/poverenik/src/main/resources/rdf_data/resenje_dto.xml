@@ -1,6 +1,7 @@
 <resenje xmlns="http://resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd">
+	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#">
     <resenje_body idZalbe="1" datum="2020-06-10">
         <tip_resenja>основана</tip_resenja>    
         <uvodne_informacije>
@@ -105,6 +106,7 @@
 <!--
 <resenje xmlns="http://resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#"
 	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd"><resenje_body idZalbe="1" datum="2020-06-10"><tip_resenja></tip_resenja><uvodne_informacije>
                 <trazilac id=""></trazilac>
                 <lice></lice>

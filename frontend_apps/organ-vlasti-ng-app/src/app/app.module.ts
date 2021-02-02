@@ -15,12 +15,20 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpAuthInterceptor} from './interceptors/http-auth.interceptor';
+import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
+import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
+import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vlasti/navigation-organ-vlasti.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    NavigationComponent,
+    NavigationNonSignedInComponent,
+    NavigationGradjaninComponent,
+    NavigationOrganVlastiComponent
   ],
   imports: [
     BrowserModule,

@@ -60,4 +60,9 @@ public class ResenjeRepository {
         String xpath = "/resenje/resenje_body[@id = max(/resenje/resenje_body/@id)]/ancestor::resenje";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+
+    public ResourceSet getAllByUser(String email) throws XMLDBException {
+        String xpath = String.format("/resenje/resenje_body/uvodne_informacije/child::trazilac[@id = '%s']/ancestor::resenje", email);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

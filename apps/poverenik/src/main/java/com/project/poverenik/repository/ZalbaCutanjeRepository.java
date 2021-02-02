@@ -56,7 +56,12 @@ public class ZalbaCutanjeRepository {
     	String xpath = "/zalba_cutanje/zalba_cutanje_body[@id = max(/zalba_cutanje/zalba_cutanje_body/@id)]/ancestor::zalba_cutanje";
     	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
-    
+
+    public ResourceSet getAllByUser(String email) throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::podaci_o_podnosiocu/*[1]/@id[.='%s']/ancestor::zalba_cutanje", email);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
     public ResourceSet searchText(String text) throws XMLDBException {
     	//"/zalba_cutanje[zalba_cutanje_body/sadrzaj_zalbe/ciljani_organ_vlasti[contains(text(), '%s')] or /zalba_cutanje/zalba_cutanje_body/sadrzaj_zalbe/podaci_o_zahtjevu_i_informacijama[contains(text(), '%s')]]/ancestor::zalba_cutanje"
     	String xpath = String.format(
@@ -64,9 +69,9 @@ public class ZalbaCutanjeRepository {
 				text, text);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
-    
-    
+
+    public ResourceSet getAllByObradaOrNeobradjena() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s' or .='%s']/ancestor::zalba_cutanje", "neobradjena", "u obradi");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }
-
-//"/ScientificPaper[status = 'published' and  Chapters/Chapter/ChapterBody/ChapterContent[contains(text(), '%s')] or Abstract/Paragraph[contains(text(), '%s')]]",
-

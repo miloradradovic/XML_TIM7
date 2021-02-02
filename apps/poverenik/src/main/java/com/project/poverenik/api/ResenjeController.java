@@ -61,6 +61,19 @@ public class ResenjeController {
     }
 
     @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_USER')")
+    @RequestMapping(value = "/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeList> getResenjeListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ResenjeList resenjeList = resenjeService.getByUser(user.getEmail());
+
+        if(resenjeList != null)
+            return new ResponseEntity(resenjeList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_USER')")
     @RequestMapping(value="/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws XMLDBException, JAXBException {
         Resenje resenje = resenjeService.getOne(broj);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ZalbaService} from '../../../services/zalba-service/zalba.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-poverenik-main-page',
@@ -10,7 +11,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class PoverenikMainPageComponent implements OnInit {
 
   zalbe = []; // objekti tipa {id: number}
-  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar) { }
+  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     const newList = [];
@@ -25,7 +26,8 @@ export class PoverenikMainPageComponent implements OnInit {
         if (zalbe !== undefined){
           zalbe.forEach((item, index) => {
             const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'cutanje'};
+            const statusZalbe = item['zc:zalba_cutanje_body']['zc:status']._text;
+            const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
             newList.push(zalba);
           });
           this.zalbe = newList.concat(this.zalbe);
@@ -45,7 +47,8 @@ export class PoverenikMainPageComponent implements OnInit {
         if (zalbe !== undefined){
           zalbe.forEach((item, index) => {
             const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'odluka'};
+            const statusZalbe = item['zoc:zalba_odluka_body']['zoc:status']._text;
+            const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
             newList2.push(zalba);
           });
           this.zalbe = newList2.concat(this.zalbe);
@@ -68,5 +71,12 @@ export class PoverenikMainPageComponent implements OnInit {
 
   doubleClicked($event: string) {
     console.log($event);
+    this.zalbe.forEach((item, index) => {
+      const zalba = item.tip + '/' + item.id;
+      if (zalba === $event){
+        this.router.navigate(['/detaljni-prikaz-zalbe'], {queryParams: {zalba_id: zalba, zalba_status: item.status}});
+      }
+    });
+    // this.router.navigate(['/detailed-cultural-offer'], {queryParams: {offer_id: offerId}});
   }
 }

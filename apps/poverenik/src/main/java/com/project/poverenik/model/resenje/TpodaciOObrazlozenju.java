@@ -45,7 +45,7 @@ public class TpodaciOObrazlozenju {
     @XmlElement(name = "postupak_poverenika", namespace = "http://resenje", required = true)
     protected TppostupakPoverenika postupakPoverenika;
     @XmlElement(namespace = "http://resenje", required = true)
-    protected Object odluka;
+    protected Todluka odluka;
 
     /**
      * Gets the value of the naslov property.
@@ -127,7 +127,7 @@ public class TpodaciOObrazlozenju {
      *     {@link Object }
      *     
      */
-    public Object getOdluka() {
+    public Todluka getOdluka() {
         return odluka;
     }
 
@@ -139,7 +139,7 @@ public class TpodaciOObrazlozenju {
      *     {@link Object }
      *     
      */
-    public void setOdluka(Object value) {
+    public void setOdluka(Todluka value) {
         this.odluka = value;
     }
 

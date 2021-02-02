@@ -9,6 +9,7 @@ import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.email.Tbody;
 import com.project.poverenik.model.util.email.client.sendAttach;
 import com.project.poverenik.model.util.lists.ResenjeList;
+import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -22,6 +23,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
+
+import java.io.IOException;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -40,20 +43,34 @@ public class ResenjeController {
 
     @Autowired
     ResenjeService resenjeService;
+    
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeList> searchMetadata(@RequestParam("poverenik") String poverenik, @RequestParam("trazilac") String trazilac, @RequestParam("zalba") String zalba, @RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("tip") String tip, @RequestParam("organVlasti") String organVlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+
+    	ResenjeList resenjeList = resenjeService.searchMetadata(poverenik, trazilac, zalba, datumAfter, datumBefore, tip, organVlasti, mesto);
+    	return new ResponseEntity<ResenjeList>(resenjeList, HttpStatus.OK);
+    }
+    
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+
+    	ResenjeList resenjeList = resenjeService.searchText(input);
+    	return new ResponseEntity<ResenjeList>(resenjeList, HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException, JAXBException {
         String broj = resenjeService.create(resenje);
         if (broj != null){
-
             Resenje r = resenjeService.getOne(broj);
             JAXBElement< TuvodneInformacije.Trazilac> element = (JAXBElement<TuvodneInformacije.Trazilac>)resenje.getResenjeBody().getUvodneInformacije().getContent().get(1);
             String email = element.getValue().getId();
             if(sendToOrganVlasti(broj) && sendToUser(broj, email)){
                 return new ResponseEntity<>(HttpStatus.OK);
             }
-
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

@@ -66,4 +66,11 @@ public class ZalbaOdlukaRepository {
         String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::status[.='%s' or .='%s']/ancestor::zalba_odluka", "neobradjena", "u obradi");
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+    
+    public ResourceSet searchText(String text) throws XMLDBException {
+    	String xpath = String.format(
+				"/zalba_odluka/zalba_odluka_body[sadrzaj/*[local-name()='osnova_za_zalbu'][contains(.,'%s')] or protiv_resenja_zakljucka/*[local-name()='naziv_organa_koji_je_doneo_odluku'][contains(.,'%s')]]/ancestor::zalba_odluka",
+				text, text);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

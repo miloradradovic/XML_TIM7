@@ -65,4 +65,14 @@ public class ResenjeRepository {
         String xpath = String.format("/resenje/resenje_body/uvodne_informacije/child::trazilac[@id = '%s']/ancestor::resenje", email);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+    
+    public ResourceSet searchText(String text) throws XMLDBException {
+    	String xpath = String.format(
+				"/resenje/resenje_body[child::uvodne_informacije[contains(.,'%s')] "
+				+ "or child::podaci_o_resenju[contains(.,'%s')]"
+				+ "or child::podaci_o_obrazlozenju[contains(.,'%s')]"
+				+ "]/ancestor::resenje",
+				text, text, text);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

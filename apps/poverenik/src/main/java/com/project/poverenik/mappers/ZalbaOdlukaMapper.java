@@ -52,9 +52,6 @@ public class ZalbaOdlukaMapper {
     	zalbaOdluka.getZalbaOdlukaBody().setPodnaslov("Ж А Л Б А ");
 
     	zalbaOdluka.getZalbaOdlukaBody().setZalilac(zalbaOdlukaDTO.getZalbaOdlukaBody().getZalilac());
-    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
-    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("rel"), "pred:podnosilac");
-    	zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().put(new QName("href"), "http://users/" + userEmail);
 
     	zalbaOdluka.getZalbaOdlukaBody().setProtivResenjaZakljucka(zalbaOdlukaDTO.getZalbaOdlukaBody().getProtivResenjaZakljucka());
     	zalbaOdluka.getZalbaOdlukaBody().getProtivResenjaZakljucka().getNazivOrganaKojiJeDoneoOdluku().getOtherAttributes().put(new QName("property"), "pred:organ_vlasti");
@@ -79,7 +76,11 @@ public class ZalbaOdlukaMapper {
         JaxbClan.getValue().getContent().add(stav);
         zalbaOdluka.getZalbaOdlukaBody().getSadrzaj().getContent().set(5, JaxbClan);
     	zalbaOdluka.getZalbaOdlukaBody().getSadrzaj().getContent().set(6, "Закона о слободном приступу информацијама од јавног значаја.");
+    	
     	zalbaOdluka.getZalbaOdlukaBody().setPodaciOPodnosiocuZalbe(zalbaOdlukaDTO.getZalbaOdlukaBody().getPodaciOPodnosiocuZalbe());
+    	zalbaOdluka.getZalbaOdlukaBody().getPodaciOPodnosiocuZalbe().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
+    	zalbaOdluka.getZalbaOdlukaBody().getPodaciOPodnosiocuZalbe().getOsoba().getOtherAttributes().put(new QName("rel"), "pred:podnosilac");
+    	zalbaOdluka.getZalbaOdlukaBody().getPodaciOPodnosiocuZalbe().getOsoba().getOtherAttributes().put(new QName("href"), "http://users/" + userEmail);
     	
     	Tnapomena napomena = of.createTnapomena();
     	napomena.setNaslov("Напомена:");

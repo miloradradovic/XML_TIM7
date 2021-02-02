@@ -27,10 +27,19 @@ public class ZalbaOdlukaController {
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
     
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaOdlukaList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ZalbaOdlukaList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
 
-    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
+    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
+    	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
+    }
+    
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+
+    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchText(input);
     	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
     }
 

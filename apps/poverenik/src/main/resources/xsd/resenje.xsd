@@ -92,7 +92,7 @@
             <xs:element name="naslov" type="xs:string"/>
             <xs:element name="predmet_zalbe" type="ra:Tpredmet_zalbe"/>
             <xs:element name="postupak_poverenika" type="ra:Tppostupak_poverenika"/>
-            <xs:element name="odluka"/>
+            <xs:element name="odluka" type="ra:Todluka"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType mixed="true" name="Tadresa">

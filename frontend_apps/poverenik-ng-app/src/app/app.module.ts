@@ -31,6 +31,9 @@ import { PoverenikSvaResenjaComponent } from './components/poverenik/poverenik-s
 import { PoverenikSviIzvestajiComponent } from './components/poverenik/poverenik-svi-izvestaji/poverenik-svi-izvestaji.component';
 import { PoverenikIzjasnjavanjaComponent } from './components/poverenik/poverenik-izjasnjavanja/poverenik-izjasnjavanja.component';
 import { AddPoverenikFormComponent } from './components/forms/add-poverenik-form/add-poverenik-form.component';
+import { ResenjeFormComponent } from './components/forms/resenje-form/resenje-form.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { ZalbaOdlukaFormComponent } from './components/forms/zalba-odluka-form/zalba-odluka-form.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { AddPoverenikFormComponent } from './components/forms/add-poverenik-form
     PoverenikSvaResenjaComponent,
     PoverenikSviIzvestajiComponent,
     PoverenikIzjasnjavanjaComponent,
-    AddPoverenikFormComponent
+    AddPoverenikFormComponent,
+    ResenjeFormComponent,
+    ZalbaOdlukaFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,9 @@ import { AddPoverenikFormComponent } from './components/forms/add-poverenik-form
     RouterModule.forRoot(routes),
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatRadioModule,
+    
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

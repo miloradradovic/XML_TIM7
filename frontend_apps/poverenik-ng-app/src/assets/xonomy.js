@@ -1101,6 +1101,9 @@ Xonomy.askDate=function(defaultString, askerParameter, jsMe) {
 	html+="</form>";
 	return html;
 };
+Xonomy.askForbidden=function(defaultString, askerParameter, jsMe) {
+	return "<p>Ne mozete menjati staticki tekst.</p>";
+};
 Xonomy.askLongString=function(defaultString, askerParameter, jsMe) {
 	var width=($("body").width()*.5)-75
 	var html="";

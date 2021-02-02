@@ -22,7 +22,7 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="status">
+            <xs:element minOccurs="0" name="status">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">

@@ -40,8 +40,8 @@ public class ResenjeMapper {
     	for (int i = 0; i < resenje.getResenjeBody().getUvodneInformacije().getContent().size(); i++) {
     		try {
         		JAXBElement<TuvodneInformacije.Trazilac> element = (JAXBElement<TuvodneInformacije.Trazilac>)resenje.getResenjeBody().getUvodneInformacije().getContent().get(i);
-        		element.getValue().getOtherAttributes().put(new QName("property"), "pred:trazilac");
-        		element.getValue().getOtherAttributes().put(new QName("content"), element.getValue().getId().toString());
+        		element.getValue().getOtherAttributes().put(new QName("rel"), "pred:trazilac");
+        		element.getValue().getOtherAttributes().put(new QName("href"), "http://users/"+element.getValue().getId().toString());
     		} catch (Exception e) {}
     		try {
         		JAXBElement<TuvodneInformacije.Lice> element = (JAXBElement<TuvodneInformacije.Lice>)resenje.getResenjeBody().getUvodneInformacije().getContent().get(i);
@@ -55,8 +55,8 @@ public class ResenjeMapper {
         		elementMesto.getValue().getOtherAttributes().put(new QName("datatype"), "xs:string");
     		} catch (Exception e) {}
     	}
-    	resenje.getResenjeBody().getPoverenik().getOtherAttributes().put(new QName("property"), "pred:poverenik");
-    	resenje.getResenjeBody().getPoverenik().getOtherAttributes().put(new QName("content"), resenje.getResenjeBody().getPoverenik().getId().toString());
+    	resenje.getResenjeBody().getPoverenik().getOtherAttributes().put(new QName("rel"), "pred:poverenik");
+    	resenje.getResenjeBody().getPoverenik().getOtherAttributes().put(new QName("href"), "http://users/"+resenje.getResenjeBody().getPoverenik().getId().toString());
     	
     	return resenje;
 

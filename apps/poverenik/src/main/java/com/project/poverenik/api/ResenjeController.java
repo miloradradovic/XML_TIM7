@@ -4,6 +4,7 @@ import com.project.poverenik.client.ResenjeRefClient;
 import com.project.poverenik.model.resenje.database.client.SetResenjeRef;
 import com.project.poverenik.model.resenje.Resenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
+import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBException;
 
 @CrossOrigin(origins = "https://localhost:4201")
@@ -23,16 +26,23 @@ public class ResenjeController {
 
     @Autowired
     ResenjeService resenjeService;
+    
+    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeList> searchMetadata(@RequestParam("poverenik") String poverenik, @RequestParam("trazilac") String trazilac, @RequestParam("zalba") String zalba, @RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("tip") String tip, @RequestParam("organVlasti") String organVlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
 
-    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    	ResenjeList resenjeList = resenjeService.searchMetadata(poverenik, trazilac, zalba, datumAfter, datumBefore, tip, organVlasti, mesto);
+    	return new ResponseEntity<ResenjeList>(resenjeList, HttpStatus.OK);
+    }
+
+    //@PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createResenje(@RequestBody Resenje resenje) throws XMLDBException, JAXBException {
         String broj = resenjeService.create(resenje);
         if (broj != null){
 
-            if(sendToOrganVlasti(broj) && sendToUser(broj)){
+            //if(sendToOrganVlasti(broj) && sendToUser(broj)){
                 return new ResponseEntity<>(HttpStatus.OK);
-            }
+            //}
 
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

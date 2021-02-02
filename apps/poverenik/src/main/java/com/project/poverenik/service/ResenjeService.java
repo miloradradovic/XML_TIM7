@@ -4,7 +4,19 @@ import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ResenjeMapper;
 import com.project.poverenik.model.resenje.Resenje;
 import com.project.poverenik.model.util.lists.ResenjeList;
+import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
+import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
+import com.project.poverenik.rdf_utils.AuthenticationUtilities;
+import com.project.poverenik.rdf_utils.FileUtil;
+import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.poverenik.repository.ResenjeRepository;
+
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -17,6 +29,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,4 +118,78 @@ public class ResenjeService {
         patch = patch.substring(patch.lastIndexOf("<uvodne_informacije>"), patch.indexOf("</poverenik>") + "</poverenik>".length());
         return resenjeRepository.update(resenje.getResenjeBody().getBroj(), patch);
     }
+    
+    public ResenjeList searchMetadata(String poverenikEmail, String trazilacEmail, String idZalbe, String datumAfter, String datumBefore, String tip, String organVlasti, String mesto) throws IOException, JAXBException, XMLDBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		if (datumAfter.equals("")) {
+			datumAfter = "1000-01-01";
+		}
+		if (datumBefore.equals("")) {
+			datumBefore = "9999-12-31";
+		}
+		
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_resenje.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+		
+		String poverenik = "";
+		if (poverenikEmail.equals("")) {
+			poverenik = "?poverenik";
+		} else {
+			poverenik = "<http://users/"+poverenikEmail+">";
+		}
+		String trazilac = "";
+		if (trazilacEmail.equals("")) {
+			trazilac = "?trazilac";
+		} else {
+			trazilac = "<http://users/"+trazilacEmail+">";
+		}
+		String zalba = "";
+		if (idZalbe.equals("")) {
+			zalba = "?responseTo";
+		} else {
+			zalba = "<http://zalbe/"+idZalbe+">";
+		}
+
+		String sparqlQuery = String.format(sparqlQueryTemplate, poverenik, trazilac, zalba, datumAfter, datumBefore, tip, organVlasti, mesto);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		RDFNode id;
+
+		ResenjeList rList = null;
+		
+		List<Resenje> listR = new ArrayList<>();
+
+		while (results.hasNext()) {
+
+			QuerySolution querySolution = results.next();
+
+			id = querySolution.get("resenje");
+			String idStr = id.toString().split("resenja/")[1];
+			Resenje r = getOne(idStr);
+			listR.add(r);
+		}
+
+		rList = new ResenjeList(listR);
+		System.out.println();
+		
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+
+		// ResultSetFormatter.outputAsXML(System.out, results);
+		ResultSetFormatter.out(System.out, results);
+
+		query.close();
+
+		System.out.println("[INFO] End.");
+
+		return rList;
+
+	}
 }

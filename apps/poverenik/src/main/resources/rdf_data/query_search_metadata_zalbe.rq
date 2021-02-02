@@ -6,8 +6,8 @@ WHERE {
 	?zalba <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
 	?zalba <http://examples/predicate/zahtev> ?zahtev . 
 	?zalba <http://examples/predicate/status> ?status . 
-	?zalba <http://examples/predicate/podnosilac> ?podnosilac . 
 	?zalba <http://examples/predicate/mesto> ?mesto . 
+	?zalba <http://examples/predicate/podnosilac> %s . 
 	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#date> 
 	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#date>
 	&& regex(UCASE(str(?status)), UCASE(".*%s.*"))

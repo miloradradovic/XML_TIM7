@@ -140,29 +140,28 @@ public class ZalbaCutanjeService {
     }
 
     public ZalbaCutanjeList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
-			String mesto) throws IOException, JAXBException, XMLDBException {
+			String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
 		if (datumAfter.equals("")) {
 			datumAfter = "1000-01-01";
 		}
 		if (datumBefore.equals("")) {
-			datumAfter = "9999-12-31";
+			datumBefore = "9999-12-31";
 		}
 
-		System.out.println(datumAfter + datumBefore + status + organ_vlasti + mesto);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("datumAfter", datumAfter);
-		params.put("datumBefore", datumBefore);
-		params.put("status", status);
-		params.put("organ_vlasti", organ_vlasti);
-		params.put("mesto", mesto);
-		
 		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
 				StandardCharsets.UTF_8);
 		System.out.println(sparqlQueryTemplate);
-
-		String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore, status, organ_vlasti, mesto);
+		
+		String user = "";
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/"+userEmail+">";
+		}
+		
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
 		System.out.println(sparqlQuery);
 
 		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
@@ -173,10 +172,11 @@ public class ZalbaCutanjeService {
 
 		ZalbaCutanjeList zcList = null;
 
+		List<ZalbaCutanje> listZC = new ArrayList<>();
+
 		while (results.hasNext()) {
 
 			QuerySolution querySolution = results.next();
-			List<ZalbaCutanje> listZC = new ArrayList<>();
 
 			id = querySolution.get("zalba");
 			if (id.toString().contains("cutanje")) {
@@ -184,10 +184,10 @@ public class ZalbaCutanjeService {
 				ZalbaCutanje z = getOne(idStr);
 				listZC.add(z);
 			}
-
-			zcList = new ZalbaCutanjeList(listZC);
-			System.out.println();
 		}
+
+		zcList = new ZalbaCutanjeList(listZC);
+		System.out.println();
 
 		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml-stylesheet type="text/xsl" href="bookstore.xsl"?>
+<?xml-stylesheet type="text/xsl" href="bookstore_fo.xsl"?>
 <b:bookstore xmlns:b="http://www.ftn.uns.ac.rs/xpath/examples">
     <b:book category="WEB">
         <b:title lang="en">AngularJS in Action</b:title>

@@ -11,6 +11,7 @@ import com.project.poverenik.model.util.email.client.sendAttach;
 import com.project.poverenik.model.util.lists.ResenjeList;
 import com.project.poverenik.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,19 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4201")
 @RestController
@@ -136,7 +145,26 @@ public class ResenjeController {
         sendAttach.getEmail().setTo(email);
         sendAttach.getEmail().setContent("Postovani, <br/><br/> Dostavljamo Vam resenje na Vasu zalbu. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Resenje " + broj);
-        sendAttach.getEmail().setFile("");
-        return emailClient.sentAttach(sendAttach);
+
+        //TODO - pozvati transformaciju
+
+
+        String pdfName = "proba.pdf";
+        try {
+           // File pdf = new ClassPathResource("pdf/proba.pdf").getFile();
+            //Path pdf = ResourceUtils.getFile("classpath:pdf/proba.pdf").toPath();
+            Path pdf = Paths.get("D:/proba.pdf");
+            Path pdfPath = ResourceUtils.getFile("classpath:pdf/" + pdfName).toPath();
+
+            byte[] pdfBytes = Files.readAllBytes(pdfPath);
+
+            sendAttach.getEmail().setFile(pdfBytes.toString()); //pdfName + "|" +
+
+            return emailClient.sentAttach(sendAttach);
+
+        } catch (IOException e) {
+            e.getStackTrace();
+            return false;
+        }
     }
 }

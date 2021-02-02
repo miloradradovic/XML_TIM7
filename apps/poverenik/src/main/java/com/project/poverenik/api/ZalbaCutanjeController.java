@@ -35,7 +35,8 @@ public class ZalbaCutanjeController {
     	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaCutanjeList> searchText() throws XMLDBException, JAXBException, IOException {
 

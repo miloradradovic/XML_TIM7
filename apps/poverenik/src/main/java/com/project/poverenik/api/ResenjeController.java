@@ -156,6 +156,7 @@ public class ResenjeController {
             byte[] pdfBytes = Files.readAllBytes(pdfPath);
 
             sendAttach.getEmail().setFile(pdfBytes);
+            
 
             return emailClient.sentAttach(sendAttach);
 

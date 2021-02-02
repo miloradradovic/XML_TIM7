@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://email"
+                  xmlns:tns="http://email"
+                  name="EmailService">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://email" schemaLocation="../xsd/email.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="sendPlainRequest">
+        <wsdl:part name="email" type="tns:Tbody" />
+    </wsdl:message>
+    <wsdl:message name="sendPlainResponse">
+        <wsdl:part name="response" type="xsd:string" />
+    </wsdl:message>
+
+    <wsdl:message name="sendAttachRequest">
+        <wsdl:part name="email" type="tns:Tbody" />
+    </wsdl:message>
+    <wsdl:message name="sendAttachResponse">
+        <wsdl:part name="response" type="xsd:string" />
+    </wsdl:message>
+
+    <wsdl:portType name="EmailServicePortType">
+        <wsdl:operation name="sendPlain">
+            <wsdl:input message="tns:sendPlainRequest" />
+            <wsdl:output message="tns:sendPlainResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="sendAttach">
+            <wsdl:input message="tns:sendAttachRequest" />
+            <wsdl:output message="tns:sendAttachResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="EmailServiceSoapBinding" type="tns:EmailServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="sendPlain">
+            <soap:operation soapAction="http://email/ws/sendPlain" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendAttach">
+            <soap:operation soapAction="http://email/ws/sendAttach" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EmailService">
+        <wsdl:port name="EmailServiceSoapBinding" binding="tns:EmailServiceSoapBinding">
+            <soap:address location="http://localhost:8095/emailPort" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

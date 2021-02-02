@@ -19,17 +19,14 @@ public class ResenjeRefRepository {
 
     private final String TARGET_NAMESPACE = "http://resenje";
 
-    public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
-            + "\" xmlns=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
-            + "</xu:modifications>";
-
 
     public boolean create(ResenjeRef resenjeRef) throws XMLDBException {
         return existManager.store(collectionUri, resenjeRef.getBody().getBroj(), resenjeRef);
     }
 
-    public ResourceSet getAll() throws XMLDBException {
-        return existManager.retrieve(collectionUri, "/resenje_ref", TARGET_NAMESPACE);
+    public ResourceSet getAllByProcitano(String procitano) throws XMLDBException {
+        String xpath =  String.format("/resenje_ref/body[@procitano ='%s']/ancestor::resenje_ref", procitano);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
     public ResourceSet getOneByBroj(String broj) throws XMLDBException {
@@ -50,9 +47,8 @@ public class ResenjeRefRepository {
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
-    public boolean update(String broj, String xmlEntity) throws XMLDBException {
+    public boolean update(ResenjeRef resenjeRef) throws XMLDBException {
 
-        String xpath =  String.format("/resenje_ref/body[.='%s']/ancestor::resenje_ref", broj);
-        return existManager.update(collectionUri, broj, xpath, xmlEntity, UPDATE);
+        return existManager.store(collectionUri, resenjeRef.getBody().getBroj(), resenjeRef);
     }
 }

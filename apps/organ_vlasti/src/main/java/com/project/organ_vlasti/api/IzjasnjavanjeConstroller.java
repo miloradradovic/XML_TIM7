@@ -25,7 +25,7 @@ public class IzjasnjavanjeConstroller {
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> setIzjasnjavanje(@RequestBody Message message) throws XMLDBException {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.message.client");
 
         IzvestavanjeClient izvestavanjeClient = new IzvestavanjeClient();
         izvestavanjeClient.setDefaultUri("http://localhost:8085/ws");

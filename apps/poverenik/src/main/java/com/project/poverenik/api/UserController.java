@@ -1,13 +1,20 @@
 package com.project.poverenik.api;
 
+import com.project.poverenik.client.EmailClient;
 import com.project.poverenik.model.user.User;
+import com.project.poverenik.model.util.email.Tbody;
+import com.project.poverenik.model.util.email.client.sendAttach;
+import com.project.poverenik.model.util.email.client.sendPlain;
 import com.project.poverenik.model.util.lists.UserList;
 import com.project.poverenik.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
@@ -46,7 +53,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{email}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getUser(@PathVariable String email) throws XMLDBException, JAXBException {
         User user = userService.getOne(email);
@@ -66,7 +73,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'ROLE_POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody User user) throws XMLDBException, JAXBException {
         boolean isUpdated = userService.update(user);
@@ -74,6 +81,37 @@ public class UserController {
             return new ResponseEntity(HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/ponisti", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity sendEmail(@RequestBody String info){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        //info = "zalba/id email"
+        String zalba = info.split(" ")[0];
+        String email = info.split(" ")[1];
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.poverenik.model.util.email.client");
+
+        EmailClient emailClient = new EmailClient();
+        emailClient.setDefaultUri("http://localhost:8095/ws");
+        emailClient.setMarshaller(marshaller);
+        emailClient.setUnmarshaller(marshaller);
+
+        sendPlain sendPlain = new sendPlain();
+        sendPlain.setEmail(new Tbody());
+        sendPlain.getEmail().setTo(email);
+        sendPlain.getEmail().setContent("Postovani, zamolio bih Vas da ponistite zalbu tip/id: " + zalba + " Srdacno,  " + user.getName() + " " + user.getLastName());
+        sendPlain.getEmail().setSubject("Ponistavanje zalbe: " + zalba);
+        sendPlain.getEmail().setFile("");
+        if(emailClient.sentPlain(sendPlain)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        };
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
     }
 
 

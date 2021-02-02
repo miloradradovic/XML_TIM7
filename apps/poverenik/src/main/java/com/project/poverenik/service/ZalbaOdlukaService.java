@@ -223,4 +223,23 @@ public class ZalbaOdlukaService {
         }
         return new ZalbaOdlukaList(zalbaOdlukaList);
     }
+    
+    public ZalbaOdlukaList searchText(String text) throws IOException, JAXBException, XMLDBException {
+		List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+		ResourceSet resourceSet = zalbaOdlukaRepository.searchText(text);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		while (resourceIterator.hasMoreResources()) {
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				return null;
+			JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+			zalbaOdlukaList.add(zalbaOdluka);
+		}
+		return new ZalbaOdlukaList(zalbaOdlukaList);
+
+	}
 }

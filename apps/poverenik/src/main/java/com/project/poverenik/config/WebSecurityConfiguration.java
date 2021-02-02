@@ -68,7 +68,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
                 // svim korisnicima dopusti da pristupe putanji /auth/**
-                .authorizeRequests().antMatchers("/auth/**", "/ws/**", "/users/**", "/zalba-odluka", "/zalba-cutanje", "/resenje", "/zalba-odluka/search-metadata", "/zalba-cutanje/search-metadata", "/resenje/search-metadata").permitAll()
+                .authorizeRequests().antMatchers("/auth/**", "/ws/**", "/users/**").permitAll()
 
                 // za svaki drugi zahtev korisnik mora biti autentifikovan
                 .anyRequest().authenticated().and()
@@ -85,8 +85,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/sign-in", "/auth/sign-up", "/ws/**", "/zalba-odluka", "/zalba-cutanje", "/resenje");
+        web.ignoring().antMatchers(HttpMethod.POST, "/auth/sign-in", "/auth/sign-up", "/ws/**");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
-                "/**/*.css", "/**/*.js", "/ws/**", "/zalba-odluka/search-metadata", "/zalba-cutanje/search-metadata", "/resenje/search-metadata");
+                "/**/*.css", "/**/*.js", "/ws/**");
     }
 }

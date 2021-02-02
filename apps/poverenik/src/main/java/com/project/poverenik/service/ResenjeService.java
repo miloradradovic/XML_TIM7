@@ -235,4 +235,23 @@ public class ResenjeService {
         }
         return new ResenjeList(resenjeList);
     }
+    
+    public ResenjeList searchText(String text) throws IOException, JAXBException, XMLDBException {
+		List<Resenje> resenjeList = new ArrayList<>();
+
+		ResourceSet resourceSet = resenjeRepository.searchText(text);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		while (resourceIterator.hasMoreResources()) {
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				return null;
+			JAXBContext context = JAXBContext.newInstance(Resenje.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			Resenje resenje = (Resenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+			resenjeList.add(resenje);
+		}
+		return new ResenjeList(resenjeList);
+
+	}
 }

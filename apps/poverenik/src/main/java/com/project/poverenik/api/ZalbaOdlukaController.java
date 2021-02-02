@@ -27,19 +27,28 @@ public class ZalbaOdlukaController {
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
     
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaOdlukaList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
 
     	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
     	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
     }
+    
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
 
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchText(input);
+    	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, NumberFormatException, JAXBException {
-    	//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		//User user = (User) authentication.getPrincipal();
-    	User user = new User(); user.setEmail("s");
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) authentication.getPrincipal();
+    	//User user = new User(); user.setEmail("s");
         if (zalbaOdlukaService.create(zalbaOdluka, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

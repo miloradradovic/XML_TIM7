@@ -34,4 +34,12 @@ export class ZalbaService {
     return this.http.get('http://localhost:8085/zalba-odluka/by-status',
       {headers: this.headers, responseType: 'text'});
   }
+  getPretragaTekstZalbeCutanje(input): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-cutanje/search-text?input=' + input,
+      {headers: this.headers, responseType: 'text'});
+  }
+  getPretragaTekstZalbeOdluka(input): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-odluka/search-text?input=' + input,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

@@ -59,6 +59,54 @@ export class PoverenikSveZalbeComponent implements OnInit {
     );
   }
 
+  onTekstChanged(newValue: any){
+    console.log(newValue.value)
+    this.zalbe = [];
+    const newList = [];
+    const newList2 = [];
+    this.zalbaService.getPretragaTekstZalbeCutanje(newValue.value).subscribe(
+      result => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const lista = zalbaCutanjeList.zalbaCutanjeList;
+        const zalbe = lista['zc:zalba_cutanje'];
+        console.log(zalbe)
+        if (zalbe !== undefined){
+          zalbe.forEach((item, index) => {
+            const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+            const zalba = {id: idZalbe, tip: 'cutanje'};
+            newList.push(zalba);
+          });
+          this.zalbe = newList.concat(this.zalbe);
+        }
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
+    this.zalbaService.getPretragaTekstZalbeOdluka(newValue.value).subscribe(
+      result => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const zalbaCutanjeOdluka = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const lista = zalbaCutanjeOdluka.zalbaOdlukaList;
+        const zalbe = lista['zoc:zalba_odluka'];
+        if (zalbe !== undefined){
+          zalbe.forEach((item, index) => {
+            const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
+            const zalba = {id: idZalbe, tip: 'odluka'};
+            newList2.push(zalba);
+          });
+          this.zalbe = newList2.concat(this.zalbe);
+        }
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
+  }
+
 
   convertToXHTML($event: string) {
     console.log($event);

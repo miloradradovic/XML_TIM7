@@ -1,1 +1,11 @@
-<p>navigation works!</p>
+<div *ngIf="role === 'ROLE_USER'">
+  <app-navigation-gradjanin (signOut)="signOut($event)"></app-navigation-gradjanin>
+</div>
+
+<div *ngIf="role === 'ROLE_ORGAN_VLASTI'">
+  <app-navigation-organ-vlasti (signOut)="signOut($event)"></app-navigation-organ-vlasti>
+</div>
+
+<div *ngIf="role === ''">
+  <app-navigation-non-signed-in></app-navigation-non-signed-in>
+</div>

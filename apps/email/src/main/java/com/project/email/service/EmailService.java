@@ -1,20 +1,17 @@
 package com.project.email.service;
 
+import com.project.email.model.Tbody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.mail.SimpleMailMessage;
 
-import javax.mail.BodyPart;
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import javax.mail.util.ByteArrayDataSource;
 
-import java.util.Date;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 @Service
 public class EmailService {
@@ -26,27 +23,33 @@ public class EmailService {
 	private Environment env;
 	
 	@Async
-	public void sendMail(String email){
-	
-		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setTo(email);
-		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("Email");
-		mail.setText("Email text");
-		javaMailSender.send(mail);
-		
-		/*MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+	public void sendPlainMail(Tbody email) throws MessagingException {
+
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-		helper.setTo(email);
+		helper.setTo(email.getTo());
 		helper.setFrom(env.getProperty("spring.mail.username"));
-		helper.setSubject("Email");
-		helper.setSentDate(new Date());
-		helper.setText("<h1>Email</h1>" + "\n\n" + "<p>Email text</p>", true);
-		javaMailSender.send(mimeMessage);*/
+		helper.setSubject(email.getSubject());
+		helper.setText(email.getContent(), true);
+		javaMailSender.send(mimeMessage);
+	}
 
-		/*BodyPart messageBodyPart = new MimeBodyPart(); 
-		messageBodyPart.setText("Mail Body");*/
+	@Async
+	public void sendAttachMail(Tbody email) throws MessagingException {
 
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "utf-8");
+		helper.setTo(email.getTo());
+		helper.setFrom(env.getProperty("spring.mail.username"));
+		helper.setSubject(email.getSubject());
+		helper.setText(email.getContent(), true);
+
+		ByteArrayDataSource byteArrayDataSourcePdf = new ByteArrayDataSource((byte[]) email.getFilePdf(), "application/pdf");
+		helper.addAttachment(email.getFilePdfName(), byteArrayDataSourcePdf);
+
+		ByteArrayDataSource byteArrayDataSourceHtml = new ByteArrayDataSource((byte[]) email.getFileHtml(), "text/html");
+		helper.addAttachment(email.getFileHtmlName(), byteArrayDataSourceHtml);
+		javaMailSender.send(mimeMessage);
 	}
 
 }

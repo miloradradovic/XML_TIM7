@@ -28,6 +28,7 @@ import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import java.io.IOException;
@@ -120,37 +121,39 @@ public class ZalbaOdlukaService {
         return zalbaOdlukaRepository.delete(id);
     }
 
-    public boolean update(ZalbaOdluka zalbaOdluka) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(zalbaOdluka.getClass(), zalbaOdluka);
+    public boolean update(ZalbaOdluka zalbaOdluka, String status) throws XMLDBException {
+        zalbaOdluka.getZalbaOdlukaBody().getStatus().setValue(status);
+        return zalbaOdlukaRepository.create(zalbaOdluka);
+
+        //String patch = jaxB.marshall(zalbaOdluka.getClass(), zalbaOdluka);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<zoc:naslov>"), patch.indexOf("</zoc:napomena>") + "</zoc:napomena>".length());
-        return zalbaOdlukaRepository.update(zalbaOdluka.getZalbaOdlukaBody().getId(), patch);
+        //patch = patch.substring(patch.lastIndexOf("<zoc:zalba_odluka_body"), patch.indexOf("</zoc:zalba_odluka_body>") + "</zoc:zalba_odluka_body>".length());
     }
     
     public ZalbaOdlukaList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
-			String mesto) throws IOException, JAXBException, XMLDBException {
+			String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
 		if (datumAfter.equals("")) {
 			datumAfter = "1000-01-01";
 		}
 		if (datumBefore.equals("")) {
-			datumAfter = "9999-12-31";
+			datumBefore = "9999-12-31";
 		}
-
-		System.out.println(datumAfter + datumBefore + status + organ_vlasti + mesto);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("datumAfter", datumAfter);
-		params.put("datumBefore", datumBefore);
-		params.put("status", status);
-		params.put("organ_vlasti", organ_vlasti);
-		params.put("mesto", mesto);
 		
 		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
 				StandardCharsets.UTF_8);
 		System.out.println(sparqlQueryTemplate);
+		
+		String user = "";
+		
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/"+userEmail+">";
+		}
 
-		String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore, status, organ_vlasti, mesto);
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
 		System.out.println(sparqlQuery);
 
 		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
@@ -160,11 +163,12 @@ public class ZalbaOdlukaService {
 		RDFNode id;
 
 		ZalbaOdlukaList zcList = null;
+		
+		List<ZalbaOdluka> listZC = new ArrayList<>();
 
 		while (results.hasNext()) {
 
 			QuerySolution querySolution = results.next();
-			List<ZalbaOdluka> listZC = new ArrayList<>();
 
 			id = querySolution.get("zalba");
 			if (id.toString().contains("odluka")) {
@@ -172,11 +176,11 @@ public class ZalbaOdlukaService {
 				ZalbaOdluka z = getOne(idStr);
 				listZC.add(z);
 			}
-
-			zcList = new ZalbaOdlukaList(listZC);
-			System.out.println();
 		}
 
+		zcList = new ZalbaOdlukaList(listZC);
+		System.out.println();
+		
 		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
 		results = query.execSelect();
@@ -218,4 +222,78 @@ public class ZalbaOdlukaService {
         return true;
     }
 
+    public ZalbaOdlukaList getByUser(String email) throws XMLDBException, JAXBException {
+        List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaOdlukaList.add(zalbaOdluka);
+        }
+        return new ZalbaOdlukaList(zalbaOdlukaList);
+    }
+
+    public ZalbaOdlukaList getByObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByObradaOrNeobradjena();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaOdlukaList.add(zalbaOdluka);
+        }
+        return new ZalbaOdlukaList(zalbaOdlukaList);
+    }
+    
+    public ZalbaOdlukaList searchText(String text) throws IOException, JAXBException, XMLDBException {
+		List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
+
+		ResourceSet resourceSet = zalbaOdlukaRepository.searchText(text);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		while (resourceIterator.hasMoreResources()) {
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				return null;
+			JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+			zalbaOdlukaList.add(zalbaOdluka);
+		}
+		return new ZalbaOdlukaList(zalbaOdlukaList);
+
+	}
+
+    public Long getPodnete() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getPonistene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getPonistene();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvacene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getPrihvacene();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getOdbijene();
+        return resourceSet.getSize();
+    }
 }

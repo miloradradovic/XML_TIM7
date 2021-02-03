@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {RouterModule} from '@angular/router';
 import {routes} from './app-routing/routes';
@@ -19,6 +19,23 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
 import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
 import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vlasti/navigation-organ-vlasti.component';
+import { ZahtevFormComponent } from './components/forms/zahtev-form/zahtev-form.component';
+import { ObavestenjeFormComponent } from './components/forms/obavestenje-form/obavestenje-form.component';
+import { TableComponent } from './components/table/table.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { GradjaninMainPageComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
+import { OrganVlastiMainPageComponent } from './components/organ-vlasti/organ-vlasti-main-page/organ-vlasti-main-page.component';
+import { ZahteviComponent } from './components/organ-vlasti/zahtevi/zahtevi.component';
+import { ObavestenjaComponent } from './components/organ-vlasti/obavestenja/obavestenja.component';
+import { ProcitanaResenjaComponent } from './components/organ-vlasti/procitana-resenja/procitana-resenja.component';
+import { NeprocitanaResenjaComponent } from './components/organ-vlasti/neprocitana-resenja/neprocitana-resenja.component';
+import { IzvestajiComponent } from './components/organ-vlasti/izvestaji/izvestaji.component';
+import { IzjasnjavanjaComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanja.component';
+import {MatTableModule} from '@angular/material/table';
+import { KreiranjeIzvestajaComponent } from './components/organ-vlasti/kreiranje-izvestaja/kreiranje-izvestaja.component';
+import { IzjasnjavanjeDialogComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanje-dialog/izjasnjavanje-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,7 +45,20 @@ import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vl
     NavigationComponent,
     NavigationNonSignedInComponent,
     NavigationGradjaninComponent,
-    NavigationOrganVlastiComponent
+    NavigationOrganVlastiComponent,
+    ZahtevFormComponent,
+    ObavestenjeFormComponent,
+    TableComponent,
+    GradjaninMainPageComponent,
+    OrganVlastiMainPageComponent,
+    ZahteviComponent,
+    ObavestenjaComponent,
+    ProcitanaResenjaComponent,
+    NeprocitanaResenjaComponent,
+    IzvestajiComponent,
+    IzjasnjavanjaComponent,
+    KreiranjeIzvestajaComponent,
+    IzjasnjavanjeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +70,12 @@ import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vl
     MatInputModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

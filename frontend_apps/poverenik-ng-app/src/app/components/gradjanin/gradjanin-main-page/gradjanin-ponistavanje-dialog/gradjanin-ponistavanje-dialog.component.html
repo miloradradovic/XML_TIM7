@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Ponistavanje</h1>
+<div mat-dialog-content>
+  <p>Email: </p>
+  <mat-form-field>
+    <mat-label>email</mat-label>
+    <input matInput [(ngModel)]="emailInput">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Odustani</button>
+  <button mat-button (click)="posaljiPonistavanje()">Posalji</button>
+</div>

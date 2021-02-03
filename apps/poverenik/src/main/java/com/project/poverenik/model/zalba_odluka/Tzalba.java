@@ -82,7 +82,7 @@ public class Tzalba {
 
     @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
     protected Tzalba.Zahtev zahtev;
-    @XmlElement(namespace = "http://www.zalbanaodlukucir", required = true)
+    @XmlElement(namespace = "http://www.zalbanaodlukucir")
     protected Tzalba.Status status;
     @XmlElement(namespace = "http://www.zalbanaodlukucir")
     protected String naslov;

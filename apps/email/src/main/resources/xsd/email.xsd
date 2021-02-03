@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://email" xmlns="http://email">
+    <xs:element name="email">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="body" type="Tbody"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Tbody">
+        <xs:sequence>
+            <xs:element name="to" type="xs:string"/>
+            <xs:element name="content" type="xs:string"/>
+            <xs:element name="subject" type="xs:string"/>
+            <xs:element name="file_pdf_name" type="xs:string"/>
+            <xs:element name="file_html_name" type="xs:string"/>
+            <xs:element name="file_pdf"/>
+            <xs:element name="file_html"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

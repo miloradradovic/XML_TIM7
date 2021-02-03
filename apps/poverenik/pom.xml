@@ -205,6 +205,15 @@
 									<wsdlLocation>classpath:wsdl/Izjasnjavanje.wsdl</wsdlLocation>
 								</wsdlOption>
 
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/Izvestaj.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-impl</extraarg> <!-- Ima i drugih dodatniha<extraarg>-client</extraarg> -->
+										<extraarg>-verbose</extraarg>
+									</extraargs>
+									<wsdlLocation>classpath:wsdl/Izvestaj.wsdl</wsdlLocation>
+								</wsdlOption>
+
 							</wsdlOptions>
 						</configuration>
 						<goals>

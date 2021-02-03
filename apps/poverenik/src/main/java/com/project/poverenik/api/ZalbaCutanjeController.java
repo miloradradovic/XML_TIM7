@@ -27,28 +27,21 @@ public class ZalbaCutanjeController {
     @Autowired
     ZalbaCutanjeService zalbaCutanjeService;
     
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaCutanjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ZalbaCutanjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
 
-    	System.out.println(datumAfter + datumBefore+status+organ_vlasti+mesto);
-    	System.out.println("kontroler");
-    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaCutanjeList> searchText() throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ZalbaCutanjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
 
-    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchText("У");
+    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchText(input);
     	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
     }
-    
-    /*@RequestMapping(value="/korisnik", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaCutanjeList> getZalbeByUser() throws XMLDBException, JAXBException, IOException {
-
-    	ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getZalbeByUser("s");
-    	return new ResponseEntity<ZalbaCutanjeList>(zalbaCutanjeList, HttpStatus.OK);
-    }*/
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -73,7 +66,7 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaCutanje(@PathVariable String id) throws XMLDBException, JAXBException {
         ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(id);
@@ -83,12 +76,22 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> getZalbaCutanje() throws XMLDBException, JAXBException {
+    public ResponseEntity<?> getZalbaCutanjeListByUser() throws XMLDBException, JAXBException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
         ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getByUser(user.getEmail());
+        if(zalbaCutanjeList != null)
+            return new ResponseEntity(zalbaCutanjeList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZalbaCutanjeListObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.getByObradaOrNeobradjena();
         if(zalbaCutanjeList != null)
             return new ResponseEntity(zalbaCutanjeList, HttpStatus.OK);
 
@@ -104,9 +107,10 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody ZalbaCutanje zalbaCutanje) throws XMLDBException, JAXBException {
-        boolean isUpdated = zalbaCutanjeService.update(zalbaCutanje);
+        boolean isUpdated = zalbaCutanjeService.update(zalbaCutanje, "");
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 

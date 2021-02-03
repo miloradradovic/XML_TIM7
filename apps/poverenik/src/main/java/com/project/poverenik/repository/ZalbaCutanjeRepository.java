@@ -48,7 +48,8 @@ public class ZalbaCutanjeRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zalba_cutanje/zalba_cutanje_body[@id='%s']/ancestor::zalba_cutanje", id);
+        String xpath =  String.format("/zalba_cutanje/zalba_cutanje_body/@id[.='%s']/ancestor::zalba_cutanje", id);
+        ResourceSet s = existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
     
@@ -58,15 +59,34 @@ public class ZalbaCutanjeRepository {
     }
 
     public ResourceSet getAllByUser(String email) throws XMLDBException {
-        String xpath = "sth";
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::podaci_o_podnosiocu/*[1]/@id[.='%s']/ancestor::zalba_cutanje", email);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
     public ResourceSet searchText(String text) throws XMLDBException {
-    	//"/zalba_cutanje[zalba_cutanje_body/sadrzaj_zalbe/ciljani_organ_vlasti[contains(text(), '%s')] or /zalba_cutanje/zalba_cutanje_body/sadrzaj_zalbe/podaci_o_zahtjevu_i_informacijama[contains(text(), '%s')]]/ancestor::zalba_cutanje"
     	String xpath = String.format(
-				"/zalba_cutanje/zalba_cutanje_body/sadrzaj_zalbe/podaci_o_zahtjevu_i_informacijama[.='%s']/ancestor::zalba_cutanje",
+				"/zalba_cutanje/zalba_cutanje_body[sadrzaj_zalbe/*[local-name()='podaci_o_zahtjevu_i_informacijama'][contains(.,'%s')] or sadrzaj_zalbe/*[local-name()='ciljani_organ_vlasti'][contains(.,'%s')]]/ancestor::zalba_cutanje",
 				text, text);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getAllByObradaOrNeobradjena() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s' or .='%s']/ancestor::zalba_cutanje", "neobradjena", "u obradi");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getOdbijene() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s']/ancestor::zalba_cutanje", "odbijena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getPrihvacene() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s']/ancestor::zalba_cutanje", "prihvacena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getPonistene() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s']/ancestor::zalba_cutanje", "ponistena");
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

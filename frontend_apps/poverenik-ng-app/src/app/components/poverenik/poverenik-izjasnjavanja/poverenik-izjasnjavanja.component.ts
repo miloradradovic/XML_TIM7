@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {IzjasnjavanjaService} from '../../../services/izjasnjavanja-service/izjasnjavanja.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-poverenik-izjasnjavanja',
@@ -8,16 +10,39 @@ import { Component, OnInit } from '@angular/core';
 export class PoverenikIzjasnjavanjaComponent implements OnInit {
 
   izjasnjavanja = []; // objekti tipa {id: string}
-  constructor() { }
+  constructor(private izjasnjavanjeService: IzjasnjavanjaService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    // TODO pozovi metode iz servisa kad se napravi api
-    // treba dobaviti sva izjasnjenja
+    const newList = [];
+    this.izjasnjavanjeService.getIzjasnjavanjaList().subscribe(
+      result => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const izjasnjavanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
+        if (izjasnjavanja !== undefined){
+          try {
+            izjasnjavanja.forEach((item, index) => {
+              const message = item['ns2:body']._text;
+              const messageObject = {id: message};
+              newList.push(messageObject);
+            });
+          } catch (err){
+            const message = izjasnjavanja['ns2:body']._text;
+            const messageObject = {id: message};
+            newList.push(messageObject);
+          }
+          this.izjasnjavanja = newList;
+        }
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
   }
 
-  clicked($event: number): void {
-    // TODO otvori dialog izjasnjenja
-    console.log('clicked');
-  }
 
+  clicked($event: number) {
+    console.log($event);
+  }
 }

@@ -4,6 +4,7 @@
     xmlns:oba="http://www.obavestenje" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#"
     xsi:schemaLocation="http://www.obavestenje ../xsd/obavestenje.xsd">
     <oba:obavestenje_body  broj="331-11-1111-1111-11" idZahteva="1" datum="2000-12-12">
         <oba:naziv_organa sediste="A"></oba:naziv_organa>

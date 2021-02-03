@@ -27,8 +27,11 @@ public class ObavestenjeRepository {
             + "</xu:modifications>";
 
 
-    public boolean create(Obavestenje obavestenje) throws XMLDBException {
-        return existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje);
+    public String create(Obavestenje obavestenje) throws XMLDBException {
+        if(existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje)){
+            return obavestenje.getObavestenjeBody().getId();
+        }
+        return null;
     }
 
     public ResourceSet getAll() throws XMLDBException {
@@ -50,6 +53,23 @@ public class ObavestenjeRepository {
     
     public ResourceSet getMaxId() throws XMLDBException  {
         String xpath = "/obavestenje/obavestenje_body[@id = max(/obavestenje/obavestenje_body/@id)]/ancestor::obavestenje";
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+    
+    public ResourceSet searchText(String text) throws XMLDBException {
+    	String xpath = String.format(
+				"/obavestenje/obavestenje_body[child::tekst_zahteva/*[local-name()='opis_trazene_informacije'][contains(.,'%s')]]/ancestor::obavestenje",
+				text, text);
+    	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+	}
+
+    public ResourceSet getAllByUser(String email) throws XMLDBException {
+        String xpath = String.format("/obavestenje/obavestenje_body/child::informacije_o_podnosiocu/*[1]/*[1][@id = '%s']/ancestor::obavestenje", email);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+    
+    public ResourceSet getObavestenjeByZahtev(String idZahteva) throws XMLDBException {
+    	String xpath = String.format("/obavestenje/obavestenje_body[@idZahteva='%s']/ancestor::obavestenje", idZahteva);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

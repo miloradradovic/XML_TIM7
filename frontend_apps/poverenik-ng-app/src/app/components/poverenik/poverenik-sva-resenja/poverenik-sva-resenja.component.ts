@@ -21,14 +21,23 @@ export class PoverenikSvaResenjaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const resenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        const lista = resenjeList.resenjeList;
+        const lista = resenjeList['ra:resenjeList'];
+        console.log(lista);
         const resenja = lista['ra:resenje'];
-        resenja.forEach((item, index) => {
-          const idResenja = item['ra:resenje_body']._attributes.id;
-          const resenje = {id: idResenja};
-          newList.push(resenje);
-        });
-        this.resenja = newList;
+        if (resenja !== undefined){
+          try {
+            resenja.forEach((item, index) => {
+              const idResenja = item['ra:resenje_body']._attributes.id;
+              const resenje = {id: idResenja};
+              newList.push(resenje);
+            });
+          } catch (err){
+            const idResenja = resenja['ra:resenje_body']._attributes.id;
+            const resenje = {id: idResenja};
+            newList.push(resenje);
+          }
+          this.resenja = newList;
+        }
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -36,4 +45,11 @@ export class PoverenikSvaResenjaComponent implements OnInit {
     );
   }
 
+  convertToPDF($event: number) {
+    console.log($event);
+  }
+
+  convertToXHTML($event: number) {
+    console.log($event);
+  }
 }

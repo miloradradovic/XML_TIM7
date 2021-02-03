@@ -4,6 +4,7 @@ import com.project.organ_vlasti.client.ResenjeClient;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBroj;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBrojResponse;
 import com.project.organ_vlasti.model.resenje.database.ResenjeRef;
+import com.project.organ_vlasti.model.util.lists.ResenjeRefList;
 import com.project.organ_vlasti.service.ResenjeRefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,9 @@ public class ResenjeController {
     ResenjeRefService resenjeRefService;
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
-    @RequestMapping(value="/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    @RequestMapping(value="/resenje/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws JAXBException, XMLDBException {
+        // TODO dodati za front xhtml transformacije
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
 
@@ -47,6 +49,17 @@ public class ResenjeController {
             resenjeRefService.update(resenjeRef);
             return new ResponseEntity(getResenjeByBrojResponse, HttpStatus.OK);
         }
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value ="/{param}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeRefList> getResenjaList(@PathVariable String param) throws XMLDBException, JAXBException {
+        ResenjeRefList resenjeRefList = resenjeRefService.getAll(param);
+
+        if(resenjeRefList != null)
+            return new ResponseEntity(resenjeRefList, HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

@@ -27,10 +27,19 @@ public class ZalbaOdlukaController {
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
     
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ZalbaOdlukaList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ZalbaOdlukaList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("status") String status, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("mesto") String mesto, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
 
-    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto);
+    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
+    	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
+    }
+    
+    @PreAuthorize("hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+
+    	ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchText(input);
     	return new ResponseEntity<ZalbaOdlukaList>(zalbaOdlukaList, HttpStatus.OK);
     }
 
@@ -57,7 +66,30 @@ public class ZalbaOdlukaController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByUser(user.getEmail());
+
+        if(zalbaOdlukaList != null)
+            return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
+    @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getZalbaOdlukaListObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByObradaOrNeobradjena();
+        if(zalbaOdlukaList != null)
+            return new ResponseEntity(zalbaOdlukaList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaOdluka(@PathVariable String id) throws XMLDBException, JAXBException {
         ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(id);
@@ -79,7 +111,7 @@ public class ZalbaOdlukaController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, JAXBException {
-        boolean isUpdated = zalbaOdlukaService.update(zalbaOdluka);
+        boolean isUpdated = zalbaOdlukaService.update(zalbaOdluka, "");
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 

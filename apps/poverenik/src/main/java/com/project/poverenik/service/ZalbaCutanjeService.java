@@ -119,12 +119,14 @@ public class ZalbaCutanjeService {
         return zalbaCutanjeRepository.delete(id);
     }
 
-    public boolean update(ZalbaCutanje zalbaCutanje) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
+    public boolean update(ZalbaCutanje zalbaCutanje, String status) throws JAXBException, XMLDBException {
+        zalbaCutanje.getZalbaCutanjeBody().getStatus().setValue(status);
+        return zalbaCutanjeRepository.create(zalbaCutanje);
+
+        //String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<zc:naziv>"), patch.indexOf("</zc:podaci_o_podnosiocu>") + "</zc:podaci_o_podnosiocu>".length());
-        return zalbaCutanjeRepository.update(zalbaCutanje.getZalbaCutanjeBody().getId(), patch);
-    }
+        //patch = patch.substring(patch.lastIndexOf("<zc:zalba_cutanje_body"), patch.indexOf("</zc:zalba_cutanje_body>") + "</zc:zalba_cutanje_body>".length());
+        }
 
     public ZalbaCutanjeList getByUser(String email) throws XMLDBException, JAXBException {
         List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
@@ -145,29 +147,28 @@ public class ZalbaCutanjeService {
     }
 
     public ZalbaCutanjeList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
-			String mesto) throws IOException, JAXBException, XMLDBException {
+			String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
 		if (datumAfter.equals("")) {
 			datumAfter = "1000-01-01";
 		}
 		if (datumBefore.equals("")) {
-			datumAfter = "9999-12-31";
+			datumBefore = "9999-12-31";
 		}
 
-		System.out.println(datumAfter + datumBefore + status + organ_vlasti + mesto);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("datumAfter", datumAfter);
-		params.put("datumBefore", datumBefore);
-		params.put("status", status);
-		params.put("organ_vlasti", organ_vlasti);
-		params.put("mesto", mesto);
-		
 		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
 				StandardCharsets.UTF_8);
 		System.out.println(sparqlQueryTemplate);
-
-		String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore, status, organ_vlasti, mesto);
+		
+		String user = "";
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/"+userEmail+">";
+		}
+		
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
 		System.out.println(sparqlQuery);
 
 		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
@@ -178,10 +179,11 @@ public class ZalbaCutanjeService {
 
 		ZalbaCutanjeList zcList = null;
 
+		List<ZalbaCutanje> listZC = new ArrayList<>();
+
 		while (results.hasNext()) {
 
 			QuerySolution querySolution = results.next();
-			List<ZalbaCutanje> listZC = new ArrayList<>();
 
 			id = querySolution.get("zalba");
 			if (id.toString().contains("cutanje")) {
@@ -189,10 +191,10 @@ public class ZalbaCutanjeService {
 				ZalbaCutanje z = getOne(idStr);
 				listZC.add(z);
 			}
-
-			zcList = new ZalbaCutanjeList(listZC);
-			System.out.println();
 		}
+
+		zcList = new ZalbaCutanjeList(listZC);
+		System.out.println();
 
 		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
@@ -255,6 +257,44 @@ public class ZalbaCutanjeService {
         System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
         System.out.println("[INFO] End.");
         return true;
+    }
+
+    public ZalbaCutanjeList getByObradaOrNeobradjena() throws XMLDBException, JAXBException {
+        List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAllByObradaOrNeobradjena();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaCutanjeList.add(zalbaCutanje);
+        }
+        return new ZalbaCutanjeList(zalbaCutanjeList);
+    }
+
+    public Long getPodnete() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getPonistene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getPonistene();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvacene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getPrihvacene();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getOdbijene();
+        return resourceSet.getSize();
     }
 
 }

@@ -13,6 +13,15 @@
     </xs:element>
     <xs:complexType name="Tzahtev">
         <xs:sequence>
+            <xs:element minOccurs="0" name="status">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:anyAttribute namespace="##any" processContents="lax"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element minOccurs="1" name="mesto">
                 <xs:complexType>
                     <xs:simpleContent>

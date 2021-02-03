@@ -1,11 +1,6 @@
 
 package com.project.organ_vlasti.model.zahtev;
 
-import com.project.organ_vlasti.model.util.ComplexTypes.TciljaniOrganVlasti;
-import com.project.organ_vlasti.model.util.ComplexTypes.Tfusnote;
-import com.project.organ_vlasti.model.util.ComplexTypes.TinformacijeOTraziocu;
-import com.project.organ_vlasti.model.util.ComplexTypes.TtekstZahtevaZahtevcir;
-
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,65 +13,78 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
+import com.project.organ_vlasti.model.util.ComplexTypes.TciljaniOrganVlasti;
+import com.project.organ_vlasti.model.util.ComplexTypes.Tfusnote;
+import com.project.organ_vlasti.model.util.ComplexTypes.TinformacijeOTraziocu;
+import com.project.organ_vlasti.model.util.ComplexTypes.TtekstZahtevaZahtevcir;
 
 
 /**
  * <p>Java class for Tzahtev complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
- * &lt;complexType name="Tzahtev">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="mesto">
- *           &lt;complexType>
- *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;anyAttribute processContents='lax'/>
- *               &lt;/extension>
- *             &lt;/simpleContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *         &lt;element name="ciljani_organ_vlasti" type="{http://www.reusability}Tciljani_organ_vlasti"/>
- *         &lt;element name="naziv" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="tekst_zahteva" type="{http://www.reusability}Ttekst_zahteva_zahtevcir"/>
- *         &lt;element name="informacije_o_traziocu" type="{http://www.reusability}Tinformacije_o_traziocu"/>
- *         &lt;element name="fusnote" type="{http://www.reusability}Tfusnote" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" />
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Tzahtev"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="status" minOccurs="0"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="mesto"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="ciljani_organ_vlasti" type="{http://www.reusability}Tciljani_organ_vlasti"/&gt;
+ *         &lt;element name="naziv" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="tekst_zahteva" type="{http://www.reusability}Ttekst_zahteva_zahtevcir"/&gt;
+ *         &lt;element name="informacije_o_traziocu" type="{http://www.reusability}Tinformacije_o_traziocu"/&gt;
+ *         &lt;element name="fusnote" type="{http://www.reusability}Tfusnote" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Tzahtev", namespace = "http://www.zahtevcir", propOrder = {
-    "mesto",
-    "ciljaniOrganVlasti",
-    "naziv",
-    "tekstZahteva",
-    "informacijeOTraziocu",
-    "fusnote"
+@XmlType(name = "Tzahtev", propOrder = {
+        "status",
+        "mesto",
+        "ciljaniOrganVlasti",
+        "naziv",
+        "tekstZahteva",
+        "informacijeOTraziocu",
+        "fusnote"
 })
 public class Tzahtev {
 
-    @XmlElement(namespace = "http://www.zahtevcir", required = true)
+    protected Tzahtev.Status status;
+    @XmlElement(required = true)
     protected Tzahtev.Mesto mesto;
-    @XmlElement(name = "ciljani_organ_vlasti", namespace = "http://www.zahtevcir", required = true)
+    @XmlElement(name = "ciljani_organ_vlasti", required = true)
     protected TciljaniOrganVlasti ciljaniOrganVlasti;
-    @XmlElement(namespace = "http://www.zahtevcir")
     protected String naziv;
-    @XmlElement(name = "tekst_zahteva", namespace = "http://www.zahtevcir", required = true)
+    @XmlElement(name = "tekst_zahteva", required = true)
     protected TtekstZahtevaZahtevcir tekstZahteva;
-    @XmlElement(name = "informacije_o_traziocu", namespace = "http://www.zahtevcir", required = true)
+    @XmlElement(name = "informacije_o_traziocu", required = true)
     protected TinformacijeOTraziocu informacijeOTraziocu;
-    @XmlElement(namespace = "http://www.zahtevcir")
     protected Tfusnote fusnote;
     @XmlAttribute(name = "id")
     protected String id;
@@ -87,12 +95,36 @@ public class Tzahtev {
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     /**
+     * Gets the value of the status property.
+     *
+     * @return
+     *     possible object is
+     *     {@link Tzahtev.Status }
+     *
+     */
+    public Tzahtev.Status getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the value of the status property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link Tzahtev.Status }
+     *
+     */
+    public void setStatus(Tzahtev.Status value) {
+        this.status = value;
+    }
+
+    /**
      * Gets the value of the mesto property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Tzahtev.Mesto }
-     *     
+     *
      */
     public Tzahtev.Mesto getMesto() {
         return mesto;
@@ -100,11 +132,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the mesto property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Tzahtev.Mesto }
-     *     
+     *
      */
     public void setMesto(Tzahtev.Mesto value) {
         this.mesto = value;
@@ -112,11 +144,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the ciljaniOrganVlasti property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link TciljaniOrganVlasti }
-     *     
+     *
      */
     public TciljaniOrganVlasti getCiljaniOrganVlasti() {
         return ciljaniOrganVlasti;
@@ -124,11 +156,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the ciljaniOrganVlasti property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link TciljaniOrganVlasti }
-     *     
+     *
      */
     public void setCiljaniOrganVlasti(TciljaniOrganVlasti value) {
         this.ciljaniOrganVlasti = value;
@@ -136,11 +168,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the naziv property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getNaziv() {
         return naziv;
@@ -148,11 +180,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the naziv property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setNaziv(String value) {
         this.naziv = value;
@@ -160,11 +192,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the tekstZahteva property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link TtekstZahtevaZahtevcir }
-     *     
+     *
      */
     public TtekstZahtevaZahtevcir getTekstZahteva() {
         return tekstZahteva;
@@ -172,11 +204,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the tekstZahteva property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link TtekstZahtevaZahtevcir }
-     *     
+     *
      */
     public void setTekstZahteva(TtekstZahtevaZahtevcir value) {
         this.tekstZahteva = value;
@@ -184,11 +216,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the informacijeOTraziocu property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link TinformacijeOTraziocu }
-     *     
+     *
      */
     public TinformacijeOTraziocu getInformacijeOTraziocu() {
         return informacijeOTraziocu;
@@ -196,11 +228,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the informacijeOTraziocu property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link TinformacijeOTraziocu }
-     *     
+     *
      */
     public void setInformacijeOTraziocu(TinformacijeOTraziocu value) {
         this.informacijeOTraziocu = value;
@@ -208,11 +240,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the fusnote property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Tfusnote }
-     *     
+     *
      */
     public Tfusnote getFusnote() {
         return fusnote;
@@ -220,11 +252,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the fusnote property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Tfusnote }
-     *     
+     *
      */
     public void setFusnote(Tfusnote value) {
         this.fusnote = value;
@@ -232,11 +264,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the id property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getId() {
         return id;
@@ -244,11 +276,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the id property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setId(String value) {
         this.id = value;
@@ -256,11 +288,11 @@ public class Tzahtev {
 
     /**
      * Gets the value of the datum property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public XMLGregorianCalendar getDatum() {
         return datum;
@@ -268,11 +300,11 @@ public class Tzahtev {
 
     /**
      * Sets the value of the datum property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
@@ -280,15 +312,15 @@ public class Tzahtev {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     *
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
+     *
+     *
      * @return
      *     always non-null
      */
@@ -299,24 +331,24 @@ public class Tzahtev {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
-     * &lt;complexType>
-     *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;anyAttribute processContents='lax'/>
-     *     &lt;/extension>
-     *   &lt;/simpleContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
+     *
+     *
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Mesto {
 
@@ -327,11 +359,11 @@ public class Tzahtev {
 
         /**
          * Gets the value of the value property.
-         * 
+         *
          * @return
          *     possible object is
          *     {@link String }
-         *     
+         *
          */
         public String getValue() {
             return value;
@@ -339,11 +371,11 @@ public class Tzahtev {
 
         /**
          * Sets the value of the value property.
-         * 
+         *
          * @param value
          *     allowed object is
          *     {@link String }
-         *     
+         *
          */
         public void setValue(String value) {
             this.value = value;
@@ -351,15 +383,15 @@ public class Tzahtev {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         *
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
+         *
+         *
          * @return
          *     always non-null
          */
@@ -369,4 +401,76 @@ public class Tzahtev {
 
     }
 
+
+    /**
+     * <p>Java class for anonymous complex type.
+     *
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     *
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     *
+     *
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+            "value"
+    })
+    public static class Status {
+
+        @XmlValue
+        protected String value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         *
+         * @return
+         *     possible object is
+         *     {@link String }
+         *
+         */
+        public String getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         *
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *
+         */
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         *
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         *
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         *
+         *
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
 }

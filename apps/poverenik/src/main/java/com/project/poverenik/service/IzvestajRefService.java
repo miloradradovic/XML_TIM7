@@ -105,4 +105,24 @@ public class IzvestajRefService {
     public boolean update(IzvestajRef resenjeRef) throws XMLDBException {
         return izvestajRefRepository.update(resenjeRef);
     }
+
+    public IzvestajRefList getRefs(List<String> refs) throws XMLDBException, JAXBException {
+        List<IzvestajRef> izvestajRefs = new ArrayList<>();
+
+        for (String id: refs) {
+            ResourceSet resourceSet = izvestajRefRepository.getOneByBroj(id);
+            ResourceIterator resourceIterator = resourceSet.getIterator();
+
+            while (resourceIterator.hasMoreResources()){
+                XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+                if(xmlResource == null)
+                    return null;
+                JAXBContext context = JAXBContext.newInstance(IzvestajRef.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                IzvestajRef izvestajRef = (IzvestajRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+                izvestajRefs.add(izvestajRef);
+            }
+        }
+        return new IzvestajRefList(izvestajRefs);
+    }
 }

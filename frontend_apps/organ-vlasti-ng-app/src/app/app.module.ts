@@ -36,6 +36,11 @@ import {MatTableModule} from '@angular/material/table';
 import { KreiranjeIzvestajaComponent } from './components/organ-vlasti/kreiranje-izvestaja/kreiranje-izvestaja.component';
 import { IzjasnjavanjeDialogComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanje-dialog/izjasnjavanje-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DetaljniPrikazZahtevaComponent } from './components/organ-vlasti/detaljni-prikaz-zahteva/detaljni-prikaz-zahteva.component';
+import { DetaljniPrikazObavestenjaComponent } from './components/organ-vlasti/detaljni-prikaz-obavestenja/detaljni-prikaz-obavestenja.component';
+import { DetaljniPrikazIzvestajaComponent } from './components/organ-vlasti/detaljni-prikaz-izvestaja/detaljni-prikaz-izvestaja.component';
+import { DetaljniPrikazResenjaComponent } from './components/organ-vlasti/detaljni-prikaz-resenja/detaljni-prikaz-resenja.component';
+import { DetaljniPrikazZalbeComponent } from './components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     IzvestajiComponent,
     IzjasnjavanjaComponent,
     KreiranjeIzvestajaComponent,
-    IzjasnjavanjeDialogComponent
+    IzjasnjavanjeDialogComponent,
+    DetaljniPrikazZahtevaComponent,
+    DetaljniPrikazObavestenjaComponent,
+    DetaljniPrikazIzvestajaComponent,
+    DetaljniPrikazResenjaComponent,
+    DetaljniPrikazZalbeComponent
   ],
   imports: [
     BrowserModule,

@@ -4,11 +4,13 @@
 				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 				  targetNamespace="http://resenje"
 				  xmlns:tns="http://resenje"
+				  xmlns:tns1="http://parametars"
 				  name="ResenjeService">
 	<wsdl:types>
 		<xsd:schema>
 			<xsd:import namespace="http://resenje" schemaLocation="../xsd/resenje.xsd"/>
 			<xsd:import namespace="http://resenje" schemaLocation="../xsd/ResenjeList.xsd"/>
+			<xsd:import namespace="http://parametars" schemaLocation="../xsd/parametarMap.xsd"/>
 		</xsd:schema>
 	</wsdl:types>
 
@@ -25,6 +27,13 @@
 		<wsdl:part name="resenjeList" type="tns:resenjeList" />
 	</wsdl:message>
 
+	<wsdl:message name="getRefList">
+		<wsdl:part name="parametars" type="tns1:parametarMap" />
+	</wsdl:message>
+	<wsdl:message name="getRefListResponse">
+		<wsdl:part name="refs" type="tns1:refIdList" />
+	</wsdl:message>
+
 	<wsdl:portType name="ResenjeServicePortType">
 		<wsdl:operation name="getResenjeByBroj">
 			<wsdl:input message="tns:getResenjeRequest" />
@@ -33,6 +42,10 @@
 		<wsdl:operation name="getAllResenja">
 			<wsdl:input message="tns:getAllResenjaRequest" />
 			<wsdl:output message="tns:getAllResenjaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getRefs">
+			<wsdl:input message="tns:getRefList" />
+			<wsdl:output message="tns:getRefListResponse" />
 		</wsdl:operation>
 	</wsdl:portType>
 
@@ -50,6 +63,16 @@
 		
 		<wsdl:operation name="getAllResenja">
 			<soap:operation soapAction="http://resenje/ws/getAllResenja" />
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getRefs">
+			<soap:operation soapAction="http://resenje/ws/getRefs" />
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

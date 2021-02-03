@@ -75,4 +75,9 @@ public class ResenjeRepository {
 				text, text, text);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+    
+    public ResourceSet getResenjeByZalba(String idZalbe) throws XMLDBException {
+        String xpath = String.format("/resenje/resenje_body[@idZalbe='%s']/ancestor::resenje", idZalbe);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

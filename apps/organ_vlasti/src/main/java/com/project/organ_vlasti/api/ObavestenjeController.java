@@ -96,6 +96,16 @@ public class ObavestenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
+    @RequestMapping(value="/by-zahtev/{idZahteva}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getObavestenjeByZahtev(@PathVariable String idZahteva) throws XMLDBException, JAXBException {
+        Obavestenje obavestenje = obavestenjeService.getObavestenjeByZahtev(idZahteva);
+        if(obavestenje != null)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(null, HttpStatus.OK);
+    }
+    
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ObavestenjeList> getObavestenjeListByUser() throws XMLDBException, JAXBException {

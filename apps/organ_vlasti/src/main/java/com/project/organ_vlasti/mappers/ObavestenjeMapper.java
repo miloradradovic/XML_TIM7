@@ -19,6 +19,7 @@ public class ObavestenjeMapper {
 
 		obavestenje.setObavestenjeBody(ofO.createTobavestenje());
 		
+		String linkNaZahtev = "http://localhost:8090/zahtev/" + obavestenjeDTO.getObavestenjeBody().getIdZahteva();
 		obavestenje.getObavestenjeBody().setId(id);
 		obavestenje.getObavestenjeBody().setBroj(id);
 		obavestenje.getObavestenjeBody().setIdZahteva(obavestenjeDTO.getObavestenjeBody().getIdZahteva());
@@ -29,6 +30,7 @@ public class ObavestenjeMapper {
 		obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("property"),"pred:datum");
 		obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("datatype"),"xs:date");
 		obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("content"), obavestenjeDTO.getObavestenjeBody().getDatum().toString());
+		obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("link_na_zahtev"), linkNaZahtev);
 		
 		obavestenje.getObavestenjeBody().setNazivOrgana(obavestenjeDTO.getObavestenjeBody().getNazivOrgana());
 		obavestenje.getObavestenjeBody().getNazivOrgana().getOtherAttributes().put(new QName("property"),"pred:organVlasti");

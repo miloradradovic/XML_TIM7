@@ -67,4 +67,9 @@ public class ObavestenjeRepository {
         String xpath = String.format("/obavestenje/obavestenje_body/child::informacije_o_podnosiocu/*[1]/*[1][@id = '%s']/ancestor::obavestenje", email);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+    
+    public ResourceSet getObavestenjeByZahtev(String idZahteva) throws XMLDBException {
+    	String xpath = String.format("/obavestenje/obavestenje_body[@idZahteva='%s']/ancestor::obavestenje", idZahteva);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

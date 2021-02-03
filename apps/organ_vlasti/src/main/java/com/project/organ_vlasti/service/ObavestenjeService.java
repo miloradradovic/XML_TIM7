@@ -115,6 +115,23 @@ public class ObavestenjeService {
 
         return obavestenje;
     }
+    
+    public Obavestenje getObavestenjeByZahtev(String idZahteva) throws JAXBException, XMLDBException {
+        ResourceSet resourceSet = obavestenjeRepository.getObavestenjeByZahtev(idZahteva);
+
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            return obavestenje;
+        }
+        return null;
+    }
 
     public boolean delete(String broj) throws XMLDBException {
         return obavestenjeRepository.delete(broj);

@@ -1,5 +1,6 @@
 package com.project.organ_vlasti.database;
 
+import com.project.organ_vlasti.model.izvestaji.Izvestaj;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.MetadataService;
@@ -124,6 +125,9 @@ public class ExistManager {
                 metadataService.extractMetadata("/obavestenja", os);
             else if(xml instanceof Zahtev)
                 metadataService.extractMetadata("/zahtevi", os);
+            else if (xml instanceof Izvestaj) {
+            	metadataService.extractMetadata("/izvestaji", os);
+            }
 
 
         } catch (Exception e) {

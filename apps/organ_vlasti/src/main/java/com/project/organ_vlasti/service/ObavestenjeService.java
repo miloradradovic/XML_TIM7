@@ -4,9 +4,19 @@ import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
+import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
+import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities;
+import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProperties;
+import com.project.organ_vlasti.rdf_utils.FileUtil;
 import com.project.organ_vlasti.repository.ObavestenjeRepository;
 
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -18,6 +28,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,4 +126,92 @@ public class ObavestenjeService {
         patch = patch.substring(patch.lastIndexOf("<oba:naziv_organa property=\"pred:organ_vlasti\" datatype=\"xs:string\" sediste=\"\">"), patch.indexOf("</oba:opcija_dostave>") + "</oba:opcija_dostave>".length());
         return obavestenjeRepository.update(obavestenje.getObavestenjeBody().getBroj(), patch);
     }
+    
+    public ObavestenjeList searchMetadata(String datumAfter, String datumBefore, String organ_vlasti,
+			String userEmail, String zahtev) throws IOException, JAXBException, XMLDBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		if (datumAfter.equals("")) {
+			datumAfter = "1000-01-01";
+		}
+		if (datumBefore.equals("")) {
+			datumBefore = "9999-12-31";
+		}
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_obavestenje.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+		
+		String user = "";
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/"+userEmail+">";
+		}
+		String responseTo = "";
+		if (zahtev.equals("")) {
+			responseTo = "?responseTo";
+		} else {
+			responseTo = "<http://zahtevi/"+zahtev+">";
+		}
+		
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, responseTo, datumAfter, datumBefore, organ_vlasti);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		RDFNode id;
+
+		ObavestenjeList zcList = null;
+
+		List<Obavestenje> listZC = new ArrayList<>();
+
+		while (results.hasNext()) {
+
+			QuerySolution querySolution = results.next();
+
+			id = querySolution.get("obavestenje");
+			String idStr = id.toString().split("obavestenja/")[1];
+			Obavestenje z = getOne(idStr);
+			listZC.add(z);
+		}
+
+		zcList = new ObavestenjeList(listZC);
+		System.out.println();
+
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+
+		// ResultSetFormatter.outputAsXML(System.out, results);
+		ResultSetFormatter.out(System.out, results);
+
+		query.close();
+
+		System.out.println("[INFO] End.");
+
+		return zcList;
+
+	}
+
+	public ObavestenjeList searchText(String text) throws IOException, JAXBException, XMLDBException {
+		List<Obavestenje> obavestenjeList = new ArrayList<>();
+
+		ResourceSet resourceSet = obavestenjeRepository.searchText(text);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		while (resourceIterator.hasMoreResources()) {
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				return null;
+			JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+			obavestenjeList.add(obavestenje);
+		}
+		return new ObavestenjeList(obavestenjeList);
+
+	}
 }

@@ -19,6 +19,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
 import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
 import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vlasti/navigation-organ-vlasti.component';
+import { ZahtevFormComponent } from './components/forms/zahtev-form/zahtev-form.component';
+import { ObavestenjeFormComponent } from './components/forms/obavestenje-form/obavestenje-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vl
     NavigationComponent,
     NavigationNonSignedInComponent,
     NavigationGradjaninComponent,
-    NavigationOrganVlastiComponent
+    NavigationOrganVlastiComponent,
+    ZahtevFormComponent,
+    ObavestenjeFormComponent
   ],
   imports: [
     BrowserModule,

@@ -36,8 +36,8 @@ public class ObavestenjeMapper {
 		
 		obavestenje.getObavestenjeBody().setInformacijeOPodnosiocu(obavestenjeDTO.getObavestenjeBody().getInformacijeOPodnosiocu());
 		obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
-		obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("property"), "pred:podnosilac");
-		obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
+		obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("rel"), "pred:podnosilac");
+		obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().put(new QName("href"), "http://users/"+userEmail);
 		
 		obavestenje.getObavestenjeBody().setNaslov("ОБАВЕШТЕЊЕ");
 		obavestenje.getObavestenjeBody().setPodnaslov("о стављању на увид документа који садржи тражену информацију и о изради копије");
@@ -54,7 +54,7 @@ public class ObavestenjeMapper {
         obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(2, " Закона о слободном приступу информацијама од јавног значаја, поступајући по вашем захтеву за слободан приступ информацијама од");
         obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(3, (JAXBElement<String>) obavestenje.getObavestenjeBody().getTekstZahteva().getContent().get(3));
         obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(4, " којим сте тражили увид у докменте са инфомрацијама о/у вези са:");
-        obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(5, (JAXBElement<String>) obavestenje.getObavestenjeBody().getTekstZahteva().getContent().get(5));
+        obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(5, (JAXBElement<Topis>) obavestenje.getObavestenjeBody().getTekstZahteva().getContent().get(5));
         obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(6, "обавештавамо вас да дана ");
         obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(7, (JAXBElement<XMLGregorianCalendar>) obavestenje.getObavestenjeBody().getTekstZahteva().getContent().get(7));
         obavestenje.getObavestenjeBody().getTekstZahteva().getContent().set(8, ", у ");

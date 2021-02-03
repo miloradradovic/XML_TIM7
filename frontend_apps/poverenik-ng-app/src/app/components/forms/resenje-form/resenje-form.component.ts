@@ -18,7 +18,7 @@ export class ResenjeFormComponent implements OnInit {
 
   ngAfterViewInit(): void {
     const idZalbe = "cutanje/1";
-    const idPoverenika = '1'//JSON.parse(localStorage.getItem('user')).email;
+    const idPoverenika = JSON.parse(localStorage.getItem('user')).email;
     let elementR = document.getElementById("resenje");
     let xmlStringR = 
     `<resenje xmlns="http://resenje"

@@ -18,7 +18,7 @@
     </wsdl:message>
 
     <wsdl:message name="podnesiIzvestajRequest">
-        <wsdl:part name="izvestaj" type="tns:Tbody" />
+        <wsdl:part name="izvestajRef" type="xsd:string" />
     </wsdl:message>
     <wsdl:message name="podnesiIzvestajResponse">
         <wsdl:part name="response" type="xsd:string" />

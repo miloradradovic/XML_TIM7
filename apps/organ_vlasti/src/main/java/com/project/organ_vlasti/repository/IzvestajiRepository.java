@@ -19,8 +19,11 @@ public class IzvestajiRepository {
     private final String TARGET_NAMESPACE = "http://izvestaji";
 
 
-    public boolean create(Izvestaj izvestaj) throws XMLDBException {
-        return existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj);
+    public String create(Izvestaj izvestaj) throws XMLDBException {
+        if(existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj)){
+            return izvestaj.getIzvestajBody().getId();
+        }
+        return null;
     }
 
     public ResourceSet getAll() throws XMLDBException {

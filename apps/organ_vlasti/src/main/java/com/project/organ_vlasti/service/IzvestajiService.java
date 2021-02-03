@@ -51,7 +51,7 @@ public class IzvestajiService {
         return "0000";
     }
 
-    public boolean create(Izvestaj izvestaj) throws XMLDBException, JAXBException {
+    public String create(Izvestaj izvestaj) throws XMLDBException, JAXBException {
 
         String id = String.valueOf(Integer.parseInt(getMaxId())+1);
         izvestaj.getIzvestajBody().setId(id);

@@ -45,11 +45,10 @@ public class ResenjeRefServiceSoapBindingImpl implements ResenjeRefServicePortTy
      */
     public String setResenjeRef(String resenjeRef) {
         LOG.info("Executing operation setResenjeRef");
-        System.out.println(resenjeRef);
         try {
             ObjectFactory of = new ObjectFactory();
             ResenjeRef resenjeRefObj = of.createResenjeRef();
-            resenjeRefObj.setBody(of.creBody());
+            resenjeRefObj.setBody(of.createBody());
             resenjeRefObj.getBody().setValue(resenjeRef);
             resenjeRefObj.getBody().setProcitano("ne");
 

@@ -159,7 +159,7 @@ public class ResenjeController {
 
         sendAttach sendAttach = new sendAttach();
         sendAttach.setEmail(new Tbody());
-        sendAttach.getEmail().setTo("eromana98@gmail.com"); //email
+        sendAttach.getEmail().setTo(email);
         sendAttach.getEmail().setContent("Postovani, <br/><br/> Dostavljamo Vam resenje na Vasu zalbu. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Resenje " + broj);
 

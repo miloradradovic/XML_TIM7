@@ -8,8 +8,11 @@ package com.project.poverenik.wsdl.izvestaji;
 
 import com.project.poverenik.model.izvestaj.ObjectFactory;
 import com.project.poverenik.model.izvestaj.Tbody;
+import com.project.poverenik.model.izvestaj.database.IzvestajRef;
+import com.project.poverenik.service.IzvestajRefService;
 import com.project.poverenik.service.ZalbaCutanjeService;
 import com.project.poverenik.service.ZalbaOdlukaService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +47,9 @@ public class IzvestajServiceSoapBindingImpl implements IzvestajServicePortType {
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
 
+    @Autowired
+    IzvestajRefService izvestajRefService;
+
     private static final Logger LOG = Logger.getLogger(IzvestajServiceSoapBindingImpl.class.getName());
 
     /* (non-Javadoc)
@@ -76,15 +82,20 @@ public class IzvestajServiceSoapBindingImpl implements IzvestajServicePortType {
     /* (non-Javadoc)
      * @see izvestaji.IzvestajServicePortType#podnesiIzvestaj(izvestaji.Tbody izvestaj)*
      */
-    public String podnesiIzvestaj(Tbody izvestaj) {
+    public String podnesiIzvestaj(String izvestajRef) {
         LOG.info("Executing operation podnesiIzvestaj");
-        System.out.println(izvestaj);
         try {
-            String _return = "";
-            return _return;
+            com.project.poverenik.model.izvestaj.database.ObjectFactory of = new com.project.poverenik.model.izvestaj.database.ObjectFactory();
+            IzvestajRef izvestajRefObj = of.createIzvestajRef();
+            izvestajRefObj.setBody(of.createBody());
+            izvestajRefObj.getBody().setValue(izvestajRef);
+            izvestajRefObj.getBody().setProcitano("ne");
+
+            izvestajRefService.create(izvestajRefObj);
+
+            return "OK";
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            return "Error";
         }
     }
 

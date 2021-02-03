@@ -1,5 +1,5 @@
 
-package com.project.organ_vlasti.model.resenje.database;
+package com.project.organ_vlasti.model.izvestaji.database;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ResenjeRef }
+     * Create an instance of {@link IzvestajRef }
      * 
      */
-    public ResenjeRef createResenjeRef() {
-        return new ResenjeRef();
+    public IzvestajRef createIzvestajRef() {
+        return new IzvestajRef();
     }
 
     /**
-     * Create an instance of {@link ResenjeRef.Body }
+     * Create an instance of {@link IzvestajRef.Body }
      * 
      */
-    public ResenjeRef.Body createBody() {
-        return new ResenjeRef.Body();
+    public IzvestajRef.Body createBody() {
+        return new IzvestajRef.Body();
     }
 
 }

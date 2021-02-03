@@ -4,6 +4,7 @@ import com.project.organ_vlasti.client.IzvestajiClient;
 import com.project.organ_vlasti.model.izvestaji.Izvestaj;
 import com.project.organ_vlasti.model.izvestaji.client.getPodaci;
 import com.project.organ_vlasti.model.izvestaji.client.getPodaciResponse;
+import com.project.organ_vlasti.model.izvestaji.database.client.podnesiIzvestaj;
 import com.project.organ_vlasti.model.util.lists.IzvestajList;
 import com.project.organ_vlasti.service.IzvestajiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,12 @@ public class IzvestajiController {
         getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
 
         Izvestaj izvestaj = izvestajiService.compose(response.getResponse());
-
-        if(izvestajiService.create(izvestaj)){
-            return new ResponseEntity<>(HttpStatus.OK);
+        String id = izvestajiService.create(izvestaj);
+        if(id != null){
+            if(sendToPoverenik(id)){
+                izvestaj.getIzvestajBody().setId(id);
+                return new ResponseEntity<>(izvestaj, HttpStatus.OK);
+            }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -69,5 +73,21 @@ public class IzvestajiController {
             return new ResponseEntity(izvestaj, HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    private boolean sendToPoverenik(String id){
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.database.client");
+
+        IzvestajiClient izvestajiClient = new IzvestajiClient();
+        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
+        izvestajiClient.setMarshaller(marshaller);
+        izvestajiClient.setUnmarshaller(marshaller);
+
+        podnesiIzvestaj podnesiIzvestajRequest = new podnesiIzvestaj();
+        podnesiIzvestajRequest.setIzvestajRef(id);
+        return izvestajiClient.sendIzvestajRef(podnesiIzvestajRequest);
+
     }
 }

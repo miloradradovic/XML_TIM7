@@ -107,6 +107,21 @@ public class ZahtevService {
 
     }
 
+    public Long getPodnetiZahtevi() throws XMLDBException {
+        ResourceSet resourceSet = zahtevRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijeniZahtevi() throws XMLDBException {
+        ResourceSet resourceSet = zahtevRepository.getOdbijeniZahtevi();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvaceniZahtevi() throws XMLDBException {
+        ResourceSet resourceSet = zahtevRepository.getPrihvaceniZahtevi();
+        return resourceSet.getSize();
+    }
+
     public ZahtevList getAllNeobradjen() throws XMLDBException, JAXBException {
         List<Zahtev> zahtevList = new ArrayList<>();
 

@@ -74,4 +74,19 @@ public class ZalbaCutanjeRepository {
         String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s' or .='%s']/ancestor::zalba_cutanje", "neobradjena", "u obradi");
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+
+    public ResourceSet getOdbijene() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s']/ancestor::zalba_cutanje", "odbijena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getPrihvacene() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s']/ancestor::zalba_cutanje", "prihvacena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getPonistene() throws XMLDBException {
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/child::status[.='%s']/ancestor::zalba_cutanje", "ponistena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 }

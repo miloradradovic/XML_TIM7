@@ -242,4 +242,24 @@ public class ZalbaCutanjeService {
         }
         return new ZalbaCutanjeList(zalbaCutanjeList);
     }
+
+    public Long getPodnete() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getPonistene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getPonistene();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvacene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getPrihvacene();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getOdbijene();
+        return resourceSet.getSize();
+    }
 }

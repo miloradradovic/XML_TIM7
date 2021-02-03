@@ -245,4 +245,24 @@ public class ZalbaOdlukaService {
 		return new ZalbaOdlukaList(zalbaOdlukaList);
 
 	}
+
+    public Long getPodnete() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getPonistene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getPonistene();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvacene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getPrihvacene();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaOdlukaRepository.getOdbijene();
+        return resourceSet.getSize();
+    }
 }

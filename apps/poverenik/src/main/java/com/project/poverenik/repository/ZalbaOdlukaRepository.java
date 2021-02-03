@@ -63,6 +63,21 @@ public class ZalbaOdlukaRepository {
         String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::status[.='%s' or .='%s']/ancestor::zalba_odluka", "neobradjena", "u obradi");
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+
+    public ResourceSet getOdbijene() throws XMLDBException {
+        String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::status[.='%s']/ancestor::zalba_odluka", "odbijena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getPrihvacene() throws XMLDBException {
+        String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::status[.='%s']/ancestor::zalba_odluka", "prihvacena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
+
+    public ResourceSet getPonistene() throws XMLDBException {
+        String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::status[.='%s']/ancestor::zalba_odluka", "ponistena");
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
     
     public ResourceSet searchText(String text) throws XMLDBException {
     	String xpath = String.format(

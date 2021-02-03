@@ -41,7 +41,7 @@ public class ObjectFactory {
      * Create an instance of {@link ResenjeRef.Body }
      * 
      */
-    public ResenjeRef.Body creBody() {
+    public ResenjeRef.Body createBody() {
         return new ResenjeRef.Body();
     }
 

@@ -114,12 +114,14 @@ public class ZalbaCutanjeService {
         return zalbaCutanjeRepository.delete(id);
     }
 
-    public boolean update(ZalbaCutanje zalbaCutanje) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
+    public boolean update(ZalbaCutanje zalbaCutanje, String status) throws JAXBException, XMLDBException {
+        zalbaCutanje.getZalbaCutanjeBody().getStatus().setValue(status);
+        return zalbaCutanjeRepository.create(zalbaCutanje);
+
+        //String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<zc:naziv>"), patch.indexOf("</zc:podaci_o_podnosiocu>") + "</zc:podaci_o_podnosiocu>".length());
-        return zalbaCutanjeRepository.update(zalbaCutanje.getZalbaCutanjeBody().getId(), patch);
-    }
+        //patch = patch.substring(patch.lastIndexOf("<zc:zalba_cutanje_body"), patch.indexOf("</zc:zalba_cutanje_body>") + "</zc:zalba_cutanje_body>".length());
+        }
 
     public ZalbaCutanjeList getByUser(String email) throws XMLDBException, JAXBException {
         List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
@@ -239,5 +241,25 @@ public class ZalbaCutanjeService {
             zalbaCutanjeList.add(zalbaCutanje);
         }
         return new ZalbaCutanjeList(zalbaCutanjeList);
+    }
+
+    public Long getPodnete() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getPonistene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getPonistene();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvacene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getPrihvacene();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijene() throws XMLDBException {
+        ResourceSet resourceSet = zalbaCutanjeRepository.getOdbijene();
+        return resourceSet.getSize();
     }
 }

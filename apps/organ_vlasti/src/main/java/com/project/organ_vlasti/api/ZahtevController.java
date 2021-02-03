@@ -71,6 +71,30 @@ public class ZahtevController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value = "/neobradjen", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZahtevList> getZahtevListNeobradjen() throws XMLDBException, JAXBException {
+        ZahtevList zahtevList = zahtevService.getAllNeobradjen();
+
+        if(zahtevList != null)
+            return new ResponseEntity(zahtevList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZahtevList> getZahtevListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ZahtevList zahtevList = zahtevService.getAllByUser(user.getEmail());
+
+        if(zahtevList != null)
+            return new ResponseEntity(zahtevList, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZahtev(@PathVariable String id) throws XMLDBException, JAXBException {
@@ -92,7 +116,7 @@ public class ZahtevController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity update(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
-        boolean isUpdated = zahtevService.update(zahtev);
+        boolean isUpdated = zahtevService.update(zahtev, "");
         if(isUpdated)
             return new ResponseEntity(HttpStatus.OK);
 
@@ -112,6 +136,8 @@ public class ZahtevController {
         Zahtev zahtev = zahtevService.getOne(zahtevId);
         String email = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
 
+        zahtevService.update(zahtev, "odbijen");
+
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.util.email.client");
 
@@ -125,7 +151,6 @@ public class ZahtevController {
         sendPlain.getEmail().setTo(email);
         sendPlain.getEmail().setContent("Postovani, <br/><br/> " + poruka + " <br/><br/> Srdacno, " + user.getName() + " " + user.getLastName());
         sendPlain.getEmail().setSubject("Zahtev: " + zahtevId + " odbijen");
-        sendPlain.getEmail().setFile("");
         if(emailClient.sentPlain(sendPlain)){
             return new ResponseEntity<>(HttpStatus.OK);
         };

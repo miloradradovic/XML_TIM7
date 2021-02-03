@@ -34,6 +34,7 @@ import { AddPoverenikFormComponent } from './components/forms/add-poverenik-form
 import { ResenjeFormComponent } from './components/forms/resenje-form/resenje-form.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { ZalbaOdlukaFormComponent } from './components/forms/zalba-odluka-form/zalba-odluka-form.component';
+import { PoverenikDetaljniPrikazZalbeComponent } from './components/poverenik/poverenik-detaljni-prikaz-zalbe/poverenik-detaljni-prikaz-zalbe.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ZalbaOdlukaFormComponent } from './components/forms/zalba-odluka-form/z
     AddPoverenikFormComponent,
     ResenjeFormComponent,
     ZalbaOdlukaFormComponent,
+    PoverenikDetaljniPrikazZalbeComponent,
   ],
   imports: [
     BrowserModule,

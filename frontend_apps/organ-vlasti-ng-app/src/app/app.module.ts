@@ -21,6 +21,18 @@ import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/
 import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vlasti/navigation-organ-vlasti.component';
 import { ZahtevFormComponent } from './components/forms/zahtev-form/zahtev-form.component';
 import { ObavestenjeFormComponent } from './components/forms/obavestenje-form/obavestenje-form.component';
+import { TableComponent } from './components/table/table.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { GradjaninMainPageComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
+import { OrganVlastiMainPageComponent } from './components/organ-vlasti/organ-vlasti-main-page/organ-vlasti-main-page.component';
+import { ZahteviComponent } from './components/organ-vlasti/zahtevi/zahtevi.component';
+import { ObavestenjaComponent } from './components/organ-vlasti/obavestenja/obavestenja.component';
+import { ProcitanaResenjaComponent } from './components/organ-vlasti/procitana-resenja/procitana-resenja.component';
+import { NeprocitanaResenjaComponent } from './components/organ-vlasti/neprocitana-resenja/neprocitana-resenja.component';
+import { IzvestajiComponent } from './components/organ-vlasti/izvestaji/izvestaji.component';
+import { IzjasnjavanjaComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanja.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -32,7 +44,16 @@ import { ObavestenjeFormComponent } from './components/forms/obavestenje-form/ob
     NavigationGradjaninComponent,
     NavigationOrganVlastiComponent,
     ZahtevFormComponent,
-    ObavestenjeFormComponent
+    ObavestenjeFormComponent,
+    TableComponent,
+    GradjaninMainPageComponent,
+    OrganVlastiMainPageComponent,
+    ZahteviComponent,
+    ObavestenjaComponent,
+    ProcitanaResenjaComponent,
+    NeprocitanaResenjaComponent,
+    IzvestajiComponent,
+    IzjasnjavanjaComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +65,10 @@ import { ObavestenjeFormComponent } from './components/forms/obavestenje-form/ob
     MatInputModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

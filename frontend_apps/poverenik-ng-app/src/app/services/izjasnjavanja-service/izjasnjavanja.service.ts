@@ -13,4 +13,8 @@ export class IzjasnjavanjaService {
     return this.http.get('http://localhost:8085/izjasnjavanje',
       {headers: this.headers, responseType: 'text'});
   }
+  sendMessage(id: string): Observable<any> {
+    return this.http.post('http://localhost:8085/izjasnjavanje', id,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

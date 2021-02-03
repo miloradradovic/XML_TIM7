@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ResenjeService } from 'src/app/services/resenje-service/resenje.service';
+import {ActivatedRoute} from '@angular/router';
 
 declare const Xonomy: any;
 
@@ -11,16 +12,21 @@ declare const Xonomy: any;
 })
 export class ResenjeFormComponent implements OnInit {
 
-  constructor(private resenjeService: ResenjeService, public snackBar: MatSnackBar) { }
+  constructor(private resenjeService: ResenjeService, public snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+<<<<<<< HEAD
     const idZalbe = "cutanje/1";
+=======
+    const idZalbe = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
+
+>>>>>>> 91f8931f57b41af8e09e711ad9dd129eef901f33
     const idPoverenika = JSON.parse(localStorage.getItem('user')).email;
     let elementR = document.getElementById("resenje");
-    let xmlStringR = 
+    let xmlStringR =
     `<resenje xmlns="http://resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema#"

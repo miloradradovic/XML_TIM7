@@ -113,11 +113,64 @@ public class ZahtevService {
         return zahtevRepository.delete(id);
     }
 
-    public boolean update(Zahtev zahtev) throws JAXBException, XMLDBException {
-        String patch = jaxB.marshall(zahtev.getClass(), zahtev);
-        //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
-        patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
-        return zahtevRepository.update(zahtev.getZahtevBody().getId(), patch);
+    public boolean update(Zahtev zahtev, String status) throws XMLDBException {
+        zahtev.getZahtevBody().getStatus().setValue(status);
+        return zahtevRepository.create(zahtev);
+        //String patch = jaxB.marshall(zahtev.getClass(), zahtev);
+        ////u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
+        //patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
+
+    }
+
+    public Long getPodnetiZahtevi() throws XMLDBException {
+        ResourceSet resourceSet = zahtevRepository.getAll();
+        return resourceSet.getSize();
+    }
+
+    public Long getOdbijeniZahtevi() throws XMLDBException {
+        ResourceSet resourceSet = zahtevRepository.getOdbijeniZahtevi();
+        return resourceSet.getSize();
+    }
+
+    public Long getPrihvaceniZahtevi() throws XMLDBException {
+        ResourceSet resourceSet = zahtevRepository.getPrihvaceniZahtevi();
+        return resourceSet.getSize();
+    }
+
+    public ZahtevList getAllNeobradjen() throws XMLDBException, JAXBException {
+        List<Zahtev> zahtevList = new ArrayList<>();
+
+        ResourceSet resourceSet = zahtevRepository.getAllNeobradjen();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zahtevList.add(zahtev);
+        }
+        return new ZahtevList(zahtevList);
+    }
+
+    public ZahtevList getAllByUser(String email) throws XMLDBException, JAXBException {
+        List<Zahtev> zahtevList = new ArrayList<>();
+
+        ResourceSet resourceSet = zahtevRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zahtevList.add(zahtev);
+        }
+        return new ZahtevList(zahtevList);
     }
     
     public ZahtevList searchMetadata(String datumAfter, String datumBefore, String mesto, String organ_vlasti,

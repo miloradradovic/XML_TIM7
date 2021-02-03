@@ -107,8 +107,6 @@ public class ResenjeRefService {
     }
 
     public boolean update(ResenjeRef resenjeRef) throws JAXBException, XMLDBException {
-
-        delete(resenjeRef.getBody().getBroj());
         return resenjeRefRepository.update(resenjeRef);
     }
 }

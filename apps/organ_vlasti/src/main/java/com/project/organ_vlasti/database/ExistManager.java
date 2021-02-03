@@ -103,8 +103,6 @@ public class ExistManager {
         XMLResource res = null;
         OutputStream os = new ByteArrayOutputStream();
 
-        if(this.load(collectionUri, documentId) != null)
-            return false;
 
         try {
             collection = getOrCreateCollection(collectionUri, 0);

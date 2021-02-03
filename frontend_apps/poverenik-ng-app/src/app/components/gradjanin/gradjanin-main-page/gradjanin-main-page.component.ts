@@ -85,32 +85,23 @@ export class GradjaninMainPageComponent implements OnInit {
 
   }
 
-  ponistiZalba($event: number): void {
-    console.log('ponisti');
+  ponistiZalba($event: string) {
     console.log($event);
   }
 
-  convertToPdfZalba($event: number): void {
-    console.log('pdf');
+  convertToPdfZalba($event: string) {
     console.log($event);
   }
 
-  convertToXHTMLZalba($event: number): void {
-    console.log('xhtml');
-    console.log($event);
-  }
-  ponistiResenje($event: number): void {
-    console.log('ponisti');
+  convertToXHTMLZalba($event: string) {
     console.log($event);
   }
 
-  convertToPdfResenje($event: number): void {
-    console.log('pdf');
+  convertToPdfResenje($event: number) {
     console.log($event);
   }
 
-  convertToXHTMLResenje($event: number): void {
-    console.log('xhtml');
+  convertToXHTMLResenje($event: number) {
     console.log($event);
   }
 }

@@ -7,8 +7,10 @@ import com.project.organ_vlasti.model.util.email.Tbody;
 import com.project.organ_vlasti.model.util.email.client.sendAttach;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
+import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.ObavestenjeService;
 
+import com.project.organ_vlasti.service.ZahtevService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,6 +55,9 @@ public class ObavestenjeController {
     	return new ResponseEntity<ObavestenjeList>(obavestenjeList, HttpStatus.OK);
     }
 
+    @Autowired
+    ZahtevService zahtevService;
+
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createObavestenje(@RequestBody Obavestenje obavestenje) throws XMLDBException, JAXBException {
@@ -60,6 +65,9 @@ public class ObavestenjeController {
         if (id != null){
             Obavestenje o = obavestenjeService.getOne(id);
             String email = o.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
+            String idZahteva = o.getObavestenjeBody().getIdZahteva();
+            Zahtev zahtev = zahtevService.getOne(idZahteva);
+            zahtevService.update(zahtev, "prihvacen");
             if(sendToUser(id, email)){
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -84,6 +92,19 @@ public class ObavestenjeController {
         Obavestenje obavestenje = obavestenjeService.getOne(broj);
         if(obavestenje != null)
             return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ObavestenjeList> getObavestenjeListByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        ObavestenjeList obavestenjeList = obavestenjeService.getAllByUser(user.getEmail());
+
+        if(obavestenjeList != null)
+            return new ResponseEntity(obavestenjeList, HttpStatus.OK);
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
@@ -127,14 +148,22 @@ public class ObavestenjeController {
 
         //TODO - pozvati transformaciju
         String pdfName = "верзија.pdf";
-        sendAttach.getEmail().setFileName(pdfName);
+        sendAttach.getEmail().setFilePdfName(pdfName);
+        String htmlName = "obavestenje.html";
+        sendAttach.getEmail().setFileHtmlName(htmlName);
         try {
-            File file = new File("src/main/resources/pdf/" + pdfName);
-            Path pdfPath = file.toPath();
-
+            File filePdf = new File("src/main/resources/pdf/" + pdfName);
+            Path pdfPath = filePdf.toPath();
             byte[] pdfBytes = Files.readAllBytes(pdfPath);
 
-            sendAttach.getEmail().setFile(pdfBytes);
+            sendAttach.getEmail().setFilePdf(pdfBytes);
+
+            File fileHtml = new File("src/main/resources/pdf/" + htmlName);
+            Path htmlPath = fileHtml.toPath();
+            byte[] htmlBytes = Files.readAllBytes(htmlPath);
+
+            sendAttach.getEmail().setFileHtml(htmlBytes);
+
 
             return emailClient.sentAttach(sendAttach);
 

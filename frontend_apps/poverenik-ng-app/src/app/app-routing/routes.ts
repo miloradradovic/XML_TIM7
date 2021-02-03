@@ -11,6 +11,7 @@ import {PoverenikSviIzvestajiComponent} from '../components/poverenik/poverenik-
 import {AddPoverenikFormComponent} from '../components/forms/add-poverenik-form/add-poverenik-form.component';
 import { ResenjeFormComponent } from '../components/forms/resenje-form/resenje-form.component';
 import { ZalbaOdlukaFormComponent } from '../components/forms/zalba-odluka-form/zalba-odluka-form.component';
+import {PoverenikDetaljniPrikazZalbeComponent} from '../components/poverenik/poverenik-detaljni-prikaz-zalbe/poverenik-detaljni-prikaz-zalbe.component';
 
 export const routes: Routes = [
   {
@@ -60,5 +61,9 @@ export const routes: Routes = [
   {
     path: 'add-poverenik',
     component: AddPoverenikFormComponent
+  },
+  {
+    path: 'detaljni-prikaz-zalbe',
+    component: PoverenikDetaljniPrikazZalbeComponent
   }
 ];

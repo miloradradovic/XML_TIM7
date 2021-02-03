@@ -40,10 +40,10 @@ export class PoverenikSvaResenjaComponent implements OnInit {
   }
 
   convertToPDF($event: number) {
-
+    console.log($event);
   }
 
   convertToXHTML($event: number) {
-
+    console.log($event);
   }
 }

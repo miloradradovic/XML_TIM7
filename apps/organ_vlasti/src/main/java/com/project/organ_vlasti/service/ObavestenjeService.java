@@ -214,4 +214,22 @@ public class ObavestenjeService {
 		return new ObavestenjeList(obavestenjeList);
 
 	}
+
+    public ObavestenjeList getAllByUser(String email) throws XMLDBException, JAXBException {
+        List<Obavestenje> obavestenjeList = new ArrayList<>();
+
+        ResourceSet resourceSet = obavestenjeRepository.getAllByUser(email);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            obavestenjeList.add(obavestenje);
+        }
+        return new ObavestenjeList(obavestenjeList);
+    }
 }

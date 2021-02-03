@@ -159,20 +159,28 @@ public class ResenjeController {
 
         sendAttach sendAttach = new sendAttach();
         sendAttach.setEmail(new Tbody());
-        sendAttach.getEmail().setTo(email);
+        sendAttach.getEmail().setTo("eromana98@gmail.com"); //email
         sendAttach.getEmail().setContent("Postovani, <br/><br/> Dostavljamo Vam resenje na Vasu zalbu. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Resenje " + broj);
 
         //TODO - pozvati transformaciju
         String pdfName = "верзија.pdf";
-        sendAttach.getEmail().setFileName(pdfName);
+        sendAttach.getEmail().setFilePdfName(pdfName);
+        String htmlName = "obavestenje.html";
+        sendAttach.getEmail().setFileHtmlName(htmlName);
         try {
 
-            File file = new File("src/main/resources/pdf/" + pdfName);
-            Path pdfPath = file.toPath();
+            File filePdf = new File("src/main/resources/pdf/" + pdfName);
+            Path pdfPath = filePdf.toPath();
             byte[] pdfBytes = Files.readAllBytes(pdfPath);
 
-            sendAttach.getEmail().setFile(pdfBytes);
+            sendAttach.getEmail().setFilePdf(pdfBytes);
+
+            File fileHtml = new File("src/main/resources/pdf/" + htmlName);
+            Path htmlPath = fileHtml.toPath();
+            byte[] htmlBytes = Files.readAllBytes(htmlPath);
+
+            sendAttach.getEmail().setFileHtml(htmlBytes);
 
             return emailClient.sentAttach(sendAttach);
 

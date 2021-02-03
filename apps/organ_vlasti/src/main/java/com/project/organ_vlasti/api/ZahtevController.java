@@ -132,7 +132,6 @@ public class ZahtevController {
         sendPlain.getEmail().setTo(email);
         sendPlain.getEmail().setContent("Postovani, <br/><br/> " + poruka + " <br/><br/> Srdacno, " + user.getName() + " " + user.getLastName());
         sendPlain.getEmail().setSubject("Zahtev: " + zahtevId + " odbijen");
-        sendPlain.getEmail().setFile("");
         if(emailClient.sentPlain(sendPlain)){
             return new ResponseEntity<>(HttpStatus.OK);
         };

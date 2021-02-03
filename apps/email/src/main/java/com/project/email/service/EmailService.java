@@ -44,8 +44,11 @@ public class EmailService {
 		helper.setSubject(email.getSubject());
 		helper.setText(email.getContent(), true);
 
-		ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource((byte[]) email.getFile(), "application/pdf");
-		helper.addAttachment(email.getFileName(), byteArrayDataSource);
+		ByteArrayDataSource byteArrayDataSourcePdf = new ByteArrayDataSource((byte[]) email.getFilePdf(), "application/pdf");
+		helper.addAttachment(email.getFilePdfName(), byteArrayDataSourcePdf);
+
+		ByteArrayDataSource byteArrayDataSourceHtml = new ByteArrayDataSource((byte[]) email.getFileHtml(), "text/html");
+		helper.addAttachment(email.getFileHtmlName(), byteArrayDataSourceHtml);
 		javaMailSender.send(mimeMessage);
 	}
 

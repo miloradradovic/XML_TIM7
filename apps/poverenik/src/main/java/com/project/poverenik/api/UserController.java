@@ -140,7 +140,6 @@ public class UserController {
         sendPlain.getEmail().setTo(email);
         sendPlain.getEmail().setContent("Postovani, <br/><br/> Zamolio bih Vas da ponistite zalbu tip/id: " + zalba + " <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendPlain.getEmail().setSubject("Ponistavanje zalbe: " + zalba);
-        sendPlain.getEmail().setFile("");
         if(emailClient.sentPlain(sendPlain)){
             return new ResponseEntity<>(HttpStatus.OK);
         };

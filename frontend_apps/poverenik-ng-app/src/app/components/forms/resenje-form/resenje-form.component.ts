@@ -18,12 +18,8 @@ export class ResenjeFormComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-<<<<<<< HEAD
-    const idZalbe = "cutanje/1";
-=======
     const idZalbe = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
 
->>>>>>> 91f8931f57b41af8e09e711ad9dd129eef901f33
     const idPoverenika = JSON.parse(localStorage.getItem('user')).email;
     let elementR = document.getElementById("resenje");
     let xmlStringR =

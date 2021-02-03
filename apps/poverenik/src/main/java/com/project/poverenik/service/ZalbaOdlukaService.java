@@ -1,5 +1,6 @@
 package com.project.poverenik.service;
 
+import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
@@ -11,6 +12,7 @@ import com.project.poverenik.rdf_utils.FileUtil;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.poverenik.repository.ZalbaOdlukaRepository;
 
+import com.project.poverenik.transformer.Transformator;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -44,6 +46,9 @@ public class ZalbaOdlukaService {
 
     @Autowired
     private ZalbaOdlukaRepository zalbaOdlukaRepository;
+
+    @Autowired
+    private ExistManager existManager;
 
     private String getMaxId() throws XMLDBException, JAXBException {
     	ResourceSet max = zalbaOdlukaRepository.getMaxId();
@@ -190,6 +195,32 @@ public class ZalbaOdlukaService {
 		return zcList;
 
 	}
+
+    public boolean generateDocuments(String broj){
+        final String OUTPUT_PDF = "poverenik/src/main/resources/generated_files/documents/zalbaodluka" + broj+ ".pdf";
+        final String OUTPUT_HTML = "poverenik/src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";
+        final String XSL_FO = "poverenik/src/main/resources/generated_files/xsl-fo/zalbaodluka_fo.xsl";
+        final String XSL = "poverenik/src/main/resources/generated_files/xslt/zalbaodluka.xsl";
+
+        System.out.println("[INFO] " + Transformator.class.getSimpleName());
+
+        try {
+            Transformator transformator = new Transformator();
+            ZalbaOdluka xml = getOne(broj);
+            transformator.generateHTML(existManager.getOutputStream(xml),
+                    XSL, OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO,existManager.getOutputStream(xml), OUTPUT_PDF);
+        } catch (XMLDBException | IOException | JAXBException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
+    }
 
     public ZalbaOdlukaList getByUser(String email) throws XMLDBException, JAXBException {
         List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();

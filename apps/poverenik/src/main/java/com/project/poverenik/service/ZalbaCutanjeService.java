@@ -1,11 +1,13 @@
 package com.project.poverenik.service;
 
+import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaCutanjeMapper;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.repository.ZalbaCutanjeRepository;
 
+import com.project.poverenik.transformer.Transformator;
 import org.apache.commons.text.StringSubstitutor;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -45,6 +47,9 @@ public class ZalbaCutanjeService {
 
     @Autowired
     private ZalbaCutanjeRepository zalbaCutanjeRepository;
+
+    @Autowired
+    private ExistManager existManager;
 
     private String getMaxId() throws XMLDBException, JAXBException {
     	ResourceSet max = zalbaCutanjeRepository.getMaxId();
@@ -225,6 +230,35 @@ public class ZalbaCutanjeService {
 
 	}
 
+    public boolean generateDocuments(String broj){
+        final String OUTPUT_PDF = "poverenik/src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
+        final String OUTPUT_HTML = "poverenik/src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";
+        final String XSL_FO = "poverenik/src/main/resources/generated_files/xsl-fo/zalbacutanje_fo.xsl";
+        final String XSL = "poverenik/src/main/resources/generated_files/xslt/zalbacutanje.xsl";
+
+
+
+        System.out.println("[INFO] " + Transformator.class.getSimpleName());
+
+
+        try {
+            Transformator transformator = new Transformator();
+            ZalbaCutanje xml = getOne(broj);
+            transformator.generateHTML(existManager.getOutputStream(xml),
+                    XSL, OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO,existManager.getOutputStream(xml), OUTPUT_PDF);
+        } catch (XMLDBException | IOException | JAXBException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
+    }
+
     public ZalbaCutanjeList getByObradaOrNeobradjena() throws XMLDBException, JAXBException {
         List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
 
@@ -262,4 +296,5 @@ public class ZalbaCutanjeService {
         ResourceSet resourceSet = zalbaCutanjeRepository.getOdbijene();
         return resourceSet.getSize();
     }
+
 }

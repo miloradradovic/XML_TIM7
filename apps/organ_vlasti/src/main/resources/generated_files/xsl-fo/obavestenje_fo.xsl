@@ -31,7 +31,7 @@
                         </fo:inline>
                     </xsl:template>
                     <fo:block font-family="Times New Roman" font-size="13px" >
-                        <xsl:value-of select="/oba:obavestenje/oba:obavestenje_body/oba:naziv_organa"/> Назив органа
+                        <xsl:value-of select="/oba:obavestenje/oba:obavestenje_body/oba:naziv_organa"/>
                     </fo:block>
                     <fo:block font-family="Times New Roman" font-size="13px" >
                         <xsl:value-of select="/oba:obavestenje/oba:obavestenje_body/oba:naziv_organa/@sediste"/>

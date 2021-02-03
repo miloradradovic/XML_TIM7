@@ -27,15 +27,7 @@ public class Transformator {
 
     private static TransformerFactory transformerFactory;
 
-    public static final String HTML_FILE = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje.html";
-
     private FopFactory fopFactory;
-
-    public static final String XSL_FO = "organ_vlasti/src/main/resources/generated_files/xsl-fo/obavestenje_fo.xsl";
-
-    public static final String BOOKSTORE = "organ_vlasti/src/main/resources/generated_files/xsl-fo/bookstore.xml";
-
-
 
     public Transformator(){
         /* Inicijalizacija DOM fabrike */
@@ -58,7 +50,7 @@ public class Transformator {
 
     }
 
-    public void generateHTML(String xmlPath, String xslPath) throws FileNotFoundException {
+    public void generateHTML(String xmlPath, String xslPath, String outputFile) throws FileNotFoundException {
 
         try {
 
@@ -74,7 +66,7 @@ public class Transformator {
             // ResourceSet -
             // Transform DOM to HTML
             //DOMSource source = new DOMSource(buildDocument(xmlPath));
-            StreamResult result = new StreamResult(new FileOutputStream(HTML_FILE));
+            StreamResult result = new StreamResult(new FileOutputStream(outputFile));
             Source src = new StreamSource(new StringReader(xmlPath));
             transformer.transform(src, result);
 
@@ -89,12 +81,12 @@ public class Transformator {
     }
 
 
-    public void generatePDF(String xmlPath, String outputPath) throws Exception {
+    public void generatePDF(String xslFo,String xmlPath, String outputPath) throws Exception {
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
 
         // Point to the XSL-FO file
-        File xslFile = new File(XSL_FO);
+        File xslFile = new File(xslFo);
 
         // Create transformation source
         StreamSource transformSource = new StreamSource(xslFile);

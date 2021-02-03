@@ -119,6 +119,8 @@ public class ObavestenjeService {
     public boolean generateDocuments(String brojObavestenja){
         final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje.pdf";
         final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje.html";
+         final String XSL_FO = "organ_vlasti/src/main/resources/generated_files/xsl-fo/obavestenje_fo.xsl";
+
 
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
@@ -128,18 +130,16 @@ public class ObavestenjeService {
             Transformator transformator = new Transformator();
             Obavestenje xml = getOne("1");
             transformator.generateHTML(existManager.getOutputStream(xml),
-                    "organ_vlasti/src/main/resources/generated_files/xslt/obavestenje.xsl");
-            transformator.generatePDF(existManager.getOutputStream(xml), OUTPUT_PDF);
+                    "organ_vlasti/src/main/resources/generated_files/xslt/obavestenje.xsl", OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO,existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {
             e.printStackTrace();
             return false;
         } catch (Exception e) {
             e.printStackTrace();
         }
-		/*pdfTransformer.generateHTML(existManager.getOutputStream(), XSL_FILE);
-		pdfTransformer.generatePDF(OUTPUT_FILE);
-*/
-        System.out.println("[INFO] File \"" + "organ_vlasti/src/main/resources/generated_files/documents/bookstore.pdf" + "\" generated successfully.");
+
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
         System.out.println("[INFO] End.");
         return true;
     }

@@ -52,6 +52,13 @@ public class ZahtevRepository {
     	String xpath = "/zahtev/zahtev_body[@id = max(/zahtev/zahtev_body/@id)]/ancestor::zahtev";
     	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+    
+    public ResourceSet searchText(String text) throws XMLDBException {
+    	String xpath = String.format(
+				"/zahtev/zahtev_body[child::tekst_zahteva/*[local-name()='informacija_o_zahtevu'][contains(.,'%s')]]/ancestor::zahtev",
+				text, text);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 
     public ResourceSet getOdbijeniZahtevi() throws XMLDBException {
         String xpath = String.format("/zahtev/zahtev_body/status[.= '%s']/ancestor::zahtev", "odbijen");

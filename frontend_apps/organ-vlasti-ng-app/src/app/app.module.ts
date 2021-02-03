@@ -19,6 +19,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationNonSignedInComponent } from './navigation/navigation-non-signed-in/navigation-non-signed-in.component';
 import { NavigationGradjaninComponent } from './navigation/navigation-gradjanin/navigation-gradjanin.component';
 import { NavigationOrganVlastiComponent } from './navigation/navigation-organ-vlasti/navigation-organ-vlasti.component';
+import { ZahtevFormComponent } from './components/forms/zahtev-form/zahtev-form.component';
+import { ObavestenjeFormComponent } from './components/forms/obavestenje-form/obavestenje-form.component';
 import { TableComponent } from './components/table/table.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -44,6 +46,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     NavigationNonSignedInComponent,
     NavigationGradjaninComponent,
     NavigationOrganVlastiComponent,
+    ZahtevFormComponent,
+    ObavestenjeFormComponent,
     TableComponent,
     GradjaninMainPageComponent,
     OrganVlastiMainPageComponent,

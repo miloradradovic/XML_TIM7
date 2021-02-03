@@ -66,7 +66,7 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaCutanje(@PathVariable String id) throws XMLDBException, JAXBException {
         ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(id);
@@ -76,7 +76,7 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaCutanjeListByUser() throws XMLDBException, JAXBException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -341,6 +341,8 @@ export class ResenjeService {
         ]
       },
       "poverenik": {
+        validate: function (jsElement) {
+        },
         hasText: true,
         asker: Xonomy.askString,
         attributes: {

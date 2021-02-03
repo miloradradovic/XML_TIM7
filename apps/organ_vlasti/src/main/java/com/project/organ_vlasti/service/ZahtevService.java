@@ -2,9 +2,21 @@ package com.project.organ_vlasti.service;
 
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ZahtevMapper;
+import com.project.organ_vlasti.model.obavestenje.Obavestenje;
+import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
+import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities;
+import com.project.organ_vlasti.rdf_utils.FileUtil;
+import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.organ_vlasti.repository.ZahtevRepository;
+
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -15,6 +27,9 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,4 +172,86 @@ public class ZahtevService {
         }
         return new ZahtevList(zahtevList);
     }
+    
+    public ZahtevList searchMetadata(String datumAfter, String datumBefore, String mesto, String organ_vlasti,
+			String userEmail) throws IOException, JAXBException, XMLDBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		if (datumAfter.equals("")) {
+			datumAfter = "1000-01-01";
+		}
+		if (datumBefore.equals("")) {
+			datumBefore = "9999-12-31";
+		}
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zahtev.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+		
+		String user = "";
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/"+userEmail+">";
+		}
+		
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, mesto, organ_vlasti);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		RDFNode id;
+
+		ZahtevList zcList = null;
+
+		List<Zahtev> listZC = new ArrayList<>();
+
+		while (results.hasNext()) {
+
+			QuerySolution querySolution = results.next();
+
+			id = querySolution.get("zahtev");
+			String idStr = id.toString().split("zahtevi/")[1];
+			Zahtev z = getOne(idStr);
+			listZC.add(z);
+		}
+
+		zcList = new ZahtevList(listZC);
+		System.out.println();
+
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+
+		// ResultSetFormatter.outputAsXML(System.out, results);
+		ResultSetFormatter.out(System.out, results);
+
+		query.close();
+
+		System.out.println("[INFO] End.");
+
+		return zcList;
+
+	}
+
+	public ZahtevList searchText(String text) throws IOException, JAXBException, XMLDBException {
+		List<Zahtev> zahtevList = new ArrayList<>();
+
+		ResourceSet resourceSet = zahtevRepository.searchText(text);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		while (resourceIterator.hasMoreResources()) {
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				return null;
+			JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+			zahtevList.add(zahtev);
+		}
+		return new ZahtevList(zahtevList);
+
+	}
 }

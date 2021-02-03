@@ -2,13 +2,18 @@
 package com.project.poverenik.model.izvestaj;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -21,20 +26,109 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="zahtevi_podneti" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zahtevi_prihvaceni" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zahtevi_odbijeni" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_odluke_podneti" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_odluke_prihvaceno" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_odluke_odbijeno" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_odluke_ponisteno" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_cutanje_podneti" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_cutanje_prihvaceno" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_cutanje_odbijeno" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
- *         &lt;element name="zalbe_cutanje_ponisteno" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
+ *         &lt;element name="zahtevi_podneti"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zahtevi_prihvaceni"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zahtevi_odbijeni"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_odluke_podneti"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_odluke_prihvaceno"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_odluke_odbijeno"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_odluke_ponisteno"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_cutanje_podneti"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_cutanje_prihvaceno"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_cutanje_odbijeno"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="zalbe_cutanje_ponisteno"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;simpleContent&gt;
+ *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+ *                 &lt;anyAttribute processContents='lax'/&gt;
+ *               &lt;/extension&gt;
+ *             &lt;/simpleContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -59,53 +153,44 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class Tbody {
 
     @XmlElement(name = "zahtevi_podneti", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zahteviPodneti;
+    protected Tbody.ZahteviPodneti zahteviPodneti;
     @XmlElement(name = "zahtevi_prihvaceni", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zahteviPrihvaceni;
+    protected Tbody.ZahteviPrihvaceni zahteviPrihvaceni;
     @XmlElement(name = "zahtevi_odbijeni", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zahteviOdbijeni;
+    protected Tbody.ZahteviOdbijeni zahteviOdbijeni;
     @XmlElement(name = "zalbe_odluke_podneti", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeOdlukePodneti;
+    protected Tbody.ZalbeOdlukePodneti zalbeOdlukePodneti;
     @XmlElement(name = "zalbe_odluke_prihvaceno", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeOdlukePrihvaceno;
+    protected Tbody.ZalbeOdlukePrihvaceno zalbeOdlukePrihvaceno;
     @XmlElement(name = "zalbe_odluke_odbijeno", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeOdlukeOdbijeno;
+    protected Tbody.ZalbeOdlukeOdbijeno zalbeOdlukeOdbijeno;
     @XmlElement(name = "zalbe_odluke_ponisteno", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeOdlukePonisteno;
+    protected Tbody.ZalbeOdlukePonisteno zalbeOdlukePonisteno;
     @XmlElement(name = "zalbe_cutanje_podneti", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeCutanjePodneti;
+    protected Tbody.ZalbeCutanjePodneti zalbeCutanjePodneti;
     @XmlElement(name = "zalbe_cutanje_prihvaceno", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeCutanjePrihvaceno;
+    protected Tbody.ZalbeCutanjePrihvaceno zalbeCutanjePrihvaceno;
     @XmlElement(name = "zalbe_cutanje_odbijeno", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeCutanjeOdbijeno;
+    protected Tbody.ZalbeCutanjeOdbijeno zalbeCutanjeOdbijeno;
     @XmlElement(name = "zalbe_cutanje_ponisteno", required = true)
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger zalbeCutanjePonisteno;
+    protected Tbody.ZalbeCutanjePonisteno zalbeCutanjePonisteno;
     @XmlAttribute(name = "id")
     protected String id;
     @XmlAttribute(name = "datum")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datum;
+    @XmlAnyAttribute
+    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     /**
      * Gets the value of the zahteviPodneti property.
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZahteviPodneti }
      *     
      */
-    public BigInteger getZahteviPodneti() {
+    public Tbody.ZahteviPodneti getZahteviPodneti() {
         return zahteviPodneti;
     }
 
@@ -114,10 +199,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZahteviPodneti }
      *     
      */
-    public void setZahteviPodneti(BigInteger value) {
+    public void setZahteviPodneti(Tbody.ZahteviPodneti value) {
         this.zahteviPodneti = value;
     }
 
@@ -126,10 +211,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZahteviPrihvaceni }
      *     
      */
-    public BigInteger getZahteviPrihvaceni() {
+    public Tbody.ZahteviPrihvaceni getZahteviPrihvaceni() {
         return zahteviPrihvaceni;
     }
 
@@ -138,10 +223,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZahteviPrihvaceni }
      *     
      */
-    public void setZahteviPrihvaceni(BigInteger value) {
+    public void setZahteviPrihvaceni(Tbody.ZahteviPrihvaceni value) {
         this.zahteviPrihvaceni = value;
     }
 
@@ -150,10 +235,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZahteviOdbijeni }
      *     
      */
-    public BigInteger getZahteviOdbijeni() {
+    public Tbody.ZahteviOdbijeni getZahteviOdbijeni() {
         return zahteviOdbijeni;
     }
 
@@ -162,10 +247,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZahteviOdbijeni }
      *     
      */
-    public void setZahteviOdbijeni(BigInteger value) {
+    public void setZahteviOdbijeni(Tbody.ZahteviOdbijeni value) {
         this.zahteviOdbijeni = value;
     }
 
@@ -174,10 +259,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukePodneti }
      *     
      */
-    public BigInteger getZalbeOdlukePodneti() {
+    public Tbody.ZalbeOdlukePodneti getZalbeOdlukePodneti() {
         return zalbeOdlukePodneti;
     }
 
@@ -186,10 +271,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukePodneti }
      *     
      */
-    public void setZalbeOdlukePodneti(BigInteger value) {
+    public void setZalbeOdlukePodneti(Tbody.ZalbeOdlukePodneti value) {
         this.zalbeOdlukePodneti = value;
     }
 
@@ -198,10 +283,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukePrihvaceno }
      *     
      */
-    public BigInteger getZalbeOdlukePrihvaceno() {
+    public Tbody.ZalbeOdlukePrihvaceno getZalbeOdlukePrihvaceno() {
         return zalbeOdlukePrihvaceno;
     }
 
@@ -210,10 +295,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukePrihvaceno }
      *     
      */
-    public void setZalbeOdlukePrihvaceno(BigInteger value) {
+    public void setZalbeOdlukePrihvaceno(Tbody.ZalbeOdlukePrihvaceno value) {
         this.zalbeOdlukePrihvaceno = value;
     }
 
@@ -222,10 +307,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukeOdbijeno }
      *     
      */
-    public BigInteger getZalbeOdlukeOdbijeno() {
+    public Tbody.ZalbeOdlukeOdbijeno getZalbeOdlukeOdbijeno() {
         return zalbeOdlukeOdbijeno;
     }
 
@@ -234,10 +319,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukeOdbijeno }
      *     
      */
-    public void setZalbeOdlukeOdbijeno(BigInteger value) {
+    public void setZalbeOdlukeOdbijeno(Tbody.ZalbeOdlukeOdbijeno value) {
         this.zalbeOdlukeOdbijeno = value;
     }
 
@@ -246,10 +331,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukePonisteno }
      *     
      */
-    public BigInteger getZalbeOdlukePonisteno() {
+    public Tbody.ZalbeOdlukePonisteno getZalbeOdlukePonisteno() {
         return zalbeOdlukePonisteno;
     }
 
@@ -258,10 +343,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeOdlukePonisteno }
      *     
      */
-    public void setZalbeOdlukePonisteno(BigInteger value) {
+    public void setZalbeOdlukePonisteno(Tbody.ZalbeOdlukePonisteno value) {
         this.zalbeOdlukePonisteno = value;
     }
 
@@ -270,10 +355,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjePodneti }
      *     
      */
-    public BigInteger getZalbeCutanjePodneti() {
+    public Tbody.ZalbeCutanjePodneti getZalbeCutanjePodneti() {
         return zalbeCutanjePodneti;
     }
 
@@ -282,10 +367,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjePodneti }
      *     
      */
-    public void setZalbeCutanjePodneti(BigInteger value) {
+    public void setZalbeCutanjePodneti(Tbody.ZalbeCutanjePodneti value) {
         this.zalbeCutanjePodneti = value;
     }
 
@@ -294,10 +379,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjePrihvaceno }
      *     
      */
-    public BigInteger getZalbeCutanjePrihvaceno() {
+    public Tbody.ZalbeCutanjePrihvaceno getZalbeCutanjePrihvaceno() {
         return zalbeCutanjePrihvaceno;
     }
 
@@ -306,10 +391,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjePrihvaceno }
      *     
      */
-    public void setZalbeCutanjePrihvaceno(BigInteger value) {
+    public void setZalbeCutanjePrihvaceno(Tbody.ZalbeCutanjePrihvaceno value) {
         this.zalbeCutanjePrihvaceno = value;
     }
 
@@ -318,10 +403,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjeOdbijeno }
      *     
      */
-    public BigInteger getZalbeCutanjeOdbijeno() {
+    public Tbody.ZalbeCutanjeOdbijeno getZalbeCutanjeOdbijeno() {
         return zalbeCutanjeOdbijeno;
     }
 
@@ -330,10 +415,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjeOdbijeno }
      *     
      */
-    public void setZalbeCutanjeOdbijeno(BigInteger value) {
+    public void setZalbeCutanjeOdbijeno(Tbody.ZalbeCutanjeOdbijeno value) {
         this.zalbeCutanjeOdbijeno = value;
     }
 
@@ -342,10 +427,10 @@ public class Tbody {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjePonisteno }
      *     
      */
-    public BigInteger getZalbeCutanjePonisteno() {
+    public Tbody.ZalbeCutanjePonisteno getZalbeCutanjePonisteno() {
         return zalbeCutanjePonisteno;
     }
 
@@ -354,10 +439,10 @@ public class Tbody {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Tbody.ZalbeCutanjePonisteno }
      *     
      */
-    public void setZalbeCutanjePonisteno(BigInteger value) {
+    public void setZalbeCutanjePonisteno(Tbody.ZalbeCutanjePonisteno value) {
         this.zalbeCutanjePonisteno = value;
     }
 
@@ -407,6 +492,838 @@ public class Tbody {
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
+    }
+
+    /**
+     * Gets a map that contains attributes that aren't bound to any typed property on this class.
+     * 
+     * <p>
+     * the map is keyed by the name of the attribute and 
+     * the value is the string value of the attribute.
+     * 
+     * the map returned by this method is live, and you can add new attribute
+     * by updating the map directly. Because of this design, there's no setter.
+     * 
+     * 
+     * @return
+     *     always non-null
+     */
+    public Map<QName, String> getOtherAttributes() {
+        return otherAttributes;
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZahteviOdbijeni {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZahteviPodneti {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZahteviPrihvaceni {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeCutanjeOdbijeno {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeCutanjePodneti {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeCutanjePonisteno {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeCutanjePrihvaceno {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeOdlukeOdbijeno {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeOdlukePodneti {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeOdlukePonisteno {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
+    }
+
+
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;simpleContent&gt;
+     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;positiveInteger"&gt;
+     *       &lt;anyAttribute processContents='lax'/&gt;
+     *     &lt;/extension&gt;
+     *   &lt;/simpleContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "", propOrder = {
+        "value"
+    })
+    public static class ZalbeOdlukePrihvaceno {
+
+        @XmlValue
+        @XmlSchemaType(name = "positiveInteger")
+        protected BigInteger value;
+        @XmlAnyAttribute
+        private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+        /**
+         * Gets the value of the value property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link BigInteger }
+         *     
+         */
+        public BigInteger getValue() {
+            return value;
+        }
+
+        /**
+         * Sets the value of the value property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link BigInteger }
+         *     
+         */
+        public void setValue(BigInteger value) {
+            this.value = value;
+        }
+
+        /**
+         * Gets a map that contains attributes that aren't bound to any typed property on this class.
+         * 
+         * <p>
+         * the map is keyed by the name of the attribute and 
+         * the value is the string value of the attribute.
+         * 
+         * the map returned by this method is live, and you can add new attribute
+         * by updating the map directly. Because of this design, there's no setter.
+         * 
+         * 
+         * @return
+         *     always non-null
+         */
+        public Map<QName, String> getOtherAttributes() {
+            return otherAttributes;
+        }
+
     }
 
 }

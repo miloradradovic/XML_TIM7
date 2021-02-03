@@ -6,6 +6,7 @@ import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.email.Tbody;
 import com.project.organ_vlasti.model.util.email.client.sendAttach;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
+import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.ObavestenjeService;
 
@@ -37,6 +38,22 @@ public class ObavestenjeController {
 
     @Autowired
     ObavestenjeService obavestenjeService;
+    
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ObavestenjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("userEmail") String userEmail, @RequestParam("zahtev") String zahtev) throws XMLDBException, JAXBException, IOException {
+
+    	ObavestenjeList obavestenjeList = obavestenjeService.searchMetadata(datumAfter, datumBefore, organ_vlasti, userEmail, zahtev);
+    	return new ResponseEntity<ObavestenjeList>(obavestenjeList, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ObavestenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+
+    	ObavestenjeList obavestenjeList = obavestenjeService.searchText(input);
+    	return new ResponseEntity<ObavestenjeList>(obavestenjeList, HttpStatus.OK);
+    }
 
     @Autowired
     ZahtevService zahtevService;
@@ -79,6 +96,16 @@ public class ObavestenjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
+    @RequestMapping(value="/by-zahtev/{idZahteva}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getObavestenjeByZahtev(@PathVariable String idZahteva) throws XMLDBException, JAXBException {
+        Obavestenje obavestenje = obavestenjeService.getObavestenjeByZahtev(idZahteva);
+        if(obavestenje != null)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(null, HttpStatus.OK);
+    }
+    
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value="/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ObavestenjeList> getObavestenjeListByUser() throws XMLDBException, JAXBException {

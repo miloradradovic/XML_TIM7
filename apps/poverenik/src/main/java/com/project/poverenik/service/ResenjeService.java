@@ -146,6 +146,23 @@ public class ResenjeService {
         return resenjeRepository.update(resenje.getResenjeBody().getBroj(), patch);
     }
     
+    public Resenje getResenjeByZalba(String idZalbe) throws JAXBException, XMLDBException {
+        ResourceSet resourceSet = resenjeRepository.getResenjeByZalba(idZalbe);
+
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()){
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if(xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Resenje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Resenje resenje = (Resenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            return resenje;
+        }
+        return null;
+    }
+    
     public ResenjeList searchMetadata(String poverenikEmail, String trazilacEmail, String idZalbe, String datumAfter, String datumBefore, String tip, String organVlasti, String mesto) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 

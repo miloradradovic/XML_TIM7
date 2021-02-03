@@ -2,6 +2,8 @@ import {Routes} from '@angular/router';
 import {SignInComponent} from '../components/sign-in/sign-in.component';
 import {SignInGuard} from '../guards/sign-in-guard.service';
 import {SignUpComponent} from '../components/sign-up/sign-up.component';
+import { ZahtevFormComponent } from '../components/forms/zahtev-form/zahtev-form.component';
+import { ObavestenjeFormComponent } from '../components/forms/obavestenje-form/obavestenje-form.component';
 import {IzjasnjavanjaComponent} from '../components/organ-vlasti/izjasnjavanja/izjasnjavanja.component';
 import {NeprocitanaResenjaComponent} from '../components/organ-vlasti/neprocitana-resenja/neprocitana-resenja.component';
 import {ProcitanaResenjaComponent} from '../components/organ-vlasti/procitana-resenja/procitana-resenja.component';
@@ -19,6 +21,14 @@ export const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent
+  },
+  {
+    path: 'zahtev',
+    component: ZahtevFormComponent
+  },
+  {
+    path: 'obavestenje',
+    component: ObavestenjeFormComponent
   },
   {
     path: 'izjasnjavanja',

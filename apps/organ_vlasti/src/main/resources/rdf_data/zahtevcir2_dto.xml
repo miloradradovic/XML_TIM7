@@ -4,6 +4,7 @@
     xmlns:zcir="http://www.zahtevcir" 
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#"
     xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd">
     <zcir:zahtev_body datum="2000-12-12">
         <zcir:mesto>A</zcir:mesto>

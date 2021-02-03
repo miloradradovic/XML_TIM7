@@ -33,7 +33,7 @@ public class ZahtevMapper {
 		
 		zahtev.getZahtevBody().setMesto(zahtevDTO.getZahtevBody().getMesto());
 		zahtev.getZahtevBody().getMesto().getOtherAttributes().put(new QName("property"),"pred:mesto");
-		zahtev.getZahtevBody().getMesto().getOtherAttributes().put(new QName("datatypw"),"xs:string");
+		zahtev.getZahtevBody().getMesto().getOtherAttributes().put(new QName("datatype"),"xs:string");
 		
 		zahtev.getZahtevBody().setCiljaniOrganVlasti(zahtevDTO.getZahtevBody().getCiljaniOrganVlasti());
 		zahtev.getZahtevBody().getCiljaniOrganVlasti().getNazivOrgana().getOtherAttributes().put(new QName("property"),"pred:organ_vlasti");
@@ -58,8 +58,8 @@ public class ZahtevMapper {
 
         zahtev.getZahtevBody().setInformacijeOTraziocu(zahtevDTO.getZahtevBody().getInformacijeOTraziocu());
         zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
-        zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("property"),"pred:podnosilac");
-        zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("content"), userEmail);
+        zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("rel"),"pred:podnosilac");
+        zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().put(new QName("href"), "http://users/" + userEmail);
 
 		com.project.organ_vlasti.model.util.ComplexTypes.ObjectFactory of = new com.project.organ_vlasti.model.util.ComplexTypes.ObjectFactory();
         Tfusnote fusnote = of.createTfusnote();

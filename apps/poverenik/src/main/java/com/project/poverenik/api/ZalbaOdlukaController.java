@@ -79,7 +79,7 @@ public class ZalbaOdlukaController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/by-status", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaOdlukaListObradaOrNeobradjena() throws XMLDBException, JAXBException {
         ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByObradaOrNeobradjena();
@@ -89,7 +89,7 @@ public class ZalbaOdlukaController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER' || 'POVERENIK')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaOdluka(@PathVariable String id) throws XMLDBException, JAXBException {
         ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(id);

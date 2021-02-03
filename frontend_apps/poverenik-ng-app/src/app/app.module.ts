@@ -38,6 +38,10 @@ import { PoverenikProcitaniIzvestajiComponent } from './components/poverenik/pov
 import { PoverenikNeprocitaniIzvestajiComponent } from './components/poverenik/poverenik-neprocitani-izvestaji/poverenik-neprocitani-izvestaji.component';
 import { GradjaninPonistavanjeDialogComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-ponistavanje-dialog/gradjanin-ponistavanje-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { PoverenikDetaljniPrikazResenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-resenja/poverenik-detaljni-prikaz-resenja.component';
+import { PoverenikDetaljniPrikazZahtevaComponent } from './components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
+import { PoverenikDetaljniPrikazObavestenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
+import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/poverenik/poverenik-detaljni-prikaz-izvestaja/poverenik-detaljni-prikaz-izvestaja.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +66,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     PoverenikProcitaniIzvestajiComponent,
     PoverenikNeprocitaniIzvestajiComponent,
     GradjaninPonistavanjeDialogComponent,
+    PoverenikDetaljniPrikazResenjaComponent,
+    PoverenikDetaljniPrikazZahtevaComponent,
+    PoverenikDetaljniPrikazObavestenjaComponent,
+    PoverenikDetaljniPrikazIzvestajaComponent,
   ],
   imports: [
     BrowserModule,

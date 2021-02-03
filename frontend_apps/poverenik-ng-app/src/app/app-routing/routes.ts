@@ -13,6 +13,10 @@ import { ZalbaOdlukaFormComponent } from '../components/forms/zalba-odluka-form/
 import {PoverenikDetaljniPrikazZalbeComponent} from '../components/poverenik/poverenik-detaljni-prikaz-zalbe/poverenik-detaljni-prikaz-zalbe.component';
 import {PoverenikNeprocitaniIzvestajiComponent} from '../components/poverenik/poverenik-neprocitani-izvestaji/poverenik-neprocitani-izvestaji.component';
 import {PoverenikProcitaniIzvestajiComponent} from '../components/poverenik/poverenik-procitani-izvestaji/poverenik-procitani-izvestaji.component';
+import {PoverenikDetaljniPrikazIzvestajaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-izvestaja/poverenik-detaljni-prikaz-izvestaja.component';
+import {PoverenikDetaljniPrikazObavestenjaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
+import {PoverenikDetaljniPrikazResenjaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-resenja/poverenik-detaljni-prikaz-resenja.component';
+import {PoverenikDetaljniPrikazZahtevaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
 
 export const routes: Routes = [
   {
@@ -62,6 +66,22 @@ export const routes: Routes = [
   {
     path: 'detaljni-prikaz-zalbe',
     component: PoverenikDetaljniPrikazZalbeComponent
+  },
+  {
+    path: 'detaljni-prikaz-izvestaja',
+    component: PoverenikDetaljniPrikazIzvestajaComponent
+  },
+  {
+    path: 'detaljni-prikaz-obavestenja',
+    component: PoverenikDetaljniPrikazObavestenjaComponent
+  },
+  {
+    path: 'detaljni-prikaz-resenja',
+    component: PoverenikDetaljniPrikazResenjaComponent
+  },
+  {
+    path: 'detaljni-prikaz-zahteva',
+    component: PoverenikDetaljniPrikazZahtevaComponent
   },
   {
     path: 'neprocitani-izvestaji',

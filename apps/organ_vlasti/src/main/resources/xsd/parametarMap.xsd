@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://parametars" xmlns:p="http://parametars">
+
+    <xs:complexType name="parametarMap">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="value" type="p:Tvalue"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="refIdList">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="ref" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tvalue">
+        <xs:sequence>
+            <xs:element name="value" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

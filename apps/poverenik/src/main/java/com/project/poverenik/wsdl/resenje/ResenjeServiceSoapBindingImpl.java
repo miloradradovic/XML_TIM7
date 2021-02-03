@@ -75,7 +75,6 @@ public class ResenjeServiceSoapBindingImpl implements ResenjeServicePortType {
      */
     public RefIdList getRefs(ParametarMap parametars) {
         LOG.info("Executing operation getRefs");
-        System.out.println(parametars);
         try {
 
             ResenjeList resenjeList;
@@ -97,7 +96,6 @@ public class ResenjeServiceSoapBindingImpl implements ResenjeServicePortType {
             }
 
             for (Resenje resenje: resenjeList.getAny()) {
-                resenje.getResenjeBody().getBroj();
                 refIdList.getRef().add(resenje.getResenjeBody().getBroj());
             }
 

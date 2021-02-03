@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {IzjasnjavanjeService} from '../../../services/izjasnjavanje-service/izjasnjavanje.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {IzvestajService} from '../../../services/izvestaj-service/izvestaj.service';
 
 @Component({
   selector: 'app-izvestaji',
@@ -7,9 +10,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IzvestajiComponent implements OnInit {
 
-  constructor() { }
+  izvestaji = [];
+  constructor(private izvestajService: IzvestajService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    const newList = [];
+    this.izvestajService.getIzvestajList().subscribe(
+      result => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        console.log(izvestajList);
+        const izvestaj = izvestajList.izvestajList['ns4:izvestaj'];
+        if (izvestaj !== undefined){
+          try{
+            izvestaj.forEach((item, index) => {
+              const izvestajObject = {id: item['ns4:izvestaj_body']._attributes.id};
+              newList.push(izvestajObject);
+            });
+          } catch (err){
+            const izvestajObject = {id: izvestaj['ns4:izvestaj_body']._attributes.id};
+            newList.push(izvestajObject);
+          }
+          this.izvestaji = newList;
+        }
+        /*
+        const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
+        if (izjasnjavanja !== undefined){
+          try {
+            izjasnjavanja.forEach((item, index) => {
+              const message = item['ns2:body']._text;
+              const idMessage = item['ns2:body']._attributes.id;
+              const messageObject = {id: idMessage, messageText: message};
+              newList.push(messageObject);
+            });
+          } catch (err){
+            const message = izjasnjavanja['ns2:body']._text;
+            const idMessage = izjasnjavanja['ns2:body']._attributes.id;
+            const messageObject = {id: idMessage, messageText: message};
+            newList.push(messageObject);
+          }
+          this.izjasnjavanja = newList;
+        }
+
+         */
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
   }
 
+  pdf($event: number) {
+
+  }
+
+  xhtml($event: number) {
+
+  }
 }

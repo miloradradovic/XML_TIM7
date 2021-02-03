@@ -24,7 +24,7 @@ export class PoverenikDetaljniPrikazZalbeComponent implements OnInit {
     if (zalbaStatus === 'neobradjena'){
       this.neobradjena = true;
       this.uObradi = false;
-    }else if (zalbaStatus === 'u_obradi'){
+    }else if (zalbaStatus === 'u obradi'){
       this.neobradjena = false;
       this.uObradi = true;
     }else{

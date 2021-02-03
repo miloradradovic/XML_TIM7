@@ -60,15 +60,30 @@ public class IzvestajServiceSoapBindingImpl implements IzvestajServicePortType {
         try {
             ObjectFactory of = new ObjectFactory();
             Tbody _return = of.createTbody();
-            _return.setZalbeCutanjeOdbijeno(BigInteger.valueOf(zalbaCutanjeService.getOdbijene()));
-            _return.setZalbeCutanjePodneti(BigInteger.valueOf(zalbaCutanjeService.getPodnete()));
-            _return.setZalbeCutanjePonisteno(BigInteger.valueOf(zalbaCutanjeService.getPonistene()));
-            _return.setZalbeCutanjePrihvaceno(BigInteger.valueOf(zalbaCutanjeService.getPrihvacene()));
+            _return.setZalbeCutanjeOdbijeno(new Tbody.ZalbeCutanjeOdbijeno()); 
+            _return.getZalbeCutanjeOdbijeno().setValue(BigInteger.valueOf(zalbaCutanjeService.getOdbijene()));
+            
+            _return.setZalbeCutanjePodneti(new Tbody.ZalbeCutanjePodneti()); 
+            _return.getZalbeCutanjePodneti().setValue(BigInteger.valueOf(zalbaCutanjeService.getPodnete()));
+            
+            _return.setZalbeCutanjePonisteno(new Tbody.ZalbeCutanjePonisteno()); 
+            _return.getZalbeCutanjePonisteno().setValue(BigInteger.valueOf(zalbaCutanjeService.getPonistene()));
+            
+            _return.setZalbeCutanjePrihvaceno(new Tbody.ZalbeCutanjePrihvaceno()); 
+            _return.getZalbeCutanjePrihvaceno().setValue(BigInteger.valueOf(zalbaCutanjeService.getPrihvacene()));
 
-            _return.setZalbeOdlukeOdbijeno(BigInteger.valueOf(zalbaOdlukaService.getOdbijene()));
-            _return.setZalbeOdlukePodneti(BigInteger.valueOf(zalbaOdlukaService.getPodnete()));
-            _return.setZalbeOdlukePonisteno(BigInteger.valueOf(zalbaOdlukaService.getPonistene()));
-            _return.setZalbeOdlukePrihvaceno(BigInteger.valueOf(zalbaOdlukaService.getPrihvacene()));
+            
+            _return.setZalbeOdlukeOdbijeno(new Tbody.ZalbeOdlukeOdbijeno()); 
+            _return.getZalbeOdlukeOdbijeno().setValue(BigInteger.valueOf(zalbaOdlukaService.getOdbijene()));
+            
+            _return.setZalbeOdlukePodneti(new Tbody.ZalbeOdlukePodneti()); 
+            _return.getZalbeOdlukePodneti().setValue(BigInteger.valueOf(zalbaOdlukaService.getPodnete()));
+            
+            _return.setZalbeOdlukePonisteno(new Tbody.ZalbeOdlukePonisteno()); 
+            _return.getZalbeOdlukePonisteno().setValue(BigInteger.valueOf(zalbaOdlukaService.getPonistene()));
+            
+            _return.setZalbeOdlukePrihvaceno(new Tbody.ZalbeOdlukePrihvaceno()); 
+            _return.getZalbeOdlukePrihvaceno().setValue(BigInteger.valueOf(zalbaOdlukaService.getPrihvacene()));
             _return.setId("0");
             return _return;
         } catch (Exception ex) {

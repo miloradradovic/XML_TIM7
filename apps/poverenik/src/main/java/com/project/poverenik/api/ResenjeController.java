@@ -108,6 +108,17 @@ public class ResenjeController {
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+    
+    @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_USER')")
+    @RequestMapping(value="/by-zalba/{idZalbe}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getResenjeByZalba(@PathVariable String idZalbe) throws XMLDBException, JAXBException {
+    	String zalba = idZalbe.replace("-", "/");
+        Resenje resenje = resenjeService.getResenjeByZalba(zalba);
+        if(resenje != null)
+            return new ResponseEntity(resenje, HttpStatus.OK);
+
+        return new ResponseEntity(null, HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value="/{broj}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)

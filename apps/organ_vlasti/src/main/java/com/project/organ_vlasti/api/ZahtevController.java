@@ -7,6 +7,7 @@ import com.project.organ_vlasti.model.util.email.client.sendPlain;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.ZahtevService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
+import java.io.IOException;
+
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 
@@ -28,6 +31,22 @@ public class ZahtevController {
 
     @Autowired
     ZahtevService zahtevService;
+    
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZahtevList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("mesto") String mesto, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
+
+    	ZahtevList zahtevList = zahtevService.searchMetadata(datumAfter, datumBefore, mesto, organ_vlasti, userEmail);
+    	return new ResponseEntity<ZahtevList>(zahtevList, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
+    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ZahtevList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+
+    	ZahtevList zahtevList = zahtevService.searchText(input);
+    	return new ResponseEntity<ZahtevList>(zahtevList, HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)

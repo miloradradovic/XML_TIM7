@@ -25,11 +25,17 @@ export class GradjaninMainPageComponent implements OnInit {
         const zahtevList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zahtevList.zahtevList['zcir:zahtev'];
         if (lista !== undefined){
-          lista.forEach((item, index) => {
-            const idZahteva = item['zcir:zahtev_body']._attributes.id;
+          try {
+            lista.forEach((item, index) => {
+              const idZahteva = item['zcir:zahtev_body']._attributes.id;
+              const zahtev = {id: idZahteva};
+              newList.push(zahtev);
+            });
+          } catch (err){
+            const idZahteva = lista['zcir:zahtev_body']._attributes.id;
             const zahtev = {id: idZahteva};
             newList.push(zahtev);
-          });
+          }
           this.zahtevi = newList;
         }
       },
@@ -45,12 +51,19 @@ export class GradjaninMainPageComponent implements OnInit {
         console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
         if (lista !== undefined){
-          lista.forEach((item, index) => {
-            const idObavestenja = item['oba:obavestenje_body']._attributes.id;
-            const idZahtevaOba = item['oba:obavestenje_body']._attributes.idZahteva;
+          try {
+            lista.forEach((item, index) => {
+              const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+              const idZahtevaOba = item['oba:obavestenje_body']._attributes.idZahteva;
+              const obavestenje = {id: idObavestenja, idZahteva: idZahtevaOba};
+              newList2.push(obavestenje);
+            });
+          } catch (err){
+            const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
+            const idZahtevaOba = lista['oba:obavestenje_body']._attributes.idZahteva;
             const obavestenje = {id: idObavestenja, idZahteva: idZahtevaOba};
             newList2.push(obavestenje);
-          });
+          }
           this.obavestenja = newList2;
         }
       },

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ZalbaService} from '../../../services/zalba-service/zalba.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -11,25 +11,31 @@ import {Router} from '@angular/router';
 export class PoverenikMainPageComponent implements OnInit {
 
   zalbe = []; // objekti tipa {id: number}
-  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private router: Router, private detectChange: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    const newList = [];
-    const newList2 = [];
     this.zalbaService.getNeobradjeneAndUObradiZalbeCutanje().subscribe(
       result => {
+        const newList = [];
         // @ts-ignore
         const convert = require('xml-js');
         const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zalbaCutanjeList.zalbaCutanjeList;
         const zalbe = lista['zc:zalba_cutanje'];
         if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
-            const statusZalbe = item['zc:zalba_cutanje_body']['zc:status']._text;
+          try {
+            zalbe.forEach((item, index) => {
+              const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+              const statusZalbe = item['zc:zalba_cutanje_body']['zc:status']._text;
+              const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
+              newList.push(zalba);
+            });
+          } catch (err){
+            const idZalbe = zalbe['zc:zalba_cutanje_body']._attributes.id;
+            const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
             const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
             newList.push(zalba);
-          });
+          }
           this.zalbe = newList.concat(this.zalbe);
         }
       },
@@ -39,18 +45,26 @@ export class PoverenikMainPageComponent implements OnInit {
     );
     this.zalbaService.getNeobradjeneAndUObradiZalbeOdluka().subscribe(
       result => {
+        const newList2 = [];
         // @ts-ignore
         const convert = require('xml-js');
         const zalbaCutanjeOdluka = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zalbaCutanjeOdluka.zalbaOdlukaList;
         const zalbe = lista['zoc:zalba_odluka'];
         if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
-            const statusZalbe = item['zoc:zalba_odluka_body']['zoc:status']._text;
+          try {
+            zalbe.forEach((item, index) => {
+              const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
+              const statusZalbe = item['zoc:zalba_odluka_body']['zoc:status']._text;
+              const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
+              newList2.push(zalba);
+            });
+          } catch (err){
+            const idZalbe = zalbe['zoc:zalba_odluka_body']._attributes.id;
+            const statusZalbe = zalbe['zoc:zalba_odluka_body']['zoc:status']._text;
             const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
             newList2.push(zalba);
-          });
+          }
           this.zalbe = newList2.concat(this.zalbe);
         }
       },
@@ -61,15 +75,15 @@ export class PoverenikMainPageComponent implements OnInit {
   }
 
 
-  convertToXHTML($event: string) {
+  convertToXHTML($event: string): void {
     console.log($event);
   }
 
-  convertToPDF($event: string) {
+  convertToPDF($event: string): void {
     console.log($event);
   }
 
-  doubleClicked($event: string) {
+  doubleClicked($event: string): void {
     console.log($event);
     this.zalbe.forEach((item, index) => {
       const zalba = item.tip + '/' + item.id;
@@ -78,5 +92,21 @@ export class PoverenikMainPageComponent implements OnInit {
       }
     });
     // this.router.navigate(['/detailed-cultural-offer'], {queryParams: {offer_id: offerId}});
+  }
+
+  ponistiZalba($event: string): void {
+    this.zalbaService.ponisti($event).subscribe(
+      result => {
+        this.snackBar.open('Uspjesno ponistena zalba!', 'Ok', {duration: 2000});
+        this.zalbaService.getNeobradjeneAndUObradiZalbeCutanje();
+        this.zalbaService.getNeobradjeneAndUObradiZalbeOdluka();
+        this.zalbe = this.zalbe.filter( zalba => zalba.id !== $event.split('/')[1] && zalba.tip !== $event.split('/')[0]);
+        this.zalbe = [...this.zalbe];
+        this.detectChange.markForCheck();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
   }
 }

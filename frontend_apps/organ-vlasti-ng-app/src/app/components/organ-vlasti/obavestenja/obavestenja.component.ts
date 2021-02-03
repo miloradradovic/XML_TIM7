@@ -25,11 +25,17 @@ export class ObavestenjaComponent implements OnInit {
         console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
         if (lista !== undefined){
-          lista.forEach((item, index) => {
-            const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+          try{
+            lista.forEach((item, index) => {
+              const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+              const obavestenje = {id: idObavestenja};
+              newList.push(obavestenje);
+            });
+          } catch (err){
+            const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
             const obavestenje = {id: idObavestenja};
             newList.push(obavestenje);
-          });
+          }
           this.obavestenja = newList;
         }
       },

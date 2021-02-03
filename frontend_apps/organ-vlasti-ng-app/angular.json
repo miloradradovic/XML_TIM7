@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "organ-vlasti-ng-app"
+  "defaultProject": "organ-vlasti-ng-app",
+  "cli": {
+    "analytics": false
+  }
 }

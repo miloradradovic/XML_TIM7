@@ -7,11 +7,12 @@ import {PoverenikMainPageComponent} from '../components/poverenik/poverenik-main
 import {PoverenikSveZalbeComponent} from '../components/poverenik/poverenik-sve-zalbe/poverenik-sve-zalbe.component';
 import {PoverenikIzjasnjavanjaComponent} from '../components/poverenik/poverenik-izjasnjavanja/poverenik-izjasnjavanja.component';
 import {PoverenikSvaResenjaComponent} from '../components/poverenik/poverenik-sva-resenja/poverenik-sva-resenja.component';
-import {PoverenikSviIzvestajiComponent} from '../components/poverenik/poverenik-svi-izvestaji/poverenik-svi-izvestaji.component';
 import {AddPoverenikFormComponent} from '../components/forms/add-poverenik-form/add-poverenik-form.component';
 import { ResenjeFormComponent } from '../components/forms/resenje-form/resenje-form.component';
 import { ZalbaOdlukaFormComponent } from '../components/forms/zalba-odluka-form/zalba-odluka-form.component';
 import {PoverenikDetaljniPrikazZalbeComponent} from '../components/poverenik/poverenik-detaljni-prikaz-zalbe/poverenik-detaljni-prikaz-zalbe.component';
+import {PoverenikNeprocitaniIzvestajiComponent} from '../components/poverenik/poverenik-neprocitani-izvestaji/poverenik-neprocitani-izvestaji.component';
+import {PoverenikProcitaniIzvestajiComponent} from '../components/poverenik/poverenik-procitani-izvestaji/poverenik-procitani-izvestaji.component';
 
 export const routes: Routes = [
   {
@@ -55,15 +56,19 @@ export const routes: Routes = [
     component: PoverenikSvaResenjaComponent
   },
   {
-    path: 'izvestaji',
-    component: PoverenikSviIzvestajiComponent
-  },
-  {
     path: 'add-poverenik',
     component: AddPoverenikFormComponent
   },
   {
     path: 'detaljni-prikaz-zalbe',
     component: PoverenikDetaljniPrikazZalbeComponent
+  },
+  {
+    path: 'neprocitani-izvestaji',
+    component: PoverenikNeprocitaniIzvestajiComponent
+  },
+  {
+    path: 'procitani-izvestaji',
+    component: PoverenikProcitaniIzvestajiComponent
   }
 ];

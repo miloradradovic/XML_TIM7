@@ -117,9 +117,9 @@ public class ZalbaCutanjeController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value="/toPdf", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadObavestenje() {
-        boolean obavestenje = zalbaCutanjeService.generateDocuments("1");
+    @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadObavestenje(@PathVariable String broj) {
+        boolean obavestenje = zalbaCutanjeService.generateDocuments(broj);
         if(obavestenje)
             return new ResponseEntity(obavestenje, HttpStatus.OK);
 

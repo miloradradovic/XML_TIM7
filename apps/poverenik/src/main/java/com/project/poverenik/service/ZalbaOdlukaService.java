@@ -196,9 +196,9 @@ public class ZalbaOdlukaService {
 
 	}
 
-    public boolean generateDocuments(String brojObavestenja){
-        final String OUTPUT_PDF = "poverenik/src/main/resources/generated_files/documents/zalbaodluka.pdf";
-        final String OUTPUT_HTML = "poverenik/src/main/resources/generated_files/documents/zalbaodluka.html";
+    public boolean generateDocuments(String broj){
+        final String OUTPUT_PDF = "poverenik/src/main/resources/generated_files/documents/zalbaodluka" + broj+ ".pdf";
+        final String OUTPUT_HTML = "poverenik/src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";
         final String XSL_FO = "poverenik/src/main/resources/generated_files/xsl-fo/zalbaodluka_fo.xsl";
         final String XSL = "poverenik/src/main/resources/generated_files/xslt/zalbaodluka.xsl";
 
@@ -206,7 +206,7 @@ public class ZalbaOdlukaService {
 
         try {
             Transformator transformator = new Transformator();
-            ZalbaOdluka xml = getOne("1");
+            ZalbaOdluka xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
                     XSL, OUTPUT_HTML);
             transformator.generatePDF(XSL_FO,existManager.getOutputStream(xml), OUTPUT_PDF);

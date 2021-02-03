@@ -123,9 +123,9 @@ public class ZahtevController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value="/toPdf", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadZahtev() {
-        boolean obavestenje = zahtevService.generateDocuments("1");
+    @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZahtev(@PathVariable String broj) {
+        boolean obavestenje = zahtevService.generateDocuments(broj);
         if (!obavestenje)
             return new ResponseEntity(obavestenje, HttpStatus.OK);
 

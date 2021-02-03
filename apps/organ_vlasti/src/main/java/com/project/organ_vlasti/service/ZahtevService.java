@@ -125,9 +125,9 @@ public class ZahtevService {
 
     }
 
-    public boolean generateDocuments(String brojZahteva){
-        final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/zahtev.pdf";
-        final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/zahtev.html";
+    public boolean generateDocuments(String broj){
+        final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
+        final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/zahtev" + broj + ".html";
         final String XSL_FO = "organ_vlasti/src/main/resources/generated_files/xsl-fo/zahtev_fo.xsl";
 
 
@@ -136,7 +136,7 @@ public class ZahtevService {
 
         try {
             Transformator transformator = new Transformator();
-            Zahtev xml = getOne("1");
+            Zahtev xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
                     "organ_vlasti/src/main/resources/generated_files/xslt/zahtev.xsl", OUTPUT_HTML);
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);

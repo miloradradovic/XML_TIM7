@@ -153,11 +153,11 @@ public class ObavestenjeService {
         return obavestenjeRepository.update(obavestenje.getObavestenjeBody().getBroj(), patch);
     }
 
-    public boolean generateDocuments(String brojObavestenja) {
-        final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje.pdf";
-        final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje.html";
+    public boolean generateDocuments(String broj) {
+        final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
+        final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
         final String XSL_FO = "organ_vlasti/src/main/resources/generated_files/xsl-fo/obavestenje_fo.xsl";
-        final String XSL = "organ_vlasti/src/main/resources/generated_files/xsl-fo/obavestenje.xsl";
+        final String XSL = "organ_vlasti/src/main/resources/generated_files/xslt/obavestenje.xsl";
 
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
@@ -165,7 +165,7 @@ public class ObavestenjeService {
 
         try {
             Transformator transformator = new Transformator();
-            Obavestenje xml = getOne("1");
+            Obavestenje xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml), XSL, OUTPUT_HTML);
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {

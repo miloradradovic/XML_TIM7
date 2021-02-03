@@ -200,4 +200,13 @@ public class ResenjeController {
             return false;
         }
     }
+
+    @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadResenje(@PathVariable String broj) {
+        boolean obavestenje = resenjeService.generateDocuments(broj);
+        if(obavestenje)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
 }

@@ -25,11 +25,17 @@ export class PoverenikSveZalbeComponent implements OnInit {
         const lista = zalbaCutanjeList.zalbaCutanjeList;
         const zalbe = lista['zc:zalba_cutanje'];
         if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+          try {
+            zalbe.forEach((item, index) => {
+              const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+              const zalba = {id: idZalbe, tip: 'cutanje'};
+              newList.push(zalba);
+            });
+          } catch (err){
+            const idZalbe = zalbe['zc:zalba_cutanje_body']._attributes.id;
             const zalba = {id: idZalbe, tip: 'cutanje'};
             newList.push(zalba);
-          });
+          }
           this.zalbe = newList.concat(this.zalbe);
         }
       },
@@ -45,11 +51,17 @@ export class PoverenikSveZalbeComponent implements OnInit {
         const lista = zalbaCutanjeOdluka.zalbaOdlukaList;
         const zalbe = lista['zoc:zalba_odluka'];
         if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
+          try {
+            zalbe.forEach((item, index) => {
+              const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
+              const zalba = {id: idZalbe, tip: 'odluka'};
+              newList2.push(zalba);
+            });
+          } catch (err) {
+            const idZalbe = zalbe['zoc:zalba_odluka_body']._attributes.id;
             const zalba = {id: idZalbe, tip: 'odluka'};
             newList2.push(zalba);
-          });
+          }
           this.zalbe = newList2.concat(this.zalbe);
         }
       },

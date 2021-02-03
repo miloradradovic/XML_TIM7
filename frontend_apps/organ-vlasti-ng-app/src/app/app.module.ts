@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {RouterModule} from '@angular/router';
 import {routes} from './app-routing/routes';
@@ -31,6 +31,9 @@ import { NeprocitanaResenjaComponent } from './components/organ-vlasti/neprocita
 import { IzvestajiComponent } from './components/organ-vlasti/izvestaji/izvestaji.component';
 import { IzjasnjavanjaComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanja.component';
 import {MatTableModule} from '@angular/material/table';
+import { KreiranjeIzvestajaComponent } from './components/organ-vlasti/kreiranje-izvestaja/kreiranje-izvestaja.component';
+import { IzjasnjavanjeDialogComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanje-dialog/izjasnjavanje-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import {MatTableModule} from '@angular/material/table';
     ProcitanaResenjaComponent,
     NeprocitanaResenjaComponent,
     IzvestajiComponent,
-    IzjasnjavanjaComponent
+    IzjasnjavanjaComponent,
+    KreiranjeIzvestajaComponent,
+    IzjasnjavanjeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,9 @@ import {MatTableModule} from '@angular/material/table';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

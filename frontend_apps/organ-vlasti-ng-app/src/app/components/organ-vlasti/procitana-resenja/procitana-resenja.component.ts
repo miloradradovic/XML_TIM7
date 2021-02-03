@@ -24,11 +24,17 @@ export class ProcitanaResenjaComponent implements OnInit {
         console.log(resenjeList);
         const lista = resenjeList.resenjeRefList['ns2:resenje_ref'];
         if (lista !== undefined){
-          lista.forEach((item, index) => {
-            const idResenja = item['ns2:body']._attributes.broj;
+          try {
+            lista.forEach((item, index) => {
+              const idResenja = item['ns2:body']._attributes.broj;
+              const resenje = {id: idResenja};
+              newList.push(resenje);
+            });
+          } catch (err){
+            const idResenja = lista['ns2:body']._attributes.broj;
             const resenje = {id: idResenja};
             newList.push(resenje);
-          });
+          }
           this.resenja = newList;
         }
       },

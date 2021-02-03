@@ -25,11 +25,17 @@ export class OrganVlastiMainPageComponent implements OnInit {
         console.log(zahtevList);
         const lista = zahtevList.zahtevList['zcir:zahtev'];
         if (lista !== undefined){
-          lista.forEach((item, index) => {
-            const idZahteva = item['zcir:zahtev_body']._attributes.id;
+          try {
+            lista.forEach((item, index) => {
+              const idZahteva = item['zcir:zahtev_body']._attributes.id;
+              const zahtev = {id: idZahteva};
+              newList.push(zahtev);
+            });
+          } catch (err){
+            const idZahteva = lista['zcir:zahtev_body']._attributes.id;
             const zahtev = {id: idZahteva};
             newList.push(zahtev);
-          });
+          }
           this.zahtevi = newList;
         }
       },

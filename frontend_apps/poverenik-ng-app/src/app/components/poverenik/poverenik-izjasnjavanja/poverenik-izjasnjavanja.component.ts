@@ -21,11 +21,17 @@ export class PoverenikIzjasnjavanjaComponent implements OnInit {
         const izjasnjavanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
         if (izjasnjavanja !== undefined){
-          izjasnjavanja.forEach((item, index) => {
-            const message = item['ns2:body']._text;
+          try {
+            izjasnjavanja.forEach((item, index) => {
+              const message = item['ns2:body']._text;
+              const messageObject = {id: message};
+              newList.push(messageObject);
+            });
+          } catch (err){
+            const message = izjasnjavanja['ns2:body']._text;
             const messageObject = {id: message};
             newList.push(messageObject);
-          });
+          }
           this.izjasnjavanja = newList;
         }
       },

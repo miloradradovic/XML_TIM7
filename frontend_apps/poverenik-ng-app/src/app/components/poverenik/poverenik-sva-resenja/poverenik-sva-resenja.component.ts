@@ -25,11 +25,17 @@ export class PoverenikSvaResenjaComponent implements OnInit {
         console.log(lista);
         const resenja = lista['ra:resenje'];
         if (resenja !== undefined){
-          resenja.forEach((item, index) => {
-            const idResenja = item['ra:resenje_body']._attributes.id;
+          try {
+            resenja.forEach((item, index) => {
+              const idResenja = item['ra:resenje_body']._attributes.id;
+              const resenje = {id: idResenja};
+              newList.push(resenje);
+            });
+          } catch (err){
+            const idResenja = resenja['ra:resenje_body']._attributes.id;
             const resenje = {id: idResenja};
             newList.push(resenje);
-          });
+          }
           this.resenja = newList;
         }
       },

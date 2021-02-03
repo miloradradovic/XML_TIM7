@@ -9,6 +9,7 @@ import {ObavestenjaComponent} from '../components/organ-vlasti/obavestenja/obave
 import {OrganVlastiMainPageComponent} from '../components/organ-vlasti/organ-vlasti-main-page/organ-vlasti-main-page.component';
 import {ZahteviComponent} from '../components/organ-vlasti/zahtevi/zahtevi.component';
 import {GradjaninMainPageComponent} from '../components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
+import {KreiranjeIzvestajaComponent} from '../components/organ-vlasti/kreiranje-izvestaja/kreiranje-izvestaja.component';
 
 export const routes: Routes = [
   {
@@ -46,5 +47,9 @@ export const routes: Routes = [
   {
     path: 'main-page-gradjanin',
     component: GradjaninMainPageComponent
+  },
+  {
+    path: 'kreiraj-izvestaj',
+    component: KreiranjeIzvestajaComponent
   }
 ];

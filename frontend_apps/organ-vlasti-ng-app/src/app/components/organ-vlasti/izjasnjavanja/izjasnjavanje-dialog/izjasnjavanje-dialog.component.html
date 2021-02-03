@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Izjasni se</h1>
+<div mat-dialog-content>
+  <p>Poruka izjasnjenja: </p>
+  <mat-form-field>
+    <mat-label>izjasnjenje</mat-label>
+    <input matInput [(ngModel)]="messageText">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Odustani</button>
+  <button mat-button (click)="posaljiIzjasnjavanje()">Posalji</button>
+</div>

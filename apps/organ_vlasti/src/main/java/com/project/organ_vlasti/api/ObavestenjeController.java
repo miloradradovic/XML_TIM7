@@ -105,7 +105,7 @@ public class ObavestenjeController {
     }
 
     @RequestMapping(value = "/{broj}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> delete(@PathVariable String broj) throws XMLDBException, JAXBException {
+    public ResponseEntity<?> delete(@PathVariable String broj) throws XMLDBException {
         if (obavestenjeService.delete(broj))
             return new ResponseEntity<>(HttpStatus.OK);
 
@@ -133,9 +133,9 @@ public class ObavestenjeController {
                 headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + broj + ".pdf");
                 return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
             } catch (Exception e) {
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity(obavestenje, HttpStatus.OK);
+        return new ResponseEntity<>(obavestenje, HttpStatus.OK);
 
         // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
@@ -153,9 +153,9 @@ public class ObavestenjeController {
                 headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + broj + ".html");
                 return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
             } catch (Exception e) {
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity(obavestenje, HttpStatus.OK);
+        return new ResponseEntity<>(obavestenje, HttpStatus.OK);
 
         // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

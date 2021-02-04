@@ -34,35 +34,35 @@ public class EndpointConfig {
     @Autowired
     IzvestajServiceSoapBindingImpl izvestajServiceSoapBindingImpl;
 
-    @Bean(name="obavestenjeEndpointBean")
+    @Bean(name = "obavestenjeEndpointBean")
     public Endpoint obavestenjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, obavestenjeServiceSoapBindingImpl);
         endpoint.publish("/obavestenje");
         return endpoint;
     }
 
-    @Bean(name="zahtevEndpointBean")
+    @Bean(name = "zahtevEndpointBean")
     public Endpoint zahtevEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, zahtevServiceSoapBindingImpl);
         endpoint.publish("/zahtev");
         return endpoint;
     }
 
-    @Bean(name="izjasnjavanjeEndpointBean")
+    @Bean(name = "izjasnjavanjeEndpointBean")
     public Endpoint izjasnjavanjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izjasnjavanjeServiceSoapBindingImpl);
         endpoint.publish("/izjasnjavanje");
         return endpoint;
     }
 
-    @Bean(name="resenjeRefEndpointBean")
+    @Bean(name = "resenjeRefEndpointBean")
     public Endpoint resenjeRefEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, resenjeRefServiceSoapBindingImpl);
         endpoint.publish("/resenjeRef");
         return endpoint;
     }
 
-    @Bean(name="izvestajEndpointBean")
+    @Bean(name = "izvestajEndpointBean")
     public Endpoint izvestajEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izvestajServiceSoapBindingImpl);
         endpoint.publish("/izvestaj");

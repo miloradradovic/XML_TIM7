@@ -16,11 +16,7 @@ public class EmailClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://email/ws/sendPlain"));
 
-        if(response.getResponse().equals("OK")){
-            return true;
-        }
-
-        return false;
+        return response.getResponse().equals("OK");
     }
 
     public boolean sentAttach(sendAttach request) {
@@ -30,10 +26,6 @@ public class EmailClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://email/ws/sendAttach"));
 
-        if(response.getResponse().equals("OK")){
-            return true;
-        }
-
-        return false;
+        return response.getResponse().equals("OK");
     }
 }

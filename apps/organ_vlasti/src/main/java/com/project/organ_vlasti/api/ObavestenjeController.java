@@ -12,6 +12,8 @@ import com.project.organ_vlasti.service.ObavestenjeService;
 
 import com.project.organ_vlasti.service.ZahtevService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,12 @@ import org.xmldb.api.base.XMLDBException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -138,12 +142,43 @@ public class ObavestenjeController {
     }
 
     @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadObavestenje(@PathVariable String broj) {
+    public ResponseEntity<?> downloadObavestenjePDF(@PathVariable String broj) {
+        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
         boolean obavestenje = obavestenjeService.generateDocuments(broj);
         if (obavestenje)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + broj + ".pdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
             return new ResponseEntity(obavestenje, HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value="/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadObavestenjeXHTML(@PathVariable String broj) {
+        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
+        boolean obavestenje = obavestenjeService.generateDocuments(broj);
+        if (obavestenje)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + broj + ".html");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     private boolean sendToUser(String broj, String email){

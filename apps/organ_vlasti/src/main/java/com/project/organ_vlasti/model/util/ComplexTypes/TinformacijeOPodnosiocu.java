@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Tinformacije_o_podnosiocu complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tinformacije_o_podnosiocu"&gt;
  *   &lt;complexContent&gt;
@@ -24,13 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tinformacije_o_podnosiocu", propOrder = {
-    "lice",
-    "adresa"
+        "lice",
+        "adresa"
 })
 public class TinformacijeOPodnosiocu {
 
@@ -41,11 +39,9 @@ public class TinformacijeOPodnosiocu {
 
     /**
      * Gets the value of the lice property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TtipLica }
-     *     
+     *
+     * @return possible object is
+     * {@link TtipLica }
      */
     public TtipLica getLice() {
         return lice;
@@ -53,11 +49,9 @@ public class TinformacijeOPodnosiocu {
 
     /**
      * Sets the value of the lice property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TtipLica }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TtipLica }
      */
     public void setLice(TtipLica value) {
         this.lice = value;
@@ -65,11 +59,9 @@ public class TinformacijeOPodnosiocu {
 
     /**
      * Gets the value of the adresa property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @return possible object is
+     * {@link Tadresa }
      */
     public Tadresa getAdresa() {
         return adresa;
@@ -77,11 +69,9 @@ public class TinformacijeOPodnosiocu {
 
     /**
      * Sets the value of the adresa property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tadresa }
      */
     public void setAdresa(Tadresa value) {
         this.adresa = value;

@@ -1,20 +1,14 @@
 
 package com.project.organ_vlasti.model.util.message;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -34,12 +28,10 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", namespace = "http://www.message", propOrder = {
-    "body"
+        "body"
 })
 @XmlRootElement(name = "message", namespace = "http://www.message")
 public class Message {
@@ -49,11 +41,9 @@ public class Message {
 
     /**
      * Gets the value of the body property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Body }
-     *     
+     *
+     * @return possible object is
+     * {@link Body }
      */
     public Body getBody() {
         return body;
@@ -61,11 +51,9 @@ public class Message {
 
     /**
      * Sets the value of the body property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Body }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Body }
      */
     public void setBody(Body value) {
         this.body = value;
@@ -74,9 +62,9 @@ public class Message {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -86,12 +74,10 @@ public class Message {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Body {
 
@@ -102,11 +88,9 @@ public class Message {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -114,11 +98,9 @@ public class Message {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -126,11 +108,9 @@ public class Message {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -138,11 +118,9 @@ public class Message {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;

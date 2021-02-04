@@ -1,19 +1,19 @@
 
 package com.project.organ_vlasti.model.util.ComplexTypes;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * <p>Java class for Tnacini_dostave complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tnacini_dostave"&gt;
  *   &lt;complexContent&gt;
@@ -25,12 +25,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tnacini_dostave", propOrder = {
-    "nacinDostave"
+        "nacinDostave"
 })
 public class TnaciniDostave {
 
@@ -39,25 +37,23 @@ public class TnaciniDostave {
 
     /**
      * Gets the value of the nacinDostave property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the nacinDostave property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getNacinDostave().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TnacinDostave }
-     * 
-     * 
      */
     public List<TnacinDostave> getNacinDostave() {
         if (nacinDostave == null) {

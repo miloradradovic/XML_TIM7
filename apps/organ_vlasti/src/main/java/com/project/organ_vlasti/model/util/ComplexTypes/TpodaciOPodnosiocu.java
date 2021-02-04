@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Tpodaci_o_podnosiocu complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tpodaci_o_podnosiocu"&gt;
  *   &lt;complexContent&gt;
@@ -25,14 +25,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tpodaci_o_podnosiocu", propOrder = {
-    "osoba",
-    "adresa",
-    "drugiPodaciZaKontakt"
+        "osoba",
+        "adresa",
+        "drugiPodaciZaKontakt"
 })
 public class TpodaciOPodnosiocu {
 
@@ -45,11 +43,9 @@ public class TpodaciOPodnosiocu {
 
     /**
      * Gets the value of the osoba property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tosoba }
-     *     
+     *
+     * @return possible object is
+     * {@link Tosoba }
      */
     public Tosoba getOsoba() {
         return osoba;
@@ -57,11 +53,9 @@ public class TpodaciOPodnosiocu {
 
     /**
      * Sets the value of the osoba property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tosoba }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tosoba }
      */
     public void setOsoba(Tosoba value) {
         this.osoba = value;
@@ -69,11 +63,9 @@ public class TpodaciOPodnosiocu {
 
     /**
      * Gets the value of the adresa property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @return possible object is
+     * {@link Tadresa }
      */
     public Tadresa getAdresa() {
         return adresa;
@@ -81,11 +73,9 @@ public class TpodaciOPodnosiocu {
 
     /**
      * Sets the value of the adresa property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tadresa }
      */
     public void setAdresa(Tadresa value) {
         this.adresa = value;
@@ -93,11 +83,9 @@ public class TpodaciOPodnosiocu {
 
     /**
      * Gets the value of the drugiPodaciZaKontakt property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getDrugiPodaciZaKontakt() {
         return drugiPodaciZaKontakt;
@@ -105,11 +93,9 @@ public class TpodaciOPodnosiocu {
 
     /**
      * Sets the value of the drugiPodaciZaKontakt property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDrugiPodaciZaKontakt(String value) {
         this.drugiPodaciZaKontakt = value;

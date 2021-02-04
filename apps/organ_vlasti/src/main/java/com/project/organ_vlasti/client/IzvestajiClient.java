@@ -16,10 +16,9 @@ public class IzvestajiClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://izvestaji/ws/getPodaci"));
 
-        if(response.getResponse().getId().equals("-1")){
+        if (response.getResponse().getId().equals("-1")) {
             return null;
         }
-
         return response;
     }
 
@@ -30,10 +29,6 @@ public class IzvestajiClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://izvestaji/ws/podnesiIzvestaj"));
 
-        if(response.getResponse().equals("OK")){
-            return true;
-        }
-
-        return false;
+        return response.getResponse().equals("OK");
     }
 }

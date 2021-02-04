@@ -14,10 +14,6 @@ public class IzvestavanjeClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://www.message/ws/setIzjasnjavanje"));
 
-        if(response.getResponse().equals("OK")){
-            return true;
-        }
-
-        return false;
+        return response.getResponse().equals("OK");
     }
 }

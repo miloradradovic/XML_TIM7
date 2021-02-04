@@ -16,10 +16,9 @@ public class ZalbeClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://www.zalbacutanje/ws/getZalbaCutanjeById"));
 
-        if(response.getZalba_cutanje().getId().equals("-1")){
+        if (response.getZalba_cutanje().getId().equals("-1")) {
             return null;
         }
-
         return response;
     }
 
@@ -30,10 +29,9 @@ public class ZalbeClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://www.zalbanaodlukucir/ws/getZalbaOdlukaById"));
 
-        if(response.getZalba_odluka().getId().equals("-1")){
+        if (response.getZalba_odluka().getId().equals("-1")) {
             return null;
         }
-
         return response;
     }
 }

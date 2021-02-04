@@ -17,19 +17,19 @@ public class JaxB {
     public <T> T unmarshall(Class genericClass, String text) throws JAXBException {
 
         // Definiše se JAXB kontekst (putanja do paketa sa JAXB bean-ovima)
-        JAXBContext context =  JAXBContext.newInstance(genericClass);
+        JAXBContext context = JAXBContext.newInstance(genericClass);
 
         // Unmarshaller je objekat zadužen za konverziju iz XML-a u objektni model
         Unmarshaller unmarshaller = context.createUnmarshaller();
 
         // Unmarshalling generiše objektni model na osnovu XML fajla
-        T createdObject = (T)unmarshaller.unmarshal(new StringReader(text));
+        T createdObject = (T) unmarshaller.unmarshal(new StringReader(text));
 
-        return  createdObject;
+        return createdObject;
     }
 
     public <T> String marshall(Class genericClass, T objectToMarshall) throws JAXBException {
-        JAXBContext context =  JAXBContext.newInstance(genericClass);
+        JAXBContext context = JAXBContext.newInstance(genericClass);
 
         // Marshaller je objekat zadužen za konverziju iz objektnog u XML model
         Marshaller marshaller = context.createMarshaller();
@@ -40,7 +40,7 @@ public class JaxB {
         return sw.toString();
     }
 
-    public <T> boolean validate(Class genericClass, T objectValidate){
+    public <T> boolean validate(Class genericClass, T objectValidate) {
 
         String path = this.chooseXSD(genericClass.getSimpleName());
 
@@ -56,7 +56,7 @@ public class JaxB {
 
             unmarshaller.unmarshal(new StringReader(objectValidateString));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -64,19 +64,19 @@ public class JaxB {
         return true;
     }
 
-    public String chooseXSD(String input){
+    public String chooseXSD(String input) {
         String path = null;
 
-        switch (input){
-            case ("User"):{
+        switch (input) {
+            case ("User"): {
                 path = "classpath:xsd/user.xsd";
                 break;
             }
-            case("Zahtev"):{
+            case ("Zahtev"): {
                 path = "classpath:xsd/zahtevcir.xsd";
                 break;
             }
-            case("Obavestenje"):{
+            case ("Obavestenje"): {
                 path = "classpath:xsd/obavestenje.xsd";
                 break;
             }

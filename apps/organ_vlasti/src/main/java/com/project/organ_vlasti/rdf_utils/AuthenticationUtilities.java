@@ -1,4 +1,5 @@
 package com.project.organ_vlasti.rdf_utils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -57,8 +58,7 @@ public class AuthenticationUtilities {
     /**
      * Read a resource for an example.
      *
-     * @param fileName
-     *            the name of the resource
+     * @param fileName the name of the resource
      * @return an input stream for the resource
      * @throws IOException
      */

@@ -17,10 +17,8 @@ public class getRefsResponse {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link RefIdList }
-     *
+     * @return possible object is
+     * {@link RefIdList }
      */
     public RefIdList getResponse() {
         return refs;
@@ -29,12 +27,10 @@ public class getRefsResponse {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link RefIdList }
-     *
+     * @param value allowed object is
+     *              {@link RefIdList }
      */
-    public void setResponse(RefIdList  value) {
+    public void setResponse(RefIdList value) {
         this.refs = value;
     }
 }

@@ -1,25 +1,25 @@
 package com.project.organ_vlasti.service;
 
+import com.project.organ_vlasti.client.EmailClient;
 import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ZahtevMapper;
-import com.project.organ_vlasti.model.obavestenje.Obavestenje;
-import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
+import com.project.organ_vlasti.model.user.User;
+import com.project.organ_vlasti.model.util.email.Tbody;
+import com.project.organ_vlasti.model.util.email.client.sendPlain;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities;
-import com.project.organ_vlasti.rdf_utils.FileUtil;
 import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProperties;
+import com.project.organ_vlasti.rdf_utils.FileUtil;
 import com.project.organ_vlasti.repository.ZahtevRepository;
 import com.project.organ_vlasti.transformer.Transformator;
-
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -29,6 +29,7 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -45,38 +46,35 @@ public class ZahtevService {
 
     @Autowired
     private ExistManager existManager;
-    
+
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = zahtevRepository.getMaxId();
         ResourceIterator resourceIterator = max.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
-                return "0";
-            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Zahtev zahteveMax = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zahteveMax.getZahtevBody().getId();
+        if (!resourceIterator.hasMoreResources()) {
+            return "0";
         }
-        return "0";
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            return "0";
+        JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Zahtev zahteveMax = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        return zahteveMax.getZahtevBody().getId();
+
     }
-     
+
 
     public boolean create(Zahtev zahtevDTO, String userEmail) throws XMLDBException, JAXBException {
-        if(jaxB.validate(zahtevDTO.getClass(), zahtevDTO)){
-        	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
-        	
-        	Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id, userEmail);
-        	if(jaxB.validate(zahtev.getClass(), zahtev)) {
-                return zahtevRepository.create(zahtev);
-        	}{
-        		return false;
-        	}
+        if (jaxB.validate(zahtevDTO.getClass(), zahtevDTO)) {
+            String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-        }else{
-            return false;
+            Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id, userEmail);
+            if (jaxB.validate(zahtev.getClass(), zahtev)) {
+                return zahtevRepository.create(zahtev);
+            }
         }
+        return false;
     }
 
     public ZahtevList getAll() throws XMLDBException, JAXBException {
@@ -85,9 +83,9 @@ public class ZahtevService {
         ResourceSet resourceSet = zahtevRepository.getAll();
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(Zahtev.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -100,10 +98,10 @@ public class ZahtevService {
     public Zahtev getOne(String id) throws JAXBException, XMLDBException {
         XMLResource xmlResource = zahtevRepository.getOne(id);
 
-        if(xmlResource == null)
+        if (xmlResource == null)
             return null;
 
-        Zahtev zahtev = null;
+        Zahtev zahtev;
 
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -125,7 +123,7 @@ public class ZahtevService {
 
     }
 
-    public boolean generateDocuments(String broj){
+    public boolean generateDocuments(String broj) {
         final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
         final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
         final String XSL_FO = "src/main/resources/generated_files/xsl-fo/zahtev_fo.xsl";
@@ -140,12 +138,11 @@ public class ZahtevService {
             transformator.generateHTML(existManager.getOutputStream(xml),
                     "src/main/resources/generated_files/xslt/zahtev.xsl", OUTPUT_HTML);
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
-        } catch (XMLDBException | IOException | JAXBException e) {
-            e.printStackTrace();
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+
 		/*pdfTransformer.generateHTML(existManager.getOutputStream(), XSL_FILE);
 		pdfTransformer.generatePDF(OUTPUT_FILE);
 */
@@ -176,9 +173,9 @@ public class ZahtevService {
         ResourceSet resourceSet = zahtevRepository.getAllNeobradjen();
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(Zahtev.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -194,9 +191,9 @@ public class ZahtevService {
         ResourceSet resourceSet = zahtevRepository.getAllByUser(email);
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(Zahtev.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -205,86 +202,137 @@ public class ZahtevService {
         }
         return new ZahtevList(zahtevList);
     }
-    
+
     public ZahtevList searchMetadata(String datumAfter, String datumBefore, String mesto, String organ_vlasti,
-			String userEmail) throws IOException, JAXBException, XMLDBException {
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+                                     String userEmail) throws IOException, JAXBException, XMLDBException {
+        ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
-		if (datumAfter.equals("")) {
-			datumAfter = "1000-01-01";
-		}
-		if (datumBefore.equals("")) {
-			datumBefore = "9999-12-31";
-		}
+        if (datumAfter.equals("")) {
+            datumAfter = "1000-01-01T00:00:00";
+        }
+        if (datumBefore.equals("")) {
+            datumBefore = "9999-12-31T00:00:00";
+        }
 
-		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zahtev.rq",
-				StandardCharsets.UTF_8);
-		System.out.println(sparqlQueryTemplate);
-		
-		String user = "";
-		if (userEmail.equals("")) {
-			user = "?podnosilac";
-		} else {
-			user = "<http://users/"+userEmail+">";
-		}
-		
-		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, mesto, organ_vlasti);
-		System.out.println(sparqlQuery);
+        String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zahtev.rq",
+                StandardCharsets.UTF_8);
+        System.out.println(sparqlQueryTemplate);
 
-		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        String user;
+        if (userEmail.equals("")) {
+            user = "?podnosilac";
+        } else {
+            user = "<http://users/" + userEmail + ">";
+        }
 
-		ResultSet results = query.execSelect();
+        String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, mesto, organ_vlasti);
+        System.out.println(sparqlQuery);
 
-		RDFNode id;
+        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		ZahtevList zcList = null;
+        ResultSet results = query.execSelect();
 
-		List<Zahtev> listZC = new ArrayList<>();
+        RDFNode id;
 
-		while (results.hasNext()) {
+        ZahtevList zcList;
 
-			QuerySolution querySolution = results.next();
+        List<Zahtev> listZC = new ArrayList<>();
 
-			id = querySolution.get("zahtev");
-			String idStr = id.toString().split("zahtevi/")[1];
-			Zahtev z = getOne(idStr);
-			listZC.add(z);
-		}
+        while (results.hasNext()) {
 
-		zcList = new ZahtevList(listZC);
-		System.out.println();
+            QuerySolution querySolution = results.next();
 
-		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+            id = querySolution.get("zahtev");
+            String idStr = id.toString().split("zahtevi/")[1];
+            Zahtev z = getOne(idStr);
+            listZC.add(z);
+        }
 
-		results = query.execSelect();
+        zcList = new ZahtevList(listZC);
+        System.out.println();
 
-		// ResultSetFormatter.outputAsXML(System.out, results);
-		ResultSetFormatter.out(System.out, results);
+        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		query.close();
+        results = query.execSelect();
 
-		System.out.println("[INFO] End.");
+        // ResultSetFormatter.outputAsXML(System.out, results);
+        ResultSetFormatter.out(System.out, results);
 
-		return zcList;
+        query.close();
 
-	}
+        System.out.println("[INFO] End.");
 
-	public ZahtevList searchText(String text) throws IOException, JAXBException, XMLDBException {
-		List<Zahtev> zahtevList = new ArrayList<>();
+        return zcList;
 
-		ResourceSet resourceSet = zahtevRepository.searchText(text);
-		ResourceIterator resourceIterator = resourceSet.getIterator();
+    }
 
-		while (resourceIterator.hasMoreResources()) {
-			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-			if (xmlResource == null)
-				return null;
-			JAXBContext context = JAXBContext.newInstance(Zahtev.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-			Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-			zahtevList.add(zahtev);
-		}
-		return new ZahtevList(zahtevList);
+    public ZahtevList searchText(String text) throws JAXBException, XMLDBException {
+        List<Zahtev> zahtevList = new ArrayList<>();
 
-	}
+        ResourceSet resourceSet = zahtevRepository.searchText(text);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()) {
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if (xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Zahtev.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zahtevList.add(zahtev);
+        }
+        return new ZahtevList(zahtevList);
+
+    }
+
+    public boolean odbijZahtev(String info) throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        //info = "zahtevId:poruka"
+        String zahtevId = info.split(":")[0];
+        String poruka = info.split(":")[1];
+
+        Zahtev zahtev = getOne(zahtevId);
+        String email = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
+
+        if (!update(zahtev, "odbijen")) {
+            return false;
+        }
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.email.client");
+
+        EmailClient emailClient = new EmailClient();
+        emailClient.setDefaultUri("http://localhost:8095/ws");
+        emailClient.setMarshaller(marshaller);
+        emailClient.setUnmarshaller(marshaller);
+
+        sendPlain sendPlain = new sendPlain();
+        sendPlain.setEmail(new Tbody());
+        sendPlain.getEmail().setTo(email);
+        sendPlain.getEmail().setContent("Postovani, <br/><br/> " + poruka + " <br/><br/> Srdacno, " + user.getName() + " " + user.getLastName());
+        sendPlain.getEmail().setSubject("Zahtev: " + zahtevId + " odbijen");
+
+        return emailClient.sentPlain(sendPlain);
+    }
+
+    public String downloadResenjePDF(String broj) {
+        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj) {
+        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
 }

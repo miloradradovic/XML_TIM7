@@ -5,15 +5,15 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    public ObjectFactory(){
+    public ObjectFactory() {
 
     }
 
-    public getZalbaOdlukaById createGetZalbaOdlukaById(){
+    public getZalbaOdlukaById createGetZalbaOdlukaById() {
         return new getZalbaOdlukaById();
     }
 
-    public getZalbaOdlukaByIdResponse createGetZalbaOdlukaByIdResponse(){
+    public getZalbaOdlukaByIdResponse createGetZalbaOdlukaByIdResponse() {
         return new getZalbaOdlukaByIdResponse();
     }
 }

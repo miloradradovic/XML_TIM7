@@ -20,7 +20,7 @@ public class IzvestajiRepository {
 
 
     public String create(Izvestaj izvestaj) throws XMLDBException {
-        if(existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj)){
+        if (existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj)) {
             return izvestaj.getIzvestajBody().getId();
         }
         return null;
@@ -38,7 +38,7 @@ public class IzvestajiRepository {
         return existManager.remove(collectionUri, id);
     }
 
-    public ResourceSet getMaxId() throws XMLDBException  {
+    public ResourceSet getMaxId() throws XMLDBException {
         String xpath = "/izvestaj/izvestaj_body[@id = max(/izvestaj/izvestaj_body/@id)]/ancestor::izvestaj";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }

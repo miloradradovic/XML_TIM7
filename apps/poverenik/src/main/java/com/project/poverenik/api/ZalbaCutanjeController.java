@@ -5,6 +5,8 @@ import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.service.ZalbaCutanjeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4201")
 @RestController
@@ -118,11 +123,37 @@ public class ZalbaCutanjeController {
     }
 
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadObavestenje(@PathVariable String broj) {
-        boolean obavestenje = zalbaCutanjeService.generateDocuments(broj);
-        if (obavestenje)
-            return new ResponseEntity<>(obavestenje, HttpStatus.OK);
+    public ResponseEntity<?> downloadResenjePDF(@PathVariable String broj) {
+        String path = zalbaCutanjeService.downloadResenjePDF(broj);
+        if(!path.equals("")){
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".pdf");
+                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadResenjeXHTML(@PathVariable String broj) {
+        String path = zalbaCutanjeService.downloadResenjeXHTML(broj);
+        if(!path.equals("")){
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".html");
+                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

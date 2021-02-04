@@ -34,4 +34,12 @@ export class ZahtevService {
     return this.http.post('http://localhost:8090/zahtev/odbij', toSend,
       {headers: this.headers, responseType: 'text'});
   }
+  convertZahtevPDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/toPdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertZahtevXHTML(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/toXhtml/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 }

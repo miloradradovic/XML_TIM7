@@ -22,7 +22,7 @@ public class UserRepository {
     public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
             + "\" xmlns:u=\"" + TARGET_NAMESPACE + "\">" + "<xu:update select=\"%1$s\">%2$s</xu:update>"
             + "</xu:modifications>";
-    public final  String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
+    public final String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
             + "\" xmlns:u=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
             + "</xu:modifications>";
 
@@ -49,7 +49,7 @@ public class UserRepository {
 
     public boolean update(String email, String xmlEntity) throws XMLDBException {
 
-        String xpath =  String.format("/u:user[u:email='%s']", email);
+        String xpath = String.format("/u:user[u:email='%s']", email);
         return existManager.update(collectionUri, email, xpath, xmlEntity, UPDATE);
     }
 }

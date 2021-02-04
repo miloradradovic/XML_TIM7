@@ -1,16 +1,9 @@
 package com.project.organ_vlasti.transformer;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
-import com.project.organ_vlasti.database.ExistManager;
-import com.project.organ_vlasti.repository.ObavestenjeRepository;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +11,6 @@ import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.awt.font.TransformAttribute;
 import java.io.*;
 
 public class Transformator {
@@ -29,7 +21,7 @@ public class Transformator {
 
     private FopFactory fopFactory;
 
-    public Transformator(){
+    public Transformator() {
         /* Inicijalizacija DOM fabrike */
         documentFactory = DocumentBuilderFactory.newInstance();
         documentFactory.setNamespaceAware(true);
@@ -41,11 +33,8 @@ public class Transformator {
 
         // Initialize FOP factory object
         try {
-            File f = new File("src/main/resources/generated_files/xsl-fo/fop.xconf");
             this.fopFactory = FopFactory.newInstance(new File("src/main/resources/generated_files/xsl-fo/fop.xconf"));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
 
@@ -71,18 +60,14 @@ public class Transformator {
             Source src = new StreamSource(new StringReader(xmlPath));
             transformer.transform(src, result);
 
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (TransformerFactoryConfigurationError | TransformerException e) {
             e.printStackTrace();
         }
 
     }
 
 
-    public void generatePDF(String xslFo,String xmlPath, String outputPath) throws Exception {
+    public void generatePDF(String xslFo, String xmlPath, String outputPath) throws Exception {
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
 

@@ -63,8 +63,6 @@ public class ZalbaCutanjeService {
 
             if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
                 return zalbaCutanjeRepository.create(zalbaCutanje);
-            } else {
-                return false;
             }
         }
         return false;
@@ -139,10 +137,10 @@ public class ZalbaCutanjeService {
         ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
         if (datumAfter.equals("")) {
-            datumAfter = "1000-01-01";
+            datumAfter = "1000-01-01T00:00:00";
         }
         if (datumBefore.equals("")) {
-            datumBefore = "9999-12-31";
+            datumBefore = "9999-12-31T00:00:00";
         }
 
         String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
@@ -217,6 +215,27 @@ public class ZalbaCutanjeService {
         return new ZalbaCutanjeList(zalbaCutanjeList);
 
     }
+
+
+    public String downloadResenjePDF(String broj) {
+        String path = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj) {
+        String path = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
+
 
     public boolean generateDocuments(String broj) {
         final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";

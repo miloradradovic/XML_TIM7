@@ -35,7 +35,7 @@ public class MessageRepository {
         return existManager.remove(collectionUri, id);
     }
 
-    public ResourceSet getMaxId() throws XMLDBException  {
+    public ResourceSet getMaxId() throws XMLDBException {
         String xpath = "/message/body[@id = max(/message/body/@id)]/ancestor::message";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }

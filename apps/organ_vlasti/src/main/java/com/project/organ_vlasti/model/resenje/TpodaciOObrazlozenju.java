@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Tpodaci_o_obrazlozenju complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tpodaci_o_obrazlozenju">
  *   &lt;complexContent>
@@ -26,15 +26,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tpodaci_o_obrazlozenju", namespace = "http://resenje", propOrder = {
-    "naslov",
-    "predmetZalbe",
-    "postupakPoverenika",
-    "odluka"
+        "naslov",
+        "predmetZalbe",
+        "postupakPoverenika",
+        "odluka"
 })
 public class TpodaciOObrazlozenju {
 
@@ -49,11 +47,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Gets the value of the naslov property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getNaslov() {
         return naslov;
@@ -61,11 +57,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Sets the value of the naslov property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNaslov(String value) {
         this.naslov = value;
@@ -73,11 +67,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Gets the value of the predmetZalbe property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TpredmetZalbe }
-     *     
+     *
+     * @return possible object is
+     * {@link TpredmetZalbe }
      */
     public TpredmetZalbe getPredmetZalbe() {
         return predmetZalbe;
@@ -85,11 +77,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Sets the value of the predmetZalbe property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TpredmetZalbe }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TpredmetZalbe }
      */
     public void setPredmetZalbe(TpredmetZalbe value) {
         this.predmetZalbe = value;
@@ -97,11 +87,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Gets the value of the postupakPoverenika property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TppostupakPoverenika }
-     *     
+     *
+     * @return possible object is
+     * {@link TppostupakPoverenika }
      */
     public TppostupakPoverenika getPostupakPoverenika() {
         return postupakPoverenika;
@@ -109,11 +97,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Sets the value of the postupakPoverenika property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TppostupakPoverenika }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TppostupakPoverenika }
      */
     public void setPostupakPoverenika(TppostupakPoverenika value) {
         this.postupakPoverenika = value;
@@ -121,11 +107,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Gets the value of the odluka property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
+     *
+     * @return possible object is
+     * {@link Object }
      */
     public Object getOdluka() {
         return odluka;
@@ -133,11 +117,9 @@ public class TpodaciOObrazlozenju {
 
     /**
      * Sets the value of the odluka property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Object }
      */
     public void setOdluka(Object value) {
         this.odluka = value;

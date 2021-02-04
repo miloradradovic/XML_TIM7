@@ -45,10 +45,10 @@ public class IzvestajRefController {
     }
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
-    @RequestMapping(value = "/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<IzvestajRefList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore) throws XMLDBException, JAXBException {
+    @RequestMapping(value = "/search-metadata/{status}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<IzvestajRefList> searchMetadata(@PathVariable String status, @RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore) throws XMLDBException, JAXBException {
 
-        IzvestajRefList izvestajRefList = izvestajRefService.searchMetadata(datumAfter, datumBefore);
+        IzvestajRefList izvestajRefList = izvestajRefService.searchMetadata(datumAfter, datumBefore, status);
         if (izvestajRefList != null) {
             return new ResponseEntity<>(izvestajRefList, HttpStatus.OK);
         }

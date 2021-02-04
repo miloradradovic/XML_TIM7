@@ -22,7 +22,7 @@ public class ZalbaOdlukaMapper {
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("about"), "http://zalbe/odluka/" + id);
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/");
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("property"), "pred:datum");
-        zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
+        zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("content"), zalbaOdlukaDTO.getZalbaOdlukaBody().getDatum().toString());
         zalbaOdluka.getZalbaOdlukaBody().setDatum(zalbaOdlukaDTO.getZalbaOdlukaBody().getDatum());
 

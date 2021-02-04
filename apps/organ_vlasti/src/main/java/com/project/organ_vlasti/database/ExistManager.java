@@ -64,32 +64,32 @@ public class ExistManager {
         //createConnection(); //<- for testing purpose
         Collection collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
 
-        if (collection == null){
-            if(collectionUri.startsWith("/")){
+        if (collection == null) {
+            if (collectionUri.startsWith("/")) {
                 collectionUri = collectionUri.substring(1);
             }
             String[] pathSegments = collectionUri.split("/");
 
-            if(pathSegments.length > 0){
+            if (pathSegments.length > 0) {
                 StringBuilder newPath = new StringBuilder();
 
-                for (int i = 0; i <= pathOffset; i++){
-                    newPath.append("/" + pathSegments[i]);
+                for (int i = 0; i <= pathOffset; i++) {
+                    newPath.append("/").append(pathSegments[i]);
 
-                };
+                }
 
                 Collection startColl = DatabaseManager.getCollection(authenticationManager.getUri() + newPath, authenticationManager.getUser(), authenticationManager.getPassword());
 
-                if (startColl == null){
+                if (startColl == null) {
                     String parentPath = newPath.substring(0, newPath.lastIndexOf("/"));
                     Collection parentCollection = DatabaseManager.getCollection(authenticationManager.getUri() + parentPath, authenticationManager.getUser(), authenticationManager.getPassword());
 
-                    CollectionManagementService service = (CollectionManagementService)parentCollection.getService("CollectionManagementService", "1.0");
+                    CollectionManagementService service = (CollectionManagementService) parentCollection.getService("CollectionManagementService", "1.0");
                     collection = service.createCollection(pathSegments[pathOffset]);
                     collection.close();
                     parentCollection.close();
 
-                }else{
+                } else {
                     startColl.close();
                 }
             }
@@ -100,10 +100,10 @@ public class ExistManager {
     }
 
     //export xml to outputStream
-    public String getOutputStream(Object xml){
+    public String getOutputStream(Object xml) {
         StringWriter sw = new StringWriter();
 
-        JAXBContext context = null;
+        JAXBContext context;
         try {
             context = JAXBContext.newInstance(xml.getClass());
             Marshaller marshaller = context.createMarshaller();
@@ -142,16 +142,16 @@ public class ExistManager {
 
             if (xml instanceof Obavestenje)
                 metadataService.extractMetadata("/obavestenja", os);
-            else if(xml instanceof Zahtev)
+            else if (xml instanceof Zahtev)
                 metadataService.extractMetadata("/zahtevi", os);
             else if (xml instanceof Izvestaj) {
-            	metadataService.extractMetadata("/izvestaji", os);
+                metadataService.extractMetadata("/izvestaji", os);
             }
 
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(collection, res);
         }
         return true;
@@ -161,18 +161,18 @@ public class ExistManager {
     public XMLResource load(String collectionUri, String documentId) throws XMLDBException {
         createConnection();
         Collection collection = null;
-        XMLResource res = null;
+        XMLResource res;
 
         try {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
-            if(collection == null){
+            if (collection == null) {
                 return null;
             }
             collection.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) collection.getResource(documentId);
 
             return res;
-        }finally {
+        } finally {
             if (collection != null) {
                 try {
                     collection.close();
@@ -187,17 +187,17 @@ public class ExistManager {
     public ResourceSet retrieve(String collectionUri, String xPathExp, String TARGET_NAMESPACE) throws XMLDBException {
         createConnection();
         Collection collection = null;
-        ResourceSet res = null;
+        ResourceSet res;
 
         try {
-        	collection = getOrCreateCollection(collectionUri, 0);
+            collection = getOrCreateCollection(collectionUri, 0);
             XPathQueryService xPathQueryService = (XPathQueryService) collection.getService("XPathQueryService", "1.0");
 
             xPathQueryService.setProperty(OutputKeys.INDENT, "yes");
             xPathQueryService.setNamespace("", TARGET_NAMESPACE);
 
             res = xPathQueryService.query(xPathExp);
-        }finally {
+        } finally {
             if (collection != null) {
                 try {
                     collection.close();
@@ -220,7 +220,7 @@ public class ExistManager {
                     authenticationManager.getPassword());
             Resource foundFile = collection.getResource(documentId);
 
-            if(foundFile == null)
+            if (foundFile == null)
                 return false;
 
             collection.removeResource(foundFile);
@@ -246,14 +246,14 @@ public class ExistManager {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
 
             Resource foundFile = collection.getResource(documentId);
-            if(foundFile == null)
+            if (foundFile == null)
                 return false;
 
             XUpdateQueryService service = (XUpdateQueryService) collection.getService("XUpdateQueryService", "1.0");
             service.setProperty(OutputKeys.INDENT, "yes");
 
-            long mods = service.updateResource(documentId, String.format(UPDATE, contextXPath, patch));
-        }finally {
+            service.updateResource(documentId, String.format(UPDATE, contextXPath, patch));
+        } finally {
             if (collection != null) {
                 try {
                     collection.close();
@@ -275,7 +275,7 @@ public class ExistManager {
             service.setProperty(OutputKeys.INDENT, "yes");
 
             service.updateResource(document, String.format(APPEND, contextXPath, patch));
-        }finally {
+        } finally {
             if (collection != null)
                 collection.close();
         }
@@ -292,14 +292,14 @@ public class ExistManager {
             res = (XMLResource) collection.createResource(documentId, XMLResource.RESOURCE_TYPE);
             File f = new File(filePath);
 
-            if(!f.canRead()){
+            if (!f.canRead()) {
                 System.out.println("[ERROR] Cannot read the file: " + filePath);
                 return;
             }
 
             res.setContent(f);
             collection.storeResource(res);
-        }finally {
+        } finally {
             closeConnection(collection, res);
         }
     }

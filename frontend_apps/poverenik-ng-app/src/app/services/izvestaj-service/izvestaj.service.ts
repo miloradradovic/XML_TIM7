@@ -12,4 +12,8 @@ export class IzvestajService {
     return this.http.get('http://localhost:8085/izvestaj/' + procitano,
       {headers: this.headers, responseType: 'text'});
   }
+  getPretragaMetadata(status, datumAfter, datumBefore): Observable<any> {
+    return this.http.get('http://localhost:8085/izvestaj/search-metadata/' + status + '?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

@@ -1,13 +1,10 @@
 package com.project.organ_vlasti.model.user;
+
 import com.project.organ_vlasti.model.util.Authority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -45,8 +42,6 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -72,10 +67,8 @@ public class User implements UserDetails {
     /**
      * Gets the value of the name property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getName() {
         return name;
@@ -84,10 +77,8 @@ public class User implements UserDetails {
     /**
      * Sets the value of the name property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setName(String value) {
         this.name = value;
@@ -96,10 +87,8 @@ public class User implements UserDetails {
     /**
      * Gets the value of the lastName property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getLastName() {
         return lastName;
@@ -108,10 +97,8 @@ public class User implements UserDetails {
     /**
      * Sets the value of the lastName property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setLastName(String value) {
         this.lastName = value;
@@ -120,10 +107,8 @@ public class User implements UserDetails {
     /**
      * Gets the value of the email property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getEmail() {
         return email;
@@ -132,10 +117,8 @@ public class User implements UserDetails {
     /**
      * Sets the value of the email property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmail(String value) {
         this.email = value;
@@ -144,10 +127,8 @@ public class User implements UserDetails {
     /**
      * Gets the value of the password property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getPassword() {
         return password;
@@ -156,10 +137,8 @@ public class User implements UserDetails {
     /**
      * Sets the value of the password property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPassword(String value) {
         this.password = value;
@@ -168,10 +147,8 @@ public class User implements UserDetails {
     /**
      * Gets the value of the role property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getRole() {
         return role;
@@ -180,10 +157,8 @@ public class User implements UserDetails {
     /**
      * Sets the value of the role property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setRole(String value) {
         this.role = value;

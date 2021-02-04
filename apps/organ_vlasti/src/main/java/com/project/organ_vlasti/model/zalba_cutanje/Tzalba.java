@@ -14,9 +14,9 @@ import java.util.Map;
 
 /**
  * <p>Java class for Tzalba complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tzalba">
  *   &lt;complexContent>
@@ -53,17 +53,15 @@ import java.util.Map;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tzalba", namespace = "http://www.zalbacutanje", propOrder = {
-    "zahtev",
-    "status",
-    "naziv",
-    "podaciOPrimaocu",
-    "sadrzajZalbe",
-    "podaciOPodnosiocu"
+        "zahtev",
+        "status",
+        "naziv",
+        "podaciOPrimaocu",
+        "sadrzajZalbe",
+        "podaciOPodnosiocu"
 })
 public class Tzalba {
 
@@ -92,10 +90,8 @@ public class Tzalba {
     /**
      * Gets the value of the zahtev property.
      *
-     * @return
-     *     possible object is
-     *     {@link Zahtev }
-     *
+     * @return possible object is
+     * {@link Zahtev }
      */
     public Zahtev getZahtev() {
         return zahtev;
@@ -104,10 +100,8 @@ public class Tzalba {
     /**
      * Sets the value of the zahtev property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Zahtev }
-     *
+     * @param value allowed object is
+     *              {@link Zahtev }
      */
     public void setZahtev(Zahtev value) {
         this.zahtev = value;
@@ -116,10 +110,8 @@ public class Tzalba {
     /**
      * Gets the value of the status property.
      *
-     * @return
-     *     possible object is
-     *     {@link Status }
-     *
+     * @return possible object is
+     * {@link Status }
      */
     public Status getStatus() {
         return status;
@@ -128,10 +120,8 @@ public class Tzalba {
     /**
      * Sets the value of the status property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Status }
-     *
+     * @param value allowed object is
+     *              {@link Status }
      */
     public void setStatus(Status value) {
         this.status = value;
@@ -139,11 +129,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the naziv property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getNaziv() {
         return naziv;
@@ -151,11 +139,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the naziv property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNaziv(String value) {
         this.naziv = value;
@@ -163,11 +149,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the podaciOPrimaocu property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TpodaciPovereniku }
-     *     
+     *
+     * @return possible object is
+     * {@link TpodaciPovereniku }
      */
     public TpodaciPovereniku getPodaciOPrimaocu() {
         return podaciOPrimaocu;
@@ -175,11 +159,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the podaciOPrimaocu property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TpodaciPovereniku }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TpodaciPovereniku }
      */
     public void setPodaciOPrimaocu(TpodaciPovereniku value) {
         this.podaciOPrimaocu = value;
@@ -187,11 +169,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the sadrzajZalbe property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TsadrzajZalbe }
-     *     
+     *
+     * @return possible object is
+     * {@link TsadrzajZalbe }
      */
     public TsadrzajZalbe getSadrzajZalbe() {
         return sadrzajZalbe;
@@ -199,11 +179,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the sadrzajZalbe property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TsadrzajZalbe }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TsadrzajZalbe }
      */
     public void setSadrzajZalbe(TsadrzajZalbe value) {
         this.sadrzajZalbe = value;
@@ -211,11 +189,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the podaciOPodnosiocu property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TpodaciOPodnosiocu }
-     *     
+     *
+     * @return possible object is
+     * {@link TpodaciOPodnosiocu }
      */
     public TpodaciOPodnosiocu getPodaciOPodnosiocu() {
         return podaciOPodnosiocu;
@@ -223,11 +199,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the podaciOPodnosiocu property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TpodaciOPodnosiocu }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TpodaciOPodnosiocu }
      */
     public void setPodaciOPodnosiocu(TpodaciOPodnosiocu value) {
         this.podaciOPodnosiocu = value;
@@ -235,11 +209,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getId() {
         return id;
@@ -247,11 +219,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setId(String value) {
         this.id = value;
@@ -259,11 +229,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the mjesto property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getMjesto() {
         return mjesto;
@@ -271,11 +239,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the mjesto property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMjesto(String value) {
         this.mjesto = value;
@@ -283,11 +249,9 @@ public class Tzalba {
 
     /**
      * Gets the value of the datum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDatum() {
         return datum;
@@ -295,11 +259,9 @@ public class Tzalba {
 
     /**
      * Sets the value of the datum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
@@ -307,17 +269,15 @@ public class Tzalba {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     * <p>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
@@ -326,9 +286,9 @@ public class Tzalba {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -338,12 +298,10 @@ public class Tzalba {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Status {
 
@@ -354,11 +312,9 @@ public class Tzalba {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -366,11 +322,9 @@ public class Tzalba {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -378,17 +332,15 @@ public class Tzalba {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -399,9 +351,9 @@ public class Tzalba {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -411,12 +363,10 @@ public class Tzalba {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Zahtev {
 
@@ -427,11 +377,9 @@ public class Tzalba {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -439,11 +387,9 @@ public class Tzalba {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -451,17 +397,15 @@ public class Tzalba {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

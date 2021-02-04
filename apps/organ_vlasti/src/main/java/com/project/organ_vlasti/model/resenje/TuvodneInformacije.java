@@ -13,9 +13,9 @@ import java.util.Map;
 
 /**
  * <p>Java class for Tuvodne_informacije complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tuvodne_informacije">
  *   &lt;complexContent>
@@ -49,42 +49,40 @@ import java.util.Map;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tuvodne_informacije", namespace = "http://resenje", propOrder = {
-    "content"
+        "content"
 })
 public class TuvodneInformacije {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "adresa", namespace = "http://resenje", type = JAXBElement.class),
-        @XmlElementRef(name = "broj_odluke", namespace = "http://resenje", type = JAXBElement.class)
+            @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class),
+            @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class),
+            @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class),
+            @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class),
+            @XmlElementRef(name = "adresa", namespace = "http://resenje", type = JAXBElement.class),
+            @XmlElementRef(name = "broj_odluke", namespace = "http://resenje", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
 
     /**
      * Gets the value of the content property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link Tclan }{@code >}
@@ -94,8 +92,6 @@ public class TuvodneInformacije {
      * {@link JAXBElement }{@code <}{@link Trazilac }{@code >}
      * {@link JAXBElement }{@code <}{@link Tadresa }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * 
      */
     public List<Serializable> getContent() {
         if (content == null) {
@@ -107,9 +103,9 @@ public class TuvodneInformacije {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -119,12 +115,10 @@ public class TuvodneInformacije {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Lice {
 
@@ -135,11 +129,9 @@ public class TuvodneInformacije {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -147,11 +139,9 @@ public class TuvodneInformacije {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -159,17 +149,15 @@ public class TuvodneInformacije {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -180,9 +168,9 @@ public class TuvodneInformacije {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -193,12 +181,10 @@ public class TuvodneInformacije {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Trazilac {
 
@@ -212,11 +198,9 @@ public class TuvodneInformacije {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -224,11 +208,9 @@ public class TuvodneInformacije {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -236,11 +218,9 @@ public class TuvodneInformacije {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -248,11 +228,9 @@ public class TuvodneInformacije {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;
@@ -260,17 +238,15 @@ public class TuvodneInformacije {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

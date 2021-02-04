@@ -36,6 +36,11 @@ public class UserRepository {
 
     public ResourceSet getAll() throws XMLDBException {
         return existManager.retrieve(collectionUri, "/user", TARGET_NAMESPACE);
+
+    }
+
+    public ResourceSet hasRoleOrganVlasti() throws XMLDBException {
+        return existManager.retrieve(collectionUri, "/user/role[.='ROLE_ORGAN_VLASTI']", TARGET_NAMESPACE);
     }
 
     public boolean delete(String email) throws XMLDBException {

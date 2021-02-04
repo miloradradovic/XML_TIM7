@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Tzalilac complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tzalilac">
  *   &lt;complexContent>
@@ -25,14 +25,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tzalilac", namespace = "http://www.reusability", propOrder = {
-    "tipLica",
-    "adresa",
-    "sedisteZalioca"
+        "tipLica",
+        "adresa",
+        "sedisteZalioca"
 })
 public class Tzalilac {
 
@@ -45,11 +43,9 @@ public class Tzalilac {
 
     /**
      * Gets the value of the tipLica property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TtipLica }
-     *     
+     *
+     * @return possible object is
+     * {@link TtipLica }
      */
     public TtipLica getTipLica() {
         return tipLica;
@@ -57,11 +53,9 @@ public class Tzalilac {
 
     /**
      * Sets the value of the tipLica property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TtipLica }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TtipLica }
      */
     public void setTipLica(TtipLica value) {
         this.tipLica = value;
@@ -69,11 +63,9 @@ public class Tzalilac {
 
     /**
      * Gets the value of the adresa property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @return possible object is
+     * {@link Tadresa }
      */
     public Tadresa getAdresa() {
         return adresa;
@@ -81,11 +73,9 @@ public class Tzalilac {
 
     /**
      * Sets the value of the adresa property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tadresa }
      */
     public void setAdresa(Tadresa value) {
         this.adresa = value;
@@ -93,11 +83,9 @@ public class Tzalilac {
 
     /**
      * Gets the value of the sedisteZalioca property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSedisteZalioca() {
         return sedisteZalioca;
@@ -105,11 +93,9 @@ public class Tzalilac {
 
     /**
      * Sets the value of the sedisteZalioca property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSedisteZalioca(String value) {
         this.sedisteZalioca = value;

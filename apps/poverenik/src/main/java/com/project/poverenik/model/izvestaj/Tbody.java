@@ -1,26 +1,19 @@
 
 package com.project.poverenik.model.izvestaj;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.namespace.QName;
 
 
 /**
  * <p>Java class for Tbody complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tbody"&gt;
  *   &lt;complexContent&gt;
@@ -133,22 +126,20 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tbody", propOrder = {
-    "zahteviPodneti",
-    "zahteviPrihvaceni",
-    "zahteviOdbijeni",
-    "zalbeOdlukePodneti",
-    "zalbeOdlukePrihvaceno",
-    "zalbeOdlukeOdbijeno",
-    "zalbeOdlukePonisteno",
-    "zalbeCutanjePodneti",
-    "zalbeCutanjePrihvaceno",
-    "zalbeCutanjeOdbijeno",
-    "zalbeCutanjePonisteno"
+        "zahteviPodneti",
+        "zahteviPrihvaceni",
+        "zahteviOdbijeni",
+        "zalbeOdlukePodneti",
+        "zalbeOdlukePrihvaceno",
+        "zalbeOdlukeOdbijeno",
+        "zalbeOdlukePonisteno",
+        "zalbeCutanjePodneti",
+        "zalbeCutanjePrihvaceno",
+        "zalbeCutanjeOdbijeno",
+        "zalbeCutanjePonisteno"
 })
 public class Tbody {
 
@@ -184,11 +175,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zahteviPodneti property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZahteviPodneti }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZahteviPodneti }
      */
     public Tbody.ZahteviPodneti getZahteviPodneti() {
         return zahteviPodneti;
@@ -196,11 +185,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zahteviPodneti property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZahteviPodneti }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZahteviPodneti }
      */
     public void setZahteviPodneti(Tbody.ZahteviPodneti value) {
         this.zahteviPodneti = value;
@@ -208,11 +195,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zahteviPrihvaceni property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZahteviPrihvaceni }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZahteviPrihvaceni }
      */
     public Tbody.ZahteviPrihvaceni getZahteviPrihvaceni() {
         return zahteviPrihvaceni;
@@ -220,11 +205,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zahteviPrihvaceni property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZahteviPrihvaceni }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZahteviPrihvaceni }
      */
     public void setZahteviPrihvaceni(Tbody.ZahteviPrihvaceni value) {
         this.zahteviPrihvaceni = value;
@@ -232,11 +215,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zahteviOdbijeni property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZahteviOdbijeni }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZahteviOdbijeni }
      */
     public Tbody.ZahteviOdbijeni getZahteviOdbijeni() {
         return zahteviOdbijeni;
@@ -244,11 +225,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zahteviOdbijeni property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZahteviOdbijeni }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZahteviOdbijeni }
      */
     public void setZahteviOdbijeni(Tbody.ZahteviOdbijeni value) {
         this.zahteviOdbijeni = value;
@@ -256,11 +235,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeOdlukePodneti property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeOdlukePodneti }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeOdlukePodneti }
      */
     public Tbody.ZalbeOdlukePodneti getZalbeOdlukePodneti() {
         return zalbeOdlukePodneti;
@@ -268,11 +245,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeOdlukePodneti property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeOdlukePodneti }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeOdlukePodneti }
      */
     public void setZalbeOdlukePodneti(Tbody.ZalbeOdlukePodneti value) {
         this.zalbeOdlukePodneti = value;
@@ -280,11 +255,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeOdlukePrihvaceno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeOdlukePrihvaceno }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeOdlukePrihvaceno }
      */
     public Tbody.ZalbeOdlukePrihvaceno getZalbeOdlukePrihvaceno() {
         return zalbeOdlukePrihvaceno;
@@ -292,11 +265,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeOdlukePrihvaceno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeOdlukePrihvaceno }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeOdlukePrihvaceno }
      */
     public void setZalbeOdlukePrihvaceno(Tbody.ZalbeOdlukePrihvaceno value) {
         this.zalbeOdlukePrihvaceno = value;
@@ -304,11 +275,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeOdlukeOdbijeno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeOdlukeOdbijeno }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeOdlukeOdbijeno }
      */
     public Tbody.ZalbeOdlukeOdbijeno getZalbeOdlukeOdbijeno() {
         return zalbeOdlukeOdbijeno;
@@ -316,11 +285,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeOdlukeOdbijeno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeOdlukeOdbijeno }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeOdlukeOdbijeno }
      */
     public void setZalbeOdlukeOdbijeno(Tbody.ZalbeOdlukeOdbijeno value) {
         this.zalbeOdlukeOdbijeno = value;
@@ -328,11 +295,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeOdlukePonisteno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeOdlukePonisteno }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeOdlukePonisteno }
      */
     public Tbody.ZalbeOdlukePonisteno getZalbeOdlukePonisteno() {
         return zalbeOdlukePonisteno;
@@ -340,11 +305,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeOdlukePonisteno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeOdlukePonisteno }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeOdlukePonisteno }
      */
     public void setZalbeOdlukePonisteno(Tbody.ZalbeOdlukePonisteno value) {
         this.zalbeOdlukePonisteno = value;
@@ -352,11 +315,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeCutanjePodneti property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeCutanjePodneti }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeCutanjePodneti }
      */
     public Tbody.ZalbeCutanjePodneti getZalbeCutanjePodneti() {
         return zalbeCutanjePodneti;
@@ -364,11 +325,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeCutanjePodneti property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeCutanjePodneti }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeCutanjePodneti }
      */
     public void setZalbeCutanjePodneti(Tbody.ZalbeCutanjePodneti value) {
         this.zalbeCutanjePodneti = value;
@@ -376,11 +335,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeCutanjePrihvaceno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeCutanjePrihvaceno }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeCutanjePrihvaceno }
      */
     public Tbody.ZalbeCutanjePrihvaceno getZalbeCutanjePrihvaceno() {
         return zalbeCutanjePrihvaceno;
@@ -388,11 +345,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeCutanjePrihvaceno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeCutanjePrihvaceno }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeCutanjePrihvaceno }
      */
     public void setZalbeCutanjePrihvaceno(Tbody.ZalbeCutanjePrihvaceno value) {
         this.zalbeCutanjePrihvaceno = value;
@@ -400,11 +355,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeCutanjeOdbijeno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeCutanjeOdbijeno }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeCutanjeOdbijeno }
      */
     public Tbody.ZalbeCutanjeOdbijeno getZalbeCutanjeOdbijeno() {
         return zalbeCutanjeOdbijeno;
@@ -412,11 +365,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeCutanjeOdbijeno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeCutanjeOdbijeno }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeCutanjeOdbijeno }
      */
     public void setZalbeCutanjeOdbijeno(Tbody.ZalbeCutanjeOdbijeno value) {
         this.zalbeCutanjeOdbijeno = value;
@@ -424,11 +375,9 @@ public class Tbody {
 
     /**
      * Gets the value of the zalbeCutanjePonisteno property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody.ZalbeCutanjePonisteno }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody.ZalbeCutanjePonisteno }
      */
     public Tbody.ZalbeCutanjePonisteno getZalbeCutanjePonisteno() {
         return zalbeCutanjePonisteno;
@@ -436,11 +385,9 @@ public class Tbody {
 
     /**
      * Sets the value of the zalbeCutanjePonisteno property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody.ZalbeCutanjePonisteno }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody.ZalbeCutanjePonisteno }
      */
     public void setZalbeCutanjePonisteno(Tbody.ZalbeCutanjePonisteno value) {
         this.zalbeCutanjePonisteno = value;
@@ -448,11 +395,9 @@ public class Tbody {
 
     /**
      * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getId() {
         return id;
@@ -460,11 +405,9 @@ public class Tbody {
 
     /**
      * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setId(String value) {
         this.id = value;
@@ -472,11 +415,9 @@ public class Tbody {
 
     /**
      * Gets the value of the datum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDatum() {
         return datum;
@@ -484,11 +425,9 @@ public class Tbody {
 
     /**
      * Sets the value of the datum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
@@ -496,17 +435,15 @@ public class Tbody {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     * <p>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
@@ -515,9 +452,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -527,12 +464,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZahteviOdbijeni {
 
@@ -544,11 +479,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -556,11 +489,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -568,17 +499,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -589,9 +518,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -601,12 +530,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZahteviPodneti {
 
@@ -618,11 +545,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -630,11 +555,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -642,17 +565,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -663,9 +584,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -675,12 +596,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZahteviPrihvaceni {
 
@@ -692,11 +611,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -704,11 +621,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -716,17 +631,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -737,9 +650,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -749,12 +662,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeCutanjeOdbijeno {
 
@@ -766,11 +677,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -778,11 +687,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -790,17 +697,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -811,9 +716,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -823,12 +728,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeCutanjePodneti {
 
@@ -840,11 +743,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -852,11 +753,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -864,17 +763,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -885,9 +782,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -897,12 +794,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeCutanjePonisteno {
 
@@ -914,11 +809,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -926,11 +819,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -938,17 +829,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -959,9 +848,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -971,12 +860,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeCutanjePrihvaceno {
 
@@ -988,11 +875,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -1000,11 +885,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -1012,17 +895,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -1033,9 +914,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -1045,12 +926,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeOdlukeOdbijeno {
 
@@ -1062,11 +941,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -1074,11 +951,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -1086,17 +961,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -1107,9 +980,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -1119,12 +992,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeOdlukePodneti {
 
@@ -1136,11 +1007,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -1148,11 +1017,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -1160,17 +1027,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -1181,9 +1046,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -1193,12 +1058,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeOdlukePonisteno {
 
@@ -1210,11 +1073,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -1222,11 +1083,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -1234,17 +1093,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -1255,9 +1112,9 @@ public class Tbody {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -1267,12 +1124,10 @@ public class Tbody {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class ZalbeOdlukePrihvaceno {
 
@@ -1284,11 +1139,9 @@ public class Tbody {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @return possible object is
+         * {@link BigInteger }
          */
         public BigInteger getValue() {
             return value;
@@ -1296,11 +1149,9 @@ public class Tbody {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigInteger }
          */
         public void setValue(BigInteger value) {
             this.value = value;
@@ -1308,17 +1159,15 @@ public class Tbody {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

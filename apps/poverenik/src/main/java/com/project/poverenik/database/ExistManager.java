@@ -1,6 +1,7 @@
 package com.project.poverenik.database;
 
 import com.project.poverenik.model.resenje.Resenje;
+import com.project.poverenik.service.MetadataService;
 import org.exist.xmldb.DatabaseImpl;
 import org.exist.xmldb.EXistResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +13,19 @@ import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XPathQueryService;
 import org.xmldb.api.modules.XUpdateQueryService;
 
-import com.project.poverenik.service.MetadataService;
-
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
 import javax.xml.transform.OutputKeys;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.OutputStream;
 import java.io.StringWriter;
 
 @Component
 public class ExistManager {
-	
-	@Autowired
-	private MetadataService metadataService;
+
+    @Autowired
+    private MetadataService metadataService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -67,32 +62,32 @@ public class ExistManager {
         //createConnection(); //<- for testing purpose
         Collection collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
 
-        if (collection == null){
-            if(collectionUri.startsWith("/")){
+        if (collection == null) {
+            if (collectionUri.startsWith("/")) {
                 collectionUri = collectionUri.substring(1);
             }
             String[] pathSegments = collectionUri.split("/");
 
-            if(pathSegments.length > 0){
+            if (pathSegments.length > 0) {
                 StringBuilder newPath = new StringBuilder();
 
-                for (int i = 0; i <= pathOffset; i++){
-                    newPath.append("/" + pathSegments[i]);
+                for (int i = 0; i <= pathOffset; i++) {
+                    newPath.append("/").append(pathSegments[i]);
 
-                };
+                }
 
                 Collection startColl = DatabaseManager.getCollection(authenticationManager.getUri() + newPath, authenticationManager.getUser(), authenticationManager.getPassword());
 
-                if (startColl == null){
+                if (startColl == null) {
                     String parentPath = newPath.substring(0, newPath.lastIndexOf("/"));
                     Collection parentCollection = DatabaseManager.getCollection(authenticationManager.getUri() + parentPath, authenticationManager.getUser(), authenticationManager.getPassword());
 
-                    CollectionManagementService service = (CollectionManagementService)parentCollection.getService("CollectionManagementService", "1.0");
+                    CollectionManagementService service = (CollectionManagementService) parentCollection.getService("CollectionManagementService", "1.0");
                     collection = service.createCollection(pathSegments[pathOffset]);
                     collection.close();
                     parentCollection.close();
 
-                }else{
+                } else {
                     startColl.close();
                 }
             }
@@ -116,33 +111,33 @@ public class ExistManager {
             JAXBContext context = JAXBContext.newInstance(xml.getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.setProperty("com.sun.xml.bind.xmlHeaders", 
-            	    " <?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            marshaller.setProperty("com.sun.xml.bind.xmlHeaders", 
-            	    "<?xml-stylesheet type=\"text/xsl\" href=\"../xsl/grddl.xsl\"?>");
+            marshaller.setProperty("com.sun.xml.bind.xmlHeaders",
+                    " <?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            marshaller.setProperty("com.sun.xml.bind.xmlHeaders",
+                    "<?xml-stylesheet type=\"text/xsl\" href=\"../xsl/grddl.xsl\"?>");
             marshaller.marshal(xml, os);
-           
+
             res.setContent(os);
             collection.storeResource(res);
-            
+
             if (xml instanceof Resenje)
-            	metadataService.extractMetadata("/resenja", os);
+                metadataService.extractMetadata("/resenja", os);
             else
-            	metadataService.extractMetadata("/zalbe", os);
-           
+                metadataService.extractMetadata("/zalbe", os);
+
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             closeConnection(collection, res);
         }
         return true;
     }
 
     //export xml to outputStream
-    public String getOutputStream(Object xml){
+    public String getOutputStream(Object xml) {
         StringWriter sw = new StringWriter();
 
-        JAXBContext context = null;
+        JAXBContext context;
         try {
             context = JAXBContext.newInstance(xml.getClass());
             Marshaller marshaller = context.createMarshaller();
@@ -159,18 +154,18 @@ public class ExistManager {
     public XMLResource load(String collectionUri, String documentId) throws XMLDBException {
         createConnection();
         Collection collection = null;
-        XMLResource res = null;
+        XMLResource res;
 
         try {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
-            if(collection == null){
+            if (collection == null) {
                 return null;
             }
             collection.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) collection.getResource(documentId);
 
             return res;
-        }finally {
+        } finally {
             if (collection != null) {
                 try {
                     collection.close();
@@ -185,7 +180,7 @@ public class ExistManager {
     public ResourceSet retrieve(String collectionUri, String xPathExp, String TARGET_NAMESPACE) throws XMLDBException {
         createConnection();
         Collection collection = null;
-        ResourceSet res = null;
+        ResourceSet res;
 
         try {
             collection = getOrCreateCollection(collectionUri, 0);
@@ -196,7 +191,7 @@ public class ExistManager {
             xPathQueryService.setNamespace("", TARGET_NAMESPACE);
 
             res = xPathQueryService.query(xPathExp);
-        }finally {
+        } finally {
             if (collection != null) {
                 try {
                     collection.close();
@@ -219,7 +214,7 @@ public class ExistManager {
                     authenticationManager.getPassword());
             Resource foundFile = collection.getResource(documentId);
 
-            if(foundFile == null)
+            if (foundFile == null)
                 return false;
 
             collection.removeResource(foundFile);
@@ -245,14 +240,14 @@ public class ExistManager {
             collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
 
             Resource foundFile = collection.getResource(documentId);
-            if(foundFile == null)
+            if (foundFile == null)
                 return false;
 
             XUpdateQueryService service = (XUpdateQueryService) collection.getService("XUpdateQueryService", "1.0");
             service.setProperty(OutputKeys.INDENT, "yes");
 
-            long mods = service.updateResource(documentId, String.format(UPDATE, contextXPath, patch));
-        }finally {
+            service.updateResource(documentId, String.format(UPDATE, contextXPath, patch));
+        } finally {
             if (collection != null) {
                 try {
                     collection.close();
@@ -263,44 +258,4 @@ public class ExistManager {
         }
         return true;
     }
-
-    public void append(String collectionUri, String document, String contextXPath, String patch, String APPEND) throws XMLDBException {
-        createConnection();
-        Collection collection = null;
-        try {
-            collection = DatabaseManager.getCollection(authenticationManager.getUri() + collectionUri, authenticationManager.getUser(), authenticationManager.getPassword());
-
-            XUpdateQueryService service = (XUpdateQueryService) collection.getService("XUpdateQueryService", "1.0");
-            service.setProperty(OutputKeys.INDENT, "yes");
-
-             service.updateResource(document, String.format(APPEND, contextXPath, patch));
-        }finally {
-            if (collection != null)
-                collection.close();
-        }
-    }
-
-    // for adding from file
-    public void storeFromFile(String collectionUri, String documentId, String filePath) throws XMLDBException {
-        createConnection();
-        Collection collection = null;
-        XMLResource res = null;
-
-        try {
-            collection = getOrCreateCollection(collectionUri, 0);
-            res = (XMLResource) collection.createResource(documentId, XMLResource.RESOURCE_TYPE);
-            File f = new File(filePath);
-
-            if(!f.canRead()){
-                System.out.println("[ERROR] Cannot read the file: " + filePath);
-                return;
-            }
-
-            res.setContent(f);
-            collection.storeResource(res);
-        }finally {
-            closeConnection(collection, res);
-        }
-    }
-
 }

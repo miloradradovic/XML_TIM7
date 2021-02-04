@@ -71,7 +71,7 @@ public class IzvestajServiceSoapBindingImpl implements IzvestajServicePortType {
 
             IzvestajList izvestajList = izvestajiService.searchMetadata(
                     parametars.getValue().get(0).getName().equals("datumAfter") ? parametars.getValue().get(0).getValue() : "",
-                    parametars.getValue().get(0).getName().equals("datumBefore") ? parametars.getValue().get(0).getValue() : "");
+                    parametars.getValue().get(1).getName().equals("datumBefore") ? parametars.getValue().get(1).getValue() : "");
 
 
             for (Izvestaj izvestaj: izvestajList.getIzvestajList()) {

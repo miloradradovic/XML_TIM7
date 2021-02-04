@@ -21,7 +21,7 @@ public class Transformator {
 
     private FopFactory fopFactory;
 
-    public Transformator(){
+    public Transformator() {
         /* Inicijalizacija DOM fabrike */
         documentFactory = DocumentBuilderFactory.newInstance();
         documentFactory.setNamespaceAware(true);
@@ -34,9 +34,7 @@ public class Transformator {
         // Initialize FOP factory object
         try {
             this.fopFactory = FopFactory.newInstance(new File("src/main/resources/generated_files/xsl-fo/fop.xconf"));
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
 
@@ -62,18 +60,14 @@ public class Transformator {
             Source src = new StreamSource(new StringReader(xmlPath));
             transformer.transform(src, result);
 
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (TransformerFactoryConfigurationError | TransformerException e) {
             e.printStackTrace();
         }
 
     }
 
 
-    public void generatePDF(String xslFo,String xmlPath, String outputPath) throws Exception {
+    public void generatePDF(String xslFo, String xmlPath, String outputPath) throws Exception {
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
 

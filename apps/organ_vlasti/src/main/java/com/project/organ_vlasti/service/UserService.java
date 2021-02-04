@@ -70,6 +70,11 @@ public class UserService {
         return userRepository.delete(email);
     }
 
+    public Long hasRoleOrganVlasti() throws XMLDBException {
+        ResourceSet resourceSet = userRepository.hasRoleOrganVlasti();
+        return  resourceSet.getSize();
+    }
+
     public boolean update(User user) throws JAXBException, XMLDBException {
         String patch = jaxB.marshall(user.getClass(), user);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani

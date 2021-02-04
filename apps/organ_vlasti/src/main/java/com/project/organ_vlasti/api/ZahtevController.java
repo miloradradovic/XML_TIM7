@@ -9,6 +9,8 @@ import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.service.ZahtevService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
@@ -124,12 +129,43 @@ public class ZahtevController {
     }
 
     @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadZahtev(@PathVariable String broj) {
+    public ResponseEntity<?> downloadZahtevPDF(@PathVariable String broj) {
+        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
         boolean obavestenje = zahtevService.generateDocuments(broj);
         if (!obavestenje)
-            return new ResponseEntity(obavestenje, HttpStatus.OK);
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=zahtev" + broj + ".pdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value="/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZahtevXHTML(@PathVariable String broj) {
+        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
+        boolean obavestenje = zahtevService.generateDocuments(broj);
+        if (!obavestenje)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=zahtev" + broj + ".html");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")

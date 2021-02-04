@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {
         "email"
 })
-@XmlRootElement(name = "sendAttach", namespace="http://email")
+@XmlRootElement(name = "sendAttach", namespace = "http://email")
 public class sendAttach {
     @XmlElement(name = "email", required = true)
     protected Tbody email;
@@ -16,10 +16,8 @@ public class sendAttach {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link Tbody }
-     *
+     * @return possible object is
+     * {@link Tbody }
      */
     public Tbody getEmail() {
         return email;
@@ -28,10 +26,8 @@ public class sendAttach {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Tbody }
-     *
+     * @param value allowed object is
+     *              {@link Tbody }
      */
     public void setEmail(Tbody value) {
         this.email = value;

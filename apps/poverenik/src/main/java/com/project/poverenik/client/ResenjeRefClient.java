@@ -14,10 +14,6 @@ public class ResenjeRefClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://resenje/ws/setResenjeRef"));
 
-        if(response.getResponse().equals("OK")){
-            return true;
-        }
-
-        return false;
+        return response.getResponse().equals("OK");
     }
 }

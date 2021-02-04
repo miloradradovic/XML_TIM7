@@ -1,24 +1,17 @@
 
 package com.project.poverenik.model.resenje;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
 
 
 /**
  * <p>Java class for Tresenje complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tresenje">
  *   &lt;complexContent>
@@ -61,16 +54,14 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tresenje", namespace = "http://resenje", propOrder = {
-    "tipResenja",
-    "uvodneInformacije",
-    "podaciOResenju",
-    "podaciOObrazlozenju",
-    "poverenik"
+        "tipResenja",
+        "uvodneInformacije",
+        "podaciOResenju",
+        "podaciOObrazlozenju",
+        "poverenik"
 })
 public class Tresenje {
 
@@ -95,11 +86,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the tipResenja property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tresenje.TipResenja }
-     *     
+     *
+     * @return possible object is
+     * {@link Tresenje.TipResenja }
      */
     public Tresenje.TipResenja getTipResenja() {
         return tipResenja;
@@ -107,11 +96,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the tipResenja property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tresenje.TipResenja }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tresenje.TipResenja }
      */
     public void setTipResenja(Tresenje.TipResenja value) {
         this.tipResenja = value;
@@ -119,11 +106,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the uvodneInformacije property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TuvodneInformacije }
-     *     
+     *
+     * @return possible object is
+     * {@link TuvodneInformacije }
      */
     public TuvodneInformacije getUvodneInformacije() {
         return uvodneInformacije;
@@ -131,11 +116,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the uvodneInformacije property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TuvodneInformacije }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TuvodneInformacije }
      */
     public void setUvodneInformacije(TuvodneInformacije value) {
         this.uvodneInformacije = value;
@@ -143,11 +126,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the podaciOResenju property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TpodaciOResenju }
-     *     
+     *
+     * @return possible object is
+     * {@link TpodaciOResenju }
      */
     public TpodaciOResenju getPodaciOResenju() {
         return podaciOResenju;
@@ -155,11 +136,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the podaciOResenju property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TpodaciOResenju }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TpodaciOResenju }
      */
     public void setPodaciOResenju(TpodaciOResenju value) {
         this.podaciOResenju = value;
@@ -167,11 +146,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the podaciOObrazlozenju property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TpodaciOObrazlozenju }
-     *     
+     *
+     * @return possible object is
+     * {@link TpodaciOObrazlozenju }
      */
     public TpodaciOObrazlozenju getPodaciOObrazlozenju() {
         return podaciOObrazlozenju;
@@ -179,11 +156,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the podaciOObrazlozenju property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TpodaciOObrazlozenju }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TpodaciOObrazlozenju }
      */
     public void setPodaciOObrazlozenju(TpodaciOObrazlozenju value) {
         this.podaciOObrazlozenju = value;
@@ -191,11 +166,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the poverenik property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tresenje.Poverenik }
-     *     
+     *
+     * @return possible object is
+     * {@link Tresenje.Poverenik }
      */
     public Tresenje.Poverenik getPoverenik() {
         return poverenik;
@@ -203,11 +176,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the poverenik property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tresenje.Poverenik }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tresenje.Poverenik }
      */
     public void setPoverenik(Tresenje.Poverenik value) {
         this.poverenik = value;
@@ -215,11 +186,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the datum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getDatum() {
         return datum;
@@ -227,11 +196,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the datum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDatum(String value) {
         this.datum = value;
@@ -239,11 +206,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the broj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getBroj() {
         return broj;
@@ -251,11 +216,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the broj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBroj(String value) {
         this.broj = value;
@@ -263,11 +226,9 @@ public class Tresenje {
 
     /**
      * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getId() {
         return id;
@@ -275,11 +236,9 @@ public class Tresenje {
 
     /**
      * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setId(String value) {
         this.id = value;
@@ -287,17 +246,15 @@ public class Tresenje {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     * <p>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
@@ -306,9 +263,9 @@ public class Tresenje {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -319,12 +276,10 @@ public class Tresenje {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Poverenik {
 
@@ -338,11 +293,9 @@ public class Tresenje {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -350,11 +303,9 @@ public class Tresenje {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -362,11 +313,9 @@ public class Tresenje {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -374,11 +323,9 @@ public class Tresenje {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;
@@ -386,17 +333,15 @@ public class Tresenje {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -407,9 +352,9 @@ public class Tresenje {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -419,12 +364,10 @@ public class Tresenje {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class TipResenja {
 
@@ -435,11 +378,9 @@ public class Tresenje {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -447,11 +388,9 @@ public class Tresenje {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -459,17 +398,15 @@ public class Tresenje {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

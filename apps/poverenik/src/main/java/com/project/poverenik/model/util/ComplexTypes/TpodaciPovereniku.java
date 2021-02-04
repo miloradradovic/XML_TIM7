@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Tpodaci_povereniku complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tpodaci_povereniku">
  *   &lt;complexContent>
@@ -24,13 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tpodaci_povereniku", namespace = "http://www.reusability", propOrder = {
-    "uloga",
-    "adresa"
+        "uloga",
+        "adresa"
 })
 public class TpodaciPovereniku {
 
@@ -41,11 +39,9 @@ public class TpodaciPovereniku {
 
     /**
      * Gets the value of the uloga property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getUloga() {
         return uloga;
@@ -53,11 +49,9 @@ public class TpodaciPovereniku {
 
     /**
      * Sets the value of the uloga property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUloga(String value) {
         this.uloga = value;
@@ -65,11 +59,9 @@ public class TpodaciPovereniku {
 
     /**
      * Gets the value of the adresa property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @return possible object is
+     * {@link Tadresa }
      */
     public Tadresa getAdresa() {
         return adresa;
@@ -77,11 +69,9 @@ public class TpodaciPovereniku {
 
     /**
      * Sets the value of the adresa property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tadresa }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tadresa }
      */
     public void setAdresa(Tadresa value) {
         this.adresa = value;

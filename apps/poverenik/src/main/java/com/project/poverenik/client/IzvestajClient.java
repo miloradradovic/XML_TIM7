@@ -16,10 +16,9 @@ public class IzvestajClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://izvestaji/ws/getIzvestajById"));
 
-        if(response.getIzvestaj().getId().equals("-1")){
+        if (response.getIzvestaj().getId().equals("-1")) {
             return null;
         }
-
         return response;
     }
 
@@ -30,11 +29,10 @@ public class IzvestajClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://izvestaji/ws/getRefs"));
 
-        if(!response.getResponse().getRef().isEmpty()){
-            if(response.getResponse().getRef().get(0).equals("-1"))
+        if (!response.getResponse().getRef().isEmpty()) {
+            if (response.getResponse().getRef().get(0).equals("-1"))
                 return null;
         }
-
         return response;
     }
 }

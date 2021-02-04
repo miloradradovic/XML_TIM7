@@ -17,52 +17,47 @@ import javax.xml.ws.Endpoint;
 public class EndpointConfig {
 
     @Autowired
-    private Bus bus;
-
-    @Autowired
     ResenjeServiceSoapBindingImpl resenjeServiceSoapBindingImpl;
-
     @Autowired
     ZalbaCutanjeServiceSoapBindingImpl zalbaCutanjeServiceSoapBindingImpl;
-
     @Autowired
     ZalbaOdlukaServiceSoapBindingImpl zalbaOdlukaServiceSoapBindingImpl;
-
     @Autowired
     IzjasnjavanjeServiceSoapBindingImpl izjasnjavanjeServiceSoapBindingImpl;
-
     @Autowired
     IzvestajServiceSoapBindingImpl izvestajServiceSoapBindingImpl;
+    @Autowired
+    private Bus bus;
 
-    @Bean(name="resenjeEndpointBean")
+    @Bean(name = "resenjeEndpointBean")
     public Endpoint resenjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, resenjeServiceSoapBindingImpl);
         endpoint.publish("/resenje");
         return endpoint;
     }
 
-    @Bean(name="zalbaCutanjeEndpointBean")
+    @Bean(name = "zalbaCutanjeEndpointBean")
     public Endpoint zalbaCutanjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, zalbaCutanjeServiceSoapBindingImpl);
         endpoint.publish("/zalba-cutanje");
         return endpoint;
     }
 
-    @Bean(name="zalbaOdlukaEndpointBean")
+    @Bean(name = "zalbaOdlukaEndpointBean")
     public Endpoint zalbaOdlukaEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, zalbaOdlukaServiceSoapBindingImpl);
         endpoint.publish("/zalba-odluka");
         return endpoint;
     }
 
-    @Bean(name="izjasnjavanjeEndpointBean")
+    @Bean(name = "izjasnjavanjeEndpointBean")
     public Endpoint izjasnjavanjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izjasnjavanjeServiceSoapBindingImpl);
         endpoint.publish("/izjasnjavanje");
         return endpoint;
     }
 
-    @Bean(name="izvestajEndpointBean")
+    @Bean(name = "izvestajEndpointBean")
     public Endpoint izvestajEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izvestajServiceSoapBindingImpl);
         endpoint.publish("/izvestaj");

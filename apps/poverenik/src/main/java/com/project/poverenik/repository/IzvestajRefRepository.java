@@ -24,12 +24,12 @@ public class IzvestajRefRepository {
     }
 
     public ResourceSet getAllByProcitano(String procitano) throws XMLDBException {
-        String xpath =  String.format("/izvestaj_ref/body[@procitano ='%s']/ancestor::izvestaj_ref", procitano);
+        String xpath = String.format("/izvestaj_ref/body[@procitano ='%s']/ancestor::izvestaj_ref", procitano);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
     public ResourceSet getOneByBroj(String broj) throws XMLDBException {
-        String xpath =  String.format("/izvestaj_ref/body[.='%s']/ancestor::izvestaj_ref", broj);
+        String xpath = String.format("/izvestaj_ref/body[.='%s']/ancestor::izvestaj_ref", broj);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
@@ -41,7 +41,7 @@ public class IzvestajRefRepository {
         return existManager.remove(collectionUri, id);
     }
 
-    public ResourceSet getMaxId() throws XMLDBException  {
+    public ResourceSet getMaxId() throws XMLDBException {
         String xpath = "/izvestaj_ref/body[@id = max(/izvestaj_ref/body/@id)]/ancestor::izvestaj_ref";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }

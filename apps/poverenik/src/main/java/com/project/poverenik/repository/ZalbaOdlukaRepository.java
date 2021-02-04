@@ -19,10 +19,10 @@ public class ZalbaOdlukaRepository {
 
     private final String TARGET_NAMESPACE = "http://www.zalbanaodlukucir";
 
-    public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS + "\" xmlns:zoc=\"" + TARGET_NAMESPACE + "\"" + " xmlns:re=\"" + "http://reusability" +  "\">" +
+    public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS + "\" xmlns:zoc=\"" + TARGET_NAMESPACE + "\"" + " xmlns:re=\"" + "http://reusability" + "\">" +
             "<xu:update select=\"%1$s\">%2$s</xu:update>"
             + "</xu:modifications>";
-    public final  String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
+    public final String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
             + "\" xmlns:zoc=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
             + "</xu:modifications>";
 
@@ -44,14 +44,14 @@ public class ZalbaOdlukaRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zalba_odluka/zalba_odluka_body[@id='%s' or @id[.='%s'] or @id[text()='%s']]/ancestor::zalba_odluka ", id, id, id);
+        String xpath = String.format("/zalba_odluka/zalba_odluka_body[@id='%s' or @id[.='%s'] or @id[text()='%s']]/ancestor::zalba_odluka ", id, id, id);
         ResourceSet s = existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
-    
-    public ResourceSet getMaxId() throws XMLDBException  {
-    	String xpath = "/zalba_odluka/zalba_odluka_body[@id = max(/zalba_odluka/zalba_odluka_body/@id)]/ancestor::zalba_odluka";
-    	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+
+    public ResourceSet getMaxId() throws XMLDBException {
+        String xpath = "/zalba_odluka/zalba_odluka_body[@id = max(/zalba_odluka/zalba_odluka_body/@id)]/ancestor::zalba_odluka";
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
     public ResourceSet getAllByUser(String email) throws XMLDBException {///re:osoba[@id = '%s']/ancestor::zalba_odluka
@@ -78,11 +78,11 @@ public class ZalbaOdlukaRepository {
         String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::status[.='%s']/ancestor::zalba_odluka", "ponistena");
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
-    
+
     public ResourceSet searchText(String text) throws XMLDBException {
-    	String xpath = String.format(
-				"/zalba_odluka/zalba_odluka_body[sadrzaj/*[local-name()='osnova_za_zalbu'][contains(.,'%s')] or protiv_resenja_zakljucka/*[local-name()='naziv_organa_koji_je_doneo_odluku'][contains(.,'%s')]]/ancestor::zalba_odluka",
-				text, text);
+        String xpath = String.format(
+                "/zalba_odluka/zalba_odluka_body[sadrzaj/*[local-name()='osnova_za_zalbu'][contains(.,'%s')] or protiv_resenja_zakljucka/*[local-name()='naziv_organa_koji_je_doneo_odluku'][contains(.,'%s')]]/ancestor::zalba_odluka",
+                text, text);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 }

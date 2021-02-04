@@ -24,20 +24,22 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    // Servis koji se koristi za citanje podataka o korisnicima aplikacije
+    @Autowired
+    private CustomUserDetailsService jwtUserDetailsService;
+    // Handler za vracanje 401 kada klijent sa neodogovarajucim korisnickim imenom i lozinkom pokusa da pristupi resursu
+    @Autowired
+    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    // Injektujemo implementaciju iz TokenUtils klase kako bismo mogli da koristimo njene metode za rad sa JWT u TokenAuthenticationFilteru
+    @Autowired
+    private TokenUtils tokenUtils;
+
     // Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
     // BCrypt po defalt-u radi 10 rundi hesiranja prosledjene vrednosti.
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    // Servis koji se koristi za citanje podataka o korisnicima aplikacije
-    @Autowired
-    private CustomUserDetailsService jwtUserDetailsService;
-
-    // Handler za vracanje 401 kada klijent sa neodogovarajucim korisnickim imenom i lozinkom pokusa da pristupi resursu
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     // Registrujemo authentication manager koji ce da uradi autentifikaciju korisnika za nas
     @Bean
@@ -52,10 +54,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
-
-    // Injektujemo implementaciju iz TokenUtils klase kako bismo mogli da koristimo njene metode za rad sa JWT u TokenAuthenticationFilteru
-    @Autowired
-    private TokenUtils tokenUtils;
 
     // Definisemo prava pristupa odredjenim URL-ovima
     @Override

@@ -27,7 +27,7 @@ public class ZahtevMapper {
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("about"), "http://zahtevi/" + id);
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/");
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("property"), "pred:datum");
-        zahtev.getZahtevBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
+        zahtev.getZahtevBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("content"), zahtevDTO.getZahtevBody().getDatum().toString());
 
         zahtev.getZahtevBody().setMesto(zahtevDTO.getZahtevBody().getMesto());
@@ -64,7 +64,7 @@ public class ZahtevMapper {
         Tfusnote fusnote = of.createTfusnote();
         fusnote.getFusnota().add("* У кућици означити која законска права на приступ информацијама желите да остварите.");
         fusnote.getFusnota().add("** У кућици означити начин достављања копије докумената.");
-        fusnote.getFusnota().add("*** Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.");
+        fusnote.getFusnota().add("* Када захтевате други начин достављања обавезно уписати који начин достављања захтевате.");
         zahtev.getZahtevBody().setFusnote(fusnote);
 
         return zahtev;

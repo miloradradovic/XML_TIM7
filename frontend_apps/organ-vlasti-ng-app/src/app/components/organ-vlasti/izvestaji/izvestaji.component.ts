@@ -107,11 +107,11 @@ export class IzvestajiComponent implements OnInit {
   }
 
   onDatumAfterChanged(event) {
-    this.form.controls.datumAfter.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
+    this.form.controls.datumAfter.patchValue(new Date(event.target.value).toISOString().split('.')[0]);
   }
 
   onDatumBeforeChanged(event) {
-    this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
+    this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('.')[0]);
   }
 
   pdf($event: number) {

@@ -27,7 +27,7 @@ public class ObavestenjeMapper {
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("rel"), "pred:responseTo");
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("href"), "http://zahtevi/" + obavestenjeDTO.getObavestenjeBody().getIdZahteva());
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("property"), "pred:datum");
-        obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
+        obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("content"), obavestenjeDTO.getObavestenjeBody().getDatum().toString());
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("link_na_zahtev"), linkNaZahtev);
 

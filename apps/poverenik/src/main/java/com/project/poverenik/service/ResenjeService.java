@@ -177,10 +177,10 @@ public class ResenjeService {
         ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
         if (datumAfter.equals("")) {
-            datumAfter = "1000-01-01";
+            datumAfter = "1000-01-01T00:00:00";
         }
         if (datumBefore.equals("")) {
-            datumBefore = "9999-12-31";
+            datumBefore = "9999-12-31T00:00:00";
         }
 
         String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_resenje.rq",

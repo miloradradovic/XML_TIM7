@@ -22,7 +22,7 @@ public class ZalbaCutanjeMapper {
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("about"), "http://zalbe/cutanje/" + id);
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/");
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("property"), "pred:datum");
-        zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
+        zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("content"), zalbaCutanjeDTO.getZalbaCutanjeBody().getDatum().toString());
         zalbaCutanje.getZalbaCutanjeBody().setDatum(zalbaCutanjeDTO.getZalbaCutanjeBody().getDatum());
 

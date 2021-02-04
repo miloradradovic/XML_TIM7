@@ -93,10 +93,14 @@ public class ResenjeService {
             String email;
             if (zalba.equals("cutanje")) {
                 ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(idZalbe);
+                if (zalbaCutanje == null)
+                    return false;
                 email = zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().get(new QName("id"));
                 zalbaCutanjeService.update(zalbaCutanje, status);
             } else {
                 ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
+                if (zalbaOdluka == null)
+                    return false;
                 email = zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().get(new QName("id"));
                 zalbaOdlukaService.update(zalbaOdluka, status);
             }
@@ -202,6 +206,7 @@ public class ResenjeService {
             trazilac = "<http://users/" + trazilacEmail + ">";
         }
         String zalba;
+        idZalbe = idZalbe.replace("-", "/");
         if (idZalbe.equals("")) {
             zalba = "?responseTo";
         } else {
@@ -374,10 +379,10 @@ public class ResenjeService {
         }
     }
 
-    public ResponseEntity<?> downloadResenjePDF(String broj){
+    public ResponseEntity<?> downloadResenjePDF(String broj) {
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -392,10 +397,10 @@ public class ResenjeService {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<?> downloadResenjeXHTML(String broj){
+    public ResponseEntity<?> downloadResenjeXHTML(String broj) {
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".html";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 

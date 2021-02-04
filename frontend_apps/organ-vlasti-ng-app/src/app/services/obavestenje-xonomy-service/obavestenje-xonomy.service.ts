@@ -51,7 +51,6 @@ export class ObavestenjeXonomyService {
         },
         attributes: {
           "datum": {
-            asker: Xonomy.askDate,
           },
           "idZahteva": {
           }

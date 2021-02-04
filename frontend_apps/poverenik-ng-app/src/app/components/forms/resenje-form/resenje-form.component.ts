@@ -19,14 +19,14 @@ export class ResenjeFormComponent implements OnInit {
 
   ngAfterViewInit(): void {
     const idZalbe = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
-
+    const datumAtr = (new Date()).toISOString().split('.')[0];
     const idPoverenika = JSON.parse(localStorage.getItem('user')).email;
     let elementR = document.getElementById("resenje");
     let xmlStringR =
     `<resenje xmlns="http://resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema#"
-   	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd"><resenje_body idZalbe="${idZalbe}" datum=""><tip_resenja></tip_resenja><uvodne_informacije>
+   	xsi:schemaLocation="http://resenje ../xsd/resenje.xsd"><resenje_body idZalbe="${idZalbe}" datum="${datumAtr}"><tip_resenja></tip_resenja><uvodne_informacije>
                 <trazilac id=""></trazilac>
                 <lice></lice>
             	  <adresa><mesto></mesto><ulica broj="0"></ulica></adresa>

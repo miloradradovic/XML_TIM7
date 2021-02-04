@@ -61,7 +61,6 @@ export class ZalbaCutanjeService {
             asker: Xonomy.askString
           },
           "datum": {
-            asker: Xonomy.askDate
           }
         }
       },

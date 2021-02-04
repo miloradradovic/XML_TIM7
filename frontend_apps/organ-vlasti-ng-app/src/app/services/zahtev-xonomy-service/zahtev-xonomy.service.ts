@@ -53,7 +53,6 @@ export class ZahtevXonomyService {
         },
         attributes: {
           "datum": {
-            asker: Xonomy.askDate,
           }
         }
       },

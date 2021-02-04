@@ -79,7 +79,6 @@ export class ResenjeService {
         },
         attributes: {
           "datum": {
-            asker: Xonomy.askDate,
           }
         }
       },

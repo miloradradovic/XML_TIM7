@@ -28,7 +28,7 @@ public class ZahtevMapper {
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("about"), "http://zahtevi/" + id);
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("vocab"),"http://examples/predicate/");
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("property"),"pred:datum");
-		zahtev.getZahtevBody().getOtherAttributes().put(new QName("datatype"),"xs:date");
+		zahtev.getZahtevBody().getOtherAttributes().put(new QName("datatype"),"xs:dateTime");
 		zahtev.getZahtevBody().getOtherAttributes().put(new QName("content"),zahtevDTO.getZahtevBody().getDatum().toString());
 		
 		zahtev.getZahtevBody().setMesto(zahtevDTO.getZahtevBody().getMesto());

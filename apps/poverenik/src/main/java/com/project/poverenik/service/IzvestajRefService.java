@@ -109,7 +109,7 @@ public class IzvestajRefService {
         return izvestajRefRepository.update(resenjeRef);
     }
 
-    public IzvestajRefList searchMetadata(String datumAfter, String datumBefore) throws XMLDBException, JAXBException {
+    public IzvestajRefList searchMetadata(String datumAfter, String datumBefore, String status) throws XMLDBException, JAXBException {
         com.project.poverenik.model.util.parametars.ObjectFactory of = new com.project.poverenik.model.util.parametars.ObjectFactory();
         ParametarMap parametarMap = of.createParametarMap();
 
@@ -123,11 +123,11 @@ public class IzvestajRefService {
         tvalue1.setValue(datumBefore);
         parametarMap.getValue().add(tvalue1);
 
-        return sendToPoverenik(parametarMap);
+        return sendToPoverenik(parametarMap, status);
 
     }
 
-    private IzvestajRefList sendToPoverenik(ParametarMap parametarMap) throws XMLDBException, JAXBException {
+    private IzvestajRefList sendToPoverenik(ParametarMap parametarMap, String status) throws XMLDBException, JAXBException {
 
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.poverenik.model.izvestaj.database.client");
@@ -142,17 +142,17 @@ public class IzvestajRefService {
 
         getRefsResponse refsResponse = izvestajClient.getRefs(getRefs);
         if (refsResponse != null) {
-            return getRefs(refsResponse.getResponse().getRef());
+            return getRefs(refsResponse.getResponse().getRef(), status);
         }
         return null;
 
     }
 
-    public IzvestajRefList getRefs(List<String> refs) throws XMLDBException, JAXBException {
+    public IzvestajRefList getRefs(List<String> refs, String status) throws XMLDBException, JAXBException {
         List<IzvestajRef> izvestajRefs = new ArrayList<>();
 
         for (String id : refs) {
-            ResourceSet resourceSet = izvestajRefRepository.getOneByBroj(id);
+            ResourceSet resourceSet = izvestajRefRepository.getOneStatusByBroj(id, status);
             ResourceIterator resourceIterator = resourceSet.getIterator();
 
             while (resourceIterator.hasMoreResources()) {

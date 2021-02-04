@@ -114,6 +114,8 @@ public class ResenjeRefService {
         // r.setResenjeBody(getResenjeByBrojResponse.getResenje());
         if (getResenjeByBrojResponse != null) {
             ResenjeRef resenjeRef = getOneByBroj(broj);
+            if (resenjeRef == null)
+                return null;
             resenjeRef.getBody().setProcitano("da");
             if (update(resenjeRef)) {
                 return getResenjeByBrojResponse;

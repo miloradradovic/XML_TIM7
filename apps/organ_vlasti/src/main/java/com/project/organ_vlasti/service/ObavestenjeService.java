@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -81,9 +80,9 @@ public class ObavestenjeService {
             String zahtevId = obavestenjeDTO.getObavestenjeBody().getIdZahteva();
             Zahtev zahtev = zahtevService.getOne(zahtevId);
 
-            if(zahtev == null ){
+            if (zahtev == null) {
                 return false;
-            }else if(!zahtev.getZahtevBody().getStatus().getValue().equals("neobradjen")){
+            } else if (!zahtev.getZahtevBody().getStatus().getValue().equals("neobradjen")) {
                 return false;
             }
             String userEmail = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
@@ -92,7 +91,7 @@ public class ObavestenjeService {
             if (jaxB.validate(obavestenje.getClass(), obavestenje)) {
                 if (obavestenjeRepository.create(obavestenje) != null) {
                     String email = obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
-                    if(zahtevService.update(zahtev, "prihvacen")){
+                    if (zahtevService.update(zahtev, "prihvacen")) {
                         return sendToUser(id, email);
                     }
                 }
@@ -119,7 +118,7 @@ public class ObavestenjeService {
         sendAttach.getEmail().setContent("Postovani, <br/><br/> dostavljamo Vam obavestenje na Vas zahtev. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Obavestenje " + broj);
 
-        if(!generateDocuments(broj)){
+        if (!generateDocuments(broj)) {
             return false;
         }
 
@@ -174,7 +173,7 @@ public class ObavestenjeService {
 
         JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        return  (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        return (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
     }
 
     public Obavestenje getObavestenjeByZahtev(String idZahteva) throws JAXBException, XMLDBException {
@@ -334,20 +333,20 @@ public class ObavestenjeService {
         return new ObavestenjeList(obavestenjeList);
     }
 
-    public String downloadResenjePDF(String broj){
+    public String downloadResenjePDF(String broj) {
         String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             return path;
         }
         return "";
     }
 
 
-    public String downloadResenjeXHTML(String broj){
+    public String downloadResenjeXHTML(String broj) {
         String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             return path;
         }
         return "";

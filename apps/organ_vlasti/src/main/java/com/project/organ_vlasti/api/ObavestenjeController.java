@@ -1,7 +1,6 @@
 package com.project.organ_vlasti.api;
 
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
-import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.service.ObavestenjeService;
 import com.project.organ_vlasti.service.ZahtevService;
@@ -12,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -43,7 +40,7 @@ public class ObavestenjeController {
                                                           @RequestParam("zahtev") String zahtev) throws XMLDBException, JAXBException, IOException {
 
         ObavestenjeList obavestenjeList = obavestenjeService.searchMetadata(datumAfter, datumBefore, organ_vlasti, userEmail, zahtev);
-        if(obavestenjeList != null){
+        if (obavestenjeList != null) {
             return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,7 +51,7 @@ public class ObavestenjeController {
     public ResponseEntity<ObavestenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException {
 
         ObavestenjeList obavestenjeList = obavestenjeService.searchText(input);
-        if(obavestenjeList != null){
+        if (obavestenjeList != null) {
             return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -109,7 +106,6 @@ public class ObavestenjeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadObavestenjePDF(@PathVariable String broj) {
         String path = obavestenjeService.downloadResenjePDF(broj);
@@ -128,7 +124,6 @@ public class ObavestenjeController {
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadObavestenjeXHTML(@PathVariable String broj) {
         String path = obavestenjeService.downloadResenjeXHTML(broj);

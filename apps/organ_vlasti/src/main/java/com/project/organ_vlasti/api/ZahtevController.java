@@ -88,13 +88,12 @@ public class ZahtevController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZahtev(@PathVariable String id) throws XMLDBException, JAXBException {
         Zahtev zahtev = zahtevService.getOne(id);
-        if (zahtev != null){
+        if (zahtev != null) {
             return new ResponseEntity<>(zahtev, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadZahtevPDF(@PathVariable String broj) {
         String path = zahtevService.downloadResenjePDF(broj);
@@ -112,7 +111,6 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadZahtevXHTML(@PathVariable String broj) {
         String path = zahtevService.downloadResenjeXHTML(broj);

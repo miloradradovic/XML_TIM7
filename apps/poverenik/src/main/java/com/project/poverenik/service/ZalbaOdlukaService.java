@@ -3,6 +3,7 @@ package com.project.poverenik.service;
 import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
+import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
@@ -13,6 +14,8 @@ import com.project.poverenik.transformer.Transformator;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -56,12 +59,15 @@ public class ZalbaOdlukaService {
 
     }
 
-    public boolean create(ZalbaOdluka zalbaOdlukaDTO, String userEmail) throws XMLDBException, NumberFormatException, JAXBException {
+    public boolean create(ZalbaOdluka zalbaOdlukaDTO) throws XMLDBException, NumberFormatException, JAXBException {
         if (jaxB.validate(zalbaOdlukaDTO.getClass(), zalbaOdlukaDTO)) {
 
             String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-            ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id, userEmail);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = (User) authentication.getPrincipal();
+
+            ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id, user.getEmail());
 
             if (jaxB.validate(zalbaOdluka.getClass(), zalbaOdluka)) {
                 return zalbaOdlukaRepository.create(zalbaOdluka);
@@ -227,10 +233,13 @@ public class ZalbaOdlukaService {
         return true;
     }
 
-    public ZalbaOdlukaList getByUser(String email) throws XMLDBException, JAXBException {
+    public ZalbaOdlukaList getByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
 
-        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByUser(email);
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByUser(user.getEmail());
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()) {

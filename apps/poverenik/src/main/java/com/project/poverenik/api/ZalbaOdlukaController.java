@@ -1,6 +1,5 @@
 package com.project.poverenik.api;
 
-import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.ZalbaOdlukaService;
@@ -11,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
@@ -41,7 +38,11 @@ public class ZalbaOdlukaController {
 
         ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchMetadata(
                 datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
-        return new ResponseEntity<>(zalbaOdlukaList, HttpStatus.OK);
+
+        if (zalbaOdlukaList != null) {
+            return new ResponseEntity<>(zalbaOdlukaList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
@@ -49,16 +50,16 @@ public class ZalbaOdlukaController {
     public ResponseEntity<ZalbaOdlukaList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
 
         ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.searchText(input);
-        return new ResponseEntity<>(zalbaOdlukaList, HttpStatus.OK);
+        if (zalbaOdlukaList != null) {
+            return new ResponseEntity<>(zalbaOdlukaList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createZalbaOdluka(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException, NumberFormatException, JAXBException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-
-        if (zalbaOdlukaService.create(zalbaOdluka, user.getEmail())) {
+        if (zalbaOdlukaService.create(zalbaOdluka)) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -78,9 +79,7 @@ public class ZalbaOdlukaController {
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value = "/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZalbaOdlukaList> getZalbaOdlukaListByUser() throws XMLDBException, JAXBException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByUser(user.getEmail());
+        ZalbaOdlukaList zalbaOdlukaList = zalbaOdlukaService.getByUser();
 
         if (zalbaOdlukaList != null)
             return new ResponseEntity<>(zalbaOdlukaList, HttpStatus.OK);
@@ -108,27 +107,10 @@ public class ZalbaOdlukaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> delete(@PathVariable String id) throws XMLDBException {
-        if (zalbaOdlukaService.delete(id))
-            return new ResponseEntity<>(HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> update(@RequestBody ZalbaOdluka zalbaOdluka) throws XMLDBException {
-        if (zalbaOdlukaService.update(zalbaOdluka, ""))
-            return new ResponseEntity<>(HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadResenjePDF(@PathVariable String broj) {
         String path = zalbaOdlukaService.downloadResenjePDF(broj);
-        if(!path.equals("")){
+        if (!path.equals("")) {
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -146,7 +128,7 @@ public class ZalbaOdlukaController {
     @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadResenjeXHTML(@PathVariable String broj) {
         String path = zalbaOdlukaService.downloadResenjeXHTML(broj);
-        if(!path.equals("")){
+        if (!path.equals("")) {
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
                 HttpHeaders headers = new HttpHeaders();

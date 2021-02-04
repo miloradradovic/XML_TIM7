@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ObavestenjeService} from '../../../services/obavestenje-service/obavestenje.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+declare var require: any;
 
 @Component({
   selector: 'app-obavestenja',
@@ -12,8 +15,18 @@ export class ObavestenjaComponent implements OnInit {
 
   obavestenja = [];
 
+  form: FormGroup;
   constructor(private obavestenjeService: ObavestenjeService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private fb: FormBuilder) {
+                this.form = this.fb.group({
+                  zahtev: [''],
+                  organVlasti: [''],
+                  userEmail: [''],
+                  datumAfter: [''],
+                  datumBefore: [''],
+                });
+  }
 
   ngOnInit(): void {
     const newList = [];
@@ -25,11 +38,17 @@ export class ObavestenjaComponent implements OnInit {
         console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
         if (lista !== undefined){
-          lista.forEach((item, index) => {
-            const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+          try{
+            lista.forEach((item, index) => {
+              const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+              const obavestenje = {id: idObavestenja};
+              newList.push(obavestenje);
+            });
+          } catch (err){
+            const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
             const obavestenje = {id: idObavestenja};
             newList.push(obavestenje);
-          });
+          }
           this.obavestenja = newList;
         }
       },
@@ -38,6 +57,66 @@ export class ObavestenjaComponent implements OnInit {
       }
     );
   }
+
+  renderObavestenja = (result) => {
+    this.obavestenja = [];
+    const newList = [];
+    const convert = require('xml-js');
+        const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        console.log(obavestenjeList);
+        const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
+        if (lista !== undefined){
+          try{
+            lista.forEach((item, index) => {
+              const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+              const obavestenje = {id: idObavestenja};
+              newList.push(obavestenje);
+            });
+          } catch (err){
+            const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
+            const obavestenje = {id: idObavestenja};
+            newList.push(obavestenje);
+          }
+          this.obavestenja = newList;
+        }
+  }
+
+  onTekstChanged(newValue: any){
+    console.log(newValue.value)
+    this.obavestenjeService.getPretragaTekst(newValue.value).subscribe(
+      result => {
+        this.renderObavestenja(result);    
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
+  }
+
+  onSubmitClicked() {
+    console.log(this.form.controls.zahtev.value)
+    console.log(this.form.controls.organVlasti.value)
+    console.log(this.form.controls.userEmail.value)
+    console.log(this.form.controls.datumAfter.value)
+    console.log(this.form.controls.datumBefore.value)
+    this.obavestenjeService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value, this.form.controls.zahtev.value).subscribe(
+      result => {
+        this.renderObavestenja(result);    
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      }
+    );
+  }
+
+  onDatumAfterChanged(event) {
+    this.form.controls.datumAfter.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
+  }
+
+  onDatumBeforeChanged(event) {
+    this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
+  }
+
 
   pdf($event: number) {
 

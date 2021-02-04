@@ -17,4 +17,12 @@ export class ObavestenjeService {
     return this.http.get('http://localhost:8090/obavestenje/by-user',
       {headers: this.headers, responseType: 'text'});
   }
+  getPretragaTekst(input): Observable<any> {
+    return this.http.get('http://localhost:8090/obavestenje/search-text?input=' + input,
+    {headers: this.headers, responseType: 'text'});
+  }
+  getPretragaMetadata(datumAfter, datumBefore, organVlasti, userEmail, zahtev): Observable<any> {
+    return this.http.get('http://localhost:8090/obavestenje/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail + '&zahtev=' + zahtev,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

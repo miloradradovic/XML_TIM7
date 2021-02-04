@@ -4,6 +4,8 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {SignInModel} from '../../../model/sign-in.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ResenjeService} from '../../../services/resenje-service/resenje.service';
+import {GradjaninPonistavanjeDialogComponent} from './gradjanin-ponistavanje-dialog/gradjanin-ponistavanje-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gradjanin-main-page',
@@ -16,7 +18,8 @@ export class GradjaninMainPageComponent implements OnInit {
   resenja = []; // isto
   constructor(private zalbaService: ZalbaService,
               private resenjeService: ResenjeService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     const newList = [];
@@ -26,15 +29,25 @@ export class GradjaninMainPageComponent implements OnInit {
       result => {
         // @ts-ignore
         const convert = require('xml-js');
-        const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        const lista = zalbaCutanjeList.zalbaCutanjeList;
-        const zalbe = lista['zc:zalba_odluka'];
+        const zalbaOdlukaList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+        const lista = zalbaOdlukaList.zalbaOdlukaList;
+        const zalbe = lista['zoc:zalba_odluka'];
+        console.log(zalbe);
         if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zc:zalba_odluka_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'odluka'};
+          try {
+            zalbe.forEach((item, index) => {
+              const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
+              const statusZalbe = item['zoc:zalba_odluka_body']['zoc:status']._text;
+              const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
+              newList.push(zalba);
+            });
+          }
+          catch (err) {
+            const idZalbe = zalbe['zoc:zalba_odluka_body']._attributes.id;
+            const statusZalbe = zalbe['zoc:zalba_odluka_body']['zoc:status']._text;
+            const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
             newList.push(zalba);
-          });
+          }
         }
         this.zalbe = newList.concat(this.zalbe);
       },
@@ -50,11 +63,20 @@ export class GradjaninMainPageComponent implements OnInit {
         const lista = zalbaCutanjeList.zalbaCutanjeList;
         const zalbe = lista['zc:zalba_cutanje'];
         if (zalbe !== undefined){
-          zalbe.forEach((item, index) => {
-            const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'cutanje'};
+          try {
+            zalbe.forEach((item, index) => {
+              const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
+              const statusZalbe = item['zc:zalba_cutanje_body']['zc:status']._text;
+              const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
+              newList2.push(zalba);
+            });
+          }
+          catch (err) {
+            const idZalbe = zalbe['zc:zalba_cutanje_body']._attributes.id;
+            const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
+            const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
             newList2.push(zalba);
-          });
+          }
           this.zalbe = newList2.concat(this.zalbe);
         }
       },
@@ -62,7 +84,7 @@ export class GradjaninMainPageComponent implements OnInit {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
       }
     );
-    this.resenjeService.getResenjeList().subscribe(
+    this.resenjeService.getResenjeListByUser().subscribe(
       result => {
         // @ts-ignore
         const convert = require('xml-js');
@@ -70,11 +92,18 @@ export class GradjaninMainPageComponent implements OnInit {
         const lista = resenjeList;
         const resenja = lista['ra:resenje'];
         if (resenja !== undefined){
-          resenja.forEach((item, index) => {
-            const idResenja = item['ra:resenje_body']._attributes.id;
+          try {
+            resenja.forEach((item, index) => {
+              const idResenja = item['ra:resenje_body']._attributes.id;
+              const resenje = {id: idResenja};
+              newList3.push(resenje);
+            });
+          }
+          catch (err) {
+            const idResenja = resenja['ra:resenje_body']._attributes.id;
             const resenje = {id: idResenja};
             newList3.push(resenje);
-          });
+          }
           this.resenja = newList3;
         }
       },
@@ -85,8 +114,30 @@ export class GradjaninMainPageComponent implements OnInit {
 
   }
 
-  ponistiZalba($event: string) {
+  ponistiZalba($event: string): void {
     console.log($event);
+    // $event je tip/id
+    // u need email iz dialoga
+    this.zalbe.forEach((item, index) => {
+      const itemid = item.tip + '/' + item.id;
+      if (itemid === $event){
+        if (item.status !== 'u obradi' || item.status !== 'neobradjena'){
+          this.openDialog($event);
+        }else{
+          this.snackBar.open('Zalba je obradjena!', 'Ok', { duration: 2000 });
+        }
+      }
+    });
+  }
+  openDialog(zalbaId: string): void{
+    const dialogRef = this.dialog.open(GradjaninPonistavanjeDialogComponent, {
+      width: '250px',
+      data: {zalba: zalbaId}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   convertToPdfZalba($event: string) {

@@ -7,7 +7,6 @@ import com.project.poverenik.model.zalba_odluka.Tzalba;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import java.math.BigInteger;
 
@@ -25,6 +24,7 @@ public class ZalbaOdlukaMapper {
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("property"), "pred:datum");
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
         zalbaOdluka.getZalbaOdlukaBody().getOtherAttributes().put(new QName("content"), zalbaOdlukaDTO.getZalbaOdlukaBody().getDatum().toString());
+        zalbaOdluka.getZalbaOdlukaBody().setDatum(zalbaOdlukaDTO.getZalbaOdlukaBody().getDatum());
 
         zalbaOdluka.getZalbaOdlukaBody().setZahtev(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev());
         zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("property"), "pred:zahtev");

@@ -2,13 +2,11 @@ package com.project.poverenik.mappers;
 
 import com.project.poverenik.model.util.ComplexTypes.ObjectFactory;
 import com.project.poverenik.model.util.ComplexTypes.Tclan;
-import com.project.poverenik.model.util.ComplexTypes.Topcije;
 import com.project.poverenik.model.util.ComplexTypes.TsadrzajZalbe;
 import com.project.poverenik.model.zalba_cutanje.Tzalba;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import java.math.BigInteger;
 
@@ -26,6 +24,7 @@ public class ZalbaCutanjeMapper {
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("property"), "pred:datum");
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
         zalbaCutanje.getZalbaCutanjeBody().getOtherAttributes().put(new QName("content"), zalbaCutanjeDTO.getZalbaCutanjeBody().getDatum().toString());
+        zalbaCutanje.getZalbaCutanjeBody().setDatum(zalbaCutanjeDTO.getZalbaCutanjeBody().getDatum());
 
         zalbaCutanje.getZalbaCutanjeBody().setZahtev(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev());
         zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("property"), "pred:zahtev");

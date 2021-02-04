@@ -84,13 +84,13 @@ public class ResenjeServiceSoapBindingImpl implements ResenjeServicePortType {
 
                 resenjeList = resenjeService.searchMetadata(
                         parametars.getValue().get(0).getName().equals("poverenik") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("trazilac") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("zalba") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("datumAfter") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("datumBefore") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("tip") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("organVlasti") ? parametars.getValue().get(0).getValue() : "",
-                        parametars.getValue().get(0).getName().equals("mesto") ? parametars.getValue().get(0).getValue() : "");
+                        parametars.getValue().get(1).getName().equals("trazilac") ? parametars.getValue().get(1).getValue() : "",
+                        parametars.getValue().get(2).getName().equals("zalba") ? parametars.getValue().get(2).getValue() : "",
+                        parametars.getValue().get(3).getName().equals("datumAfter") ? parametars.getValue().get(3).getValue() : "",
+                        parametars.getValue().get(4).getName().equals("datumBefore") ? parametars.getValue().get(4).getValue() : "",
+                        parametars.getValue().get(5).getName().equals("tip") ? parametars.getValue().get(5).getValue() : "",
+                        parametars.getValue().get(6).getName().equals("organVlasti") ? parametars.getValue().get(6).getValue() : "",
+                        parametars.getValue().get(7).getName().equals("mesto") ? parametars.getValue().get(7).getValue() : "");
             }
 
             for (Resenje resenje : resenjeList.getAny()) {

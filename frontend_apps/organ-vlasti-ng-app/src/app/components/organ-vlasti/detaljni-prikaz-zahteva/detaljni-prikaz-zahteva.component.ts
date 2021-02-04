@@ -12,10 +12,19 @@ import {MatDialog} from '@angular/material/dialog';
 export class DetaljniPrikazZahtevaComponent implements OnInit {
 
   zahtevId = '0';
+  odbijen = false;
+  neobradjena = true;
   constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.zahtevId = this.activatedRoute.snapshot.queryParamMap.get('zahtev_id');
+    const status = this.activatedRoute.snapshot.queryParamMap.get('zahtev_status');
+    if (status === 'odbijen' || status === 'prihvacen'){
+      this.odbijen = true;
+    }
+    if (status === 'neobradjen'){
+      this.neobradjena = true;
+    }
   }
 
 

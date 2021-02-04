@@ -106,7 +106,6 @@ export class ObavestenjeFormComponent implements OnInit {
     this.obavestenjeService.send(dataTemplate)
       .subscribe(res => console.log(res));
     this.snackBar.open("Uspešno ste poslali obavestenje!", 'Ok', { duration: 3000 });
-    this.router.navigate(['/main-page-organ-vlasti']);
 
   }
 

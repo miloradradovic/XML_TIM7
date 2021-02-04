@@ -81,7 +81,6 @@ export class ZahtevFormComponent implements OnInit {
     this.zahtevService.send(dataTemplate)
       .subscribe(res => console.log(res));
     this.snackBar.open("Uspešno ste poslali zahtev!", 'Ok', { duration: 3000 });
-    this.router.navigate(['/main-page-gradjanin']);
   }
 
 }

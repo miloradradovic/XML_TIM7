@@ -218,6 +218,27 @@ public class ZalbaCutanjeService {
 
     }
 
+
+    public String downloadResenjePDF(String broj){
+        String path = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj){
+        String path = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
+
+
     public boolean generateDocuments(String broj) {
         final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
         final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";

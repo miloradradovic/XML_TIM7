@@ -280,11 +280,9 @@ public class ResenjeService {
             transformator.generateHTML(existManager.getOutputStream(xml),
                     XSL, OUTPUT_HTML);
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
-        } catch (XMLDBException | IOException | JAXBException e) {
-            e.printStackTrace();
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
 
         System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
@@ -381,6 +379,7 @@ public class ResenjeService {
         }
         return "";
     }
+
 
     public String downloadResenjeXHTML(String broj) {
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".html";

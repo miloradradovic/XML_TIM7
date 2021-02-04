@@ -126,9 +126,8 @@ public class ZahtevController {
 
     @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadZahtevPDF(@PathVariable String broj) {
-        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
-        boolean obavestenje = zahtevService.generateDocuments(broj);
-        if (!obavestenje)
+        String path = zahtevService.downloadResenjePDF(broj);
+        if (!path.equals(""))
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -139,16 +138,13 @@ public class ZahtevController {
             } catch (Exception e) {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity(obavestenje, HttpStatus.OK);
-
-        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value="/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadZahtevXHTML(@PathVariable String broj) {
-        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
-        boolean obavestenje = zahtevService.generateDocuments(broj);
-        if (!obavestenje)
+        String path = zahtevService.downloadResenjeXHTML(broj);
+        if (!path.equals(""))
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -159,7 +155,7 @@ public class ZahtevController {
             } catch (Exception e) {
                 return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity(obavestenje, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

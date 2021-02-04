@@ -140,12 +140,11 @@ public class ZahtevService {
             transformator.generateHTML(existManager.getOutputStream(xml),
                     "src/main/resources/generated_files/xslt/zahtev.xsl", OUTPUT_HTML);
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
-        } catch (XMLDBException | IOException | JAXBException e) {
-            e.printStackTrace();
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+
 		/*pdfTransformer.generateHTML(existManager.getOutputStream(), XSL_FILE);
 		pdfTransformer.generatePDF(OUTPUT_FILE);
 */
@@ -287,4 +286,23 @@ public class ZahtevService {
 		return new ZahtevList(zahtevList);
 
 	}
+
+    public String downloadResenjePDF(String broj){
+        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj){
+        String path = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
 }

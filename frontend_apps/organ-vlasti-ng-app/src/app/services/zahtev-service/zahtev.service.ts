@@ -21,4 +21,12 @@ export class ZahtevService {
     return this.http.get('http://localhost:8090/zahtev/by-user',
       {headers: this.headers, responseType: 'text'});
   }
+  getPretragaTekst(input): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/search-text?input=' + input,
+    {headers: this.headers, responseType: 'text'});
+  }
+  getPretragaMetadata(datumAfter, datumBefore, mesto, organVlasti, userEmail): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

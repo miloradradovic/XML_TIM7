@@ -36,6 +36,10 @@ import {MatTableModule} from '@angular/material/table';
 import { KreiranjeIzvestajaComponent } from './components/organ-vlasti/kreiranje-izvestaja/kreiranje-izvestaja.component';
 import { IzjasnjavanjeDialogComponent } from './components/organ-vlasti/izjasnjavanja/izjasnjavanje-dialog/izjasnjavanje-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 import { DetaljniPrikazZahtevaComponent } from './components/organ-vlasti/detaljni-prikaz-zahteva/detaljni-prikaz-zahteva.component';
 import { DetaljniPrikazObavestenjaComponent } from './components/organ-vlasti/detaljni-prikaz-obavestenja/detaljni-prikaz-obavestenja.component';
 import { DetaljniPrikazIzvestajaComponent } from './components/organ-vlasti/detaljni-prikaz-izvestaja/detaljni-prikaz-izvestaja.component';
@@ -85,7 +89,11 @@ import { DetaljniPrikazZalbeComponent } from './components/organ-vlasti/detaljni
     MatIconModule,
     MatTableModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

@@ -38,10 +38,15 @@ import { PoverenikProcitaniIzvestajiComponent } from './components/poverenik/pov
 import { PoverenikNeprocitaniIzvestajiComponent } from './components/poverenik/poverenik-neprocitani-izvestaji/poverenik-neprocitani-izvestaji.component';
 import { GradjaninPonistavanjeDialogComponent } from './components/gradjanin/gradjanin-main-page/gradjanin-ponistavanje-dialog/gradjanin-ponistavanje-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 import { PoverenikDetaljniPrikazResenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-resenja/poverenik-detaljni-prikaz-resenja.component';
 import { PoverenikDetaljniPrikazZahtevaComponent } from './components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
 import { PoverenikDetaljniPrikazObavestenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
 import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/poverenik/poverenik-detaljni-prikaz-izvestaja/poverenik-detaljni-prikaz-izvestaja.component';
+import { EmptyComponent } from './components/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +75,7 @@ import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/povereni
     PoverenikDetaljniPrikazZahtevaComponent,
     PoverenikDetaljniPrikazObavestenjaComponent,
     PoverenikDetaljniPrikazIzvestajaComponent,
+    EmptyComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +94,10 @@ import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/povereni
     MatRadioModule,
     MatDialogModule,
     FormsModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

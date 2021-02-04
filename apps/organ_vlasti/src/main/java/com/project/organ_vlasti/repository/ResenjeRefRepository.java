@@ -28,6 +28,11 @@ public class ResenjeRefRepository {
         String xpath =  String.format("/resenje_ref/body[@procitano ='%s']/ancestor::resenje_ref", procitano);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
+    
+    public ResourceSet getOneStatusByBroj(String broj, String status) throws XMLDBException {
+        String xpath =  String.format("/resenje_ref/body[.='%s' and @procitano ='%s']/ancestor::resenje_ref", broj, status);
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+    }
 
     public ResourceSet getOneByBroj(String broj) throws XMLDBException {
         String xpath =  String.format("/resenje_ref/body[.='%s']/ancestor::resenje_ref", broj);

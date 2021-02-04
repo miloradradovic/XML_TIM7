@@ -12,6 +12,7 @@ export class PoverenikDetaljniPrikazZalbeComponent implements OnInit {
   uObradi: boolean;
   neobradjena: boolean;
   zalba = {id: '', status: ''};
+  src = '../../../../assets/obavestenje.html';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
               private izjasnjavanjeService: IzjasnjavanjaService, private snackBar: MatSnackBar) { }

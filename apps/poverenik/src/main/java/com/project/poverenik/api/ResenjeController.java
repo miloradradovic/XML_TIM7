@@ -36,7 +36,7 @@ public class ResenjeController {
 
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value = "/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ResenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ResenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException {
 
         ResenjeList resenjeList = resenjeService.searchText(input);
         return new ResponseEntity<>(resenjeList, HttpStatus.OK);
@@ -117,13 +117,15 @@ public class ResenjeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadResenje(@PathVariable String broj) {
-        boolean obavestenje = resenjeService.generateDocuments(broj);
-        if (obavestenje)
-            return new ResponseEntity<>(obavestenje, HttpStatus.OK);
+    public ResponseEntity<?> downloadResenjePDF(@PathVariable String broj) {
 
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return resenjeService.downloadResenjePDF(broj);
+    }
+
+    @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadResenjeXHTML(@PathVariable String broj) {
+
+        return resenjeService.downloadResenjeXHTML(broj);
     }
 }

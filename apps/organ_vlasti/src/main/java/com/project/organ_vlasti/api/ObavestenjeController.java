@@ -43,7 +43,10 @@ public class ObavestenjeController {
                                                           @RequestParam("zahtev") String zahtev) throws XMLDBException, JAXBException, IOException {
 
         ObavestenjeList obavestenjeList = obavestenjeService.searchMetadata(datumAfter, datumBefore, organ_vlasti, userEmail, zahtev);
-        return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
+        if(obavestenjeList != null){
+            return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
@@ -121,7 +124,7 @@ public class ObavestenjeController {
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
 
@@ -140,7 +143,7 @@ public class ObavestenjeController {
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
 }

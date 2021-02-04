@@ -103,17 +103,9 @@ public class ZahtevService {
         if (xmlResource == null)
             return null;
 
-        Zahtev zahtev;
-
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-
-        return zahtev;
-    }
-
-    public boolean delete(String id) throws XMLDBException {
-        return zahtevRepository.delete(id);
+        return (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
     }
 
     public boolean update(Zahtev zahtev, String status) throws XMLDBException {
@@ -299,9 +291,9 @@ public class ZahtevService {
         String poruka = info.split(":")[1];
 
         Zahtev zahtev = getOne(zahtevId);
-        if(zahtev == null){
+        if (zahtev == null) {
             return false;
-        }else if(zahtev.getZahtevBody().getStatus().getValue().equals("odbijen")){
+        } else if (zahtev.getZahtevBody().getStatus().getValue().equals("odbijen")) {
             return false;
         }
 

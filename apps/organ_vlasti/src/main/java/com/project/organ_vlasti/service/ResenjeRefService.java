@@ -118,7 +118,6 @@ public class ResenjeRefService {
             if (update(resenjeRef)) {
                 return getResenjeByBrojResponse;
             }
-            return null;
         }
         return null;
     }
@@ -208,7 +207,6 @@ public class ResenjeRefService {
             return getRefs(refsResponse.getResponse().getRef(), status);
         }
         return null;
-
     }
 
     public ResenjeRef getOne(String id) throws JAXBException, XMLDBException {
@@ -241,10 +239,6 @@ public class ResenjeRefService {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
 
-    }
-
-    public boolean delete(String id) throws XMLDBException {
-        return resenjeRefRepository.delete(id);
     }
 
     public boolean update(ResenjeRef resenjeRef) throws XMLDBException {

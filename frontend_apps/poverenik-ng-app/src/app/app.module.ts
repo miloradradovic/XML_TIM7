@@ -42,6 +42,7 @@ import { PoverenikDetaljniPrikazResenjaComponent } from './components/poverenik/
 import { PoverenikDetaljniPrikazZahtevaComponent } from './components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
 import { PoverenikDetaljniPrikazObavestenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
 import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/poverenik/poverenik-detaljni-prikaz-izvestaja/poverenik-detaljni-prikaz-izvestaja.component';
+import { EmptyComponent } from './components/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/povereni
     PoverenikDetaljniPrikazZahtevaComponent,
     PoverenikDetaljniPrikazObavestenjaComponent,
     PoverenikDetaljniPrikazIzvestajaComponent,
+    EmptyComponent,
   ],
   imports: [
     BrowserModule,

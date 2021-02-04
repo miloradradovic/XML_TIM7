@@ -84,7 +84,7 @@ export class ZahteviComponent implements OnInit {
     console.log(newValue.value)
     this.zahtevService.getPretragaTekst(newValue.value).subscribe(
       result => {
-        this.renderZahtevi(result);    
+        this.renderZahtevi(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -100,7 +100,7 @@ export class ZahteviComponent implements OnInit {
     console.log(this.form.controls.datumBefore.value)
     this.zahtevService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.mesto.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value).subscribe(
       result => {
-        this.renderZahtevi(result);    
+        this.renderZahtevi(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -116,11 +116,45 @@ export class ZahteviComponent implements OnInit {
     this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
   }
 
-  xhtml($event: number) {
-
+  pdf($event: string): void {
+    this.zahtevService.convertZahtevPDF($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zahtev' + $event + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
   }
 
-  pdf($event: number) {
-
+  xhtml($event: string): void {
+    this.zahtevService.convertZahtevXHTML($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zahtev' + $event + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
   }
 }

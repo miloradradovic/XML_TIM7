@@ -29,4 +29,13 @@ export class ZahtevService {
     return this.http.get('http://localhost:8090/zahtev/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail,
       {headers: this.headers, responseType: 'text'});
   }
+
+  convertZahtevPDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/toPdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertZahtevXHTML(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/toXhtml/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 }

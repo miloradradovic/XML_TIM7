@@ -17,10 +17,8 @@ public class getResenjeByBrojResponse {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link Tresenje }
-     *
+     * @return possible object is
+     * {@link Tresenje }
      */
     public Tresenje getResenje() {
         return resenje;
@@ -29,10 +27,8 @@ public class getResenjeByBrojResponse {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Tresenje }
-     *
+     * @param value allowed object is
+     *              {@link Tresenje }
      */
     public void setResenje(Tresenje value) {
         this.resenje = value;

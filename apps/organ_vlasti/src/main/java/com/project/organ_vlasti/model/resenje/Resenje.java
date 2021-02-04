@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -20,12 +20,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resenjeBody"
+        "resenjeBody"
 })
 @XmlRootElement(name = "resenje", namespace = "http://resenje")
 public class Resenje {
@@ -35,11 +33,9 @@ public class Resenje {
 
     /**
      * Gets the value of the resenjeBody property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tresenje }
-     *     
+     *
+     * @return possible object is
+     * {@link Tresenje }
      */
     public Tresenje getResenjeBody() {
         return resenjeBody;
@@ -47,11 +43,9 @@ public class Resenje {
 
     /**
      * Sets the value of the resenjeBody property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tresenje }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tresenje }
      */
     public void setResenjeBody(Tresenje value) {
         this.resenjeBody = value;

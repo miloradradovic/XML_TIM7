@@ -5,25 +5,18 @@ import com.project.organ_vlasti.model.util.ComplexTypes.TinformacijeOPodnosiocu;
 import com.project.organ_vlasti.model.util.ComplexTypes.Topcije;
 import com.project.organ_vlasti.model.util.ComplexTypes.TtekstZahtevaObavestenja;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * <p>Java class for Tobavestenje complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tobavestenje">
  *   &lt;complexContent>
@@ -54,17 +47,15 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tobavestenje", namespace = "http://www.obavestenje", propOrder = {
-    "nazivOrgana",
-    "informacijeOPodnosiocu",
-    "naslov",
-    "podnaslov",
-    "tekstZahteva",
-    "opcijaDostave"
+        "nazivOrgana",
+        "informacijeOPodnosiocu",
+        "naslov",
+        "podnaslov",
+        "tekstZahteva",
+        "opcijaDostave"
 })
 public class Tobavestenje {
 
@@ -94,11 +85,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the nazivOrgana property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tobavestenje.NazivOrgana }
-     *     
+     *
+     * @return possible object is
+     * {@link Tobavestenje.NazivOrgana }
      */
     public Tobavestenje.NazivOrgana getNazivOrgana() {
         return nazivOrgana;
@@ -106,11 +95,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the nazivOrgana property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tobavestenje.NazivOrgana }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tobavestenje.NazivOrgana }
      */
     public void setNazivOrgana(Tobavestenje.NazivOrgana value) {
         this.nazivOrgana = value;
@@ -118,11 +105,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the informacijeOPodnosiocu property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TinformacijeOPodnosiocu }
-     *     
+     *
+     * @return possible object is
+     * {@link TinformacijeOPodnosiocu }
      */
     public TinformacijeOPodnosiocu getInformacijeOPodnosiocu() {
         return informacijeOPodnosiocu;
@@ -130,11 +115,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the informacijeOPodnosiocu property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TinformacijeOPodnosiocu }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TinformacijeOPodnosiocu }
      */
     public void setInformacijeOPodnosiocu(TinformacijeOPodnosiocu value) {
         this.informacijeOPodnosiocu = value;
@@ -142,11 +125,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the naslov property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getNaslov() {
         return naslov;
@@ -154,11 +135,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the naslov property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setNaslov(String value) {
         this.naslov = value;
@@ -166,11 +145,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the podnaslov property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getPodnaslov() {
         return podnaslov;
@@ -178,11 +155,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the podnaslov property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPodnaslov(String value) {
         this.podnaslov = value;
@@ -190,11 +165,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the tekstZahteva property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TtekstZahtevaObavestenja }
-     *     
+     *
+     * @return possible object is
+     * {@link TtekstZahtevaObavestenja }
      */
     public TtekstZahtevaObavestenja getTekstZahteva() {
         return tekstZahteva;
@@ -202,11 +175,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the tekstZahteva property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TtekstZahtevaObavestenja }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TtekstZahtevaObavestenja }
      */
     public void setTekstZahteva(TtekstZahtevaObavestenja value) {
         this.tekstZahteva = value;
@@ -214,11 +185,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the opcijaDostave property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Topcije }
-     *     
+     *
+     * @return possible object is
+     * {@link Topcije }
      */
     public Topcije getOpcijaDostave() {
         return opcijaDostave;
@@ -226,11 +195,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the opcijaDostave property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Topcije }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Topcije }
      */
     public void setOpcijaDostave(Topcije value) {
         this.opcijaDostave = value;
@@ -238,11 +205,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the datum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDatum() {
         return datum;
@@ -250,11 +215,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the datum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDatum(XMLGregorianCalendar value) {
         this.datum = value;
@@ -262,11 +225,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getId() {
         return id;
@@ -274,11 +235,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setId(String value) {
         this.id = value;
@@ -286,11 +245,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the idZahteva property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getIdZahteva() {
         return idZahteva;
@@ -298,11 +255,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the idZahteva property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setIdZahteva(String value) {
         this.idZahteva = value;
@@ -310,11 +265,9 @@ public class Tobavestenje {
 
     /**
      * Gets the value of the broj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getBroj() {
         return broj;
@@ -322,11 +275,9 @@ public class Tobavestenje {
 
     /**
      * Sets the value of the broj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBroj(String value) {
         this.broj = value;
@@ -334,17 +285,15 @@ public class Tobavestenje {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     * <p>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
@@ -353,9 +302,9 @@ public class Tobavestenje {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -366,12 +315,10 @@ public class Tobavestenje {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class NazivOrgana {
 
@@ -384,11 +331,9 @@ public class Tobavestenje {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -396,11 +341,9 @@ public class Tobavestenje {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -408,11 +351,9 @@ public class Tobavestenje {
 
         /**
          * Gets the value of the sediste property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getSediste() {
             return sediste;
@@ -420,11 +361,9 @@ public class Tobavestenje {
 
         /**
          * Sets the value of the sediste property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setSediste(String value) {
             this.sediste = value;
@@ -432,17 +371,15 @@ public class Tobavestenje {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

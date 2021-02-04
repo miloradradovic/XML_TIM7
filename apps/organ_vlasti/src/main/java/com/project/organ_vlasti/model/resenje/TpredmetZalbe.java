@@ -10,9 +10,9 @@ import java.util.List;
 
 /**
  * <p>Java class for Tpredmet_zalbe complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tpredmet_zalbe">
  *   &lt;complexContent>
@@ -35,40 +35,38 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tpredmet_zalbe", namespace = "http://resenje", propOrder = {
-    "content"
+        "content"
 })
 public class TpredmetZalbe {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false)
+            @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
 
     /**
      * Gets the value of the content property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
@@ -76,8 +74,6 @@ public class TpredmetZalbe {
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
-     * 
-     * 
      */
     public List<Serializable> getContent() {
         if (content == null) {
@@ -89,9 +85,9 @@ public class TpredmetZalbe {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -101,12 +97,10 @@ public class TpredmetZalbe {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Trazilac {
 
@@ -118,11 +112,9 @@ public class TpredmetZalbe {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -130,11 +122,9 @@ public class TpredmetZalbe {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -142,11 +132,9 @@ public class TpredmetZalbe {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -154,11 +142,9 @@ public class TpredmetZalbe {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;

@@ -10,9 +10,9 @@ import java.util.List;
 
 /**
  * <p>Java class for Tclan complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tclan">
  *   &lt;complexContent>
@@ -34,18 +34,16 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tclan", namespace = "http://resenje", propOrder = {
-    "content"
+        "content"
 })
 public class Tclan {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "tacka", namespace = "http://resenje", type = JAXBElement.class, required = false)
+            @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "tacka", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -54,27 +52,25 @@ public class Tclan {
 
     /**
      * Gets the value of the content property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link Tacka }{@code >}
      * {@link String }
      * {@link JAXBElement }{@code <}{@link Tstav }{@code >}
-     * 
-     * 
      */
     public List<Serializable> getContent() {
         if (content == null) {
@@ -85,11 +81,9 @@ public class Tclan {
 
     /**
      * Gets the value of the broj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     * {@link Integer }
      */
     public Integer getBroj() {
         return broj;
@@ -97,11 +91,9 @@ public class Tclan {
 
     /**
      * Sets the value of the broj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setBroj(Integer value) {
         this.broj = value;
@@ -110,9 +102,9 @@ public class Tclan {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -122,12 +114,10 @@ public class Tclan {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Tacka {
 
@@ -138,11 +128,9 @@ public class Tclan {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -150,11 +138,9 @@ public class Tclan {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -162,11 +148,9 @@ public class Tclan {
 
         /**
          * Gets the value of the broj property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Integer }
-         *     
+         *
+         * @return possible object is
+         * {@link Integer }
          */
         public Integer getBroj() {
             return broj;
@@ -174,11 +158,9 @@ public class Tclan {
 
         /**
          * Sets the value of the broj property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Integer }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link Integer }
          */
         public void setBroj(Integer value) {
             this.broj = value;

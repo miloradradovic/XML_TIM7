@@ -1,22 +1,17 @@
 
 package com.project.organ_vlasti.model.util.ComplexTypes;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
 
 
 /**
  * <p>Java class for Tadresa complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tadresa"&gt;
  *   &lt;complexContent&gt;
@@ -45,13 +40,11 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tadresa", propOrder = {
-    "mesto",
-    "ulica"
+        "mesto",
+        "ulica"
 })
 public class Tadresa {
 
@@ -60,11 +53,9 @@ public class Tadresa {
 
     /**
      * Gets the value of the mesto property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Mesto }
-     *     
+     *
+     * @return possible object is
+     * {@link Mesto }
      */
     public Mesto getMesto() {
         return mesto;
@@ -72,11 +63,9 @@ public class Tadresa {
 
     /**
      * Sets the value of the mesto property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Mesto }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Mesto }
      */
     public void setMesto(Mesto value) {
         this.mesto = value;
@@ -84,11 +73,9 @@ public class Tadresa {
 
     /**
      * Gets the value of the ulica property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Ulica }
-     *     
+     *
+     * @return possible object is
+     * {@link Ulica }
      */
     public Ulica getUlica() {
         return ulica;
@@ -96,11 +83,9 @@ public class Tadresa {
 
     /**
      * Sets the value of the ulica property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Ulica }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Ulica }
      */
     public void setUlica(Ulica value) {
         this.ulica = value;
@@ -109,9 +94,9 @@ public class Tadresa {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -121,12 +106,10 @@ public class Tadresa {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Mesto {
 
@@ -137,11 +120,9 @@ public class Tadresa {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -149,11 +130,9 @@ public class Tadresa {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -161,17 +140,15 @@ public class Tadresa {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -182,9 +159,9 @@ public class Tadresa {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -194,12 +171,10 @@ public class Tadresa {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Ulica {
 
@@ -210,11 +185,9 @@ public class Tadresa {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -222,11 +195,9 @@ public class Tadresa {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -234,11 +205,9 @@ public class Tadresa {
 
         /**
          * Gets the value of the broj property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Integer }
-         *     
+         *
+         * @return possible object is
+         * {@link Integer }
          */
         public Integer getBroj() {
             return broj;
@@ -246,11 +215,9 @@ public class Tadresa {
 
         /**
          * Sets the value of the broj property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Integer }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link Integer }
          */
         public void setBroj(Integer value) {
             this.broj = value;

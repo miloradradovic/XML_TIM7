@@ -10,9 +10,9 @@ import java.util.List;
 
 /**
  * <p>Java class for Tstav complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tstav">
  *   &lt;complexContent>
@@ -33,12 +33,10 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tstav", namespace = "http://resenje", propOrder = {
-    "content"
+        "content"
 })
 public class Tstav {
 
@@ -50,26 +48,24 @@ public class Tstav {
 
     /**
      * Gets the value of the content property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link Tacka }{@code >}
      * {@link String }
-     * 
-     * 
      */
     public List<Serializable> getContent() {
         if (content == null) {
@@ -80,11 +76,9 @@ public class Tstav {
 
     /**
      * Gets the value of the broj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
+     *
+     * @return possible object is
+     * {@link Integer }
      */
     public Integer getBroj() {
         return broj;
@@ -92,11 +86,9 @@ public class Tstav {
 
     /**
      * Sets the value of the broj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Integer }
      */
     public void setBroj(Integer value) {
         this.broj = value;
@@ -105,9 +97,9 @@ public class Tstav {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -117,12 +109,10 @@ public class Tstav {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Tacka {
 
@@ -133,11 +123,9 @@ public class Tstav {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -145,11 +133,9 @@ public class Tstav {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -157,11 +143,9 @@ public class Tstav {
 
         /**
          * Gets the value of the broj property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Integer }
-         *     
+         *
+         * @return possible object is
+         * {@link Integer }
          */
         public Integer getBroj() {
             return broj;
@@ -169,11 +153,9 @@ public class Tstav {
 
         /**
          * Sets the value of the broj property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Integer }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link Integer }
          */
         public void setBroj(Integer value) {
             this.broj = value;

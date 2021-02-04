@@ -18,10 +18,8 @@ public class getRefs {
     /**
      * Gets the value of the name property.
      *
-     * @return
-     *     possible object is
-     *     {@link ParametarMap }
-     *
+     * @return possible object is
+     * {@link ParametarMap }
      */
     public ParametarMap getParametars() {
         return parametars;
@@ -30,10 +28,8 @@ public class getRefs {
     /**
      * Sets the value of the name property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link ParametarMap }
-     *
+     * @param value allowed object is
+     *              {@link ParametarMap }
      */
     public void setParametars(ParametarMap value) {
         this.parametars = value;

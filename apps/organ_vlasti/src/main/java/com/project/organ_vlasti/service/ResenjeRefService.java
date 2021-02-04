@@ -70,11 +70,11 @@ public class ResenjeRefService {
         return new ResenjeRefList(resenjeRefs);
     }
 
-    public ResenjeRefList getRefs(List<String> refs) throws XMLDBException, JAXBException {
+    public ResenjeRefList getRefs(List<String> refs, String status) throws XMLDBException, JAXBException {
         List<ResenjeRef> resenjeRefs = new ArrayList<>();
 
         for (String broj: refs) {
-            ResourceSet resourceSet = resenjeRefRepository.getOneByBroj(broj);
+            ResourceSet resourceSet = resenjeRefRepository.getOneStatusByBroj(broj, status);
             ResourceIterator resourceIterator = resourceSet.getIterator();
 
             while (resourceIterator.hasMoreResources()){

@@ -76,8 +76,8 @@ public class ResenjeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
-    @RequestMapping(value="/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ResenjeRefList> searchMetadata(@RequestParam("poverenik") String poverenik, @RequestParam("trazilac") String trazilac, @RequestParam("zalba") String zalba, @RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("tip") String tip, @RequestParam("organVlasti") String organVlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
+    @RequestMapping(value="/search-metadata/{status}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeRefList> searchMetadata(@PathVariable String status, @RequestParam("poverenik") String poverenik, @RequestParam("trazilac") String trazilac, @RequestParam("zalba") String zalba, @RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("tip") String tip, @RequestParam("organVlasti") String organVlasti, @RequestParam("mesto") String mesto) throws XMLDBException, JAXBException, IOException {
 
         com.project.organ_vlasti.model.util.parametars.ObjectFactory of = new com.project.organ_vlasti.model.util.parametars.ObjectFactory();
         ParametarMap parametarMap = of.createParametarMap();
@@ -122,7 +122,7 @@ public class ResenjeController {
         tvalue7.setValue(mesto);
         parametarMap.getValue().add(tvalue7);
 
-        ResenjeRefList resenjeRefList = sendToPoverenik(parametarMap);
+        ResenjeRefList resenjeRefList = sendToPoverenik(parametarMap, status);
 
         if (resenjeRefList != null){
             return new ResponseEntity<>(resenjeRefList, HttpStatus.OK);
@@ -132,8 +132,8 @@ public class ResenjeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
-    @RequestMapping(value="/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ResenjeRefList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+    @RequestMapping(value="/search-text/{status}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<ResenjeRefList> searchText(@PathVariable String status, @RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
 
         com.project.organ_vlasti.model.util.parametars.ObjectFactory of = new com.project.organ_vlasti.model.util.parametars.ObjectFactory();
         ParametarMap parametarMap = of.createParametarMap();
@@ -143,7 +143,7 @@ public class ResenjeController {
         tvalue.setValue(input);
         parametarMap.getValue().add(tvalue);
 
-        ResenjeRefList resenjeRefList = sendToPoverenik(parametarMap);
+        ResenjeRefList resenjeRefList = sendToPoverenik(parametarMap, status);
 
         if (resenjeRefList != null){
             return new ResponseEntity<>(resenjeRefList, HttpStatus.OK);
@@ -153,7 +153,7 @@ public class ResenjeController {
 
     }
 
-    private ResenjeRefList sendToPoverenik(ParametarMap parametarMap) throws XMLDBException, JAXBException {
+    private ResenjeRefList sendToPoverenik(ParametarMap parametarMap, String status) throws XMLDBException, JAXBException {
 
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.resenje.database.client");
@@ -168,7 +168,7 @@ public class ResenjeController {
 
         getRefsResponse refsResponse = resenjeClient.getRefs(getRefs);
         if(refsResponse != null){
-            return resenjeRefService.getRefs(refsResponse.getResponse().getRef());
+            return resenjeRefService.getRefs(refsResponse.getResponse().getRef(), status);
         }
         return null;
 

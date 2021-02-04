@@ -13,4 +13,12 @@ export class ResenjeService {
     return this.http.get('http://localhost:8090/resenje/' + status,
       {headers: this.headers, responseType: 'text'});
   }
+  getPretragaTekst(status, input): Observable<any> {
+    return this.http.get('http://localhost:8090/resenje/search-text/'+ status +'?input=' + input,
+    {headers: this.headers, responseType: 'text'});
+  }
+  getPretragaMetadata(status, poverenik, trazilac, zalba, datumAfter, datumBefore, tip, organVlasti, mesto): Observable<any> {
+    return this.http.get('http://localhost:8090/resenje/search-metadata/' + status + '?poverenik=' + poverenik + '&trazilac=' + trazilac + '&zalba=' + zalba + '&datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&tip=' + tip + '&organVlasti=' + organVlasti + '&mesto=' + mesto,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

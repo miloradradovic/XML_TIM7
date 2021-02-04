@@ -10,6 +10,7 @@ declare const Xonomy: any;
 export class ResenjeService {
   private headers = new HttpHeaders({'Content-Type': 'application/xml'});
   constructor(private http: HttpClient) { }
+
   getResenjeList(): Observable<any> {
     return this.http.get('http://localhost:8085/resenje',
       {headers: this.headers, responseType: 'text'});
@@ -25,6 +26,15 @@ export class ResenjeService {
   convertResenjeXHTML(s: string): Observable<any> {
     return this.http.get('http://localhost:8085/resenje/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
+  }
+
+  getPretragaTekst(input): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/search-text?input=' + input,
+    {headers: this.headers, responseType: 'text'});
+  }
+  getPretragaMetadata(poverenik, trazilac, zalba, datumAfter, datumBefore, tip, organVlasti, mesto): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/search-metadata?poverenik=' + poverenik + '&trazilac=' + trazilac + '&zalba=' + zalba + '&datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&tip=' + tip + '&organVlasti=' + organVlasti + '&mesto=' + mesto,
+      {headers: this.headers, responseType: 'text'});
   }
 
 

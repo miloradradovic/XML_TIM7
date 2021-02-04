@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for Ttip_lica complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Ttip_lica">
  *   &lt;complexContent>
@@ -24,13 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ttip_lica", namespace = "http://www.reusability", propOrder = {
-    "osoba",
-    "preduzece"
+        "osoba",
+        "preduzece"
 })
 public class TtipLica {
 
@@ -41,11 +39,9 @@ public class TtipLica {
 
     /**
      * Gets the value of the osoba property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tosoba }
-     *     
+     *
+     * @return possible object is
+     * {@link Tosoba }
      */
     public Tosoba getOsoba() {
         return osoba;
@@ -53,11 +49,9 @@ public class TtipLica {
 
     /**
      * Sets the value of the osoba property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tosoba }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tosoba }
      */
     public void setOsoba(Tosoba value) {
         this.osoba = value;
@@ -65,11 +59,9 @@ public class TtipLica {
 
     /**
      * Gets the value of the preduzece property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getPreduzece() {
         return preduzece;
@@ -77,11 +69,9 @@ public class TtipLica {
 
     /**
      * Sets the value of the preduzece property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPreduzece(String value) {
         this.preduzece = value;

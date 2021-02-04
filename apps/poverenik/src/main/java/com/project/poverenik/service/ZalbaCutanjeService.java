@@ -5,15 +5,12 @@ import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaCutanjeMapper;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
+import com.project.poverenik.rdf_utils.AuthenticationUtilities;
+import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
+import com.project.poverenik.rdf_utils.FileUtil;
 import com.project.poverenik.repository.ZalbaCutanjeRepository;
-
 import com.project.poverenik.transformer.Transformator;
-import org.apache.commons.text.StringSubstitutor;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,22 +19,13 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.XMLResource;
 
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import com.project.poverenik.rdf_utils.AuthenticationUtilities;
-import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
-import com.project.poverenik.rdf_utils.FileUtil;
 
 @Service
 public class ZalbaCutanjeService {
@@ -52,30 +40,30 @@ public class ZalbaCutanjeService {
     private ExistManager existManager;
 
     private String getMaxId() throws XMLDBException, JAXBException {
-    	ResourceSet max = zalbaCutanjeRepository.getMaxId();
-    	ResourceIterator resourceIterator = max.getIterator();
+        ResourceSet max = zalbaCutanjeRepository.getMaxId();
+        ResourceIterator resourceIterator = max.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
-                return "0";
-            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            ZalbaCutanje zalbaCutanjeMax = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return zalbaCutanjeMax.getZalbaCutanjeBody().getId();
+        if (!resourceIterator.hasMoreResources()) {
+            return "0";
         }
-        return "0";
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            return "0";
+        JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        ZalbaCutanje zalbaCutanjeMax = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        return zalbaCutanjeMax.getZalbaCutanjeBody().getId();
     }
 
     public boolean create(ZalbaCutanje zalbaCutanjeDTO, String userEmail) throws XMLDBException, JAXBException {
-        if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)){
-        	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
+        if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)) {
+            String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-        	ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, userEmail);
-        	
-            if(jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)){
+            ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, userEmail);
+
+            if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
                 return zalbaCutanjeRepository.create(zalbaCutanje);
-            }else {
+            } else {
                 return false;
             }
         }
@@ -88,9 +76,9 @@ public class ZalbaCutanjeService {
         ResourceSet resourceSet = zalbaCutanjeRepository.getAll();
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -103,10 +91,10 @@ public class ZalbaCutanjeService {
     public ZalbaCutanje getOne(String id) throws JAXBException, XMLDBException {
         XMLResource xmlResource = zalbaCutanjeRepository.getOne(id);
 
-        if(xmlResource == null)
+        if (xmlResource == null)
             return null;
 
-        ZalbaCutanje zalbaCutanje = null;
+        ZalbaCutanje zalbaCutanje;
 
         JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -119,14 +107,14 @@ public class ZalbaCutanjeService {
         return zalbaCutanjeRepository.delete(id);
     }
 
-    public boolean update(ZalbaCutanje zalbaCutanje, String status) throws JAXBException, XMLDBException {
+    public boolean update(ZalbaCutanje zalbaCutanje, String status) throws XMLDBException {
         zalbaCutanje.getZalbaCutanjeBody().getStatus().setValue(status);
         return zalbaCutanjeRepository.create(zalbaCutanje);
 
         //String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         //patch = patch.substring(patch.lastIndexOf("<zc:zalba_cutanje_body"), patch.indexOf("</zc:zalba_cutanje_body>") + "</zc:zalba_cutanje_body>".length());
-        }
+    }
 
     public ZalbaCutanjeList getByUser(String email) throws XMLDBException, JAXBException {
         List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
@@ -134,9 +122,9 @@ public class ZalbaCutanjeService {
         ResourceSet resourceSet = zalbaCutanjeRepository.getAllByUser(email);
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -147,95 +135,94 @@ public class ZalbaCutanjeService {
     }
 
     public ZalbaCutanjeList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
-			String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+                                           String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
+        ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
-		if (datumAfter.equals("")) {
-			datumAfter = "1000-01-01";
-		}
-		if (datumBefore.equals("")) {
-			datumBefore = "9999-12-31";
-		}
+        if (datumAfter.equals("")) {
+            datumAfter = "1000-01-01";
+        }
+        if (datumBefore.equals("")) {
+            datumBefore = "9999-12-31";
+        }
 
-		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
-				StandardCharsets.UTF_8);
-		System.out.println(sparqlQueryTemplate);
-		
-		String user = "";
-		if (userEmail.equals("")) {
-			user = "?podnosilac";
-		} else {
-			user = "<http://users/"+userEmail+">";
-		}
-		
-		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
-		System.out.println(sparqlQuery);
+        String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
+                StandardCharsets.UTF_8);
+        System.out.println(sparqlQueryTemplate);
 
-		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        String user;
+        if (userEmail.equals("")) {
+            user = "?podnosilac";
+        } else {
+            user = "<http://users/" + userEmail + ">";
+        }
 
-		ResultSet results = query.execSelect();
+        String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
+        System.out.println(sparqlQuery);
 
-		RDFNode id;
+        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		ZalbaCutanjeList zcList = null;
+        ResultSet results = query.execSelect();
 
-		List<ZalbaCutanje> listZC = new ArrayList<>();
+        RDFNode id;
 
-		while (results.hasNext()) {
+        ZalbaCutanjeList zcList;
 
-			QuerySolution querySolution = results.next();
+        List<ZalbaCutanje> listZC = new ArrayList<>();
 
-			id = querySolution.get("zalba");
-			if (id.toString().contains("cutanje")) {
-				String idStr = id.toString().split("zalbe/cutanje/")[1];
-				ZalbaCutanje z = getOne(idStr);
-				listZC.add(z);
-			}
-		}
+        while (results.hasNext()) {
 
-		zcList = new ZalbaCutanjeList(listZC);
-		System.out.println();
+            QuerySolution querySolution = results.next();
 
-		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+            id = querySolution.get("zalba");
+            if (id.toString().contains("cutanje")) {
+                String idStr = id.toString().split("zalbe/cutanje/")[1];
+                ZalbaCutanje z = getOne(idStr);
+                listZC.add(z);
+            }
+        }
 
-		results = query.execSelect();
+        zcList = new ZalbaCutanjeList(listZC);
+        System.out.println();
 
-		// ResultSetFormatter.outputAsXML(System.out, results);
-		ResultSetFormatter.out(System.out, results);
+        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		query.close();
+        results = query.execSelect();
 
-		System.out.println("[INFO] End.");
+        // ResultSetFormatter.outputAsXML(System.out, results);
+        ResultSetFormatter.out(System.out, results);
 
-		return zcList;
+        query.close();
 
-	}
+        System.out.println("[INFO] End.");
 
-	public ZalbaCutanjeList searchText(String text) throws IOException, JAXBException, XMLDBException {
-		List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
+        return zcList;
 
-		ResourceSet resourceSet = zalbaCutanjeRepository.searchText(text);
-		ResourceIterator resourceIterator = resourceSet.getIterator();
+    }
 
-		while (resourceIterator.hasMoreResources()) {
-			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-			if (xmlResource == null)
-				return null;
-			JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-			ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-			zalbaCutanjeList.add(zalbaCutanje);
-		}
-		return new ZalbaCutanjeList(zalbaCutanjeList);
+    public ZalbaCutanjeList searchText(String text) throws JAXBException, XMLDBException {
+        List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
 
-	}
+        ResourceSet resourceSet = zalbaCutanjeRepository.searchText(text);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
 
-    public boolean generateDocuments(String broj){
+        while (resourceIterator.hasMoreResources()) {
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if (xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaCutanjeList.add(zalbaCutanje);
+        }
+        return new ZalbaCutanjeList(zalbaCutanjeList);
+
+    }
+
+    public boolean generateDocuments(String broj) {
         final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
         final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";
         final String XSL_FO = "src/main/resources/generated_files/xsl-fo/zalbacutanje_fo.xsl";
         final String XSL = "src/main/resources/generated_files/xslt/zalbacutanje.xsl";
-
 
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
@@ -246,7 +233,7 @@ public class ZalbaCutanjeService {
             ZalbaCutanje xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
                     XSL, OUTPUT_HTML);
-            transformator.generatePDF(XSL_FO,existManager.getOutputStream(xml), OUTPUT_PDF);
+            transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {
             e.printStackTrace();
             return false;
@@ -265,9 +252,9 @@ public class ZalbaCutanjeService {
         ResourceSet resourceSet = zalbaCutanjeRepository.getAllByObradaOrNeobradjena();
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();

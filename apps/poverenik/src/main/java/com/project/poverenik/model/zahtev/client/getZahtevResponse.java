@@ -10,18 +10,14 @@ package com.project.poverenik.model.zahtev.client;
 
 import com.project.poverenik.model.zahtev.Tzahtev;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -33,12 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "zahtev"
+        "zahtev"
 })
 @XmlRootElement(name = "getZahtevByIdResponse", namespace = "http://www.zahtevcir")
 public class getZahtevResponse {
@@ -48,11 +42,9 @@ public class getZahtevResponse {
 
     /**
      * Gets the value of the student property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tzahtev }
-     *     
+     *
+     * @return possible object is
+     * {@link Tzahtev }
      */
     public Tzahtev getZahtev() {
         return zahtev;
@@ -60,11 +52,9 @@ public class getZahtevResponse {
 
     /**
      * Sets the value of the student property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tzahtev }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tzahtev }
      */
     public void setZahtev(Tzahtev value) {
         this.zahtev = value;

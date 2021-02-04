@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -20,12 +20,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "zahtevBody"
+        "zahtevBody"
 })
 @XmlRootElement(name = "zahtev", namespace = "http://www.zahtevcir")
 public class Zahtev {
@@ -35,11 +33,9 @@ public class Zahtev {
 
     /**
      * Gets the value of the zahtevBody property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tzahtev }
-     *     
+     *
+     * @return possible object is
+     * {@link Tzahtev }
      */
     public Tzahtev getZahtevBody() {
         return zahtevBody;
@@ -47,11 +43,9 @@ public class Zahtev {
 
     /**
      * Sets the value of the zahtevBody property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tzahtev }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tzahtev }
      */
     public void setZahtevBody(Tzahtev value) {
         this.zahtevBody = value;

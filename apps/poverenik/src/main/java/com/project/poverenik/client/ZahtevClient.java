@@ -14,10 +14,9 @@ public class ZahtevClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://www.zahtevcir/ws/getZahtevById"));
 
-        if(response.getZahtev().getId().equals("-1")){
+        if (response.getZahtev().getId().equals("-1")) {
             return null;
         }
-
         return response;
     }
 }

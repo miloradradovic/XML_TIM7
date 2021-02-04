@@ -1,22 +1,17 @@
 
 package com.project.poverenik.model.util.ComplexTypes;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
 
 
 /**
  * <p>Java class for Tprotiv_resenja_zakljucka complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tprotiv_resenja_zakljucka">
  *   &lt;complexContent>
@@ -52,14 +47,12 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tprotiv_resenja_zakljucka", namespace = "http://www.reusability", propOrder = {
-    "nazivOrganaKojiJeDoneoOdluku",
-    "broj",
-    "odGodine"
+        "nazivOrganaKojiJeDoneoOdluku",
+        "broj",
+        "odGodine"
 })
 public class TprotivResenjaZakljucka {
 
@@ -72,11 +65,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * Gets the value of the nazivOrganaKojiJeDoneoOdluku property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
-     *     
+     *
+     * @return possible object is
+     * {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
      */
     public TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku getNazivOrganaKojiJeDoneoOdluku() {
         return nazivOrganaKojiJeDoneoOdluku;
@@ -84,11 +75,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * Sets the value of the nazivOrganaKojiJeDoneoOdluku property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
      */
     public void setNazivOrganaKojiJeDoneoOdluku(TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku value) {
         this.nazivOrganaKojiJeDoneoOdluku = value;
@@ -96,11 +85,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * Gets the value of the broj property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TprotivResenjaZakljucka.Broj }
-     *     
+     *
+     * @return possible object is
+     * {@link TprotivResenjaZakljucka.Broj }
      */
     public TprotivResenjaZakljucka.Broj getBroj() {
         return broj;
@@ -108,11 +95,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * Sets the value of the broj property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TprotivResenjaZakljucka.Broj }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TprotivResenjaZakljucka.Broj }
      */
     public void setBroj(TprotivResenjaZakljucka.Broj value) {
         this.broj = value;
@@ -120,11 +105,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * Gets the value of the odGodine property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getOdGodine() {
         return odGodine;
@@ -132,11 +115,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * Sets the value of the odGodine property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOdGodine(String value) {
         this.odGodine = value;
@@ -145,9 +126,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -157,12 +138,10 @@ public class TprotivResenjaZakljucka {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Broj {
 
@@ -173,11 +152,9 @@ public class TprotivResenjaZakljucka {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -185,11 +162,9 @@ public class TprotivResenjaZakljucka {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -197,17 +172,15 @@ public class TprotivResenjaZakljucka {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;
@@ -218,9 +191,9 @@ public class TprotivResenjaZakljucka {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -230,12 +203,10 @@ public class TprotivResenjaZakljucka {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class NazivOrganaKojiJeDoneoOdluku {
 
@@ -246,11 +217,9 @@ public class TprotivResenjaZakljucka {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -258,11 +227,9 @@ public class TprotivResenjaZakljucka {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -270,17 +237,15 @@ public class TprotivResenjaZakljucka {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -20,12 +20,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "body"
+        "body"
 })
 @XmlRootElement(name = "email")
 public class Email {
@@ -35,11 +33,9 @@ public class Email {
 
     /**
      * Gets the value of the body property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tbody }
-     *     
+     *
+     * @return possible object is
+     * {@link Tbody }
      */
     public Tbody getBody() {
         return body;
@@ -47,11 +43,9 @@ public class Email {
 
     /**
      * Sets the value of the body property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tbody }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tbody }
      */
     public void setBody(Tbody value) {
         this.body = value;

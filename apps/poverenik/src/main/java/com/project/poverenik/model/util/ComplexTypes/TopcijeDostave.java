@@ -1,21 +1,16 @@
 
 package com.project.poverenik.model.util.ComplexTypes;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 
 /**
  * <p>Java class for Topcije_dostave complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Topcije_dostave">
  *   &lt;complexContent>
@@ -36,13 +31,11 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Topcije_dostave", namespace = "http://www.reusability", propOrder = {
-    "opcija",
-    "naciniDostave"
+        "opcija",
+        "naciniDostave"
 })
 public class TopcijeDostave {
 
@@ -53,25 +46,23 @@ public class TopcijeDostave {
 
     /**
      * Gets the value of the opcija property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the opcija property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getOpcija().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TopcijeDostave.Opcija }
-     * 
-     * 
      */
     public List<TopcijeDostave.Opcija> getOpcija() {
         if (opcija == null) {
@@ -82,11 +73,9 @@ public class TopcijeDostave {
 
     /**
      * Gets the value of the naciniDostave property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TnaciniDostave }
-     *     
+     *
+     * @return possible object is
+     * {@link TnaciniDostave }
      */
     public TnaciniDostave getNaciniDostave() {
         return naciniDostave;
@@ -94,11 +83,9 @@ public class TopcijeDostave {
 
     /**
      * Sets the value of the naciniDostave property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TnaciniDostave }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TnaciniDostave }
      */
     public void setNaciniDostave(TnaciniDostave value) {
         this.naciniDostave = value;
@@ -107,9 +94,9 @@ public class TopcijeDostave {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -119,12 +106,10 @@ public class TopcijeDostave {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Opcija {
 
@@ -135,11 +120,9 @@ public class TopcijeDostave {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -147,11 +130,9 @@ public class TopcijeDostave {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -159,11 +140,9 @@ public class TopcijeDostave {
 
         /**
          * Gets the value of the izabran property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Boolean }
-         *     
+         *
+         * @return possible object is
+         * {@link Boolean }
          */
         public Boolean isIzabran() {
             return izabran;
@@ -171,11 +150,9 @@ public class TopcijeDostave {
 
         /**
          * Sets the value of the izabran property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Boolean }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link Boolean }
          */
         public void setIzabran(Boolean value) {
             this.izabran = value;

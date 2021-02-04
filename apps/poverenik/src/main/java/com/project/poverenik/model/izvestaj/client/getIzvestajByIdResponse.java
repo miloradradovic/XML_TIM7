@@ -17,10 +17,8 @@ public class getIzvestajByIdResponse {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link Tbody }
-     *
+     * @return possible object is
+     * {@link Tbody }
      */
     public Tbody getIzvestaj() {
         return izvestaj;
@@ -29,10 +27,8 @@ public class getIzvestajByIdResponse {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Tbody }
-     *
+     * @param value allowed object is
+     *              {@link Tbody }
      */
     public void setIzvestaj(Tbody value) {
         this.izvestaj = value;

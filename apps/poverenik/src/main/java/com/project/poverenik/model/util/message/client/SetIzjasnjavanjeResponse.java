@@ -8,16 +8,14 @@
 
 package com.project.poverenik.model.util.message.client;
 
-import com.project.poverenik.model.zahtev.Tzahtev;
-
 import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -29,12 +27,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "response"
+        "response"
 })
 @XmlRootElement(name = "setIzjasnjavanjeResponse", namespace = "http://www.message")
 public class SetIzjasnjavanjeResponse {
@@ -44,11 +40,9 @@ public class SetIzjasnjavanjeResponse {
 
     /**
      * Gets the value of the student property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getResponse() {
         return response;
@@ -56,13 +50,11 @@ public class SetIzjasnjavanjeResponse {
 
     /**
      * Sets the value of the student property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
-    public void setResponse(String  value) {
+    public void setResponse(String value) {
         this.response = value;
     }
 

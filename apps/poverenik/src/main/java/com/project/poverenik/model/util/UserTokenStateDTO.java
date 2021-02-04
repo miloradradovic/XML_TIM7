@@ -11,7 +11,9 @@ public class UserTokenStateDTO {
     @XmlElement(namespace = "http://token", required = true)
     public String jwt;
 
-    public UserTokenStateDTO(){}
+    public UserTokenStateDTO() {
+    }
+
     public UserTokenStateDTO(String jwt) {
         this.jwt = jwt;
     }

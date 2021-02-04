@@ -14,13 +14,16 @@ import java.util.List;
 public class IzvestajRefList {
     private final List<IzvestajRef> izvestajRefList;
 
-    public IzvestajRefList(){
+    public IzvestajRefList() {
         this.izvestajRefList = new ArrayList<>();
     }
-    public IzvestajRefList(List<IzvestajRef> izvestajRefList){
+
+    public IzvestajRefList(List<IzvestajRef> izvestajRefList) {
         this.izvestajRefList = izvestajRefList;
     }
 
     @XmlAnyElement
-    public List<IzvestajRef> getIzvestajRefList() { return izvestajRefList; }
+    public List<IzvestajRef> getIzvestajRefList() {
+        return izvestajRefList;
+    }
 }

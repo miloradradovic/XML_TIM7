@@ -184,6 +184,25 @@ public class ZalbaOdlukaService {
 
     }
 
+    public String downloadResenjePDF(String broj){
+        String path = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj){
+        String path = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
+
     public boolean generateDocuments(String broj) {
         final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".pdf";
         final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";

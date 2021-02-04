@@ -3,6 +3,7 @@ import {ZalbaService} from '../../../services/zalba-service/zalba.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
+import {of} from 'rxjs';
 
 declare var require: any;
 
@@ -91,7 +92,6 @@ export class PoverenikSveZalbeComponent implements OnInit {
     const zalbaCutanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
     const lista = zalbaCutanjeList.zalbaCutanjeList;
     const zalbe = lista['zc:zalba_cutanje'];
-    console.log(zalbe)
     if (zalbe !== undefined){
       try {
         zalbe.forEach((item, index) => {
@@ -131,11 +131,10 @@ export class PoverenikSveZalbeComponent implements OnInit {
   }
 
   onTekstChanged(newValue: any){
-    console.log(newValue.value)
     this.zalbe = [];
     this.zalbaService.getPretragaTekstZalbeCutanje(newValue.value).subscribe(
       result => {
-        this.renderZalbeCutanje(result);    
+        this.renderZalbeCutanje(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -161,7 +160,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
     this.zalbe = [];
     this.zalbaService.getPretragaMetadataZalbeCutanje(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.status.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value, this.form.controls.userEmail.value).subscribe(
       result => {
-        this.renderZalbeCutanje(result);    
+        this.renderZalbeCutanje(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -186,13 +185,63 @@ export class PoverenikSveZalbeComponent implements OnInit {
     this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('.')[0]);
   }
 
-
-
-  convertToXHTML($event: string) {
-    console.log($event);
+  convertToPDF($event: string): void {
+    let obs$ = of([]);
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjePDF($event.split('/')[1]);
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaPDF($event.split('/')[1]);
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
   }
 
-  convertToPDF($event: string) {
-    console.log($event);
+  convertToXHTML($event: string): void {
+    let obs$;
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeXHTML($event.split('/')[1]);
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaXHTML($event.split('/')[1]);
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
   }
 }

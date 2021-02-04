@@ -1,10 +1,14 @@
 package com.project.organ_vlasti.service;
 
 import com.itextpdf.text.DocumentException;
+import com.project.organ_vlasti.client.EmailClient;
 import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
+import com.project.organ_vlasti.model.user.User;
+import com.project.organ_vlasti.model.util.email.Tbody;
+import com.project.organ_vlasti.model.util.email.client.sendAttach;
 import com.project.organ_vlasti.model.util.lists.ObavestenjeList;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
@@ -21,6 +25,11 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
@@ -37,6 +46,8 @@ import javax.xml.namespace.QName;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +82,7 @@ public class ObavestenjeService {
         return "0000";
     }
 
-    public String create(Obavestenje obavestenjeDTO) throws XMLDBException, JAXBException {
+    public boolean create(Obavestenje obavestenjeDTO) throws XMLDBException, JAXBException {
         
         if (jaxB.validate(obavestenjeDTO.getClass(), obavestenjeDTO)){
         	String id = String.valueOf(Integer.parseInt(getMaxId())+1);
@@ -83,13 +94,63 @@ public class ObavestenjeService {
             Obavestenje obavestenje = ObavestenjeMapper.mapFromDTO(obavestenjeDTO, id, userEmail);
 
             if(jaxB.validate(obavestenje.getClass(), obavestenje)){
-            	 return obavestenjeRepository.create(obavestenje);
-            }else {
-                return null;
+                if(obavestenjeRepository.create(obavestenje) != null){
+                    String email = obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
+                    zahtevService.update(zahtev, "prihvacen");
+                    return sendToUser(id, email);
+                }
+            	 return false;
             }
         }
-        return null;
-         
+        return false;
+    }
+
+    private boolean sendToUser(String broj, String email){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.email.client");
+
+        EmailClient emailClient = new EmailClient();
+        emailClient.setDefaultUri("http://localhost:8095/ws");
+        emailClient.setMarshaller(marshaller);
+        emailClient.setUnmarshaller(marshaller);
+
+        sendAttach sendAttach = new sendAttach();
+        sendAttach.setEmail(new Tbody());
+        sendAttach.getEmail().setTo(email);
+        sendAttach.getEmail().setContent("Postovani, <br/><br/> dostavljamo Vam obavestenje na Vas zahtev. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
+        sendAttach.getEmail().setSubject("Obavestenje " + broj);
+
+        boolean obavestenje = generateDocuments(broj);
+        //TODO - boolean provera
+
+
+        String pdfName = "obavestenje" + broj + ".pdf";
+        sendAttach.getEmail().setFilePdfName(pdfName);
+        String htmlName = "obavestenje" + broj + ".html";
+        sendAttach.getEmail().setFileHtmlName(htmlName);
+        try {
+            File filePdf = new File("src/main/resources/generated_files/documents/" + pdfName);
+            Path pdfPath = filePdf.toPath();
+            byte[] pdfBytes = Files.readAllBytes(pdfPath);
+
+            sendAttach.getEmail().setFilePdf(pdfBytes);
+
+            File fileHtml = new File("src/main/resources/generated_files/documents/" + htmlName);
+            Path htmlPath = fileHtml.toPath();
+            byte[] htmlBytes = Files.readAllBytes(htmlPath);
+
+            sendAttach.getEmail().setFileHtml(htmlBytes);
+
+
+            return emailClient.sentAttach(sendAttach);
+
+        } catch (IOException e) {
+            e.getStackTrace();
+            return false;
+        }
     }
 
     public ObavestenjeList getAll() throws XMLDBException, JAXBException {

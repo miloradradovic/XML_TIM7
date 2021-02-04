@@ -28,9 +28,6 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     UserService userService;
 
     public AuthenticationController() {
@@ -53,9 +50,7 @@ public class AuthenticationController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, value = "/sign-up")
     public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
-        if (userService.create(user)) {
+        if (userService.create(user, "ROLE_USER")) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

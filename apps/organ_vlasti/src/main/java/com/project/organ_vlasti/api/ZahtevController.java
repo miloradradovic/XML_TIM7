@@ -42,7 +42,7 @@ public class ZahtevController {
     public ResponseEntity<ZahtevList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("mesto") String mesto, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
 
     	ZahtevList zahtevList = zahtevService.searchMetadata(datumAfter, datumBefore, mesto, organ_vlasti, userEmail);
-    	return new ResponseEntity<ZahtevList>(zahtevList, HttpStatus.OK);
+    	return new ResponseEntity<>(zahtevList, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
@@ -50,7 +50,7 @@ public class ZahtevController {
     public ResponseEntity<ZahtevList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
 
     	ZahtevList zahtevList = zahtevService.searchText(input);
-    	return new ResponseEntity<ZahtevList>(zahtevList, HttpStatus.OK);
+    	return new ResponseEntity<>(zahtevList, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -58,7 +58,6 @@ public class ZahtevController {
     public ResponseEntity<?> createZahtev(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) authentication.getPrincipal();
-    	//User user = new User(); user.setEmail("s");
         if (zahtevService.create(zahtev, user.getEmail())){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -69,11 +68,10 @@ public class ZahtevController {
     @RequestMapping( method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ZahtevList> getZahtevList() throws XMLDBException, JAXBException {
         ZahtevList zahtevList = zahtevService.getAll();
-
         if(zahtevList != null)
-            return new ResponseEntity(zahtevList, HttpStatus.OK);
+            return new ResponseEntity<>(zahtevList, HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
@@ -82,9 +80,9 @@ public class ZahtevController {
         ZahtevList zahtevList = zahtevService.getAllNeobradjen();
 
         if(zahtevList != null)
-            return new ResponseEntity(zahtevList, HttpStatus.OK);
+            return new ResponseEntity<>(zahtevList, HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -95,9 +93,9 @@ public class ZahtevController {
         ZahtevList zahtevList = zahtevService.getAllByUser(user.getEmail());
 
         if(zahtevList != null)
-            return new ResponseEntity(zahtevList, HttpStatus.OK);
+            return new ResponseEntity<>(zahtevList, HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -105,27 +103,25 @@ public class ZahtevController {
     public ResponseEntity<?> getZahtev(@PathVariable String id) throws XMLDBException, JAXBException {
         Zahtev zahtev = zahtevService.getOne(id);
         if(zahtev != null)
-            return new ResponseEntity(zahtev, HttpStatus.OK);
+            return new ResponseEntity<>(zahtev, HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity delete(@PathVariable String id) throws XMLDBException, JAXBException {
-        boolean isDeleted = zahtevService.delete(id);
-        if(isDeleted)
-            return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<?> delete(@PathVariable String id) throws XMLDBException, JAXBException {
+        if(zahtevService.delete(id))
+            return new ResponseEntity<>(HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity update(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
-        boolean isUpdated = zahtevService.update(zahtev, "");
-        if(isUpdated)
-            return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<?> update(@RequestBody Zahtev zahtev) throws XMLDBException, JAXBException {
+        if(zahtevService.update(zahtev, ""))
+            return new ResponseEntity<>(HttpStatus.OK);
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)

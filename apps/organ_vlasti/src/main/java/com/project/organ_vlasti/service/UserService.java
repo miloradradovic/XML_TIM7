@@ -5,6 +5,7 @@ import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.lists.UserList;
 import com.project.organ_vlasti.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -26,7 +27,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public boolean create(User user) throws XMLDBException {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public boolean create(User user, String role) throws XMLDBException {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(role);
         if (jaxB.validate(user.getClass(), user)){
             return userRepository.create(user);
         }

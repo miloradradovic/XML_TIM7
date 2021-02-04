@@ -19,6 +19,14 @@ export class ResenjeService {
     return this.http.get('http://localhost:8085/resenje/by-user',
       {headers: this.headers, responseType: 'text'});
   }
+  convertResenjePDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/toPdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertResenjeXHTML(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/toXhtml/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 
   getPretragaTekst(input): Observable<any> {
     return this.http.get('http://localhost:8085/resenje/search-text?input=' + input,
@@ -47,7 +55,7 @@ export class ResenjeService {
       };
       for (let i = 0; i < jsElement.children.length; i++) {
         let jsChild = jsElement.children[i];
-        if (jsChild.type == "element") { 
+        if (jsChild.type == "element") {
           this.validate(jsChild);
         }
       }
@@ -101,7 +109,7 @@ export class ResenjeService {
             caption: "Obrisi",
             action: Xonomy.deleteElement,
             hideIf: function(jsElement){
-              return jsElement.parent().name === "uvodne_informacije" 
+              return jsElement.parent().name === "uvodne_informacije"
             }
           }
         ],
@@ -188,7 +196,7 @@ export class ResenjeService {
             caption: "Obrisi",
             action: Xonomy.deleteElement,
             hideIf: function(jsElement){
-              return jsElement.parent().name === "uvodne_informacije" 
+              return jsElement.parent().name === "uvodne_informacije"
             }
           }
         ],
@@ -201,7 +209,7 @@ export class ResenjeService {
             caption: "Obrisi",
             action: Xonomy.deleteElement,
             hideIf: function(jsElement){
-              return jsElement.parent().parent().name === "uvodne_informacije" 
+              return jsElement.parent().parent().name === "uvodne_informacije"
             }
           }
         ],
@@ -260,7 +268,7 @@ export class ResenjeService {
             caption: "Obrisi",
             action: Xonomy.deleteElement,
             hideIf: function(jsElement){
-              return jsElement.parent().name === "uvodne_informacije" 
+              return jsElement.parent().name === "uvodne_informacije"
             }
           }
         ],

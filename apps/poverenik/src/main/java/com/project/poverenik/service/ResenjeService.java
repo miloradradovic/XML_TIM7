@@ -374,40 +374,22 @@ public class ResenjeService {
         }
     }
 
-    public ResponseEntity<?> downloadResenjePDF(String broj){
+    public String downloadResenjePDF(String broj){
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
         boolean obavestenje = generateDocuments(broj);
         if(obavestenje){
-            try {
-                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.add("Content-Type", "application/xml; charset=utf-8");
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".pdf");
-                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
-            } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+            return path;
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return "";
     }
 
-    public ResponseEntity<?> downloadResenjeXHTML(String broj){
+    public String downloadResenjeXHTML(String broj){
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".html";
         boolean obavestenje = generateDocuments(broj);
         if(obavestenje){
-            try {
-                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.add("Content-Type", "application/xml; charset=utf-8");
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".html");
-                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
-            } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+            return path;
         }
-        return new ResponseEntity<>(obavestenje, HttpStatus.BAD_REQUEST);
+        return "";
     }
 
 }

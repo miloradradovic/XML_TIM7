@@ -378,6 +378,7 @@ public class ResenjeService {
             return false;
         }
     }
+
     public String downloadResenjePDF(String broj){
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
         boolean obavestenje = generateDocuments(broj);
@@ -386,6 +387,7 @@ public class ResenjeService {
         }
         return "";
     }
+
 
     public String downloadResenjeXHTML(String broj){
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".html";

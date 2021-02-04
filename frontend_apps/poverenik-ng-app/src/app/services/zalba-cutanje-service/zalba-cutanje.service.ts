@@ -25,7 +25,7 @@ export class ZalbaCutanjeService {
       };
       for (let i = 0; i < jsElement.children.length; i++) {
         let jsChild = jsElement.children[i];
-        if (jsChild.type == "element") { 
+        if (jsChild.type == "element") {
           this.validate(jsChild);
         }
       }
@@ -171,7 +171,7 @@ export class ZalbaCutanjeService {
       "zc:podaci_o_podnosiocu": {
         displayName: "podaci_o_podnosiocu",
       },
-      
+
     }
   }
 

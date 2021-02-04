@@ -333,4 +333,23 @@ public class ObavestenjeService {
         }
         return new ObavestenjeList(obavestenjeList);
     }
+
+    public String downloadResenjePDF(String broj){
+        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj){
+        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if(obavestenje){
+            return path;
+        }
+        return "";
+    }
 }

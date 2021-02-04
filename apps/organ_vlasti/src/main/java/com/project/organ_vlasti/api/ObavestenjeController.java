@@ -109,9 +109,8 @@ public class ObavestenjeController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadObavestenjePDF(@PathVariable String broj) {
-        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
-        boolean obavestenje = obavestenjeService.generateDocuments(broj);
-        if (obavestenje)
+        String path = obavestenjeService.downloadResenjePDF(broj);
+        if (!path.equals(""))
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -122,17 +121,15 @@ public class ObavestenjeController {
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity<>(obavestenje, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
-        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadObavestenjeXHTML(@PathVariable String broj) {
-        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
-        boolean obavestenje = obavestenjeService.generateDocuments(broj);
-        if (obavestenje)
+        String path = obavestenjeService.downloadResenjeXHTML(broj);
+        if (!path.equals(""))
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -143,8 +140,7 @@ public class ObavestenjeController {
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-        return new ResponseEntity<>(obavestenje, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
-        // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

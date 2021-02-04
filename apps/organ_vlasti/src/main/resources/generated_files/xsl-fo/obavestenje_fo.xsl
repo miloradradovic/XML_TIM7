@@ -14,35 +14,6 @@
             <fo:page-sequence master-reference="A4">
                 <fo:flow flow-name="xsl-region-body">
 
-                    <xsl:template match="/oba:obavestenje/oba:obavestenje_body/oba:tekst_zahteva/re:opis_trazene_informacije">
-                        <fo:root>
-                            <fo:page-sequence>
-                                <fo:flow>
-                                    <xsl:apply-templates />
-                                </fo:flow>
-                            </fo:page-sequence>
-                        </fo:root>
-                    </xsl:template>
-
-                    <xsl:template match="/oba:obavestenje/oba:obavestenje_body/oba:tekst_zahteva/re:opis_trazene_informacije/*">
-                        <fo:block font-size="16pt" space-after="5mm">
-                            <xsl:apply-templates select="."/>
-                        </fo:block>
-                    </xsl:template>
-
-                    <xsl:template match="re:bold">
-                        <fo:block font-weight="bold">
-                            <xsl:apply-templates select="."/>
-                        </fo:block>
-                    </xsl:template>
-
-                    <xsl:template match="re:italic">
-                        <fo:block font-style="italic">
-                            <xsl:apply-templates select="." />
-                        </fo:block>
-                    </xsl:template>
-
-
                     <fo:block font-family="Times New Roman" font-size="13px" >
                         <xsl:value-of select="/oba:obavestenje/oba:obavestenje_body/oba:naziv_organa"/>
                     </fo:block>

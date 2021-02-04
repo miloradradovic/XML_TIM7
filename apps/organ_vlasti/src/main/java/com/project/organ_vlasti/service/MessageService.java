@@ -29,25 +29,25 @@ public class MessageService {
         ResourceSet max = messageRepository.getMaxId();
         ResourceIterator resourceIterator = max.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
-                return "0000";
-            JAXBContext context = JAXBContext.newInstance(Message.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Message messageMax = (Message) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return messageMax.getBody().getId();
+        if (!resourceIterator.hasMoreResources()) {
+            return "0000";
         }
-        return "0000";
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            return "0000";
+        JAXBContext context = JAXBContext.newInstance(Message.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Message messageMax = (Message) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        return messageMax.getBody().getId();
+
     }
 
     public boolean create(Message message) throws XMLDBException, JAXBException {
 
-        String id = String.valueOf(Integer.parseInt(getMaxId())+1);
+        String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
         message.getBody().setId(id);
 
         return messageRepository.create(message);
-
     }
 
     public MessageList getAll() throws XMLDBException, JAXBException {
@@ -56,9 +56,9 @@ public class MessageService {
         ResourceSet resourceSet = messageRepository.getAll();
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(Message.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -71,7 +71,7 @@ public class MessageService {
     public Message getOne(String id) throws JAXBException, XMLDBException {
         XMLResource xmlResource = messageRepository.getOne(id);
 
-        if(xmlResource == null)
+        if (xmlResource == null)
             return null;
 
         Message message;
@@ -99,7 +99,7 @@ public class MessageService {
         SetIzjasnjavanje setIzjasnjavanje = new SetIzjasnjavanje();
         setIzjasnjavanje.setMessage(message.getBody().getValue());
         boolean isSet = izvestavanjeClient.sendIzjasnjavanje(setIzjasnjavanje);
-        if(isSet){
+        if (isSet) {
             delete(message.getBody().getId());
             return true;
         }

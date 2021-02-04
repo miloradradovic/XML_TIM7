@@ -13,13 +13,16 @@ import java.util.List;
 public class ResenjeRefList {
     private final List<ResenjeRef> resenjeRefList;
 
-    public ResenjeRefList(){
+    public ResenjeRefList() {
         this.resenjeRefList = new ArrayList<>();
     }
-    public ResenjeRefList(List<ResenjeRef> resenjeRefList){
+
+    public ResenjeRefList(List<ResenjeRef> resenjeRefList) {
         this.resenjeRefList = resenjeRefList;
     }
 
     @XmlAnyElement
-    public List<ResenjeRef> getMessageList() { return resenjeRefList; }
+    public List<ResenjeRef> getMessageList() {
+        return resenjeRefList;
+    }
 }

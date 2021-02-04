@@ -1,6 +1,5 @@
 package com.project.organ_vlasti.model.util.lists;
 
-import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.util.message.Message;
 
 import javax.xml.bind.annotation.XmlAnyElement;
@@ -14,13 +13,16 @@ import java.util.List;
 public class MessageList {
     private final List<Message> messageList;
 
-    public MessageList(){
+    public MessageList() {
         this.messageList = new ArrayList<>();
     }
-    public MessageList(List<Message> messageList){
+
+    public MessageList(List<Message> messageList) {
         this.messageList = messageList;
     }
 
     @XmlAnyElement
-    public List<Message> getMessageList() { return messageList; }
+    public List<Message> getMessageList() {
+        return messageList;
+    }
 }

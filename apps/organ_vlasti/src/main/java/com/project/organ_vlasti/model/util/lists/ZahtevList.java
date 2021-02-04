@@ -13,10 +13,11 @@ import java.util.List;
 public class ZahtevList {
     private final List<Zahtev> zahtevList;
 
-    public ZahtevList(){
+    public ZahtevList() {
         this.zahtevList = new ArrayList<>();
     }
-    public ZahtevList(List<Zahtev> zahtevList){
+
+    public ZahtevList(List<Zahtev> zahtevList) {
         this.zahtevList = zahtevList;
     }
 

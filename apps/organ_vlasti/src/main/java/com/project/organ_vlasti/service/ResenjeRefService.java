@@ -1,20 +1,16 @@
 package com.project.organ_vlasti.service;
 
 import com.project.organ_vlasti.client.ResenjeClient;
-import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBroj;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBrojResponse;
 import com.project.organ_vlasti.model.resenje.database.ResenjeRef;
 import com.project.organ_vlasti.model.resenje.database.client.getRefs;
 import com.project.organ_vlasti.model.resenje.database.client.getRefsResponse;
-import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.lists.ResenjeRefList;
 import com.project.organ_vlasti.model.util.parametars.ParametarMap;
 import com.project.organ_vlasti.model.util.parametars.Tvalue;
 import com.project.organ_vlasti.repository.ResenjeRefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -32,34 +28,30 @@ import java.util.List;
 public class ResenjeRefService {
 
     @Autowired
-    private JaxB jaxB;
-
-    @Autowired
     private ResenjeRefRepository resenjeRefRepository;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = resenjeRefRepository.getMaxId();
         ResourceIterator resourceIterator = max.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
-                return "0000";
-            JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            ResenjeRef resenjeRefMax = (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return resenjeRefMax.getBody().getBroj();
+        if (!resourceIterator.hasMoreResources()) {
+            return "0000";
         }
-        return "0000";
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            return "0000";
+        JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        ResenjeRef resenjeRefMax = (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        return resenjeRefMax.getBody().getBroj();
     }
 
     public boolean create(ResenjeRef message) throws XMLDBException, JAXBException {
 
-        String id = String.valueOf(Integer.parseInt(getMaxId())+1);
+        String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
         message.getBody().setBroj(id);
 
         return resenjeRefRepository.create(message);
-
     }
 
     public ResenjeRefList getAll(String procitano) throws XMLDBException, JAXBException {
@@ -68,9 +60,9 @@ public class ResenjeRefService {
         ResourceSet resourceSet = resenjeRefRepository.getAllByProcitano(procitano);
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -83,13 +75,13 @@ public class ResenjeRefService {
     public ResenjeRefList getRefs(List<String> refs, String status) throws XMLDBException, JAXBException {
         List<ResenjeRef> resenjeRefs = new ArrayList<>();
 
-        for (String broj: refs) {
+        for (String broj : refs) {
             ResourceSet resourceSet = resenjeRefRepository.getOneStatusByBroj(broj, status);
             ResourceIterator resourceIterator = resourceSet.getIterator();
 
-            while (resourceIterator.hasMoreResources()){
+            while (resourceIterator.hasMoreResources()) {
                 XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-                if(xmlResource == null)
+                if (xmlResource == null)
                     return null;
                 JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -120,10 +112,10 @@ public class ResenjeRefService {
         // ObjectFactory of = new ObjectFactory() com.project.organ_vlasti.model.resenje
         // Resenje r = of.createResenje();
         // r.setResenjeBody(getResenjeByBrojResponse.getResenje());
-        if(getResenjeByBrojResponse != null){
+        if (getResenjeByBrojResponse != null) {
             ResenjeRef resenjeRef = getOneByBroj(broj);
             resenjeRef.getBody().setProcitano("da");
-            if(update(resenjeRef)){
+            if (update(resenjeRef)) {
                 return getResenjeByBrojResponse;
             }
             return null;
@@ -187,7 +179,7 @@ public class ResenjeRefService {
 
     }
 
-    public  ResenjeRefList searchText(String status, String input) throws XMLDBException, JAXBException {
+    public ResenjeRefList searchText(String status, String input) throws XMLDBException, JAXBException {
         com.project.organ_vlasti.model.util.parametars.ObjectFactory of = new com.project.organ_vlasti.model.util.parametars.ObjectFactory();
         ParametarMap parametarMap = of.createParametarMap();
 
@@ -213,7 +205,7 @@ public class ResenjeRefService {
         getRefs.setParametars(parametarMap);
 
         getRefsResponse refsResponse = resenjeClient.getRefs(getRefs);
-        if(refsResponse != null){
+        if (refsResponse != null) {
             return getRefs(refsResponse.getResponse().getRef(), status);
         }
         return null;
@@ -223,10 +215,10 @@ public class ResenjeRefService {
     public ResenjeRef getOne(String id) throws JAXBException, XMLDBException {
         XMLResource xmlResource = resenjeRefRepository.getOne(id);
 
-        if(xmlResource == null)
+        if (xmlResource == null)
             return null;
 
-        ResenjeRef message = null;
+        ResenjeRef message;
 
         JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -240,23 +232,23 @@ public class ResenjeRefService {
         ResourceSet resourceSet = resenjeRefRepository.getOneByBroj(broj);
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
-            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
-                return null;
-            JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            ResenjeRef resenjeRef = (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-            return  resenjeRef;
+        if (!resourceIterator.hasMoreResources()) {
+            return null;
         }
-        return null;
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            return null;
+        JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        return (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+
     }
 
     public boolean delete(String id) throws XMLDBException {
         return resenjeRefRepository.delete(id);
     }
 
-    public boolean update(ResenjeRef resenjeRef) throws JAXBException, XMLDBException {
+    public boolean update(ResenjeRef resenjeRef) throws XMLDBException {
         return resenjeRefRepository.update(resenjeRef);
     }
 }

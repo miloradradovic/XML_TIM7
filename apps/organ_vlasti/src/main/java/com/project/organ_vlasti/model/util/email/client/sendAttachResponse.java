@@ -15,10 +15,8 @@ public class sendAttachResponse {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getResponse() {
         return response;
@@ -27,12 +25,10 @@ public class sendAttachResponse {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
-    public void setResponse(String  value) {
+    public void setResponse(String value) {
         this.response = value;
     }
 }

@@ -65,8 +65,6 @@ public class ZalbaOdlukaService {
 
             if (jaxB.validate(zalbaOdluka.getClass(), zalbaOdluka)) {
                 return zalbaOdlukaRepository.create(zalbaOdluka);
-            } else {
-                return false;
             }
         }
         return false;
@@ -184,20 +182,20 @@ public class ZalbaOdlukaService {
 
     }
 
-    public String downloadResenjePDF(String broj){
+    public String downloadResenjePDF(String broj) {
         String path = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".pdf";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             return path;
         }
         return "";
     }
 
 
-    public String downloadResenjeXHTML(String broj){
+    public String downloadResenjeXHTML(String broj) {
         String path = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             return path;
         }
         return "";

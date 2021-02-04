@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ZalbeService {
 
 
-    public getZalbaCutanjeByIdResponse getZalbaCutanje(String id){
+    public getZalbaCutanjeByIdResponse getZalbaCutanje(String id) {
         // TODO dodati za front xhtml transformacije
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.zalba_cutanje.client");
@@ -26,10 +26,10 @@ public class ZalbeService {
         getZalbaCutanjeById getZalbaCutanjeById = new getZalbaCutanjeById();
         getZalbaCutanjeById.setId(id);
 
-       return zalbeClient.getZalbaCutanje(getZalbaCutanjeById);
+        return zalbeClient.getZalbaCutanje(getZalbaCutanjeById);
     }
 
-    public getZalbaOdlukaByIdResponse getZalbaOdluka(String id){
+    public getZalbaOdlukaByIdResponse getZalbaOdluka(String id) {
         // TODO dodati za front xhtml transformacije
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.zalba_odluka.client");

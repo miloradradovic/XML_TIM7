@@ -19,10 +19,10 @@ public class ZahtevRepository {
 
     private final String TARGET_NAMESPACE = "http://www.zahtevcir";
 
-    public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS + "\" xmlns:zcir=\"" + TARGET_NAMESPACE + "\"" + " xmlns:re=\"" + "http://reusability" +  "\">" +
+    public final String UPDATE = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS + "\" xmlns:zcir=\"" + TARGET_NAMESPACE + "\"" + " xmlns:re=\"" + "http://reusability" + "\">" +
             "<xu:update select=\"%1$s\">%2$s</xu:update>"
             + "</xu:modifications>";
-    public final  String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
+    public final String APPEND = "<xu:modifications version=\"1.0\" xmlns:xu=\"" + XUpdateProcessor.XUPDATE_NS
             + "\" xmlns:zcir=\"" + TARGET_NAMESPACE + "\">" + "<xu:append select=\"%1$s\" child=\"last()\">%2$s</xu:append>"
             + "</xu:modifications>";
 
@@ -44,19 +44,19 @@ public class ZahtevRepository {
     }
 
     public boolean update(String id, String patch) throws XMLDBException {
-        String xpath =  String.format("/zahtev/zahtev_body[@id='%s']/ancestor::zahtev", id);
+        String xpath = String.format("/zahtev/zahtev_body[@id='%s']/ancestor::zahtev", id);
         return existManager.update(collectionUri, id, xpath, patch, UPDATE);
     }
-    
-    public ResourceSet getMaxId() throws XMLDBException  {
-    	String xpath = "/zahtev/zahtev_body[@id = max(/zahtev/zahtev_body/@id)]/ancestor::zahtev";
-    	return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
+
+    public ResourceSet getMaxId() throws XMLDBException {
+        String xpath = "/zahtev/zahtev_body[@id = max(/zahtev/zahtev_body/@id)]/ancestor::zahtev";
+        return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
-    
+
     public ResourceSet searchText(String text) throws XMLDBException {
-    	String xpath = String.format(
-				"/zahtev/zahtev_body[child::tekst_zahteva/*[local-name()='informacija_o_zahtevu'][contains(.,'%s')]]/ancestor::zahtev",
-				text, text);
+        String xpath = String.format(
+                "/zahtev/zahtev_body[child::tekst_zahteva/*[local-name()='informacija_o_zahtevu'][contains(.,'%s')]]/ancestor::zahtev",
+                text, text);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 

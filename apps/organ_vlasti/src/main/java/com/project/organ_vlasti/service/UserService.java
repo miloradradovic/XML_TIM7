@@ -33,7 +33,7 @@ public class UserService {
     public boolean create(User user, String role) throws XMLDBException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(role);
-        if (jaxB.validate(user.getClass(), user)){
+        if (jaxB.validate(user.getClass(), user)) {
             return userRepository.create(user);
         }
         return false;
@@ -45,9 +45,9 @@ public class UserService {
         ResourceSet resourceSet = userRepository.getAll();
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
-        while (resourceIterator.hasMoreResources()){
+        while (resourceIterator.hasMoreResources()) {
             XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-            if(xmlResource == null)
+            if (xmlResource == null)
                 return null;
             JAXBContext context = JAXBContext.newInstance(User.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -60,10 +60,10 @@ public class UserService {
     public User getOne(String email) throws XMLDBException, JAXBException {
         XMLResource xmlResource = userRepository.getOne(email);
 
-        if(xmlResource == null)
+        if (xmlResource == null)
             return null;
 
-        User user = null;
+        User user;
 
         JAXBContext context = JAXBContext.newInstance(User.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -78,7 +78,7 @@ public class UserService {
 
     public Long hasRoleOrganVlasti() throws XMLDBException {
         ResourceSet resourceSet = userRepository.hasRoleOrganVlasti();
-        return  resourceSet.getSize();
+        return resourceSet.getSize();
     }
 
     public boolean update(User user) throws JAXBException, XMLDBException {

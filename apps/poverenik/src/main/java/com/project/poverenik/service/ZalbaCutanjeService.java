@@ -63,8 +63,6 @@ public class ZalbaCutanjeService {
 
             if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
                 return zalbaCutanjeRepository.create(zalbaCutanje);
-            } else {
-                return false;
             }
         }
         return false;
@@ -219,20 +217,20 @@ public class ZalbaCutanjeService {
     }
 
 
-    public String downloadResenjePDF(String broj){
+    public String downloadResenjePDF(String broj) {
         String path = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             return path;
         }
         return "";
     }
 
 
-    public String downloadResenjeXHTML(String broj){
+    public String downloadResenjeXHTML(String broj) {
         String path = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";
         boolean obavestenje = generateDocuments(broj);
-        if(obavestenje){
+        if (obavestenje) {
             return path;
         }
         return "";

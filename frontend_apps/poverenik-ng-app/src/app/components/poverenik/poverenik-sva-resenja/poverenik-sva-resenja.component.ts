@@ -27,7 +27,7 @@ export class PoverenikSvaResenjaComponent implements OnInit {
         if (resenja !== undefined){
           try {
             resenja.forEach((item, index) => {
-              const idResenja = item['ra:resenje_body']._attributes.id;
+              const idResenja = item['ra:resenje_body']._attributes.broj;
               const resenje = {id: idResenja};
               newList.push(resenje);
             });
@@ -45,11 +45,45 @@ export class PoverenikSvaResenjaComponent implements OnInit {
     );
   }
 
-  convertToPDF($event: number) {
-    console.log($event);
+  convertToPDF($event: number): void {
+    this.resenjeService.convertResenjePDF(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
   }
 
-  convertToXHTML($event: number) {
-    console.log($event);
+  convertToXHTML($event: number): void {
+    this.resenjeService.convertResenjeXHTML(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
   }
 }

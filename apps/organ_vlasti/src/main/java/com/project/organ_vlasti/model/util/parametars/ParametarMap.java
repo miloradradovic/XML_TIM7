@@ -11,9 +11,9 @@ import java.util.List;
 
 /**
  * <p>Java class for parametarMap complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="parametarMap"&gt;
  *   &lt;complexContent&gt;
@@ -25,12 +25,10 @@ import java.util.List;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "parametarMap", propOrder = {
-    "value"
+        "value"
 })
 public class ParametarMap {
 
@@ -39,25 +37,23 @@ public class ParametarMap {
 
     /**
      * Gets the value of the value property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the value property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getValue().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Tvalue }
-     * 
-     * 
      */
     public List<Tvalue> getValue() {
         if (value == null) {

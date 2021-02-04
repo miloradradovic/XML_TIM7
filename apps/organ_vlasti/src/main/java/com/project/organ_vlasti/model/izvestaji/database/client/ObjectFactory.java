@@ -16,19 +16,17 @@ import javax.xml.bind.annotation.XmlRegistry;
  * type definitions, element declarations and model
  * groups.  Factory methods for each of these are
  * provided in this class.
- *
  */
 @XmlRegistry
 public class ObjectFactory {
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.project.organ_vlasti.model.zahtev
-     *
      */
     public ObjectFactory() {
     }
+
     /**
      * Create an instance of {@link podnesiIzvestaj }
-     *
      */
     public podnesiIzvestaj createPodnesiIzvestaj() {
         return new podnesiIzvestaj();
@@ -36,7 +34,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link podnesiIzvestajResponse }
-     *
      */
     public podnesiIzvestajResponse createPodnesiIzvestajResponse() {
         return new podnesiIzvestajResponse();

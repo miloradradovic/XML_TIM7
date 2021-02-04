@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -28,12 +28,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", namespace = "http://izvestaji", propOrder = {
-    "body"
+        "body"
 })
 @XmlRootElement(name = "izvestaj_ref", namespace = "http://izvestaji")
 public class IzvestajRef {
@@ -43,11 +41,9 @@ public class IzvestajRef {
 
     /**
      * Gets the value of the body property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Body }
-     *     
+     *
+     * @return possible object is
+     * {@link Body }
      */
     public Body getBody() {
         return body;
@@ -55,11 +51,9 @@ public class IzvestajRef {
 
     /**
      * Sets the value of the body property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Body }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Body }
      */
     public void setBody(Body value) {
         this.body = value;
@@ -68,9 +62,9 @@ public class IzvestajRef {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -80,12 +74,10 @@ public class IzvestajRef {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Body {
 
@@ -98,11 +90,9 @@ public class IzvestajRef {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -110,11 +100,9 @@ public class IzvestajRef {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -122,11 +110,9 @@ public class IzvestajRef {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -134,11 +120,9 @@ public class IzvestajRef {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;
@@ -147,10 +131,8 @@ public class IzvestajRef {
         /**
          * Gets the value of the id property.
          *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
+         * @return possible object is
+         * {@link String }
          */
         public String getProcitano() {
             return procitano;
@@ -159,10 +141,8 @@ public class IzvestajRef {
         /**
          * Sets the value of the id property.
          *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setProcitano(String value) {
             this.procitano = value;

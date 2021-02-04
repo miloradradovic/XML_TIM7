@@ -6,8 +6,8 @@ WHERE {
 	?obavestenje <http://examples/predicate/organVlasti> ?organVlasti . 
 	?obavestenje <http://examples/predicate/podnosilac> %s . 
 	?obavestenje <http://examples/predicate/responseTo> %s . 
-	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#date> 
-	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#date>
+	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime> 
+	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime>
 	&& regex(UCASE(str(?organVlasti)), UCASE(".*%s.*"))
 	)
 }

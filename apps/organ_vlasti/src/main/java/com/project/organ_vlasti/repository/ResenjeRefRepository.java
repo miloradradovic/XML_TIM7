@@ -2,7 +2,6 @@ package com.project.organ_vlasti.repository;
 
 import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.model.resenje.database.ResenjeRef;
-import org.exist.xupdate.XUpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.xmldb.api.base.ResourceSet;
@@ -25,17 +24,17 @@ public class ResenjeRefRepository {
     }
 
     public ResourceSet getAllByProcitano(String procitano) throws XMLDBException {
-        String xpath =  String.format("/resenje_ref/body[@procitano ='%s']/ancestor::resenje_ref", procitano);
+        String xpath = String.format("/resenje_ref/body[@procitano ='%s']/ancestor::resenje_ref", procitano);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
-    
+
     public ResourceSet getOneStatusByBroj(String broj, String status) throws XMLDBException {
-        String xpath =  String.format("/resenje_ref/body[.='%s' and @procitano ='%s']/ancestor::resenje_ref", broj, status);
+        String xpath = String.format("/resenje_ref/body[.='%s' and @procitano ='%s']/ancestor::resenje_ref", broj, status);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
     public ResourceSet getOneByBroj(String broj) throws XMLDBException {
-        String xpath =  String.format("/resenje_ref/body[.='%s']/ancestor::resenje_ref", broj);
+        String xpath = String.format("/resenje_ref/body[.='%s']/ancestor::resenje_ref", broj);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 
@@ -47,7 +46,7 @@ public class ResenjeRefRepository {
         return existManager.remove(collectionUri, id);
     }
 
-    public ResourceSet getMaxId() throws XMLDBException  {
+    public ResourceSet getMaxId() throws XMLDBException {
         String xpath = "/resenje_ref/body[@broj = max(/resenje_ref/body/@broj)]/ancestor::resenje_ref";
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }

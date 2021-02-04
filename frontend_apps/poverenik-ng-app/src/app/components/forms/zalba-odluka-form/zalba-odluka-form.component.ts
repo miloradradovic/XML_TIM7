@@ -18,6 +18,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    const datumAtr = (new Date()).toISOString().split('.')[0];
     let elementOdluka = document.getElementById("zalbaOdluka");
     let xmlStringOdluka =
     `<?xml version="1.0" encoding="UTF-8"?>
@@ -26,7 +27,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
         xmlns:re="http://www.reusability"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
-        xsi:schemaLocation="http://www.zalbanaodlukucir ../xsd/zalbanaodlukucir.xsd"><zoc:zalba_odluka_body mesto="" datum=""><zoc:zahtev></zoc:zahtev><zoc:zalilac><re:tip_lica><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba></re:tip_lica><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:sediste_zalioca></re:sediste_zalioca></zoc:zalilac><zoc:protiv_resenja_zakljucka><re:naziv_organa_koji_je_doneo_odluku></re:naziv_organa_koji_je_doneo_odluku><re:broj></re:broj><re:od_godine></re:od_godine></zoc:protiv_resenja_zakljucka><zoc:sadrzaj><re:datum></re:datum><re:osnova_za_zalbu></re:osnova_za_zalbu><re:clan><re:stav></re:stav></re:clan></zoc:sadrzaj><zoc:podaci_o_podnosiocu_zalbe><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zoc:podaci_o_podnosiocu_zalbe></zoc:zalba_odluka_body></zoc:zalba_odluka>`;
+        xsi:schemaLocation="http://www.zalbanaodlukucir ../xsd/zalbanaodlukucir.xsd"><zoc:zalba_odluka_body mesto="" datum="${datumAtr}"><zoc:zahtev></zoc:zahtev><zoc:zalilac><re:tip_lica><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba></re:tip_lica><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:sediste_zalioca></re:sediste_zalioca></zoc:zalilac><zoc:protiv_resenja_zakljucka><re:naziv_organa_koji_je_doneo_odluku></re:naziv_organa_koji_je_doneo_odluku><re:broj></re:broj><re:od_godine></re:od_godine></zoc:protiv_resenja_zakljucka><zoc:sadrzaj><re:datum></re:datum><re:osnova_za_zalbu></re:osnova_za_zalbu><re:clan><re:stav></re:stav></re:clan></zoc:sadrzaj><zoc:podaci_o_podnosiocu_zalbe><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zoc:podaci_o_podnosiocu_zalbe></zoc:zalba_odluka_body></zoc:zalba_odluka>`;
     Xonomy.render(xmlStringOdluka, elementOdluka, {
       validate: this.zalbaOdlukaService.zalbaOdlukaSpecification.validate,
       elements: this.zalbaOdlukaService.zalbaOdlukaSpecification.elements,

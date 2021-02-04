@@ -1,6 +1,5 @@
 package com.project.organ_vlasti.model.zalba_cutanje.client;
 
-import com.project.organ_vlasti.model.resenje.Tresenje;
 import com.project.organ_vlasti.model.zalba_cutanje.Tzalba;
 
 import javax.xml.bind.annotation.*;
@@ -18,10 +17,8 @@ public class getZalbaCutanjeByIdResponse {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link Tzalba }
-     *
+     * @return possible object is
+     * {@link Tzalba }
      */
     public Tzalba getZalba_cutanje() {
         return zalba_cutanje;
@@ -30,10 +27,8 @@ public class getZalbaCutanjeByIdResponse {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Tzalba }
-     *
+     * @param value allowed object is
+     *              {@link Tzalba }
      */
     public void setZalba_cutanje(Tzalba value) {
         this.zalba_cutanje = value;

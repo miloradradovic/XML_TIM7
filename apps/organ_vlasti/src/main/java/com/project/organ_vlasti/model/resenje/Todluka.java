@@ -10,9 +10,9 @@ import java.util.List;
 
 /**
  * <p>Java class for Todluka complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Todluka">
  *   &lt;complexContent>
@@ -44,43 +44,41 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Todluka", namespace = "http://resenje", propOrder = {
-    "content"
+        "content"
 })
 public class Todluka {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "iznos", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false)
+            @XmlElementRef(name = "clan", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "lice", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "stav", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "iznos", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "trazilac", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "datum", namespace = "http://resenje", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "mesto", namespace = "http://resenje", type = JAXBElement.class, required = false)
     })
     @XmlMixed
     protected List<Serializable> content;
 
     /**
      * Gets the value of the content property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
@@ -91,8 +89,6 @@ public class Todluka {
      * {@link JAXBElement }{@code <}{@link Trazilac }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * 
      */
     public List<Serializable> getContent() {
         if (content == null) {
@@ -104,9 +100,9 @@ public class Todluka {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -116,12 +112,10 @@ public class Todluka {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Trazilac {
 
@@ -133,11 +127,9 @@ public class Todluka {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -145,11 +137,9 @@ public class Todluka {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -157,11 +147,9 @@ public class Todluka {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -169,11 +157,9 @@ public class Todluka {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;

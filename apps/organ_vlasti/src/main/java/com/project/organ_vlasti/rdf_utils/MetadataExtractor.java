@@ -1,11 +1,7 @@
 package com.project.organ_vlasti.rdf_utils;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+import org.xml.sax.SAXException;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -13,17 +9,12 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.xml.sax.SAXException;
-
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+import java.io.*;
 
 /**
- *
  * Primer demonstrira ekstrakciju RDFa metapodataka iz
  * XML dokumenta primenom GRDDL (Gleaning Resource Descriptions
  * from Dialects of Languages) transformacije.
- *
  */
 public class MetadataExtractor {
     private TransformerFactory transformerFactory;
@@ -40,7 +31,7 @@ public class MetadataExtractor {
      * Generates RDF/XML based on RDFa metadata from an XML containing
      * input stream by applying GRDDL XSL transformation.
      *
-     * @param in XML containing input stream
+     * @param in  XML containing input stream
      * @param out RDF/XML output stream
      */
     public void extractMetadata(InputStream in, OutputStream out) throws FileNotFoundException, TransformerException {

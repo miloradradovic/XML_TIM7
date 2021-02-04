@@ -1,27 +1,26 @@
 
 package com.project.organ_vlasti.model.util.ComplexTypes;
 
-import java.math.BigInteger;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
+import java.math.BigInteger;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the reusability package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the reusability package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -57,14 +56,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: reusability
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link Topcije }
-     * 
      */
     public Topcije createTopcije() {
         return new Topcije();
@@ -72,7 +69,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TopisTroskova }
-     * 
      */
     public TopisTroskova createTopisTroskova() {
         return new TopisTroskova();
@@ -80,7 +76,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TopcijeDostave }
-     * 
      */
     public TopcijeDostave createTopcijeDostave() {
         return new TopcijeDostave();
@@ -88,7 +83,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TciljaniOrganVlasti }
-     * 
      */
     public TciljaniOrganVlasti createTciljaniOrganVlasti() {
         return new TciljaniOrganVlasti();
@@ -96,7 +90,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TsadrzajZalbe }
-     * 
      */
     public TsadrzajZalbe createTsadrzajZalbe() {
         return new TsadrzajZalbe();
@@ -104,7 +97,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tclan }
-     * 
      */
     public Tclan createTclan() {
         return new Tclan();
@@ -112,7 +104,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TprotivResenjaZakljucka }
-     * 
      */
     public TprotivResenjaZakljucka createTprotivResenjaZakljucka() {
         return new TprotivResenjaZakljucka();
@@ -120,7 +111,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tadresa }
-     * 
      */
     public Tadresa createTadresa() {
         return new Tadresa();
@@ -128,7 +118,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TpodaciPovereniku }
-     * 
      */
     public TpodaciPovereniku createTpodaciPovereniku() {
         return new TpodaciPovereniku();
@@ -136,7 +125,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tzalilac }
-     * 
      */
     public Tzalilac createTzalilac() {
         return new Tzalilac();
@@ -144,7 +132,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TtipLica }
-     * 
      */
     public TtipLica createTtipLica() {
         return new TtipLica();
@@ -152,7 +139,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tosoba }
-     * 
      */
     public Tosoba createTosoba() {
         return new Tosoba();
@@ -160,7 +146,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tsadrzaj }
-     * 
      */
     public Tsadrzaj createTsadrzaj() {
         return new Tsadrzaj();
@@ -168,7 +153,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TpodaciOPodnosiocu }
-     * 
      */
     public TpodaciOPodnosiocu createTpodaciOPodnosiocu() {
         return new TpodaciOPodnosiocu();
@@ -176,7 +160,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tnapomena }
-     * 
      */
     public Tnapomena createTnapomena() {
         return new Tnapomena();
@@ -184,7 +167,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TtekstZahtevaZahtevcir }
-     * 
      */
     public TtekstZahtevaZahtevcir createTtekstZahtevaZahtevcir() {
         return new TtekstZahtevaZahtevcir();
@@ -192,7 +174,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TnaciniDostave }
-     * 
      */
     public TnaciniDostave createTnaciniDostave() {
         return new TnaciniDostave();
@@ -200,7 +181,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TnacinDostave }
-     * 
      */
     public TnacinDostave createTnacinDostave() {
         return new TnacinDostave();
@@ -208,7 +188,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TinformacijeOTraziocu }
-     * 
      */
     public TinformacijeOTraziocu createTinformacijeOTraziocu() {
         return new TinformacijeOTraziocu();
@@ -216,7 +195,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tfusnote }
-     * 
      */
     public Tfusnote createTfusnote() {
         return new Tfusnote();
@@ -224,7 +202,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TinformacijeOPodnosiocu }
-     * 
      */
     public TinformacijeOPodnosiocu createTinformacijeOPodnosiocu() {
         return new TinformacijeOPodnosiocu();
@@ -232,7 +209,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TtekstZahtevaObavestenja }
-     * 
      */
     public TtekstZahtevaObavestenja createTtekstZahtevaObavestenja() {
         return new TtekstZahtevaObavestenja();
@@ -240,7 +216,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TradnoVreme }
-     * 
      */
     public TradnoVreme createTradnoVreme() {
         return new TradnoVreme();
@@ -248,7 +223,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TukupanTrosak }
-     * 
      */
     public TukupanTrosak createTukupanTrosak() {
         return new TukupanTrosak();
@@ -256,7 +230,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Topis }
-     * 
      */
     public Topis createTopis() {
         return new Topis();
@@ -264,7 +237,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Topcije.Opcija }
-     * 
      */
     public Topcije.Opcija createTopcijeOpcija() {
         return new Topcije.Opcija();
@@ -272,7 +244,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TopisTroskova.Cena }
-     * 
      */
     public TopisTroskova.Cena createTopisTroskovaCena() {
         return new TopisTroskova.Cena();
@@ -280,7 +251,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TopcijeDostave.Opcija }
-     * 
      */
     public TopcijeDostave.Opcija createTopcijeDostaveOpcija() {
         return new TopcijeDostave.Opcija();
@@ -288,7 +258,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TciljaniOrganVlasti.NazivOrgana }
-     * 
      */
     public TciljaniOrganVlasti.NazivOrgana createTciljaniOrganVlastiNazivOrgana() {
         return new TciljaniOrganVlasti.NazivOrgana();
@@ -296,7 +265,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TsadrzajZalbe.CiljaniOrganVlasti }
-     * 
      */
     public TsadrzajZalbe.CiljaniOrganVlasti createTsadrzajZalbeCiljaniOrganVlasti() {
         return new TsadrzajZalbe.CiljaniOrganVlasti();
@@ -304,7 +272,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tclan.Stav }
-     * 
      */
     public Tclan.Stav createTclanStav() {
         return new Tclan.Stav();
@@ -312,7 +279,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku }
-     * 
      */
     public TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku createTprotivResenjaZakljuckaNazivOrganaKojiJeDoneoOdluku() {
         return new TprotivResenjaZakljucka.NazivOrganaKojiJeDoneoOdluku();
@@ -320,7 +286,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TprotivResenjaZakljucka.Broj }
-     * 
      */
     public TprotivResenjaZakljucka.Broj createTprotivResenjaZakljuckaBroj() {
         return new TprotivResenjaZakljucka.Broj();
@@ -328,7 +293,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tadresa.Mesto }
-     * 
      */
     public Tadresa.Mesto createTadresaMesto() {
         return new Tadresa.Mesto();
@@ -336,7 +300,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Tadresa.Ulica }
-     * 
      */
     public Tadresa.Ulica createTadresaUlica() {
         return new Tadresa.Ulica();
@@ -344,7 +307,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "bold", scope = Topis.class)
     public JAXBElement<String> createTopisBold(String value) {
@@ -353,7 +315,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "italic", scope = Topis.class)
     public JAXBElement<String> createTopisItalic(String value) {
@@ -362,7 +323,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "iznos", scope = TukupanTrosak.class)
     public JAXBElement<String> createTukupanTrosakIznos(String value) {
@@ -371,7 +331,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "broj_racuna", scope = TukupanTrosak.class)
     public JAXBElement<String> createTukupanTrosakBrojRacuna(String value) {
@@ -380,7 +339,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "poziv_na_broj", scope = TukupanTrosak.class)
     public JAXBElement<BigInteger> createTukupanTrosakPozivNaBroj(BigInteger value) {
@@ -389,7 +347,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TopisTroskova.Cena }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "cena", scope = TopisTroskova.class)
     public JAXBElement<TopisTroskova.Cena> createTopisTroskovaCena(TopisTroskova.Cena value) {
@@ -398,7 +355,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "pocetak", scope = TradnoVreme.class)
     public JAXBElement<String> createTradnoVremePocetak(String value) {
@@ -407,7 +363,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "kraj", scope = TradnoVreme.class)
     public JAXBElement<String> createTradnoVremeKraj(String value) {
@@ -416,7 +371,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<Tclan> createTtekstZahtevaObavestenjaClan(Tclan value) {
@@ -425,7 +379,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "godina", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<String> createTtekstZahtevaObavestenjaGodina(String value) {
@@ -434,7 +387,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Topis }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "opis_trazene_informacije", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<Topis> createTtekstZahtevaObavestenjaOpisTrazeneInformacije(Topis value) {
@@ -443,7 +395,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "dan", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<XMLGregorianCalendar> createTtekstZahtevaObavestenjaDan(XMLGregorianCalendar value) {
@@ -452,7 +403,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "vreme", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<String> createTtekstZahtevaObavestenjaVreme(String value) {
@@ -461,7 +411,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TradnoVreme }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "radno_vreme", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<TradnoVreme> createTtekstZahtevaObavestenjaRadnoVreme(TradnoVreme value) {
@@ -470,7 +419,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tadresa }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "adresa", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<Tadresa> createTtekstZahtevaObavestenjaAdresa(Tadresa value) {
@@ -479,7 +427,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "broj_kancelarije", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<BigInteger> createTtekstZahtevaObavestenjaBrojKancelarije(BigInteger value) {
@@ -488,7 +435,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TopisTroskova }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "opis_troskova", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<TopisTroskova> createTtekstZahtevaObavestenjaOpisTroskova(TopisTroskova value) {
@@ -497,7 +443,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TukupanTrosak }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "ukupan_trosak", scope = TtekstZahtevaObavestenja.class)
     public JAXBElement<TukupanTrosak> createTtekstZahtevaObavestenjaUkupanTrosak(TukupanTrosak value) {
@@ -506,7 +451,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "nacin_dostave_input", scope = TnacinDostave.class)
     public JAXBElement<String> createTnacinDostaveNacinDostaveInput(String value) {
@@ -515,7 +459,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TtekstZahtevaZahtevcir.class)
     public JAXBElement<Tclan> createTtekstZahtevaZahtevcirClan(Tclan value) {
@@ -524,7 +467,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TopcijeDostave }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "opcije", scope = TtekstZahtevaZahtevcir.class)
     public JAXBElement<TopcijeDostave> createTtekstZahtevaZahtevcirOpcije(TopcijeDostave value) {
@@ -533,7 +475,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Topis }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "informacija_o_zahtevu", scope = TtekstZahtevaZahtevcir.class)
     public JAXBElement<Topis> createTtekstZahtevaZahtevcirInformacijaOZahtevu(Topis value) {
@@ -542,7 +483,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = TsadrzajZalbe.class)
     public JAXBElement<Tclan> createTsadrzajZalbeClan(Tclan value) {
@@ -551,7 +491,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TsadrzajZalbe.CiljaniOrganVlasti }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "ciljani_organ_vlasti", scope = TsadrzajZalbe.class)
     public JAXBElement<TsadrzajZalbe.CiljaniOrganVlasti> createTsadrzajZalbeCiljaniOrganVlasti(TsadrzajZalbe.CiljaniOrganVlasti value) {
@@ -560,7 +499,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Topcije }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "razlog_zalbe", scope = TsadrzajZalbe.class)
     public JAXBElement<Topcije> createTsadrzajZalbeRazlogZalbe(Topcije value) {
@@ -569,7 +507,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "datum", scope = TsadrzajZalbe.class)
     public JAXBElement<XMLGregorianCalendar> createTsadrzajZalbeDatum(XMLGregorianCalendar value) {
@@ -578,7 +515,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "podaci_o_zahtjevu_i_informacijama", scope = TsadrzajZalbe.class)
     public JAXBElement<String> createTsadrzajZalbePodaciOZahtjevuIInformacijama(String value) {
@@ -587,7 +523,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "napomena", scope = TsadrzajZalbe.class)
     public JAXBElement<String> createTsadrzajZalbeNapomena(String value) {
@@ -596,7 +531,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tclan.Stav }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "stav", scope = Tclan.class)
     public JAXBElement<Tclan.Stav> createTclanStav(Tclan.Stav value) {
@@ -605,7 +539,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "datum", scope = Tsadrzaj.class)
     public JAXBElement<XMLGregorianCalendar> createTsadrzajDatum(XMLGregorianCalendar value) {
@@ -614,7 +547,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "osnova_za_zalbu", scope = Tsadrzaj.class)
     public JAXBElement<String> createTsadrzajOsnovaZaZalbu(String value) {
@@ -623,7 +555,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tclan }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.reusability", name = "clan", scope = Tsadrzaj.class)
     public JAXBElement<Tclan> createTsadrzajClan(Tclan value) {

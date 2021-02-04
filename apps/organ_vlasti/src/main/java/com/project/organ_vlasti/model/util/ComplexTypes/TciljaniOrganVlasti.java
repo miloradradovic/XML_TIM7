@@ -1,22 +1,17 @@
 
 package com.project.organ_vlasti.model.util.ComplexTypes;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import javax.xml.namespace.QName;
 
 
 /**
  * <p>Java class for Tciljani_organ_vlasti complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tciljani_organ_vlasti"&gt;
  *   &lt;complexContent&gt;
@@ -37,13 +32,11 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tciljani_organ_vlasti", propOrder = {
-    "nazivOrgana",
-    "sedisteOrgana"
+        "nazivOrgana",
+        "sedisteOrgana"
 })
 public class TciljaniOrganVlasti {
 
@@ -54,11 +47,9 @@ public class TciljaniOrganVlasti {
 
     /**
      * Gets the value of the nazivOrgana property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link NazivOrgana }
-     *     
+     *
+     * @return possible object is
+     * {@link NazivOrgana }
      */
     public NazivOrgana getNazivOrgana() {
         return nazivOrgana;
@@ -66,11 +57,9 @@ public class TciljaniOrganVlasti {
 
     /**
      * Sets the value of the nazivOrgana property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link NazivOrgana }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link NazivOrgana }
      */
     public void setNazivOrgana(NazivOrgana value) {
         this.nazivOrgana = value;
@@ -78,11 +67,9 @@ public class TciljaniOrganVlasti {
 
     /**
      * Gets the value of the sedisteOrgana property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSedisteOrgana() {
         return sedisteOrgana;
@@ -90,11 +77,9 @@ public class TciljaniOrganVlasti {
 
     /**
      * Sets the value of the sedisteOrgana property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSedisteOrgana(String value) {
         this.sedisteOrgana = value;
@@ -103,9 +88,9 @@ public class TciljaniOrganVlasti {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType&gt;
      *   &lt;simpleContent&gt;
@@ -115,12 +100,10 @@ public class TciljaniOrganVlasti {
      *   &lt;/simpleContent&gt;
      * &lt;/complexType&gt;
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class NazivOrgana {
 
@@ -131,11 +114,9 @@ public class TciljaniOrganVlasti {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -143,11 +124,9 @@ public class TciljaniOrganVlasti {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -155,17 +134,15 @@ public class TciljaniOrganVlasti {
 
         /**
          * Gets a map that contains attributes that aren't bound to any typed property on this class.
-         * 
+         *
          * <p>
-         * the map is keyed by the name of the attribute and 
+         * the map is keyed by the name of the attribute and
          * the value is the string value of the attribute.
-         * 
+         * <p>
          * the map returned by this method is live, and you can add new attribute
          * by updating the map directly. Because of this design, there's no setter.
-         * 
-         * 
-         * @return
-         *     always non-null
+         *
+         * @return always non-null
          */
         public Map<QName, String> getOtherAttributes() {
             return otherAttributes;

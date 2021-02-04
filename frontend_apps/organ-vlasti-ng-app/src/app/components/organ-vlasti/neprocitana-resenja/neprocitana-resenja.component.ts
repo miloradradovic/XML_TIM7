@@ -104,7 +104,7 @@ export class NeprocitanaResenjaComponent implements OnInit {
     console.log(this.form.controls.tip.value)
     console.log(this.form.controls.datumAfter.value)
     console.log(this.form.controls.datumBefore.value)
-    this.resenjeService.getPretragaMetadata('ne', this.form.controls.poverenik.value, this.form.controls.trazilac.value, this.form.controls.zalba.value, this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.tip.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value).subscribe(
+    this.resenjeService.getPretragaMetadata('ne', this.form.controls.poverenik.value, this.form.controls.trazilac.value, this.form.controls.zalba.value.replace('/', '-'), this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.tip.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value).subscribe(
       result => {
         this.renderResenja(result);    
       },
@@ -115,11 +115,11 @@ export class NeprocitanaResenjaComponent implements OnInit {
   }
 
   onDatumAfterChanged(event) {
-    this.form.controls.datumAfter.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
+    this.form.controls.datumAfter.patchValue(new Date(event.target.value).toISOString().split('.')[0]);
   }
 
   onDatumBeforeChanged(event) {
-    this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('T')[0]);
+    this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('.')[0]);
   }
 
   clicked($event: number) {

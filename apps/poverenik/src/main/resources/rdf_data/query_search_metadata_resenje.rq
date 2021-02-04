@@ -9,8 +9,8 @@ WHERE {
 	?resenje <http://examples/predicate/poverenik> %s . 
 	?resenje <http://examples/predicate/trazilac> %s . 
 	?resenje <http://examples/predicate/responseTo> %s . 
-	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#date> 
-	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#date>
+	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime> 
+	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime>
 	&& regex(UCASE(str(?tip)), UCASE(".*%s.*"))
 	&& regex(UCASE(str(?organVlasti)), UCASE(".*%s.*"))
 	&& regex(UCASE(str(?mesto)), UCASE(".*%s.*"))

@@ -13,10 +13,11 @@ import java.util.List;
 public class ObavestenjeList {
     private final List<Obavestenje> obavestenjeList;
 
-    public ObavestenjeList(){
+    public ObavestenjeList() {
         this.obavestenjeList = new ArrayList<>();
     }
-    public ObavestenjeList(List<Obavestenje> obavestenjeList){
+
+    public ObavestenjeList(List<Obavestenje> obavestenjeList) {
         this.obavestenjeList = obavestenjeList;
     }
 

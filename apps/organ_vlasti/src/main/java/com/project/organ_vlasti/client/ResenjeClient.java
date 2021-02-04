@@ -16,10 +16,9 @@ public class ResenjeClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://resenje/ws/getResenjeByBroj"));
 
-        if(response.getResenje().getBroj().equals("-1")){
+        if (response.getResenje().getBroj().equals("-1")) {
             return null;
         }
-
         return response;
     }
 
@@ -30,11 +29,10 @@ public class ResenjeClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(
                                 "http://resenje/ws/getRefs"));
 
-        if(!response.getResponse().getRef().isEmpty()){
-            if(response.getResponse().getRef().get(0).equals("-1"))
-            return null;
+        if (!response.getResponse().getRef().isEmpty()) {
+            if (response.getResponse().getRef().get(0).equals("-1"))
+                return null;
         }
-
         return response;
     }
 }

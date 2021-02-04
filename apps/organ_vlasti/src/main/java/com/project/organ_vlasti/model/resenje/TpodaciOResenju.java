@@ -8,9 +8,9 @@ import java.util.List;
 
 /**
  * <p>Java class for Tpodaci_o_resenju complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Tpodaci_o_resenju">
  *   &lt;complexContent>
@@ -31,13 +31,11 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tpodaci_o_resenju", namespace = "http://resenje", propOrder = {
-    "naslov",
-    "tacka"
+        "naslov",
+        "tacka"
 })
 public class TpodaciOResenju {
 
@@ -49,10 +47,8 @@ public class TpodaciOResenju {
     /**
      * Gets the value of the naslov property.
      *
-     * @return
-     *     possible object is
-     *     {@link Naslov }
-     *
+     * @return possible object is
+     * {@link Naslov }
      */
     public Naslov getNaslov() {
         return naslov;
@@ -61,10 +57,8 @@ public class TpodaciOResenju {
     /**
      * Sets the value of the naslov property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Naslov }
-     *
+     * @param value allowed object is
+     *              {@link Naslov }
      */
     public void setNaslov(Naslov value) {
         this.naslov = value;
@@ -72,25 +66,23 @@ public class TpodaciOResenju {
 
     /**
      * Gets the value of the tacka property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the tacka property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getTacka().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Ttacka }
-     * 
-     * 
      */
     public List<Ttacka> getTacka() {
         if (tacka == null) {
@@ -102,9 +94,9 @@ public class TpodaciOResenju {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     *
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;simpleContent>
@@ -114,12 +106,10 @@ public class TpodaciOResenju {
      *   &lt;/simpleContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "value"
+            "value"
     })
     public static class Naslov {
 
@@ -131,11 +121,9 @@ public class TpodaciOResenju {
 
         /**
          * Gets the value of the value property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getValue() {
             return value;
@@ -143,11 +131,9 @@ public class TpodaciOResenju {
 
         /**
          * Sets the value of the value property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setValue(String value) {
             this.value = value;
@@ -155,11 +141,9 @@ public class TpodaciOResenju {
 
         /**
          * Gets the value of the id property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         * {@link String }
          */
         public String getId() {
             return id;
@@ -167,11 +151,9 @@ public class TpodaciOResenju {
 
         /**
          * Sets the value of the id property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setId(String value) {
             this.id = value;

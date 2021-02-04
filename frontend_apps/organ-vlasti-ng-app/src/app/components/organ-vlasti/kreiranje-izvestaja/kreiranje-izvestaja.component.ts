@@ -27,21 +27,22 @@ export class KreiranjeIzvestajaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        const izvestaj = izvestajList.izvestaj.izvestaj_body;
-        const zahtev = {broj_podnetih_zahteva: izvestaj.zahtevi_podneti._text, broj_prihvacenih_zahteva: izvestaj.zahtevi_prihvaceni._text,
-        broj_odbijenih_zahteva: izvestaj.zahtevi_odbijeni._text};
+        console.log(izvestajList);
+        const izvestaj = izvestajList['ns3:izvestaj']['ns3:izvestaj_body'];
+        const zahtev = {broj_podnetih_zahteva: izvestaj['ns3:zahtevi_podneti']._text, broj_prihvacenih_zahteva: izvestaj['ns3:zahtevi_prihvaceni']._text,
+        broj_odbijenih_zahteva: izvestaj['ns3:zahtevi_odbijeni']._text};
         newList.push(zahtev);
         this.zahtevi = newList;
-        const zalbacutanje = {broj_podnetih_zalbi_cutanje: izvestaj.zalbe_cutanje_podneti._text,
-          broj_prihvacenih_zalbi_cutanje: izvestaj.zalbe_cutanje_prihvaceno._text,
-          broj_odbijenih_zalbi_cutanje: izvestaj.zalbe_cutanje_odbijeno._text,
-          broj_ponistenih_zalbi_cutanje: izvestaj.zalbe_cutanje_ponisteno._text};
+        const zalbacutanje = {broj_podnetih_zalbi_cutanje: izvestaj['ns3:zalbe_cutanje_podneti']._text,
+          broj_prihvacenih_zalbi_cutanje: izvestaj['ns3:zalbe_cutanje_prihvaceno']._text,
+          broj_odbijenih_zalbi_cutanje: izvestaj['ns3:zalbe_cutanje_odbijeno']._text,
+          broj_ponistenih_zalbi_cutanje: izvestaj['ns3:zalbe_cutanje_ponisteno']._text};
         newList2.push(zalbacutanje);
         this.zalbecutanje = newList2;
-        const zalbaodluka = {broj_podnetih_zalbi_odluka: izvestaj.zalbe_odluke_podneti._text,
-                             broj_prihvacenih_zalbi_odluka: izvestaj.zalbe_odluke_prihvaceno._text,
-                             broj_odbijenih_zalbi_odluka: izvestaj.zalbe_odluke_odbijeno._text,
-                             broj_ponistenih_zalbi_odluka: izvestaj.zalbe_odluke_ponisteno._text};
+        const zalbaodluka = {broj_podnetih_zalbi_odluka: izvestaj['ns3:zalbe_odluke_podneti']._text,
+                             broj_prihvacenih_zalbi_odluka: izvestaj['ns3:zalbe_odluke_prihvaceno']._text,
+                             broj_odbijenih_zalbi_odluka: izvestaj['ns3:zalbe_odluke_odbijeno']._text,
+                             broj_ponistenih_zalbi_odluka: izvestaj['ns3:zalbe_odluke_ponisteno']._text};
         newList3.push(zalbaodluka);
         this.zalbeodluka = newList3;
       },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ZahtevXonomyService } from 'src/app/services/zahtev-xonomy-service/zahtev-xonomy.service';
+import {Router} from '@angular/router';
 
 declare const Xonomy: any;
 
@@ -11,26 +12,27 @@ declare const Xonomy: any;
 })
 export class ZahtevFormComponent implements OnInit {
 
-  constructor(private zahtevService: ZahtevXonomyService, public snackBar: MatSnackBar) { }
+  constructor(private zahtevService: ZahtevXonomyService, public snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+    const datumAtr = (new Date()).toISOString().split('.')[0];
     let elementZahtev = document.getElementById("zahtev");
     let xmlStringZahtev =
     `<?xml version="1.0" encoding="UTF-8"?>
     <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
     <zcir:zahtev
-        xmlns:zcir="http://www.zahtevcir" 
+        xmlns:zcir="http://www.zahtevcir"
         xmlns:re="http://www.reusability"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
-        xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd"><zcir:zahtev_body datum=""><zcir:mesto></zcir:mesto><zcir:ciljani_organ_vlasti><re:naziv_organa></re:naziv_organa><re:sediste_organa></re:sediste_organa></zcir:ciljani_organ_vlasti><zcir:tekst_zahteva><re:clan><re:stav></re:stav></re:clan><re:opcije><re:opcija izabran="false">oбавештење да ли поседује тражену информацију;</re:opcija><re:opcija izabran="false">увид у документ који садржи тражену информацију;</re:opcija><re:opcija izabran="false">копију документа који садржи тражену информацију;</re:opcija><re:opcija izabran="false">достављање копије документа који садржи тражену информацију:**</re:opcija><re:nacini_dostave><re:nacin_dostave izabran="false">поштом</re:nacin_dostave><re:nacin_dostave izabran="false">електронском поштом</re:nacin_dostave><re:nacin_dostave izabran="false">факсом</re:nacin_dostave><re:nacin_dostave>на други начин:***<re:nacin_dostave_input></re:nacin_dostave_input></re:nacin_dostave></re:nacini_dostave></re:opcije><re:informacija_o_zahtevu></re:informacija_o_zahtevu></zcir:tekst_zahteva><zcir:informacije_o_traziocu><re:lice><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba></re:lice><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zcir:informacije_o_traziocu></zcir:zahtev_body></zcir:zahtev>`;
+        xsi:schemaLocation="http://www.zahtevcir ../xsd/zahtevcir.xsd"><zcir:zahtev_body datum="${datumAtr}"><zcir:mesto></zcir:mesto><zcir:ciljani_organ_vlasti><re:naziv_organa></re:naziv_organa><re:sediste_organa></re:sediste_organa></zcir:ciljani_organ_vlasti><zcir:tekst_zahteva><re:clan><re:stav></re:stav></re:clan><re:opcije><re:opcija izabran="false">oбавештење да ли поседује тражену информацију;</re:opcija><re:opcija izabran="false">увид у документ који садржи тражену информацију;</re:opcija><re:opcija izabran="false">копију документа који садржи тражену информацију;</re:opcija><re:opcija izabran="false">достављање копије документа који садржи тражену информацију:**</re:opcija><re:nacini_dostave><re:nacin_dostave izabran="false">поштом</re:nacin_dostave><re:nacin_dostave izabran="false">електронском поштом</re:nacin_dostave><re:nacin_dostave izabran="false">факсом</re:nacin_dostave><re:nacin_dostave>на други начин:***<re:nacin_dostave_input></re:nacin_dostave_input></re:nacin_dostave></re:nacini_dostave></re:opcije><re:informacija_o_zahtevu></re:informacija_o_zahtevu></zcir:tekst_zahteva><zcir:informacije_o_traziocu><re:lice><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba></re:lice><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zcir:informacije_o_traziocu></zcir:zahtev_body></zcir:zahtev>`;
     Xonomy.render(xmlStringZahtev, elementZahtev, {
       validate: this.zahtevService.zahtevSpecification.validate,
       elements: this.zahtevService.zahtevSpecification.elements,
-      onchange: () => { 
+      onchange: () => {
       }
     });
   }
@@ -65,7 +67,7 @@ export class ZahtevFormComponent implements OnInit {
    let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
    <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
    <zcir:zahtev
-       xmlns:zcir="http://www.zahtevcir" 
+       xmlns:zcir="http://www.zahtevcir"
        xmlns:re="http://www.reusability"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -79,7 +81,7 @@ export class ZahtevFormComponent implements OnInit {
     this.zahtevService.send(dataTemplate)
       .subscribe(res => console.log(res));
     this.snackBar.open("Uspešno ste poslali zahtev!", 'Ok', { duration: 3000 });
-
+    this.router.navigate(['/main-page-gradjanin']);
   }
 
 }

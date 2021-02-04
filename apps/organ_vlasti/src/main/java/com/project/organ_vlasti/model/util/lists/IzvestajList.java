@@ -13,13 +13,16 @@ import java.util.List;
 public class IzvestajList {
     private final List<Izvestaj> izvestajList;
 
-    public IzvestajList(){
+    public IzvestajList() {
         this.izvestajList = new ArrayList<>();
     }
-    public IzvestajList(List<Izvestaj> izvestajList){
+
+    public IzvestajList(List<Izvestaj> izvestajList) {
         this.izvestajList = izvestajList;
     }
 
     @XmlAnyElement
-    public List<Izvestaj> getIzvestajList() { return izvestajList; }
+    public List<Izvestaj> getIzvestajList() {
+        return izvestajList;
+    }
 }

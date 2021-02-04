@@ -1,25 +1,20 @@
 
 package com.project.organ_vlasti.model.util.ComplexTypes;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for Ttekst_zahteva_obavestenja complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Ttekst_zahteva_obavestenja"&gt;
  *   &lt;complexContent&gt;
@@ -52,46 +47,44 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ttekst_zahteva_obavestenja", propOrder = {
-    "content"
+        "content"
 })
 public class TtekstZahtevaObavestenja {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "broj_kancelarije", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "adresa", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "vreme", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "opis_troskova", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "radno_vreme", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "opis_trazene_informacije", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "dan", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "ukupan_trosak", namespace = "http://www.reusability", type = JAXBElement.class),
-        @XmlElementRef(name = "godina", namespace = "http://www.reusability", type = JAXBElement.class)
+            @XmlElementRef(name = "broj_kancelarije", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "adresa", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "vreme", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "opis_troskova", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "radno_vreme", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "clan", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "opis_trazene_informacije", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "dan", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "ukupan_trosak", namespace = "http://www.reusability", type = JAXBElement.class),
+            @XmlElementRef(name = "godina", namespace = "http://www.reusability", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
 
     /**
      * Gets the value of the content property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
@@ -105,8 +98,6 @@ public class TtekstZahtevaObavestenja {
      * {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
      * {@link JAXBElement }{@code <}{@link TukupanTrosak }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * 
      */
     public List<Serializable> getContent() {
         if (content == null) {

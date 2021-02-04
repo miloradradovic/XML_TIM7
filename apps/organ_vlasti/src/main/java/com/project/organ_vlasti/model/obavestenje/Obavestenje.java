@@ -1,18 +1,14 @@
 
 package com.project.organ_vlasti.model.obavestenje;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -24,12 +20,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "obavestenjeBody"
+        "obavestenjeBody"
 })
 @XmlRootElement(name = "obavestenje", namespace = "http://www.obavestenje")
 public class Obavestenje {
@@ -39,11 +33,9 @@ public class Obavestenje {
 
     /**
      * Gets the value of the obavestenjeBody property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tobavestenje }
-     *     
+     *
+     * @return possible object is
+     * {@link Tobavestenje }
      */
     public Tobavestenje getObavestenjeBody() {
         return obavestenjeBody;
@@ -51,11 +43,9 @@ public class Obavestenje {
 
     /**
      * Sets the value of the obavestenjeBody property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tobavestenje }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tobavestenje }
      */
     public void setObavestenjeBody(Tobavestenje value) {
         this.obavestenjeBody = value;

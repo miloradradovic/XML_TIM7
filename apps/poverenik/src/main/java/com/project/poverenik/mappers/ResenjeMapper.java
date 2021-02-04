@@ -34,7 +34,7 @@ public class ResenjeMapper {
         resenje.getResenjeBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/"); //cutanje/1 odluka/1
         resenje.getResenjeBody().getOtherAttributes().put(new QName("href"), "http://zalbe/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")));
         resenje.getResenjeBody().getOtherAttributes().put(new QName("property"), "pred:datum");
-        resenje.getResenjeBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
+        resenje.getResenjeBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
         resenje.getResenjeBody().getOtherAttributes().put(new QName("content"), resenje.getResenjeBody().getDatum());
         resenje.getResenjeBody().getOtherAttributes().put(new QName("link_na_zalbu"), linkNaZalbu);
 

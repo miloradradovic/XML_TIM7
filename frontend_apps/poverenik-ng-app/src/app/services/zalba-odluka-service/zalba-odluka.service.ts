@@ -61,7 +61,6 @@ export class ZalbaOdlukaService {
             asker: Xonomy.askString,
           },
           "datum": {
-            asker: Xonomy.askDate,
           }
         }
       },

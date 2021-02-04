@@ -1,4 +1,5 @@
 package com.project.organ_vlasti.model.user;
+
 import javax.xml.bind.annotation.XmlRegistry;
 
 
@@ -14,20 +15,17 @@ import javax.xml.bind.annotation.XmlRegistry;
  * type definitions, element declarations and model
  * groups.  Factory methods for each of these are
  * provided in this class.
- *
  */
 @XmlRegistry
 public class ObjectFactory {
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.project.poverenik.model.user
-     *
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link User }
-     *
      */
     public User createUser() {
         return new User();

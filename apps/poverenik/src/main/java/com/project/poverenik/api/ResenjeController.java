@@ -125,7 +125,7 @@ public class ResenjeController {
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadResenjePDF(@PathVariable String broj) {
         String path = resenjeService.downloadResenjePDF(broj);
-        if(!path.equals("")){
+        if (!path.equals("")) {
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
 
@@ -143,7 +143,7 @@ public class ResenjeController {
     @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadResenjeXHTML(@PathVariable String broj) {
         String path = resenjeService.downloadResenjeXHTML(broj);
-        if(!path.equals("")){
+        if (!path.equals("")) {
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
                 HttpHeaders headers = new HttpHeaders();

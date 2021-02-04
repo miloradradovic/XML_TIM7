@@ -18,10 +18,8 @@ public class getZalbaOdlukaByIdResponse {
     /**
      * Gets the value of the student property.
      *
-     * @return
-     *     possible object is
-     *     {@link Tzalba }
-     *
+     * @return possible object is
+     * {@link Tzalba }
      */
     public Tzalba getZalba_odluka() {
         return zalba_odluka;
@@ -30,10 +28,8 @@ public class getZalbaOdlukaByIdResponse {
     /**
      * Sets the value of the student property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Tzalba }
-     *
+     * @param value allowed object is
+     *              {@link Tzalba }
      */
     public void setZalba_odluka(Tzalba value) {
         this.zalba_odluka = value;

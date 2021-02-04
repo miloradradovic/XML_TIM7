@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.*;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -20,12 +20,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "zalbaCutanjeBody"
+        "zalbaCutanjeBody"
 })
 @XmlRootElement(name = "zalba_cutanje", namespace = "http://www.zalbacutanje")
 public class ZalbaCutanje {
@@ -35,11 +33,9 @@ public class ZalbaCutanje {
 
     /**
      * Gets the value of the zalbaCutanjeBody property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tzalba }
-     *     
+     *
+     * @return possible object is
+     * {@link Tzalba }
      */
     public Tzalba getZalbaCutanjeBody() {
         return zalbaCutanjeBody;
@@ -47,11 +43,9 @@ public class ZalbaCutanje {
 
     /**
      * Sets the value of the zalbaCutanjeBody property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tzalba }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tzalba }
      */
     public void setZalbaCutanjeBody(Tzalba value) {
         this.zalbaCutanjeBody = value;

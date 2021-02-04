@@ -65,11 +65,13 @@ public class ZahtevService {
     }
 
 
-    public boolean create(Zahtev zahtevDTO, String userEmail) throws XMLDBException, JAXBException {
+    public boolean create(Zahtev zahtevDTO) throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         if (jaxB.validate(zahtevDTO.getClass(), zahtevDTO)) {
             String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-            Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id, userEmail);
+            Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id, user.getEmail());
             if (jaxB.validate(zahtev.getClass(), zahtev)) {
                 return zahtevRepository.create(zahtev);
             }
@@ -101,17 +103,9 @@ public class ZahtevService {
         if (xmlResource == null)
             return null;
 
-        Zahtev zahtev;
-
         JAXBContext context = JAXBContext.newInstance(Zahtev.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        zahtev = (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-
-        return zahtev;
-    }
-
-    public boolean delete(String id) throws XMLDBException {
-        return zahtevRepository.delete(id);
+        return (Zahtev) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
     }
 
     public boolean update(Zahtev zahtev, String status) throws XMLDBException {
@@ -185,10 +179,13 @@ public class ZahtevService {
         return new ZahtevList(zahtevList);
     }
 
-    public ZahtevList getAllByUser(String email) throws XMLDBException, JAXBException {
+    public ZahtevList getAllByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         List<Zahtev> zahtevList = new ArrayList<>();
 
-        ResourceSet resourceSet = zahtevRepository.getAllByUser(email);
+        ResourceSet resourceSet = zahtevRepository.getAllByUser(user.getEmail());
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()) {
@@ -294,6 +291,12 @@ public class ZahtevService {
         String poruka = info.split(":")[1];
 
         Zahtev zahtev = getOne(zahtevId);
+        if (zahtev == null) {
+            return false;
+        } else if (zahtev.getZahtevBody().getStatus().getValue().equals("odbijen")) {
+            return false;
+        }
+
         String email = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
 
         if (!update(zahtev, "odbijen")) {

@@ -114,11 +114,12 @@ public class ResenjeRefService {
         // r.setResenjeBody(getResenjeByBrojResponse.getResenje());
         if (getResenjeByBrojResponse != null) {
             ResenjeRef resenjeRef = getOneByBroj(broj);
+            if (resenjeRef == null)
+                return null;
             resenjeRef.getBody().setProcitano("da");
             if (update(resenjeRef)) {
                 return getResenjeByBrojResponse;
             }
-            return null;
         }
         return null;
     }
@@ -176,7 +177,6 @@ public class ResenjeRefService {
         parametarMap.getValue().add(tvalue7);
 
         return sendToPoverenik(parametarMap, status);
-
     }
 
     public ResenjeRefList searchText(String status, String input) throws XMLDBException, JAXBException {
@@ -209,7 +209,6 @@ public class ResenjeRefService {
             return getRefs(refsResponse.getResponse().getRef(), status);
         }
         return null;
-
     }
 
     public ResenjeRef getOne(String id) throws JAXBException, XMLDBException {
@@ -242,10 +241,6 @@ public class ResenjeRefService {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
 
-    }
-
-    public boolean delete(String id) throws XMLDBException {
-        return resenjeRefRepository.delete(id);
     }
 
     public boolean update(ResenjeRef resenjeRef) throws XMLDBException {

@@ -3,7 +3,9 @@ package com.project.poverenik.service;
 import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaCutanjeMapper;
+import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
+import com.project.poverenik.model.zahtev.client.getZahtevResponse;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
@@ -13,6 +15,8 @@ import com.project.poverenik.transformer.Transformator;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -22,10 +26,13 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ZalbaCutanjeService {
@@ -38,6 +45,9 @@ public class ZalbaCutanjeService {
 
     @Autowired
     private ExistManager existManager;
+
+    @Autowired
+    private ZahtevService zahtevService;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = zalbaCutanjeRepository.getMaxId();
@@ -55,17 +65,39 @@ public class ZalbaCutanjeService {
         return zalbaCutanjeMax.getZalbaCutanjeBody().getId();
     }
 
-    public boolean create(ZalbaCutanje zalbaCutanjeDTO, String userEmail) throws XMLDBException, JAXBException {
+    public boolean create(ZalbaCutanje zalbaCutanjeDTO) throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)) {
+
+            if (canMakeZalba(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev().getValue())) {
+                return false;
+            }
             String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-            ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, userEmail);
+            ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, user.getEmail());
 
             if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
                 return zalbaCutanjeRepository.create(zalbaCutanje);
             }
         }
         return false;
+    }
+
+    public boolean canMakeZalba(String idZahteva) {
+        getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
+        if (zahtevResponse == null)
+            return false;
+
+        XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
+
+        Date xmlDate = date.toGregorianCalendar().getTime();
+        Date dateNow = new Date();
+
+        long diffInMillies = Math.abs(dateNow.getTime() - xmlDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MINUTES);
+
+        return diff >= 2;
     }
 
     public ZalbaCutanjeList getAll() throws XMLDBException, JAXBException {
@@ -114,10 +146,12 @@ public class ZalbaCutanjeService {
         //patch = patch.substring(patch.lastIndexOf("<zc:zalba_cutanje_body"), patch.indexOf("</zc:zalba_cutanje_body>") + "</zc:zalba_cutanje_body>".length());
     }
 
-    public ZalbaCutanjeList getByUser(String email) throws XMLDBException, JAXBException {
+    public ZalbaCutanjeList getByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
 
-        ResourceSet resourceSet = zalbaCutanjeRepository.getAllByUser(email);
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAllByUser(user.getEmail());
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()) {

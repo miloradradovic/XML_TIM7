@@ -25,7 +25,6 @@ public class ResenjeController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/resenje/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws JAXBException, XMLDBException {
-
         getResenjeByBrojResponse getResenjeByBrojResponse = resenjeRefService.getResenje(broj);
         if (getResenjeByBrojResponse != null) {
             return new ResponseEntity<>(getResenjeByBrojResponse, HttpStatus.OK);
@@ -66,13 +65,10 @@ public class ResenjeController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/search-text/{status}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ResenjeRefList> searchText(@PathVariable String status, @RequestParam("input") String input) throws XMLDBException, JAXBException {
-
         ResenjeRefList resenjeRefList = resenjeRefService.searchText(status, input);
         if (resenjeRefList != null) {
             return new ResponseEntity<>(resenjeRefList, HttpStatus.OK);
         }
-
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
     }
 }

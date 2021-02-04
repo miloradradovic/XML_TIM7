@@ -103,7 +103,6 @@ public class ResenjeRefService {
         resenjeClient.setMarshaller(marshaller);
         resenjeClient.setUnmarshaller(marshaller);
 
-
         getResenjeByBroj getResenjeByBroj = new getResenjeByBroj();
         getResenjeByBroj.setBroj(broj);
 

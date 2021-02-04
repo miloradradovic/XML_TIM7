@@ -214,6 +214,7 @@ public class ZalbaOdlukaService {
             ZalbaOdluka xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
                     XSL, OUTPUT_HTML);
+
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {
             e.printStackTrace();

@@ -236,7 +236,6 @@ public class ZalbaCutanjeService {
         return "";
     }
 
-
     public boolean generateDocuments(String broj) {
         final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".pdf";
         final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zalbacutanje" + broj + ".html";
@@ -252,6 +251,7 @@ public class ZalbaCutanjeService {
             ZalbaCutanje xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
                     XSL, OUTPUT_HTML);
+
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {
             e.printStackTrace();

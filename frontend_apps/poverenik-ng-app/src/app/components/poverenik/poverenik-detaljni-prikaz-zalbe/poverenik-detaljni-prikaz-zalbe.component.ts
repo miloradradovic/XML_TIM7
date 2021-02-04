@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IzjasnjavanjaService} from '../../../services/izjasnjavanja-service/izjasnjavanja.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ZalbaService} from '../../../services/zalba-service/zalba.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-poverenik-detaljni-prikaz-zalbe',
@@ -12,14 +14,28 @@ export class PoverenikDetaljniPrikazZalbeComponent implements OnInit {
   uObradi: boolean;
   neobradjena: boolean;
   zalba = {id: '', status: ''};
-  src = '../../../../assets/obavestenje.html';
+  src: any = '';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private izjasnjavanjeService: IzjasnjavanjaService, private snackBar: MatSnackBar) { }
+              private izjasnjavanjeService: IzjasnjavanjaService, private snackBar: MatSnackBar,
+              private service: ZalbaService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    const zalbaId = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
+
+    const zalbaId: string = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
     const zalbaStatus = this.activatedRoute.snapshot.queryParamMap.get('zalba_status');
+    const tip = zalbaId.split('/')[0];
+    const broj = zalbaId.split('/')[1];
+    let obs$;
+    if (tip === 'cutanje'){
+      obs$ = this.service.convertZalbaCutanjeXHTML(broj);
+    }
+    else{
+      obs$ = this.service.convertZalbaOdlukaXHTML(broj);
+    }
+    obs$.subscribe( res => {
+
+    });
     this.zalba.id = zalbaId;
     this.zalba.status = zalbaStatus;
     if (zalbaStatus === 'neobradjena'){

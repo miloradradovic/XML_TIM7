@@ -18,7 +18,7 @@ public class EndpointConfig {
     @Autowired
     EmailServiceSoapBindingImpl emailServiceSoapBindingImpl;
 
-    @Bean(name="emailRefEndpointBean")
+    @Bean(name = "emailRefEndpointBean")
     public Endpoint emailEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, emailServiceSoapBindingImpl);
         endpoint.publish("/email");

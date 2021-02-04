@@ -24,9 +24,7 @@ public class IzjasnjavanjeController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> setIzjasnjavanje(@RequestBody Message message) throws XMLDBException {
-
         if (messageService.sendIzjasnjavanje(message)) {
-
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -36,7 +34,6 @@ public class IzjasnjavanjeController {
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getMessageList() throws XMLDBException, JAXBException {
         MessageList messageList = messageService.getAll();
-
         if (messageList != null)
             return new ResponseEntity<>(messageList, HttpStatus.OK);
 

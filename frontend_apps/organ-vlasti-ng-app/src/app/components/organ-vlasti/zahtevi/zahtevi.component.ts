@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ZahtevService} from '../../../services/zahtev-service/zahtev.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {Router} from '@angular/router';
 
 declare var require: any;
 
@@ -15,7 +16,7 @@ export class ZahteviComponent implements OnInit {
   zahtevi = [];
 
   form: FormGroup;
-  constructor(private zahtevService: ZahtevService,
+  constructor(private router: Router, private zahtevService: ZahtevService,
               private snackBar: MatSnackBar,
               private fb: FormBuilder) {
                 this.form = this.fb.group({
@@ -156,5 +157,13 @@ export class ZahteviComponent implements OnInit {
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
       });
+  }
+
+  doubleClicked($event: number) {
+    this.zahtevi.forEach((item, index) => {
+      if (item.id === $event){
+        this.router.navigate(['/detaljni-prikaz-zahteva'], {queryParams: {zahtev_id: $event, zahtev_status: item.status}});
+      }
+    });
   }
 }

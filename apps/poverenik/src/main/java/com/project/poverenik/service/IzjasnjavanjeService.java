@@ -28,22 +28,33 @@ public class IzjasnjavanjeService {
 
         if (tip.equals("cutanje")) {
             ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(idZalbe);
-            if (zalbaCutanje == null)
+            if (zalbaCutanje == null) {
                 return false;
+            } else if (!zalbaCutanje.getZalbaCutanjeBody().getStatus().getValue().equals("neobradjena")) {
+                return false;
+            }
+
             int last = zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue().split("/").length - 1;
             idZahteva = zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue().split("/")[last];
 
-            zalbaCutanjeService.update(zalbaCutanje, "u obradi");
+            if (!zalbaCutanjeService.update(zalbaCutanje, "u obradi")) {
+                return false;
+            }
         } else {
             ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
-            if (zalbaOdluka == null)
+            if (zalbaOdluka == null) {
                 return false;
+            } else if (!zalbaOdluka.getZalbaOdlukaBody().getStatus().getValue().equals("neobradjena")) {
+                return false;
+            }
+
             int last = zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue().split("/").length - 1;
             idZahteva = zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue().split("/")[last];
 
-            zalbaOdlukaService.update(zalbaOdluka, "u obradi");
+            if (zalbaOdlukaService.update(zalbaOdluka, "u obradi")) {
+                return false;
+            }
         }
-
         return setIzjasnjavanjeClient(idZahteva);
     }
 

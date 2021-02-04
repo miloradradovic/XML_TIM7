@@ -33,7 +33,6 @@ public class MessageService {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Message messageMax = (Message) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
         return messageMax.getBody().getId();
-
     }
 
     public boolean create(Message message) throws XMLDBException, JAXBException {

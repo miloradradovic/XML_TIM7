@@ -197,10 +197,10 @@ public class ZalbaOdlukaService {
 	}
 
     public boolean generateDocuments(String broj){
-        final String OUTPUT_PDF = "poverenik/src/main/resources/generated_files/documents/zalbaodluka" + broj+ ".pdf";
-        final String OUTPUT_HTML = "poverenik/src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";
-        final String XSL_FO = "poverenik/src/main/resources/generated_files/xsl-fo/zalbaodluka_fo.xsl";
-        final String XSL = "poverenik/src/main/resources/generated_files/xslt/zalbaodluka.xsl";
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zalbaodluka" + broj+ ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zalbaodluka" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/zalbaodluka_fo.xsl";
+        final String XSL = "src/main/resources/generated_files/xslt/zalbaodluka.xsl";
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
 

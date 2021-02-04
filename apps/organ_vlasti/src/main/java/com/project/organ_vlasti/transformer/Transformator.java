@@ -41,7 +41,8 @@ public class Transformator {
 
         // Initialize FOP factory object
         try {
-            this.fopFactory = FopFactory.newInstance(new File("organ_vlasti/src/main/resources/generated_files/xsl-fo/fop.xconf"));
+            File f = new File("src/main/resources/generated_files/xsl-fo/fop.xconf");
+            this.fopFactory = FopFactory.newInstance(new File("src/main/resources/generated_files/xsl-fo/fop.xconf"));
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {

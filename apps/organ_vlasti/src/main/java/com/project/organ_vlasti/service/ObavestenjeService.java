@@ -154,10 +154,10 @@ public class ObavestenjeService {
     }
 
     public boolean generateDocuments(String broj) {
-        final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
-        final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
-        final String XSL_FO = "organ_vlasti/src/main/resources/generated_files/xsl-fo/obavestenje_fo.xsl";
-        final String XSL = "organ_vlasti/src/main/resources/generated_files/xslt/obavestenje.xsl";
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/obavestenje_fo.xsl";
+        final String XSL = "src/main/resources/generated_files/xslt/obavestenje.xsl";
 
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());

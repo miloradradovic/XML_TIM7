@@ -36,6 +36,7 @@ public class ResenjeController {
     @RequestMapping(value="/resenje/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getResenje(@PathVariable String broj) throws JAXBException, XMLDBException {
         // TODO dodati za front xhtml transformacije
+        //pocetak soap
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
 
@@ -49,6 +50,10 @@ public class ResenjeController {
         getResenjeByBroj.setBroj(broj);
 
         getResenjeByBrojResponse getResenjeByBrojResponse = resenjeClient.getOneResenje(getResenjeByBroj);
+        //kraj soap
+        // ObjectFactory of = new ObjectFactory() com.project.organ_vlasti.model.resenje
+        // Resenje r = of.createResenje();
+        // r.setResenjeBody(getResenjeByBrojResponse.getResenje());
         if(getResenjeByBrojResponse != null){
             ResenjeRef resenjeRef = resenjeRefService.getOneByBroj(broj);
             resenjeRef.getBody().setProcitano("da");

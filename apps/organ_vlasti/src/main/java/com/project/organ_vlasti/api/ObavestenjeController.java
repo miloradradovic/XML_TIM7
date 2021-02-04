@@ -164,20 +164,22 @@ public class ObavestenjeController {
         sendAttach.getEmail().setContent("Postovani, <br/><br/> dostavljamo Vam obavestenje na Vas zahtev. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Obavestenje " + broj);
 
+        boolean obavestenje = obavestenjeService.generateDocuments(broj);
+        //TODO - boolean provera
 
-        //TODO - pozvati transformaciju
-        String pdfName = "верзија.pdf";
+
+        String pdfName = "obavestenje" + broj + ".pdf";
         sendAttach.getEmail().setFilePdfName(pdfName);
-        String htmlName = "obavestenje.html";
+        String htmlName = "obavestenje" + broj + ".html";
         sendAttach.getEmail().setFileHtmlName(htmlName);
         try {
-            File filePdf = new File("src/main/resources/pdf/" + pdfName);
+            File filePdf = new File("src/main/resources/generated_files/documents/" + pdfName);
             Path pdfPath = filePdf.toPath();
             byte[] pdfBytes = Files.readAllBytes(pdfPath);
 
             sendAttach.getEmail().setFilePdf(pdfBytes);
 
-            File fileHtml = new File("src/main/resources/pdf/" + htmlName);
+            File fileHtml = new File("src/main/resources/generated_files/documents/" + htmlName);
             Path htmlPath = fileHtml.toPath();
             byte[] htmlBytes = Files.readAllBytes(htmlPath);
 

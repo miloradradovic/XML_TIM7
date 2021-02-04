@@ -126,9 +126,9 @@ public class ZahtevService {
     }
 
     public boolean generateDocuments(String broj){
-        final String OUTPUT_PDF = "organ_vlasti/src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
-        final String OUTPUT_HTML = "organ_vlasti/src/main/resources/generated_files/documents/zahtev" + broj + ".html";
-        final String XSL_FO = "organ_vlasti/src/main/resources/generated_files/xsl-fo/zahtev_fo.xsl";
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/zahtev_fo.xsl";
 
 
         System.out.println("[INFO] " + Transformator.class.getSimpleName());
@@ -138,7 +138,7 @@ public class ZahtevService {
             Transformator transformator = new Transformator();
             Zahtev xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
-                    "organ_vlasti/src/main/resources/generated_files/xslt/zahtev.xsl", OUTPUT_HTML);
+                    "src/main/resources/generated_files/xslt/zahtev.xsl", OUTPUT_HTML);
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {
             e.printStackTrace();

@@ -16,9 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
-import javax.servlet.http.HttpServletResponse;
-
-//123qweASD
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_XML_VALUE)
@@ -29,9 +26,9 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-    
+
     @Autowired
-	private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserService userService;
@@ -40,9 +37,8 @@ public class AuthenticationController {
 
     }
 
-    @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, value = "/sign-in")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody User authenticationRequest,
-                                                       HttpServletResponse response) {
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, value = "/sign-in")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody User authenticationRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
                         authenticationRequest.getPassword()));
@@ -55,11 +51,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(new UserTokenStateDTO(jwt));
     }
 
-    @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, value = "/sign-up")
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, value = "/sign-up")
     public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_USER");
-        if (userService.create(user)){
+        if (userService.create(user)) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

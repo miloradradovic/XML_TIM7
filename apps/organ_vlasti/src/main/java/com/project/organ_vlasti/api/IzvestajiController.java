@@ -34,25 +34,8 @@ public class IzvestajiController {
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createIzvestaj() throws XMLDBException, JAXBException, DatatypeConfigurationException {
 
-
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.client");
-
-        IzvestajiClient izvestajiClient = new IzvestajiClient();
-        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
-        izvestajiClient.setMarshaller(marshaller);
-        izvestajiClient.setUnmarshaller(marshaller);
-
-        getPodaci getPodaciRequest = new getPodaci();
-        getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
-
-        Izvestaj izvestaj = izvestajiService.compose(response.getResponse());
-        String id = izvestajiService.create(izvestaj);
-        if(id != null){
-            if(sendToPoverenik(id)){
-                izvestaj.getIzvestajBody().setId(id);
-                return new ResponseEntity<>(izvestaj, HttpStatus.OK);
-            }
+        if(izvestajiService.generate()){
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -86,19 +69,5 @@ public class IzvestajiController {
     	return new ResponseEntity<IzvestajList>(izvestajList, HttpStatus.OK);
     }
 
-    private boolean sendToPoverenik(String id){
 
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.database.client");
-
-        IzvestajiClient izvestajiClient = new IzvestajiClient();
-        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
-        izvestajiClient.setMarshaller(marshaller);
-        izvestajiClient.setUnmarshaller(marshaller);
-
-        podnesiIzvestaj podnesiIzvestajRequest = new podnesiIzvestaj();
-        podnesiIzvestajRequest.setIzvestajRef(id);
-        return izvestajiClient.sendIzvestajRef(podnesiIzvestajRequest);
-
-    }
 }

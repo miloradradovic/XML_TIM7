@@ -1,10 +1,12 @@
 package com.project.organ_vlasti.service;
 
-import com.project.organ_vlasti.jaxb.JaxB;
+import com.project.organ_vlasti.client.IzvestavanjeClient;
 import com.project.organ_vlasti.model.util.lists.MessageList;
 import com.project.organ_vlasti.model.util.message.Message;
+import com.project.organ_vlasti.model.util.message.client.SetIzjasnjavanje;
 import com.project.organ_vlasti.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -72,7 +74,7 @@ public class MessageService {
         if(xmlResource == null)
             return null;
 
-        Message message = null;
+        Message message;
 
         JAXBContext context = JAXBContext.newInstance(Message.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -83,6 +85,26 @@ public class MessageService {
 
     public boolean delete(String id) throws XMLDBException {
         return messageRepository.delete(id);
+    }
+
+    public boolean sendIzjasnjavanje(Message message) throws XMLDBException {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.message.client");
+
+        IzvestavanjeClient izvestavanjeClient = new IzvestavanjeClient();
+        izvestavanjeClient.setDefaultUri("http://localhost:8085/ws");
+        izvestavanjeClient.setMarshaller(marshaller);
+        izvestavanjeClient.setUnmarshaller(marshaller);
+
+        SetIzjasnjavanje setIzjasnjavanje = new SetIzjasnjavanje();
+        setIzjasnjavanje.setMessage(message.getBody().getValue());
+        boolean isSet = izvestavanjeClient.sendIzjasnjavanje(setIzjasnjavanje);
+        if(isSet){
+            delete(message.getBody().getId());
+            return true;
+        }
+        return false;
+
     }
 
 }

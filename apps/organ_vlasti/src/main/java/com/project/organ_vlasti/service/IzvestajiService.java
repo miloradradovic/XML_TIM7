@@ -1,8 +1,12 @@
 package com.project.organ_vlasti.service;
 
+import com.project.organ_vlasti.client.IzvestajiClient;
 import com.project.organ_vlasti.model.izvestaji.Izvestaj;
 import com.project.organ_vlasti.model.izvestaji.ObjectFactory;
 import com.project.organ_vlasti.model.izvestaji.Tbody;
+import com.project.organ_vlasti.model.izvestaji.client.getPodaci;
+import com.project.organ_vlasti.model.izvestaji.client.getPodaciResponse;
+import com.project.organ_vlasti.model.izvestaji.database.client.podnesiIzvestaj;
 import com.project.organ_vlasti.model.util.lists.IzvestajList;
 import com.project.organ_vlasti.model.util.lists.ZahtevList;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
@@ -19,6 +23,9 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
@@ -65,6 +72,46 @@ public class IzvestajiService {
             return izvestajMax.getIzvestajBody().getId();
         }
         return "0000";
+    }
+
+    public boolean generate() throws XMLDBException, JAXBException, DatatypeConfigurationException {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.client");
+
+        IzvestajiClient izvestajiClient = new IzvestajiClient();
+        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
+        izvestajiClient.setMarshaller(marshaller);
+        izvestajiClient.setUnmarshaller(marshaller);
+
+        getPodaci getPodaciRequest = new getPodaci();
+        getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
+
+        Izvestaj izvestaj = compose(response.getResponse());
+        String id = create(izvestaj);
+        if(id != null){
+            if(sendToPoverenik(id)){
+                izvestaj.getIzvestajBody().setId(id);
+                return  true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean sendToPoverenik(String id){
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.database.client");
+
+        IzvestajiClient izvestajiClient = new IzvestajiClient();
+        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
+        izvestajiClient.setMarshaller(marshaller);
+        izvestajiClient.setUnmarshaller(marshaller);
+
+        podnesiIzvestaj podnesiIzvestajRequest = new podnesiIzvestaj();
+        podnesiIzvestajRequest.setIzvestajRef(id);
+        return izvestajiClient.sendIzvestajRef(podnesiIzvestajRequest);
+
     }
 
     public String create(Izvestaj izvestaj) throws XMLDBException, JAXBException {

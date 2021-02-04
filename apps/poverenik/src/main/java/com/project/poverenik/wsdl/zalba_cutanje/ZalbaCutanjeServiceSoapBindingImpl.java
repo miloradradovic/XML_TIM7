@@ -6,6 +6,7 @@
 
 package com.project.poverenik.wsdl.zalba_cutanje;
 
+import com.project.poverenik.model.zalba_cutanje.ObjectFactory;
 import com.project.poverenik.model.zalba_cutanje.Tzalba;
 import com.project.poverenik.service.ZalbaCutanjeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,10 @@ public class ZalbaCutanjeServiceSoapBindingImpl implements ZalbaCutanjeServicePo
             Tzalba _return = zalbaCutanjeService.getOne(id).getZalbaCutanjeBody();
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            ObjectFactory objectFactory = new ObjectFactory();
+            Tzalba tzalba = objectFactory.createTzalba();
+            tzalba.setId("-1");
+            return tzalba;
         }
     }
 

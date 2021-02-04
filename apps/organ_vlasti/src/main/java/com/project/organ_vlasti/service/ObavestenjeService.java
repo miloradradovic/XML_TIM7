@@ -1,5 +1,7 @@
 package com.project.organ_vlasti.service;
 
+import com.itextpdf.text.DocumentException;
+import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ObavestenjeMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
@@ -11,6 +13,7 @@ import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProp
 import com.project.organ_vlasti.rdf_utils.FileUtil;
 import com.project.organ_vlasti.repository.ObavestenjeRepository;
 
+import com.project.organ_vlasti.transformer.Transformator;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -19,6 +22,7 @@ import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
@@ -27,6 +31,8 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.IOException;
 import javax.xml.namespace.QName;
 
 import java.io.IOException;
@@ -42,6 +48,9 @@ public class ObavestenjeService {
 
     @Autowired
     private ObavestenjeRepository obavestenjeRepository;
+
+    @Autowired
+    private ExistManager existManager;
 
     @Autowired
     ZahtevService zahtevService;
@@ -143,7 +152,34 @@ public class ObavestenjeService {
         patch = patch.substring(patch.lastIndexOf("<oba:naziv_organa property=\"pred:organ_vlasti\" datatype=\"xs:string\" sediste=\"\">"), patch.indexOf("</oba:opcija_dostave>") + "</oba:opcija_dostave>".length());
         return obavestenjeRepository.update(obavestenje.getObavestenjeBody().getBroj(), patch);
     }
-    
+
+    public boolean generateDocuments(String broj) {
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/obavestenje_fo.xsl";
+        final String XSL = "src/main/resources/generated_files/xslt/obavestenje.xsl";
+
+
+        System.out.println("[INFO] " + Transformator.class.getSimpleName());
+
+
+        try {
+            Transformator transformator = new Transformator();
+            Obavestenje xml = getOne(broj);
+            transformator.generateHTML(existManager.getOutputStream(xml), XSL, OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
+        } catch (XMLDBException | IOException | JAXBException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
+    }
+
     public ObavestenjeList searchMetadata(String datumAfter, String datumBefore, String organ_vlasti,
 			String userEmail, String zahtev) throws IOException, JAXBException, XMLDBException {
 		ConnectionProperties conn = AuthenticationUtilities.loadProperties();

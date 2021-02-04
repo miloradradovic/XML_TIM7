@@ -16,6 +16,7 @@ import com.project.poverenik.service.MetadataService;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import javax.xml.transform.OutputKeys;
@@ -23,6 +24,7 @@ import javax.xml.transform.OutputKeys;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
+import java.io.StringWriter;
 
 @Component
 public class ExistManager {
@@ -134,6 +136,23 @@ public class ExistManager {
             closeConnection(collection, res);
         }
         return true;
+    }
+
+    //export xml to outputStream
+    public String getOutputStream(Object xml){
+        StringWriter sw = new StringWriter();
+
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(xml.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(xml, sw);
+        } catch (JAXBException e) {
+            System.out.println("getOutputStream threw an error!");
+            e.printStackTrace();
+        }
+        return sw.toString();
     }
 
     //get one

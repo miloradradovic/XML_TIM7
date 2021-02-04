@@ -1,5 +1,6 @@
 package com.project.organ_vlasti.service;
 
+import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ZahtevMapper;
 import com.project.organ_vlasti.model.obavestenje.Obavestenje;
@@ -10,6 +11,7 @@ import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities;
 import com.project.organ_vlasti.rdf_utils.FileUtil;
 import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.organ_vlasti.repository.ZahtevRepository;
+import com.project.organ_vlasti.transformer.Transformator;
 
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -27,7 +29,6 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class ZahtevService {
     @Autowired
     private ZahtevRepository zahtevRepository;
 
+    @Autowired
+    private ExistManager existManager;
     
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = zahtevRepository.getMaxId();
@@ -121,6 +124,36 @@ public class ZahtevService {
         //patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());
 
     }
+
+    public boolean generateDocuments(String broj){
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/zahtev" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/zahtev" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/zahtev_fo.xsl";
+
+
+        System.out.println("[INFO] " + Transformator.class.getSimpleName());
+
+
+        try {
+            Transformator transformator = new Transformator();
+            Zahtev xml = getOne(broj);
+            transformator.generateHTML(existManager.getOutputStream(xml),
+                    "src/main/resources/generated_files/xslt/zahtev.xsl", OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
+        } catch (XMLDBException | IOException | JAXBException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		/*pdfTransformer.generateHTML(existManager.getOutputStream(), XSL_FILE);
+		pdfTransformer.generatePDF(OUTPUT_FILE);
+*/
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
+    }
+
 
     public Long getPodnetiZahtevi() throws XMLDBException {
         ResourceSet resourceSet = zahtevRepository.getAll();

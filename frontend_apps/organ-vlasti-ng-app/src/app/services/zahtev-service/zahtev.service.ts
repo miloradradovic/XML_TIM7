@@ -29,4 +29,9 @@ export class ZahtevService {
     return this.http.get('http://localhost:8090/zahtev/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail,
       {headers: this.headers, responseType: 'text'});
   }
+
+  posaljiOdbijanje(toSend: string): Observable<any> {
+    return this.http.post('http://localhost:8090/zahtev/odbij', toSend,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ZahtevXonomyService } from 'src/app/services/zahtev-xonomy-service/zahtev-xonomy.service';
+import {Router} from '@angular/router';
 
 declare const Xonomy: any;
 
@@ -11,7 +12,7 @@ declare const Xonomy: any;
 })
 export class ZahtevFormComponent implements OnInit {
 
-  constructor(private zahtevService: ZahtevXonomyService, public snackBar: MatSnackBar) { }
+  constructor(private zahtevService: ZahtevXonomyService, public snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,7 @@ export class ZahtevFormComponent implements OnInit {
     `<?xml version="1.0" encoding="UTF-8"?>
     <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
     <zcir:zahtev
-        xmlns:zcir="http://www.zahtevcir" 
+        xmlns:zcir="http://www.zahtevcir"
         xmlns:re="http://www.reusability"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -30,7 +31,7 @@ export class ZahtevFormComponent implements OnInit {
     Xonomy.render(xmlStringZahtev, elementZahtev, {
       validate: this.zahtevService.zahtevSpecification.validate,
       elements: this.zahtevService.zahtevSpecification.elements,
-      onchange: () => { 
+      onchange: () => {
       }
     });
   }
@@ -65,7 +66,7 @@ export class ZahtevFormComponent implements OnInit {
    let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
    <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
    <zcir:zahtev
-       xmlns:zcir="http://www.zahtevcir" 
+       xmlns:zcir="http://www.zahtevcir"
        xmlns:re="http://www.reusability"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -79,7 +80,7 @@ export class ZahtevFormComponent implements OnInit {
     this.zahtevService.send(dataTemplate)
       .subscribe(res => console.log(res));
     this.snackBar.open("Uspešno ste poslali zahtev!", 'Ok', { duration: 3000 });
-
+    this.router.navigate(['/main-page-gradjanin']);
   }
 
 }

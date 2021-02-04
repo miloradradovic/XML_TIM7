@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Odbijanje zahteva</h1>
+<div mat-dialog-content>
+  <p>Razlog odbijanja: </p>
+  <mat-form-field>
+    <mat-label>razlog odbijanja</mat-label>
+    <input matInput [(ngModel)]="razlog">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Odustani</button>
+  <button mat-button [disabled]="razlog === ''" (click)="posaljiOdbijanje()">Posalji</button>
+</div>

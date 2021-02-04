@@ -18,6 +18,7 @@ import {DetaljniPrikazIzvestajaComponent} from '../components/organ-vlasti/detal
 import {DetaljniPrikazObavestenjaComponent} from '../components/organ-vlasti/detaljni-prikaz-obavestenja/detaljni-prikaz-obavestenja.component';
 import {DetaljniPrikazResenjaComponent} from '../components/organ-vlasti/detaljni-prikaz-resenja/detaljni-prikaz-resenja.component';
 import {DetaljniPrikazZalbeComponent} from '../components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
+import {AddOrganVlastiFormComponent} from '../components/forms/add-organ-vlasti-form/add-organ-vlasti-form.component';
 
 export const routes: Routes = [
   {
@@ -91,5 +92,9 @@ export const routes: Routes = [
   {
     path: 'detaljni-prikaz-zalbe',
     component: DetaljniPrikazZalbeComponent
+  },
+  {
+    path: 'dodaj-sluzbenika',
+    component: AddOrganVlastiFormComponent
   }
 ];

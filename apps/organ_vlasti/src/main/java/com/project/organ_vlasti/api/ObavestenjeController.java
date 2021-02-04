@@ -36,7 +36,11 @@ public class ObavestenjeController {
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ObavestenjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore, @RequestParam("organ_vlasti") String organ_vlasti, @RequestParam("userEmail") String userEmail, @RequestParam("zahtev") String zahtev) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ObavestenjeList> searchMetadata(@RequestParam("datumAfter") String datumAfter,
+                                                          @RequestParam("datumBefore") String datumBefore,
+                                                          @RequestParam("organ_vlasti") String organ_vlasti,
+                                                          @RequestParam("userEmail") String userEmail,
+                                                          @RequestParam("zahtev") String zahtev) throws XMLDBException, JAXBException, IOException {
 
         ObavestenjeList obavestenjeList = obavestenjeService.searchMetadata(datumAfter, datumBefore, organ_vlasti, userEmail, zahtev);
         return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
@@ -44,16 +48,18 @@ public class ObavestenjeController {
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/search-text", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ObavestenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException, IOException {
+    public ResponseEntity<ObavestenjeList> searchText(@RequestParam("input") String input) throws XMLDBException, JAXBException {
 
         ObavestenjeList obavestenjeList = obavestenjeService.searchText(input);
-        return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
+        if(obavestenjeList != null){
+            return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createObavestenje(@RequestBody Obavestenje obavestenje) throws XMLDBException, JAXBException {
-
         if (obavestenjeService.create(obavestenje)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -64,7 +70,6 @@ public class ObavestenjeController {
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ObavestenjeList> getObavestenjeList() throws XMLDBException, JAXBException {
         ObavestenjeList obavestenjeList = obavestenjeService.getAll();
-
         if (obavestenjeList != null)
             return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
 
@@ -94,32 +99,14 @@ public class ObavestenjeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/by-user", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ObavestenjeList> getObavestenjeListByUser() throws XMLDBException, JAXBException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        ObavestenjeList obavestenjeList = obavestenjeService.getAllByUser(user.getEmail());
-
+        ObavestenjeList obavestenjeList = obavestenjeService.getAllByUser();
         if (obavestenjeList != null)
             return new ResponseEntity<>(obavestenjeList, HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/{broj}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> delete(@PathVariable String broj) throws XMLDBException {
-        if (obavestenjeService.delete(broj))
-            return new ResponseEntity<>(HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> update(@RequestBody Obavestenje obavestenje) throws XMLDBException, JAXBException {
-        if (obavestenjeService.update(obavestenje))
-            return new ResponseEntity<>(HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadObavestenjePDF(@PathVariable String broj) {
         String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
@@ -140,6 +127,7 @@ public class ObavestenjeController {
         // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/toXhtml/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadObavestenjeXHTML(@PathVariable String broj) {
         String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
@@ -159,6 +147,4 @@ public class ObavestenjeController {
 
         // return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
-
-
 }

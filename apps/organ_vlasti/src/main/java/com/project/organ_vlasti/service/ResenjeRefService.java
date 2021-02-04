@@ -176,7 +176,6 @@ public class ResenjeRefService {
         parametarMap.getValue().add(tvalue7);
 
         return sendToPoverenik(parametarMap, status);
-
     }
 
     public ResenjeRefList searchText(String status, String input) throws XMLDBException, JAXBException {

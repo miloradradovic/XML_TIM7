@@ -36,7 +36,6 @@ public class IzvestajiController {
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<IzvestajList> getIzvestajList() throws XMLDBException, JAXBException {
         IzvestajList izvestajList = izvestajiService.getAll();
-
         if (izvestajList != null)
             return new ResponseEntity<>(izvestajList, HttpStatus.OK);
 
@@ -55,9 +54,12 @@ public class IzvestajiController {
 
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/search-metadata", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<IzvestajList> searchMetadata(@RequestParam("datumAfter") String datumAfter, @RequestParam("datumBefore") String datumBefore) throws XMLDBException, JAXBException, IOException {
-
+    public ResponseEntity<IzvestajList> searchMetadata(@RequestParam("datumAfter") String datumAfter,
+                                                       @RequestParam("datumBefore") String datumBefore) throws XMLDBException, JAXBException, IOException {
         IzvestajList izvestajList = izvestajiService.searchMetadata(datumAfter, datumBefore);
-        return new ResponseEntity<>(izvestajList, HttpStatus.OK);
+        if(izvestajList != null){
+            return new ResponseEntity<>(izvestajList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(izvestajList, HttpStatus.BAD_REQUEST);
     }
 }

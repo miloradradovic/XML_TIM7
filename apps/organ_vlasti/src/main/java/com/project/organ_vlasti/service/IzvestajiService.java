@@ -74,15 +74,15 @@ public class IzvestajiService {
         getPodaci getPodaciRequest = new getPodaci();
         getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
 
+        if(response == null){
+            return false;
+        }
+
         Izvestaj izvestaj = compose(response.getResponse());
         String id = create(izvestaj);
         if (id != null) {
-            if (sendToPoverenik(id)) {
-                izvestaj.getIzvestajBody().setId(id);
-                return true;
-            }
+            return sendToPoverenik(id);
         }
-
         return false;
     }
 
@@ -102,19 +102,13 @@ public class IzvestajiService {
 
     }
 
-    public String create(Izvestaj izvestaj) throws XMLDBException, JAXBException {
-
-        String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
-        izvestaj.getIzvestajBody().setId(id);
-
+    public String create(Izvestaj izvestaj) throws XMLDBException {
         return izvestajiRepository.create(izvestaj);
-
     }
 
     public Izvestaj compose(Tbody zalbe) throws XMLDBException, JAXBException, DatatypeConfigurationException {
 
         String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
-
 
         ObjectFactory of = new ObjectFactory();
         Izvestaj izvestaj = of.createIzvestaj();
@@ -210,17 +204,10 @@ public class IzvestajiService {
         if (xmlResource == null)
             return null;
 
-        Izvestaj izvestaj;
-
         JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        izvestaj = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
 
-        return izvestaj;
-    }
-
-    public boolean delete(String id) throws XMLDBException {
-        return izvestajiRepository.delete(id);
+        return (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
     }
 
 
@@ -258,6 +245,9 @@ public class IzvestajiService {
             id = querySolution.get("izvestaj");
             String idStr = id.toString().split("izvestaji/")[1];
             Izvestaj z = getOne(idStr);
+            if(z == null){
+                return null;
+            }
             listZC.add(z);
         }
 
@@ -276,7 +266,5 @@ public class IzvestajiService {
         System.out.println("[INFO] End.");
 
         return zcList;
-
     }
-
 }

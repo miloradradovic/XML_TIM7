@@ -1,5 +1,6 @@
 package com.project.poverenik.service;
 
+import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ResenjeMapper;
 import com.project.poverenik.model.resenje.Resenje;
@@ -12,6 +13,7 @@ import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionPropert
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.repository.ResenjeRepository;
 
+import com.project.poverenik.transformer.Transformator;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -51,6 +53,9 @@ public class ResenjeService {
 
     @Autowired
     ZalbaOdlukaService zalbaOdlukaService;
+
+    @Autowired
+    private ExistManager existManager;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = resenjeRepository.getMaxId();
@@ -254,6 +259,32 @@ public class ResenjeService {
         }
         return new ResenjeList(resenjeList);
     }
+
+    public boolean generateDocuments(String broj){
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/resenje" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/resenje_fo.xsl";
+        final String XSL = "src/main/resources/generated_files/xslt/resenje.xsl";
+
+        System.out.println("[INFO] " + Transformator.class.getSimpleName());
+
+        try {
+            Transformator transformator = new Transformator();
+            Resenje xml = getOne(broj);
+            transformator.generateHTML(existManager.getOutputStream(xml),
+                    XSL, OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO,existManager.getOutputStream(xml), OUTPUT_PDF);
+        } catch (XMLDBException | IOException | JAXBException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
+    }
     
     public ResenjeList searchText(String text) throws IOException, JAXBException, XMLDBException {
 		List<Resenje> resenjeList = new ArrayList<>();
@@ -273,4 +304,5 @@ public class ResenjeService {
 		return new ResenjeList(resenjeList);
 
 	}
+
 }

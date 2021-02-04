@@ -123,6 +123,15 @@ public class ZahtevController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZahtev(@PathVariable String broj) {
+        boolean obavestenje = zahtevService.generateDocuments(broj);
+        if (!obavestenje)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value ="/odbij", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> odbijZahtev(@RequestBody String info) throws XMLDBException, JAXBException {

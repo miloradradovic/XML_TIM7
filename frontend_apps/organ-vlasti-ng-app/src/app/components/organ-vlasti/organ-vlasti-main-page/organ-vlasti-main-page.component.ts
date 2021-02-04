@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ObavestenjeService} from '../../../services/obavestenje-service/obavestenje.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ZahtevService} from '../../../services/zahtev-service/zahtev.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-organ-vlasti-main-page',
@@ -13,7 +14,8 @@ export class OrganVlastiMainPageComponent implements OnInit {
   zahtevi = [];
 
   constructor(private zahtevService: ZahtevService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private router: Router) { }
 
   ngOnInit(): void {
     const newList = [];
@@ -51,5 +53,9 @@ export class OrganVlastiMainPageComponent implements OnInit {
 
   pdf($event: number) {
 
+  }
+
+  doubleClicked($event: number): void {
+    this.router.navigate(['/detaljni-prikaz-zahteva'], {queryParams: {zahtev_id: $event}});
   }
 }

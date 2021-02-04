@@ -6,6 +6,7 @@
 
 package com.project.poverenik.wsdl.zalba_odluka;
 
+import com.project.poverenik.model.zalba_odluka.ObjectFactory;
 import com.project.poverenik.model.zalba_odluka.Tzalba;
 import com.project.poverenik.service.ZalbaOdlukaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,10 @@ public class ZalbaOdlukaServiceSoapBindingImpl implements ZalbaOdlukaServicePort
             Tzalba _return = zalbaOdlukaService.getOne(id).getZalbaOdlukaBody();
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+            ObjectFactory objectFactory = new ObjectFactory();
+            Tzalba tzalba = objectFactory.createTzalba();
+            tzalba.setId("-1");
+            return tzalba;
         }
     }
 

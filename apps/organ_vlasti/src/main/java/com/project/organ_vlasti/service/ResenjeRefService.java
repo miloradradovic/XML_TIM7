@@ -70,6 +70,26 @@ public class ResenjeRefService {
         return new ResenjeRefList(resenjeRefs);
     }
 
+    public ResenjeRefList getRefs(List<String> refs, String status) throws XMLDBException, JAXBException {
+        List<ResenjeRef> resenjeRefs = new ArrayList<>();
+
+        for (String broj: refs) {
+            ResourceSet resourceSet = resenjeRefRepository.getOneStatusByBroj(broj, status);
+            ResourceIterator resourceIterator = resourceSet.getIterator();
+
+            while (resourceIterator.hasMoreResources()){
+                XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+                if(xmlResource == null)
+                    return null;
+                JAXBContext context = JAXBContext.newInstance(ResenjeRef.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                ResenjeRef message = (ResenjeRef) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+                resenjeRefs.add(message);
+            }
+        }
+        return new ResenjeRefList(resenjeRefs);
+    }
+
     public ResenjeRef getOne(String id) throws JAXBException, XMLDBException {
         XMLResource xmlResource = resenjeRefRepository.getOne(id);
 

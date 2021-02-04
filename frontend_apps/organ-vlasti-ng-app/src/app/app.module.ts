@@ -40,7 +40,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { DetaljniPrikazZahtevaComponent } from './components/organ-vlasti/detaljni-prikaz-zahteva/detaljni-prikaz-zahteva.component';
+import { DetaljniPrikazObavestenjaComponent } from './components/organ-vlasti/detaljni-prikaz-obavestenja/detaljni-prikaz-obavestenja.component';
+import { DetaljniPrikazIzvestajaComponent } from './components/organ-vlasti/detaljni-prikaz-izvestaja/detaljni-prikaz-izvestaja.component';
+import { DetaljniPrikazResenjaComponent } from './components/organ-vlasti/detaljni-prikaz-resenja/detaljni-prikaz-resenja.component';
+import { DetaljniPrikazZalbeComponent } from './components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,12 @@ import {MatMenuModule} from '@angular/material/menu';
     IzvestajiComponent,
     IzjasnjavanjaComponent,
     KreiranjeIzvestajaComponent,
-    IzjasnjavanjeDialogComponent
+    IzjasnjavanjeDialogComponent,
+    DetaljniPrikazZahtevaComponent,
+    DetaljniPrikazObavestenjaComponent,
+    DetaljniPrikazIzvestajaComponent,
+    DetaljniPrikazResenjaComponent,
+    DetaljniPrikazZalbeComponent
   ],
   imports: [
     BrowserModule,

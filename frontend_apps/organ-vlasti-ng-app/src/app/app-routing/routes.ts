@@ -12,6 +12,12 @@ import {OrganVlastiMainPageComponent} from '../components/organ-vlasti/organ-vla
 import {ZahteviComponent} from '../components/organ-vlasti/zahtevi/zahtevi.component';
 import {GradjaninMainPageComponent} from '../components/gradjanin/gradjanin-main-page/gradjanin-main-page.component';
 import {KreiranjeIzvestajaComponent} from '../components/organ-vlasti/kreiranje-izvestaja/kreiranje-izvestaja.component';
+import {IzvestajiComponent} from '../components/organ-vlasti/izvestaji/izvestaji.component';
+import {DetaljniPrikazZahtevaComponent} from '../components/organ-vlasti/detaljni-prikaz-zahteva/detaljni-prikaz-zahteva.component';
+import {DetaljniPrikazIzvestajaComponent} from '../components/organ-vlasti/detaljni-prikaz-izvestaja/detaljni-prikaz-izvestaja.component';
+import {DetaljniPrikazObavestenjaComponent} from '../components/organ-vlasti/detaljni-prikaz-obavestenja/detaljni-prikaz-obavestenja.component';
+import {DetaljniPrikazResenjaComponent} from '../components/organ-vlasti/detaljni-prikaz-resenja/detaljni-prikaz-resenja.component';
+import {DetaljniPrikazZalbeComponent} from '../components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
 
 export const routes: Routes = [
   {
@@ -47,7 +53,7 @@ export const routes: Routes = [
     component: ObavestenjaComponent
   },
   {
-    path: 'main-page-organ_vlasti',
+    path: 'main-page-organ-vlasti',
     component: OrganVlastiMainPageComponent
   },
   {
@@ -61,5 +67,29 @@ export const routes: Routes = [
   {
     path: 'kreiraj-izvestaj',
     component: KreiranjeIzvestajaComponent
+  },
+  {
+    path: 'izvestaji',
+    component: IzvestajiComponent
+  },
+  {
+    path: 'detaljni-prikaz-zahteva',
+    component: DetaljniPrikazZahtevaComponent
+  },
+  {
+    path: 'detaljni-prikaz-izvestaja',
+    component: DetaljniPrikazIzvestajaComponent
+  },
+  {
+    path: 'detaljni-prikaz-obavestenja',
+    component: DetaljniPrikazObavestenjaComponent
+  },
+  {
+    path: 'detaljni-prikaz-resenja',
+    component: DetaljniPrikazResenjaComponent
+  },
+  {
+    path: 'detaljni-prikaz-zalbe',
+    component: DetaljniPrikazZalbeComponent
   }
 ];

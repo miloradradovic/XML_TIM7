@@ -42,6 +42,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
+import { PoverenikDetaljniPrikazResenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-resenja/poverenik-detaljni-prikaz-resenja.component';
+import { PoverenikDetaljniPrikazZahtevaComponent } from './components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
+import { PoverenikDetaljniPrikazObavestenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
+import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/poverenik/poverenik-detaljni-prikaz-izvestaja/poverenik-detaljni-prikaz-izvestaja.component';
+import { EmptyComponent } from './components/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +71,11 @@ import {MatMenuModule} from '@angular/material/menu';
     PoverenikProcitaniIzvestajiComponent,
     PoverenikNeprocitaniIzvestajiComponent,
     GradjaninPonistavanjeDialogComponent,
+    PoverenikDetaljniPrikazResenjaComponent,
+    PoverenikDetaljniPrikazZahtevaComponent,
+    PoverenikDetaljniPrikazObavestenjaComponent,
+    PoverenikDetaljniPrikazIzvestajaComponent,
+    EmptyComponent,
   ],
   imports: [
     BrowserModule,

@@ -117,4 +117,13 @@ public class ZalbaOdlukaController {
 
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
+    @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadObavestenje(@PathVariable String broj) {
+        boolean obavestenje = zalbaOdlukaService.generateDocuments(broj);
+        if(obavestenje)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
 }

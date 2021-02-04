@@ -170,24 +170,25 @@ public class ResenjeController {
 
         sendAttach sendAttach = new sendAttach();
         sendAttach.setEmail(new Tbody());
-        sendAttach.getEmail().setTo(email);
+        sendAttach.getEmail().setTo("eromana98@gmail.com");
         sendAttach.getEmail().setContent("Postovani, <br/><br/> Dostavljamo Vam resenje na Vasu zalbu. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Resenje " + broj);
 
-        //TODO - pozvati transformaciju
-        String pdfName = "верзија.pdf";
+        resenjeService.generateDocuments(broj);
+        //TODO - boolean povezati
+        String pdfName = "resenje" + broj + ".pdf";
         sendAttach.getEmail().setFilePdfName(pdfName);
-        String htmlName = "obavestenje.html";
+        String htmlName = "resenje" + broj + ".html";
         sendAttach.getEmail().setFileHtmlName(htmlName);
         try {
 
-            File filePdf = new File("src/main/resources/pdf/" + pdfName);
+            File filePdf = new File("src/main/resources/generated_files/documents/" + pdfName);
             Path pdfPath = filePdf.toPath();
             byte[] pdfBytes = Files.readAllBytes(pdfPath);
 
             sendAttach.getEmail().setFilePdf(pdfBytes);
 
-            File fileHtml = new File("src/main/resources/pdf/" + htmlName);
+            File fileHtml = new File("src/main/resources/generated_files/documents/" + htmlName);
             Path htmlPath = fileHtml.toPath();
             byte[] htmlBytes = Files.readAllBytes(htmlPath);
 
@@ -199,5 +200,14 @@ public class ResenjeController {
             e.getStackTrace();
             return false;
         }
+    }
+
+    @RequestMapping(value="/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadResenje(@PathVariable String broj) {
+        boolean obavestenje = resenjeService.generateDocuments(broj);
+        if(obavestenje)
+            return new ResponseEntity(obavestenje, HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

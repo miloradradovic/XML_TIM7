@@ -12,4 +12,12 @@ export class IzvestajService {
     return this.http.post('http://localhost:8090/izvestaji', '',
       {headers: this.headers, responseType: 'text'});
   }
+  getIzvestajList(): Observable<any> {
+    return this.http.get('http://localhost:8090/izvestaji',
+      {headers: this.headers, responseType: 'text'});
+  }
+  getPretragaMetadata(datumAfter, datumBefore): Observable<any> {
+    return this.http.get('http://localhost:8090/izvestaji/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

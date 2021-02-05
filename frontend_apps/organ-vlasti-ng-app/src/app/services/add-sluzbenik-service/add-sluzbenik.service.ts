@@ -16,4 +16,14 @@ export class AddSluzbenikService {
     return this.http.post('http://localhost:8090/users',
       auth, {headers: this.headers, responseType: 'text'});
   }
+
+  editProfile(auth: any): Observable<any> {
+    return this.http.put('http://localhost:8090/users',
+      auth, {headers: this.headers, responseType: 'text'});
+  }
+
+  getUser(email: String): Observable<any> {
+    return this.http.get('http://localhost:8090/users/' + email,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

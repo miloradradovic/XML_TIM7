@@ -17,6 +17,7 @@ import {PoverenikDetaljniPrikazIzvestajaComponent} from '../components/poverenik
 import {PoverenikDetaljniPrikazObavestenjaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
 import {PoverenikDetaljniPrikazResenjaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-resenja/poverenik-detaljni-prikaz-resenja.component';
 import {PoverenikDetaljniPrikazZahtevaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
+import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   {
@@ -90,5 +91,9 @@ export const routes: Routes = [
   {
     path: 'procitani-izvestaji',
     component: PoverenikProcitaniIzvestajiComponent
+  },
+  {
+    path: 'profil',
+    component: EditProfileComponent
   }
 ];

@@ -26,7 +26,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_POVERENIK') || hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException {
+    public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException, JAXBException {
         if (userService.create(user, "ROLE_POVERENIK")) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -46,7 +46,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_POVERENIK')")
     @RequestMapping(value = "/{email}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getUser(@PathVariable String email) throws XMLDBException, JAXBException {
-        User user = userService.getOne(email);
+    	User user = userService.getOne(email.replace("-", "."));
         if (user != null)
             return new ResponseEntity<>(user, HttpStatus.OK);
 
@@ -56,7 +56,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_POVERENIK')")
     @RequestMapping(value = "/{email}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> delete(@PathVariable String email) throws XMLDBException {
-        if (userService.delete(email))
+        if (userService.delete(email.replace("-", ".")))
             return new ResponseEntity<>(HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

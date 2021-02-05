@@ -72,6 +72,10 @@ public class UserService {
         return user;
     }
 
+    public boolean delete(String email) throws XMLDBException {
+        return userRepository.delete(email);
+    }
+
     public Long hasRoleOrganVlasti() throws XMLDBException {
         ResourceSet resourceSet = userRepository.hasRoleOrganVlasti();
         return resourceSet.getSize();

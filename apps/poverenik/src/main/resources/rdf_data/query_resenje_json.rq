@@ -1,0 +1,13 @@
+PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
+
+SELECT * FROM <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/resenja>
+WHERE { 
+	%s <http://examples/predicate/datum> ?datum . 
+	%s <http://examples/predicate/organ_vasti> ?organ_vlasti . 
+	%s <http://examples/predicate/tip> ?tip . 
+	%s <http://examples/predicate/trazilac> ?trazilac . 
+	%s <http://examples/predicate/mesto> ?mesto . 
+	%s <http://examples/predicate/poverenik> ?poverenik . 
+	%s <http://examples/predicate/zalba> ?zalba . 
+	
+}

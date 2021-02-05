@@ -24,7 +24,7 @@ public class ObavestenjeMapper {
         obavestenje.getObavestenjeBody().setIdZahteva(obavestenjeDTO.getObavestenjeBody().getIdZahteva());
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("about"), "http://obavestenja/" + obavestenje.getObavestenjeBody().getBroj());
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/");
-        obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("rel"), "pred:responseTo");
+        obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("rel"), "pred:zahtev");
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("href"), "http://zahtevi/" + obavestenjeDTO.getObavestenjeBody().getIdZahteva());
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("property"), "pred:datum");
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
@@ -32,7 +32,7 @@ public class ObavestenjeMapper {
         obavestenje.getObavestenjeBody().getOtherAttributes().put(new QName("link_na_zahtev"), linkNaZahtev);
 
         obavestenje.getObavestenjeBody().setNazivOrgana(obavestenjeDTO.getObavestenjeBody().getNazivOrgana());
-        obavestenje.getObavestenjeBody().getNazivOrgana().getOtherAttributes().put(new QName("property"), "pred:organVlasti");
+        obavestenje.getObavestenjeBody().getNazivOrgana().getOtherAttributes().put(new QName("property"), "pred:organ_vlasti");
         obavestenje.getObavestenjeBody().getNazivOrgana().getOtherAttributes().put(new QName("datatype"), "xs:string");
 
         obavestenje.getObavestenjeBody().setInformacijeOPodnosiocu(obavestenjeDTO.getObavestenjeBody().getInformacijeOPodnosiocu());

@@ -5,19 +5,25 @@ import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
 import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.model.zahtev.client.getZahtevResponse;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.poverenik.rdf_utils.FileUtil;
+import com.project.poverenik.rdf_utils.MetadataExtractor;
+import com.project.poverenik.rdf_utils.SparqlUtil;
 import com.project.poverenik.repository.ZalbaOdlukaRepository;
 import com.project.poverenik.transformer.Transformator;
 import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
@@ -26,8 +32,19 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.TransformerException;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
@@ -153,7 +170,7 @@ public class ZalbaOdlukaService {
     }
 
     public ZalbaOdlukaList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
-                                          String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
+                                          String mesto, String userEmail, String zahtevId) throws IOException, JAXBException, XMLDBException {
         ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
         if (datumAfter.equals("")) {
@@ -174,8 +191,15 @@ public class ZalbaOdlukaService {
         } else {
             user = "<http://users/" + userEmail + ">";
         }
+        
+        String zahtev;
+        if (zahtevId.equals("")) {
+            zahtev = "?zahtev";
+        } else {
+            zahtev = "<http://zahtevi/" + zahtevId + ">";
+        }
 
-        String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
+        String sparqlQuery = String.format(sparqlQueryTemplate, zahtev, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
         System.out.println(sparqlQuery);
 
         QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
@@ -341,4 +365,59 @@ public class ZalbaOdlukaService {
         ResourceSet resourceSet = zalbaOdlukaRepository.getOdbijene();
         return resourceSet.getSize();
     }
+    
+	public String generateRdf(String idZalbe) throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+		ZalbaOdluka xml = getOne(idZalbe.split("-")[1]);
+		if (xml == null) {
+			return "";
+		}
+		MetadataExtractor metadataExtractor = new MetadataExtractor();
+
+        ByteArrayInputStream inStream = new ByteArrayInputStream(existManager.getOutputStream(xml).getBytes());
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        metadataExtractor.extractMetadata(
+                inStream,
+                outStream);
+        ByteArrayInputStream rdfStream = new ByteArrayInputStream(outStream.toByteArray());
+
+
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader = new BufferedReader(new InputStreamReader
+                (rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
+        String rdf = textBuilder.toString();
+        Model model = ModelFactory.createDefaultModel();
+        model.read(new StringReader(rdf),
+                "TURTLE");
+        model.write(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + idZalbe + ".rdf")), SparqlUtil.RDF_XML);
+        return "src/main/resources/generated_files/metadata/" + idZalbe + ".rdf";
+	}
+	
+	public String generateJson(String idZalbe) throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_zalba_json.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+
+		String zalba = "<http://zalbe/odluka/" + idZalbe.split("-")[1] + ">";
+		String sparqlQuery = String.format(sparqlQueryTemplate, zalba, zalba, zalba, zalba, zalba, zalba);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+		ResultSetFormatter.outputAsJSON(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + idZalbe + ".json")), results);
+		query.close();
+		return "src/main/resources/generated_files/metadata/" + idZalbe + ".json";
+	}
 }

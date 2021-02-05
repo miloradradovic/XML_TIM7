@@ -4,7 +4,7 @@ SELECT * FROM <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/zalb
 WHERE { 
 	?zalba <http://examples/predicate/datum> ?datum . 
 	?zalba <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
-	?zalba <http://examples/predicate/zahtev> ?zahtev . 
+	?zalba <http://examples/predicate/zahtev> %s . 
 	?zalba <http://examples/predicate/status> ?status . 
 	?zalba <http://examples/predicate/mesto> ?mesto . 
 	?zalba <http://examples/predicate/podnosilac> %s . 

@@ -16,15 +16,20 @@ import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.poverenik.rdf_utils.FileUtil;
+import com.project.poverenik.rdf_utils.MetadataExtractor;
+import com.project.poverenik.rdf_utils.SparqlUtil;
 import com.project.poverenik.repository.ResenjeRepository;
 import com.project.poverenik.transformer.Transformator;
 import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
@@ -34,8 +39,18 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
+import javax.xml.transform.TransformerException;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -211,7 +226,7 @@ public class ResenjeService {
         String zalba;
         idZalbe = idZalbe.replace("-", "/");
         if (idZalbe.equals("")) {
-            zalba = "?responseTo";
+            zalba = "?zalba";
         } else {
             zalba = "<http://zalbe/" + idZalbe + ">";
         }
@@ -404,5 +419,60 @@ public class ResenjeService {
         }
         return "";
     }
+    
+	public String generateRdf(String broj) throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+		Resenje xml = getOne(broj);
+		if (xml == null) {
+			return "";
+		}
+		MetadataExtractor metadataExtractor = new MetadataExtractor();
+
+        ByteArrayInputStream inStream = new ByteArrayInputStream(existManager.getOutputStream(xml).getBytes());
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        metadataExtractor.extractMetadata(
+                inStream,
+                outStream);
+        ByteArrayInputStream rdfStream = new ByteArrayInputStream(outStream.toByteArray());
+
+
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader = new BufferedReader(new InputStreamReader
+                (rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
+        String rdf = textBuilder.toString();
+        Model model = ModelFactory.createDefaultModel();
+        model.read(new StringReader(rdf),
+                "TURTLE");
+        model.write(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + "resenje-" + broj + ".rdf")), SparqlUtil.RDF_XML);
+        return "src/main/resources/generated_files/metadata/" + "resenje-" + broj + ".rdf";
+	}
+	
+	public String generateJson(String broj) throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_resenje_json.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+
+		String resenje = "<http://resenja/" + broj + ">";
+		String sparqlQuery = String.format(sparqlQueryTemplate, resenje, resenje, resenje, resenje, resenje, resenje, resenje);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+		ResultSetFormatter.outputAsJSON(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + "resenje-" + broj + ".json")), results);
+		query.close();
+		return "src/main/resources/generated_files/metadata/" + "resenje-" + broj + ".json";
+	}
 
 }

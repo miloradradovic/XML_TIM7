@@ -7,19 +7,19 @@
 
   <div style="width: 100%; padding-left: 2%">
     <form (ngSubmit)="onSubmitClicked()">
-      <mat-form-field appearance="outline" style="width: 13%">
+      <mat-form-field appearance="outline" style="width: 11%">
         <mat-label> Mesto </mat-label>
         <input id="mesto" matInput placeholder="..." [formControl]="form.controls.mesto">
       </mat-form-field>
-      <mat-form-field appearance="outline" style="width: 13%;margin-left: 1%">
+      <mat-form-field appearance="outline" style="width: 11%;margin-left: 1%">
         <mat-label> Organ vlasti </mat-label>
         <input id="organVlasti" matInput placeholder="..." [formControl]="form.controls.organVlasti">
       </mat-form-field>
-      <mat-form-field appearance="outline" style="width: 13%;margin-left: 1%">
+      <mat-form-field appearance="outline" style="width: 11%;margin-left: 1%">
         <mat-label> Email žalioca </mat-label>
         <input id="userEmail" matInput placeholder="..." [formControl]="form.controls.userEmail">
       </mat-form-field>
-      <mat-form-field appearance="outline" style="width:13%;margin-left: 1%">
+      <mat-form-field appearance="outline" style="width:11%;margin-left: 1%">
         <mat-label> Status </mat-label>
           <mat-select [formControl]="form.controls.status" id="status" >
             <mat-option value=""> Sve </mat-option>
@@ -30,19 +30,23 @@
             <mat-option value="ponistena"> Poništena </mat-option>
           </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" style="width:13%;margin-left: 1%">
+      <mat-form-field appearance="outline" style="width: 11%;margin-left: 1%">
+        <mat-label> Identifikator zahteva </mat-label>
+        <input id="zahtevId" matInput placeholder="..." [formControl]="form.controls.zahtevId">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width:11%;margin-left: 1%">
         <mat-label>Od:</mat-label>
         <input (dateChange)="onDatumAfterChanged($event)" id="datumAfter" [value]="form.controls.datumAfter.value | date: 'yyyy-MM-dd'" matInput [matDatepicker]="picker1">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
-      <mat-form-field appearance="outline" style="width:13%;margin-left: 1%">
+      <mat-form-field appearance="outline" style="width:11%;margin-left: 1%">
         <mat-label>Do:</mat-label>
         <input (dateChange)="onDatumBeforeChanged($event)" id="datumBefore" [value]="form.controls.datumBefore.value | date: 'yyyy-MM-dd'" matInput [matDatepicker]="picker2">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
-      <button id="submit" style="width:8%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Pretraži</button>
+      <button id="submit" style="width:6%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Pretraži</button>
     </form>
   </div>
 

@@ -27,9 +27,8 @@ public class ZalbaOdlukaMapper {
         zalbaOdluka.getZalbaOdlukaBody().setDatum(zalbaOdlukaDTO.getZalbaOdlukaBody().getDatum());
 
         zalbaOdluka.getZalbaOdlukaBody().setZahtev(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev());
-        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("property"), "pred:zahtev");
-        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("datatype"), "xs:string");
-        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("content"), zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
+        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("rel"), "pred:zahtev");
+        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("href"), "http://zahtevi/" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
         zalbaOdluka.getZalbaOdlukaBody().getZahtev().setValue("http://localhost:8085/zahtev/" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
 
         zalbaOdluka.getZalbaOdlukaBody().setStatus(new Tzalba.Status());

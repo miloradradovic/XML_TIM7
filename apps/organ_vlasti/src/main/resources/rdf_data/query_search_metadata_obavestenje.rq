@@ -3,9 +3,9 @@ PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
 SELECT * FROM <http://localhost:8080/fusekiOV/Tim7Dataset/data/tim7/metadata/obavestenja>
 WHERE { 
 	?obavestenje <http://examples/predicate/datum> ?datum . 
-	?obavestenje <http://examples/predicate/organVlasti> ?organVlasti . 
+	?obavestenje <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
 	?obavestenje <http://examples/predicate/podnosilac> %s . 
-	?obavestenje <http://examples/predicate/responseTo> %s . 
+	?obavestenje <http://examples/predicate/zahtev> %s . 
 	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime> 
 	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime>
 	&& regex(UCASE(str(?organVlasti)), UCASE(".*%s.*"))

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {IzjasnjavanjeDialogComponent} from '../izjasnjavanja/izjasnjavanje-dialog/izjasnjavanje-dialog.component';
 import {DialogOdbijanjeComponent} from './dialog-odbijanje/dialog-odbijanje.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ZahtevService} from "../../../services/zahtev-service/zahtev.service";
 
 @Component({
   selector: 'app-detaljni-prikaz-zahteva',
@@ -14,11 +15,19 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
   zahtevId = '0';
   odbijen = false;
   neobradjena = true;
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog) { }
+  src = '';
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private service: ZahtevService) { }
 
   ngOnInit(): void {
     this.zahtevId = this.activatedRoute.snapshot.queryParamMap.get('zahtev_id');
     const status = this.activatedRoute.snapshot.queryParamMap.get('zahtev_status');
+    this.service.convertZahtevXHTML(this.zahtevId).subscribe( res => {
+      const binaryData = [];
+      binaryData.push(res);
+      const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'text/html'}));
+      this.src = url;
+    });
     if (status === 'odbijen' || status === 'prihvacen'){
       this.odbijen = true;
     }

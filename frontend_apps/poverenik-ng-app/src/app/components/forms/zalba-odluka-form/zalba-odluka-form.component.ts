@@ -45,7 +45,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
 
   public submit(): void {
     if (Xonomy.warnings.length) {
-      this.snackBar.open("Popunite sva obavezna polja!", 'Ok', { duration: 3000 });
+      this.snackBar.open("Попуните сва обавезна поља!", 'Ok', { duration: 3000 });
       return;
     }
     console.log(Xonomy.harvest())
@@ -84,8 +84,12 @@ export class ZalbaOdlukaFormComponent implements OnInit {
 
     console.log(dataTemplate)
     this.zalbaOdlukaService.send(dataTemplate)
-      .subscribe(res => console.log(res));
-    this.snackBar.open("Uspešno ste poslali žalbu!", 'Ok', { duration: 3000 });
+      .subscribe(res => {
+        this.snackBar.open('Успешно сте послали жалбу!', 'Ok', { duration: 3000 });
+      }, error => {
+        this.snackBar.open('Немогуће креирање жалбе за прослеђени идентификатор!', 'Ok', { duration: 3000 });
+
+      });
 
   }
 

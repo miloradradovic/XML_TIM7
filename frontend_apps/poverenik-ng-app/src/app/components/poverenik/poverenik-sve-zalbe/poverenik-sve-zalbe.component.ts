@@ -56,7 +56,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
     this.zalbaService.getZalbaOdlukaList().subscribe(
@@ -82,7 +82,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -138,7 +138,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         this.renderZalbeCutanje(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
     this.zalbaService.getPretragaTekstZalbeOdluka(newValue.value).subscribe(
@@ -146,7 +146,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         this.renderZalbeOdluka(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -165,7 +165,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         this.renderZalbeCutanje(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
     this.zalbaService.getPretragaMetadataZalbeOdluka(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.status.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value, this.form.controls.userEmail.value, this.form.controls.zahtevId.value).subscribe(
@@ -173,7 +173,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         this.renderZalbeOdluka(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
 
@@ -213,7 +213,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       });
   }
 
@@ -243,7 +243,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       });
   }
 }

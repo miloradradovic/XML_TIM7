@@ -45,7 +45,7 @@ export class TableComponent implements OnChanges {
 
   doubleClicked(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.DoubleClickZalba.emit(returnValue);
     }else{
@@ -55,7 +55,7 @@ export class TableComponent implements OnChanges {
 
   ponisti(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.PonistiZalba.emit(returnValue);
     }else{
@@ -65,7 +65,7 @@ export class TableComponent implements OnChanges {
 
   xhtml(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.XHTMLZalba.emit(returnValue);
     }else{
@@ -75,7 +75,7 @@ export class TableComponent implements OnChanges {
 
   pdf(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.PDFZalba.emit(returnValue);
     }else{
@@ -85,7 +85,7 @@ export class TableComponent implements OnChanges {
 
   clicked(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.ClickZalba.emit(returnValue);
     }else{

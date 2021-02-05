@@ -29,8 +29,9 @@ public class IzvestajiController {
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createIzvestaj() throws XMLDBException, JAXBException, DatatypeConfigurationException {
-        if (izvestajiService.generate()) {
-            return new ResponseEntity<>(HttpStatus.OK);
+        Izvestaj izvestaj = izvestajiService.generate();
+        if (izvestaj != null) {
+            return new ResponseEntity<>(izvestaj, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -60,19 +61,19 @@ public class IzvestajiController {
     public ResponseEntity<IzvestajList> searchMetadata(@RequestParam("datumAfter") String datumAfter,
                                                        @RequestParam("datumBefore") String datumBefore) throws XMLDBException, JAXBException, IOException {
         IzvestajList izvestajList = izvestajiService.searchMetadata(datumAfter, datumBefore);
-        if(izvestajList != null){
+        if (izvestajList != null) {
             return new ResponseEntity<>(izvestajList, HttpStatus.OK);
         }
         return new ResponseEntity<>(izvestajList, HttpStatus.BAD_REQUEST);
     }
-    
+
     @RequestMapping(value = "/toRdf/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadIzvestajRdf(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = izvestajiService.generateRdf(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
     @RequestMapping(value = "/toJson/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadIzvestajJson(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 

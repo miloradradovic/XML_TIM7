@@ -27,7 +27,6 @@ export class KreiranjeIzvestajaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(izvestajList);
         const izvestaj = izvestajList['ns3:izvestaj']['ns3:izvestaj_body'];
         const zahtev = {broj_podnetih_zahteva: izvestaj['ns3:zahtevi_podneti']._text, broj_prihvacenih_zahteva: izvestaj['ns3:zahtevi_prihvaceni']._text,
         broj_odbijenih_zahteva: izvestaj['ns3:zahtevi_odbijeni']._text};

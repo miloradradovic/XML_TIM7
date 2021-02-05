@@ -56,7 +56,7 @@ export class PoverenikSvaResenjaComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -89,10 +89,10 @@ export class PoverenikSvaResenjaComponent implements OnInit {
     console.log(newValue.value)
     this.resenjeService.getPretragaTekst(newValue.value).subscribe(
       result => {
-        this.renderResenja(result);    
+        this.renderResenja(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -108,10 +108,10 @@ export class PoverenikSvaResenjaComponent implements OnInit {
     console.log(this.form.controls.datumBefore.value)
     this.resenjeService.getPretragaMetadata(this.form.controls.poverenik.value, this.form.controls.trazilac.value, this.form.controls.zalba.value.replace('/', '-'), this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.tip.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value).subscribe(
       result => {
-        this.renderResenja(result);    
+        this.renderResenja(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -141,7 +141,7 @@ export class PoverenikSvaResenjaComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       });
   }
 
@@ -162,7 +162,7 @@ export class PoverenikSvaResenjaComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       });
   }
 }

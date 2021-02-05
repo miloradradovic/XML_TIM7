@@ -26,11 +26,11 @@ export class ObavestenjeService {
       {headers: this.headers, responseType: 'text'});
   }
 
-  convertZahtevPDF(broj: string): Observable<any> {
+  convertObavestenjePDF(broj: string): Observable<any> {
     return this.http.get('http://localhost:8090/obavestenje/toPdf/' + broj,
       {headers: this.headers, responseType: 'blob'});
   }
-  convertZahtevXHTML(s: string): Observable<any> {
+  convertObavestenjeXHTML(s: string): Observable<any> {
     return this.http.get('http://localhost:8090/obavestenje/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
   }

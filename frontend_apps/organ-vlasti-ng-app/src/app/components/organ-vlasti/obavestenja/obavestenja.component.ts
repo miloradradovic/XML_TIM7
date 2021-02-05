@@ -3,6 +3,7 @@ import {ResenjeService} from '../../../services/resenje-service/resenje.service'
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ObavestenjeService} from '../../../services/obavestenje-service/obavestenje.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {Router} from "@angular/router";
 
 declare var require: any;
 
@@ -18,6 +19,7 @@ export class ObavestenjaComponent implements OnInit {
   form: FormGroup;
   constructor(private obavestenjeService: ObavestenjeService,
               private snackBar: MatSnackBar,
+              private router: Router,
               private fb: FormBuilder) {
                 this.form = this.fb.group({
                   zahtev: [''],
@@ -119,7 +121,7 @@ export class ObavestenjaComponent implements OnInit {
 
 
   pdf($event: string): void {
-    this.obavestenjeService.convertZahtevPDF($event).subscribe(
+    this.obavestenjeService.convertObavestenjePDF($event).subscribe(
       result => {
         const binaryData = [];
         binaryData.push(result);
@@ -140,7 +142,7 @@ export class ObavestenjaComponent implements OnInit {
   }
 
   xhtml($event: string): void {
-    this.obavestenjeService.convertZahtevXHTML($event).subscribe(
+    this.obavestenjeService.convertObavestenjeXHTML($event).subscribe(
       result => {
         const binaryData = [];
         binaryData.push(result);
@@ -167,4 +169,13 @@ export class ObavestenjaComponent implements OnInit {
   jsonObavestenje($event: number) {
 
   }
+
+  doubleClicked($event: number): void {
+    this.obavestenja.forEach( obavestenje => {
+      if (obavestenje.id === $event){
+        this.router.navigate(['/detaljni-prikaz-obavestenja'], {queryParams: {broj: obavestenje.id}});
+      }
+    });
+  }
+
 }

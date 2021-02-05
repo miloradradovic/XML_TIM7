@@ -88,6 +88,9 @@ public class ZalbaCutanjeService {
         getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
         if (zahtevResponse == null)
             return false;
+        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen")){
+            return false;
+        }
 
         XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
 

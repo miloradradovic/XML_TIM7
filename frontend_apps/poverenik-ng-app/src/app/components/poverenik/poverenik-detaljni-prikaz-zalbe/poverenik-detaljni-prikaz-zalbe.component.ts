@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {IzjasnjavanjaService} from '../../../services/izjasnjavanja-service/izjasnjavanja.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ZalbaService} from '../../../services/zalba-service/zalba.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-poverenik-detaljni-prikaz-zalbe',
@@ -14,11 +14,11 @@ export class PoverenikDetaljniPrikazZalbeComponent implements OnInit {
   uObradi: boolean;
   neobradjena: boolean;
   zalba = {id: '', status: ''};
-  src: any = '';
+  src = '';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
               private izjasnjavanjeService: IzjasnjavanjaService, private snackBar: MatSnackBar,
-              private service: ZalbaService, private sanitizer: DomSanitizer) { }
+              private service: ZalbaService) { }
 
   ngOnInit(): void {
 
@@ -34,7 +34,10 @@ export class PoverenikDetaljniPrikazZalbeComponent implements OnInit {
       obs$ = this.service.convertZalbaOdlukaXHTML(broj);
     }
     obs$.subscribe( res => {
-
+      const binaryData = [];
+      binaryData.push(res);
+      const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'text/html'}));
+      this.src = url;
     });
     this.zalba.id = zalbaId;
     this.zalba.status = zalbaStatus;

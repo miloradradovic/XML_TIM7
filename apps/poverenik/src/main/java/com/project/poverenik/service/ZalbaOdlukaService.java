@@ -5,6 +5,7 @@ import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
 import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
+import com.project.poverenik.model.zahtev.client.getZahtevResponse;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
@@ -25,10 +26,13 @@ import org.xmldb.api.modules.XMLResource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ZalbaOdlukaService {
@@ -41,6 +45,9 @@ public class ZalbaOdlukaService {
 
     @Autowired
     private ExistManager existManager;
+
+    @Autowired
+    private ZahtevService zahtevService;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = zalbaOdlukaRepository.getMaxId();
@@ -62,6 +69,10 @@ public class ZalbaOdlukaService {
     public boolean create(ZalbaOdluka zalbaOdlukaDTO) throws XMLDBException, NumberFormatException, JAXBException {
         if (jaxB.validate(zalbaOdlukaDTO.getClass(), zalbaOdlukaDTO)) {
 
+            if (canMakeZalba(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev().getValue())) {
+                return false;
+            }
+
             String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -74,6 +85,25 @@ public class ZalbaOdlukaService {
             }
         }
         return false;
+    }
+
+    public boolean canMakeZalba(String idZahteva) {
+        getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
+        if (zahtevResponse == null)
+            return false;
+        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen")){
+            return false;
+        }
+
+        XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
+
+        Date xmlDate = date.toGregorianCalendar().getTime();
+        Date dateNow = new Date();
+
+        long diffInMillies = Math.abs(dateNow.getTime() - xmlDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MINUTES);
+
+        return diff >= 2;
     }
 
     public ZalbaOdlukaList getAll() throws XMLDBException, JAXBException {

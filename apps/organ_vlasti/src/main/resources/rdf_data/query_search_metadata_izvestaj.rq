@@ -3,7 +3,7 @@ PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
 SELECT * FROM <http://localhost:8080/fusekiOV/Tim7Dataset/data/tim7/metadata/izvestaji>
 WHERE { 
 	?izvestaj <http://examples/predicate/datum> ?datum . 
-	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime> 
-	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime>
+	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#date> 
+	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#date>
 	)
 }

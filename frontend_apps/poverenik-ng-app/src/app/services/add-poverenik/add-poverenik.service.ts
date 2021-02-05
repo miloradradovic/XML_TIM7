@@ -16,4 +16,14 @@ export class AddPoverenikService {
     return this.http.post('http://localhost:8085/users',
       auth, {headers: this.headers, responseType: 'text'});
   }
+
+  editProfile(auth: any): Observable<any> {
+    return this.http.put('http://localhost:8085/users',
+      auth, {headers: this.headers, responseType: 'text'});
+  }
+
+  getUser(email: String): Observable<any> {
+    return this.http.get('http://localhost:8085/users/' + email,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

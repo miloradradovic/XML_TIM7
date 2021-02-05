@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.annotation.PostConstruct;
+import javax.xml.bind.JAXBException;
+
 import java.util.logging.Logger;
 
 
@@ -20,7 +22,7 @@ public class Initialize {
     UserService userService;
 
     @PostConstruct
-    public void init() throws XMLDBException {
+    public void init() throws XMLDBException, JAXBException {
         LOG.info("Executing operation Initialize");
         if (userService.hasRolePoverenik() == 0) {
             ObjectFactory of = new ObjectFactory();

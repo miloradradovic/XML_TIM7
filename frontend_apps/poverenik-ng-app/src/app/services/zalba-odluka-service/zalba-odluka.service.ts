@@ -134,6 +134,14 @@ export class ZalbaOdlukaService {
       },
       "re:od_godine": {
         displayName: "od_godine",
+        validate: function (jsElement) {
+          if (isNaN(jsElement.getText()) || jsElement.getText() < 1000 || jsElement.getText() > 9999) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "Morate uneti datum."
+            });
+          }
+        },
         hasText: true,
         asker: Xonomy.askString
       },

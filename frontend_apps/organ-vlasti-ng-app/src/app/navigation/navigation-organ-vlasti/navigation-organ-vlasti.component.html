@@ -3,7 +3,7 @@
   <a routerLink="/pocetna-stranica-organ-vlasti" id="home-nav" style="margin-left: 0.1%;" ><mat-icon [ngStyle]="{'color':'white'}">domain</mat-icon></a>
   <span style="padding-left: 1%">Портал органа власти</span>
 
-  <span style="padding-left:2%" class="example-spacer"> </span>
+  <span style="padding-left:1%" class="example-spacer"> </span>
   <a routerLink="/zahtevi" style="margin-left: 0.5%;"><button style="width: 90%;margin-bottom: 5%" mat-flat-button color="primary">Захтеви</button></a>
   <a routerLink="/obavestenja" style="margin-left: 0.5%;"><button style="width: 90%;margin-bottom: 5%" mat-flat-button color="primary">Обавештења</button></a>
   <a routerLink="/procitana-resenja" style="margin-left: 0.5%;"><button style="width: 90%;margin-bottom: 5%" mat-flat-button color="primary">Прочитана решења</button></a>
@@ -14,6 +14,7 @@
   <a routerLink="/kreiraj-izvestaj" style="margin-left: 0.5%"><button style="width: 90%;margin-bottom: 5%" mat-flat-button color="primary">Креирај извештај</button></a>
   <span style="width: 35%"></span>
 
-  <a routerLink="/" style="margin-left: 0.5%;" ><mat-icon (click)="signOutUser()" [ngStyle]="{'color':'white'}">exit_to_app</mat-icon></a>
+  <a routerLink="/profil" style="margin-right: 0.1%;" id="view-profile"><mat-icon [ngStyle]="{'color':'white'}">face</mat-icon></a>
+  <a routerLink="/" style="margin-left: 0.1%;" ><mat-icon (click)="signOutUser()" [ngStyle]="{'color':'white'}">exit_to_app</mat-icon></a>
 
 </mat-toolbar>

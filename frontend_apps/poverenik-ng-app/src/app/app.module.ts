@@ -47,6 +47,7 @@ import { PoverenikDetaljniPrikazZahtevaComponent } from './components/poverenik/
 import { PoverenikDetaljniPrikazObavestenjaComponent } from './components/poverenik/poverenik-detaljni-prikaz-obavestenja/poverenik-detaljni-prikaz-obavestenja.component';
 import { PoverenikDetaljniPrikazIzvestajaComponent } from './components/poverenik/poverenik-detaljni-prikaz-izvestaja/poverenik-detaljni-prikaz-izvestaja.component';
 import { EmptyComponent } from './components/empty/empty.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { EmptyComponent } from './components/empty/empty.component';
     PoverenikDetaljniPrikazObavestenjaComponent,
     PoverenikDetaljniPrikazIzvestajaComponent,
     EmptyComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

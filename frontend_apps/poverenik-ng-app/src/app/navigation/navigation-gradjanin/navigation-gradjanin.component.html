@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
 
-  <a routerLink="/main-page-gradjanin" id="home-nav" style="margin-left: 0.1%;" ><mat-icon [ngStyle]="{'color':'white'}">emoji_people</mat-icon></a>
-  <span>Portal poverenika</span>
-  <button mat-button [matMenuTriggerFor]="zalbaMenu" id="zalbaMenu">Pošalji žalbu</button>
+  <a routerLink="/pocetna-stranica-gradjanin" id="home-nav" style="margin-left: 0.1%;" ><mat-icon [ngStyle]="{'color':'white'}">domain</mat-icon></a>
+  <span style="padding-left: 1%">Портал повереника</span>
+  <button mat-button [matMenuTriggerFor]="zalbaMenu" id="zalbaMenu">Пошаљи жалбу</button>
   <mat-menu #zalbaMenu="matMenu">
-    <a routerLink="/zalba-cutanje" style="margin-left: 5%;" ><button style="width: 90%;margin-bottom: 5%"mat-flat-button color="primary" id="add-admin-navigate">Žalba na ćutanje uprave</button></a>
-    <a routerLink="/zalba-odluka" style="margin-left: 5%;" ><button mat-flat-button style="width: 90%;margin-bottom: 5%" color="primary" id="admin-dashboard-navigate">Žalba na odluku organa vlasti</button></a>
+    <a routerLink="/zalba-cutanje" style="margin-left: 5%;" ><button style="width: 90%;margin-bottom: 5%"mat-flat-button color="primary" id="add-admin-navigate">Жалба на ћутање управе</button></a>
+    <a routerLink="/zalba-odluka" style="margin-left: 5%;" ><button mat-flat-button style="width: 90%;margin-bottom: 5%" color="primary" id="admin-dashboard-navigate">Жалба на одлуку управе</button></a>
   </mat-menu>
   <span style="width: 80%"></span>
   <a routerLink="/profil" style="margin-right: 2%;" id="view-profile"><mat-icon [ngStyle]="{'color':'white'}">face</mat-icon></a>

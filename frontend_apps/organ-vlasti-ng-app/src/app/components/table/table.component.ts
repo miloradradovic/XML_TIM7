@@ -49,7 +49,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   doubleClicked(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.DoubleClickZalba.emit(returnValue);
     }else{
@@ -59,7 +59,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   ponisti(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.PonistiZalba.emit(returnValue);
     }else{
@@ -69,7 +69,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   xhtml(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.XHTMLZalba.emit(returnValue);
     }else{
@@ -79,7 +79,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   pdf(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.PDFZalba.emit(returnValue);
     }else{
@@ -89,7 +89,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   clicked(id, tip: any): void {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '/' + id;
       this.ClickZalba.emit(returnValue);
     }else{
@@ -102,7 +102,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   rdf(id, tip: any) {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '-' + id;
       this.RDFZalba.emit(returnValue);
     }else{
@@ -112,7 +112,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   json(id, tip: any) {
     let returnValue = '';
-    if (this.columnsToDisplay.includes('Id zalbe')){
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
       returnValue = tip + '-' + id;
       this.JSONZalba.emit(returnValue);
     }else{

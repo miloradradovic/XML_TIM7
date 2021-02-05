@@ -7,7 +7,7 @@
     <div>
       <mat-form-field>
         <mat-label for="name">Име:</mat-label>
-        <input matInput id="name" name="name" placeholder="name" [formControl]="form.controls.name">
+        <input matInput id="name" name="name" placeholder="име" [formControl]="form.controls.name">
         <mat-error *ngIf="form.controls.name.touched && form.controls.name.errors?.required">
           Ово поље не сме бити празно!</mat-error >
       </mat-form-field>
@@ -15,7 +15,7 @@
     <div>
       <mat-form-field>
         <mat-label for="surname">Презиме:</mat-label>
-        <input matInput id="surname" name="surname" placeholder="surname" [formControl]="form.controls.surname">
+        <input matInput id="surname" name="surname" placeholder="презиме" [formControl]="form.controls.surname">
         <mat-error *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
           Ово поље не сме бити празно!</mat-error >
       </mat-form-field>
@@ -24,7 +24,7 @@
     <div>
       <mat-form-field >
         <mat-label for="email">Електронска пошта:</mat-label>
-        <input matInput type="email" id="email" name="email" placeholder="email" [formControl]="form.controls.email">
+        <input matInput type="email" id="email" name="email" placeholder="е-пошта" [formControl]="form.controls.email">
         <mat-error *ngIf="form.controls.email.touched && form.controls.email.errors?.required">
           Ово поље не сме бити празно!</mat-error >
         <mat-error *ngIf="form.controls.email.errors?.email">
@@ -35,7 +35,7 @@
     <div>
       <mat-form-field>
         <mat-label for="password">Лозинка:</mat-label>
-        <input matInput  type="password" id="password" name="password" placeholder="Password" [formControl]="form.controls.password">
+        <input matInput  type="password" id="password" name="password" placeholder="лозинка" [formControl]="form.controls.password">
         <mat-error *ngIf="form.controls.password.touched && form.controls.password.errors?.required">
           Ово поље не сме бити празно!</mat-error>
         <mat-error *ngIf="form.controls.password.errors?.minlength">

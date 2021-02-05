@@ -52,7 +52,7 @@ export class GradjaninMainPageComponent implements OnInit {
         this.zalbe = newList.concat(this.zalbe);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
     this.zalbaService.getZalbaCutanjeListByUser().subscribe(
@@ -81,7 +81,7 @@ export class GradjaninMainPageComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
     this.resenjeService.getResenjeListByUser().subscribe(
@@ -108,7 +108,7 @@ export class GradjaninMainPageComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
 
@@ -124,7 +124,7 @@ export class GradjaninMainPageComponent implements OnInit {
         if (item.status !== 'u obradi' || item.status !== 'neobradjena'){
           this.openDialog($event);
         }else{
-          this.snackBar.open('Zalba je obradjena!', 'Ok', { duration: 2000 });
+          this.snackBar.open('Жалба је обрађена!', 'Ok', { duration: 2000 });
         }
       }
     });

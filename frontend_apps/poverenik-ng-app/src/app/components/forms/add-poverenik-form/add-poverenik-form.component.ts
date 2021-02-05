@@ -56,11 +56,11 @@ export class AddPoverenikFormComponent implements OnInit {
 
     this.addPoverenikService.addPoverenik(signUpUserXML).subscribe(
       result => {
-        this.snackBar.open('Uspjesno dodat poverenik!', 'Ok', { duration: 2000 });
-        this.router.navigate(['/main-page-poverenik']);
+        this.snackBar.open('Успешно додат повереник!', 'Ok', { duration: 2000 });
+        this.router.navigate(['/pocetna-stranica-poverenik']);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Постојећа е-пошта!', 'Ok', { duration: 2000 });
       }
     );
   }

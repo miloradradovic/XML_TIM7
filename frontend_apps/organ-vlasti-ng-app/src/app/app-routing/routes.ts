@@ -22,11 +22,11 @@ import {AddOrganVlastiFormComponent} from '../components/forms/add-organ-vlasti-
 
 export const routes: Routes = [
   {
-    path: 'sign-in',
+    path: 'prijava',
     component: SignInComponent
   },
   {
-    path: 'sign-up',
+    path: 'registracija',
     component: SignUpComponent
   },
   {
@@ -54,7 +54,7 @@ export const routes: Routes = [
     component: ObavestenjaComponent
   },
   {
-    path: 'main-page-organ-vlasti',
+    path: 'pocetna-stranica-organ-vlasti',
     component: OrganVlastiMainPageComponent
   },
   {
@@ -62,7 +62,7 @@ export const routes: Routes = [
     component: ZahteviComponent
   },
   {
-    path: 'main-page-gradjanin',
+    path: 'pocetna-stranica-gradjanin',
     component: GradjaninMainPageComponent
   },
   {

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ZahtevXonomyService } from 'src/app/services/zahtev-xonomy-service/zahtev-xonomy.service';
+import {Component, OnInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ZahtevXonomyService} from 'src/app/services/zahtev-xonomy-service/zahtev-xonomy.service';
 import {Router} from '@angular/router';
 
 declare const Xonomy: any;
@@ -12,16 +12,25 @@ declare const Xonomy: any;
 })
 export class ZahtevFormComponent implements OnInit {
 
-  constructor(private zahtevService: ZahtevXonomyService, public snackBar: MatSnackBar, private router: Router) { }
+  constructor(private zahtevService: ZahtevXonomyService, public snackBar: MatSnackBar, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    const datumAtr = (new Date()).toISOString().split('.')[0];
-    let elementZahtev = document.getElementById("zahtev");
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0'); // day
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // month
+    const yyyy = today.getFullYear(); // year
+    const hour = String(today.getUTCHours() + 1).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    const seconds = String(today.getSeconds()).padStart(2, '0');
+
+    const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;
+    let elementZahtev = document.getElementById('zahtev');
     let xmlStringZahtev =
-    `<?xml version="1.0" encoding="UTF-8"?>
+      `<?xml version="1.0" encoding="UTF-8"?>
     <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
     <zcir:zahtev
         xmlns:zcir="http://www.zahtevcir"
@@ -39,10 +48,10 @@ export class ZahtevFormComponent implements OnInit {
 
   public submit(): void {
     if (Xonomy.warnings.length) {
-      this.snackBar.open("Popunite sva obavezna polja!", 'Ok', { duration: 3000 });
+      this.snackBar.open('Попуните сва обавезна поља!', 'Ок', {duration: 3000});
       return;
     }
-    console.log(Xonomy.harvest())
+    console.log(Xonomy.harvest());
     let data = Xonomy.harvest();
     const datumAtr = data.split('datum=')[1].split('><zcir:mesto>')[0];
     const mesto = data.split('><zcir:mesto>')[1].split('</zcir:mesto>')[0];
@@ -64,7 +73,7 @@ export class ZahtevFormComponent implements OnInit {
     const adresaUlica = data.split('<re:ulica broj=')[1].split('>')[1].split('</re:ulica')[0];
     const kontakt = data.split('<re:drugi_podaci_za_kontakt>')[1].split('</re:drugi_podaci_za_kontakt>')[0];
 
-   let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
+    let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
    <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
    <zcir:zahtev
        xmlns:zcir="http://www.zahtevcir"
@@ -77,10 +86,13 @@ export class ZahtevFormComponent implements OnInit {
                <re:opcije><re:opcija izabran=${opcija1}>oбавештење да ли поседује тражену информацију;</re:opcija><re:opcija izabran=${opcija2}>увид у документ који садржи тражену информацију;</re:opcija><re:opcija izabran=${opcija3}>копију документа који садржи тражену информацију;</re:opcija><re:opcija izabran=${opcija4}>достављање копије документа који садржи тражену информацију:**</re:opcija><re:nacini_dostave><re:nacin_dostave izabran=${opcija11}>поштом</re:nacin_dostave><re:nacin_dostave izabran=${opcija12}>електронском поштом</re:nacin_dostave><re:nacin_dostave izabran=${opcija13}>факсом</re:nacin_dostave><re:nacin_dostave>на други начин:***<re:nacin_dostave_input>${opcijaInput}</re:nacin_dostave_input></re:nacin_dostave></re:nacini_dostave></re:opcije>
                <re:informacija_o_zahtevu>${opis}</re:informacija_o_zahtevu>
            </zcir:tekst_zahteva><zcir:informacije_o_traziocu><re:lice><re:osoba><re:ime>${ime}</re:ime><re:prezime>${prezime}</re:prezime></re:osoba></re:lice><re:adresa><re:mesto>${adresaMesto}</re:mesto><re:ulica broj=${adresaBroj}>${adresaUlica}</re:ulica></re:adresa><re:drugi_podaci_za_kontakt>${kontakt}</re:drugi_podaci_za_kontakt></zcir:informacije_o_traziocu></zcir:zahtev_body></zcir:zahtev>`;
-     console.log(dataTemplate)
+    console.log(dataTemplate);
     this.zahtevService.send(dataTemplate)
-      .subscribe(res => console.log(res));
-    this.snackBar.open("Uspešno ste poslali zahtev!", 'Ok', { duration: 3000 });
+      .subscribe(res => {
+        this.snackBar.open('Успешно сте послали захтев!', 'Ок', {duration: 3000});
+      },
+        error => {
+        });
   }
 
 }

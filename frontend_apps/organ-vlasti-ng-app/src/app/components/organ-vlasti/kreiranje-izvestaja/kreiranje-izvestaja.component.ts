@@ -23,7 +23,7 @@ export class KreiranjeIzvestajaComponent implements OnInit {
     const newList3 = [];
     this.izvestajService.generisiIzvestaj().subscribe(
       result => {
-        this.snackBar.open('Izvestaj je izgenerisan i poslat povereniku!', 'Ok', { duration: 4000 });
+        this.snackBar.open('Извештај је изгенерисан и послат поверенику!', 'Ok', { duration: 4000 });
         // @ts-ignore
         const convert = require('xml-js');
         const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
@@ -47,7 +47,7 @@ export class KreiranjeIzvestajaComponent implements OnInit {
         this.zalbeodluka = newList3;
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }

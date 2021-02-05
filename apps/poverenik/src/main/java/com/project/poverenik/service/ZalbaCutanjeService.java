@@ -43,6 +43,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -50,6 +51,8 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -400,7 +403,7 @@ public class ZalbaCutanjeService {
         User user = (User) authentication.getPrincipal();
         if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)) {
 
-            if (canMakeZalba(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev().getValue())) {
+            if (!canMakeZalba(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev().getValue())) {
                 return false;
             }
             String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
@@ -422,15 +425,25 @@ public class ZalbaCutanjeService {
             return false;
         }
 
-        XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
-
-        Date xmlDate = date.toGregorianCalendar().getTime();
+        SimpleDateFormat sdfAM = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss a");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        String content = zahtevResponse.getZahtev().getOtherAttributes().get(new QName("content"));
+        Date fromString;
         Date dateNow = new Date();
 
-        long diffInMillies = Math.abs(dateNow.getTime() - xmlDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MINUTES);
-
-        return diff >= 2;
+        try{
+            fromString = sdf.parse(content);
+            dateNow = sdfAM.parse(sdfAM.format(dateNow));
+        }catch (Exception e){
+            fromString = null;
+        }
+        long difference_In_Time
+                = dateNow.getTime() - fromString.getTime();
+        long difference_In_Minutes
+                = (difference_In_Time
+                / (1000 * 60))
+                % 60;
+        return difference_In_Minutes >= 2;
     }
 
     

@@ -29,7 +29,7 @@ public class ZahtevMapper {
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("property"), "pred:datum");
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("datatype"), "xs:dateTime");
         zahtev.getZahtevBody().getOtherAttributes().put(new QName("content"), zahtevDTO.getZahtevBody().getDatum().toString());
-
+        zahtev.getZahtevBody().setDatum(zahtevDTO.getZahtevBody().getDatum());
         zahtev.getZahtevBody().setMesto(zahtevDTO.getZahtevBody().getMesto());
         zahtev.getZahtevBody().getMesto().getOtherAttributes().put(new QName("property"), "pred:mesto");
         zahtev.getZahtevBody().getMesto().getOtherAttributes().put(new QName("datatype"), "xs:string");

@@ -18,12 +18,19 @@ export class ZalbaOdlukaFormComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    const datumAtr = (new Date()).toISOString().split('.')[0];
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0'); // day
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // month
+    const yyyy = today.getFullYear(); // year
+    const hour = String(today.getUTCHours() + 1).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    const seconds = String(today.getSeconds()).padStart(2, '0');
+    const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;
     let elementOdluka = document.getElementById("zalbaOdluka");
     let xmlStringOdluka =
     `<?xml version="1.0" encoding="UTF-8"?>
     <zoc:zalba_odluka
-        xmlns:zoc="http://www.zalbanaodlukucir" 
+        xmlns:zoc="http://www.zalbanaodlukucir"
         xmlns:re="http://www.reusability"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -31,7 +38,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
     Xonomy.render(xmlStringOdluka, elementOdluka, {
       validate: this.zalbaOdlukaService.zalbaOdlukaSpecification.validate,
       elements: this.zalbaOdlukaService.zalbaOdlukaSpecification.elements,
-      onchange: () => { 
+      onchange: () => {
       }
     });
   }
@@ -65,7 +72,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
     const kontaktPodnosilac = data.split('<re:drugi_podaci_za_kontakt>')[1].split('</re:drugi_podaci_za_kontakt>')[0];
    let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
     <zoc:zalba_odluka
-        xmlns:zoc="http://www.zalbanaodlukucir" 
+        xmlns:zoc="http://www.zalbanaodlukucir"
         xmlns:re="http://www.reusability"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -74,7 +81,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
              <re:osnova_za_zalbu>${osnova}</re:osnova_za_zalbu>
              <re:clan><re:stav></re:stav></re:clan>
          </zoc:sadrzaj><zoc:podaci_o_podnosiocu_zalbe><re:osoba><re:ime>${imePodnosilac}</re:ime><re:prezime>${prezimePodnosilac}</re:prezime></re:osoba><re:adresa><re:mesto>${adresaMestoPodnosilac}</re:mesto><re:ulica broj=${adresaBrojPodnosilac}>${adresaUlicaPodnosilac}</re:ulica></re:adresa><re:drugi_podaci_za_kontakt>${kontaktPodnosilac}</re:drugi_podaci_za_kontakt></zoc:podaci_o_podnosiocu_zalbe></zoc:zalba_odluka_body></zoc:zalba_odluka>`;
-    
+
     console.log(dataTemplate)
     this.zalbaOdlukaService.send(dataTemplate)
       .subscribe(res => console.log(res));

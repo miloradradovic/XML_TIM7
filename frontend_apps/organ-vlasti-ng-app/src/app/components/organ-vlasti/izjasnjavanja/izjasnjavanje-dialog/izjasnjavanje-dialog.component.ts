@@ -36,11 +36,11 @@ export class IzjasnjavanjeDialogComponent {
     const messageXML = convert.js2xml(messageObject, {compact: true, ignoreComment: true, spaces: 4});
     this.izjasnjavanjeService.posaljiIzjasnjavanje(messageXML).subscribe(
       result => {
-        this.snackBar.open('Uspjesno poslato izjasnjenje!', 'ok', {duration: 2000});
+        this.snackBar.open('Успешно послато изјашњење!', 'Ок', {duration: 2000});
         this.dialogRef.close();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Слање није успело!', 'Ок', { duration: 2000 });
       }
     );
   }

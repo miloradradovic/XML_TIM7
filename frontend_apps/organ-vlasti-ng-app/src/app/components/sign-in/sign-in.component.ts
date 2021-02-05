@@ -58,15 +58,15 @@ export class SignInComponent implements OnInit {
         const user = new SignInModel(email, userToken.token.jwt._text, role);
         console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
-        this.snackBar.open('Uspesna prijava!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Успешна пријава!', 'Ок', { duration: 2000 });
         if (role === 'ROLE_USER'){
-          this.router.navigate(['/main-page-gradjanin']);
+          this.router.navigate(['/pocetna-stranica-gradjanin']);
         }else{
-          this.router.navigate(['/main-page-organ-vlasti']);
+          this.router.navigate(['/pocetna-stranica-organ-vlasti']);
         }
       },
       error => {
-        this.snackBar.open('Bad credentials!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Лоши креденцијали!', 'Ok', { duration: 2000 });
       }
     );
   }

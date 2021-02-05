@@ -117,7 +117,12 @@
                                 (Потпис овлашћеног лица, односно руководиоца органа)
                             </fo:block>
                         </fo:inline-container>
-                </fo:block>
+                    </fo:block>
+                    <fo:block>
+                        <fo:basic-link external-destination="url({/oba:obavestenje/oba:obavestenje_body/@link_na_zahtev})"  font-family="Times New Roman" text-altitude="2cm" color="blue">
+                                Референцирани захтев
+                        </fo:basic-link>
+                    </fo:block>
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>

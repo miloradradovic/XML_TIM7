@@ -145,7 +145,6 @@ public class ZalbaOdlukaController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-<<<<<<< HEAD
     
     //odluka-1
     @RequestMapping(value = "/toRdf/{idZalbe}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -162,7 +161,5 @@ public class ZalbaOdlukaController {
         String path = zalbaOdlukaService.generateJson(idZalbe);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-=======
 
->>>>>>> 73d72a09413557e7541e3dacf99cecafd792a252
 }

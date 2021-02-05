@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 
 @Component({
   selector: 'app-poverenik-detaljni-prikaz-zahteva',
@@ -10,6 +12,7 @@ export class PoverenikDetaljniPrikazZahtevaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -4,7 +4,7 @@
       <input id="pretragaTekst" (input)="onTekstChanged($event.target.valueOf())" #inputField matInput placeholder="...">
     </mat-form-field>
   </div>
- 
+
   <div style="width: 100%; padding-left: 2%">
     <form (ngSubmit)="onSubmitClicked()">
       <mat-form-field appearance="outline" style="width: 13%">
@@ -45,10 +45,11 @@
       <button id="submit" style="width:8%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Pretraži</button>
     </form>
   </div>
-  
+
 
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
   <app-table [columnsToDisplay]="['Id zalbe', 'Tip', 'xhtml', 'pdf']"
              [columnsToIterate]="['id', 'tip']"
-             [dataSource]="zalbe" (XHTMLZalba)="convertToXHTML($event)" (PDFZalba)="convertToPDF($event)"></app-table>
+             [dataSource]="zalbe" (XHTMLZalba)="convertToXHTML($event)" (PDFZalba)="convertToPDF($event)"
+             (DoubleClickZalba)="doubleClicked($event)"></app-table>
 </div>

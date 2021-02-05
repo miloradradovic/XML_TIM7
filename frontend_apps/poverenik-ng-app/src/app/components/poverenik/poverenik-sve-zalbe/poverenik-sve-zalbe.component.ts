@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import {of} from 'rxjs';
+import {Router} from '@angular/router';
 
 declare var require: any;
 
@@ -16,7 +17,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
 
   form: FormGroup;
   zalbe = []; // objekti tipa {id: number}
-  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private fb: FormBuilder) {
+  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private fb: FormBuilder, private router: Router ) {
     this.form = this.fb.group({
       mesto: [''],
       organVlasti: [''],
@@ -175,6 +176,17 @@ export class PoverenikSveZalbeComponent implements OnInit {
       }
     );
 
+  }
+
+  doubleClicked($event: string): void {
+    console.log($event);
+    this.zalbe.forEach((item, index) => {
+      const zalba = item.tip + '/' + item.id;
+      if (zalba === $event){
+        this.router.navigate(['/detaljni-prikaz-zalbe'], {queryParams: {zalba_id: zalba, zalba_status: item.status}});
+      }
+    });
+    // this.router.navigate(['/detailed-cultural-offer'], {queryParams: {offer_id: offerId}});
   }
 
   onDatumAfterChanged(event) {

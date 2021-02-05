@@ -20,6 +20,10 @@ export class TableComponent implements OnInit, OnChanges {
   @Output() XHTMLZalba = new EventEmitter<string>();
   @Output() PDF = new EventEmitter<number>();
   @Output() PDFZalba = new EventEmitter<string>();
+  @Output() RDF = new EventEmitter<number>();
+  @Output() RDFZalba = new EventEmitter<string>();
+  @Output() JSON = new EventEmitter<number>();
+  @Output() JSONZalba = new EventEmitter<string>();
   constructor() {
 
   }
@@ -96,4 +100,23 @@ export class TableComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
+  rdf(id, tip: any) {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '-' + id;
+      this.RDFZalba.emit(returnValue);
+    }else{
+      this.RDF.emit(id);
+    }
+  }
+
+  json(id, tip: any) {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Id zalbe')){
+      returnValue = tip + '-' + id;
+      this.JSONZalba.emit(returnValue);
+    }else{
+      this.JSON.emit(id);
+    }
+  }
 }

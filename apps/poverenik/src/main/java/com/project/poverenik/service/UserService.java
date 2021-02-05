@@ -11,6 +11,8 @@ import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.xmldb.api.base.ResourceIterator;
@@ -105,20 +107,31 @@ public class UserService {
         //id_zalbe = tip/id
         String tip = id.split("/")[0];
         String idZalbe = id.split("/")[1];
-        boolean isUpdated;
 
         if (tip.equals("cutanje")) {
             ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(idZalbe);
-            isUpdated = zalbaCutanjeService.update(zalbaCutanje, "ponistena");
+            if (zalbaCutanje == null) {
+                return false;
+            } else if (zalbaCutanje.getZalbaCutanjeBody().getStatus().getValue().equals("neobradjena") ||
+                    zalbaCutanje.getZalbaCutanjeBody().getStatus().getValue().equals("u obradi")) {
+                return zalbaCutanjeService.update(zalbaCutanje, "ponistena");
+            }
         } else {
             ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
-            isUpdated = zalbaOdlukaService.update(zalbaOdluka, "ponistena");
+            if (zalbaOdluka == null) {
+                return false;
+            } else if (zalbaOdluka.getZalbaOdlukaBody().getStatus().getValue().equals("neobradjena") ||
+                    zalbaOdluka.getZalbaOdlukaBody().getStatus().getValue().equals("u obradi")) {
+                return zalbaOdlukaService.update(zalbaOdluka, "ponistena");
+            }
         }
 
-        return isUpdated;
+        return false;
     }
 
-    public boolean sendEmail(String info, User user) {
+    public boolean sendEmail(String info) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         //info = "zalba/id email"
         String zalba = info.split(" ")[0];
         String email = info.split(" ")[1];

@@ -76,4 +76,5 @@ export class ZalbaService {
     return this.http.get('http://localhost:8085/zalba-odluka/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
+
 }

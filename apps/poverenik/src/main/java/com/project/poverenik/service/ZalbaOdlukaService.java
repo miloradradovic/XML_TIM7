@@ -3,8 +3,10 @@ package com.project.poverenik.service;
 import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
+import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
+import com.project.poverenik.model.zahtev.client.getZahtevResponse;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
@@ -18,6 +20,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
@@ -35,6 +39,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -42,7 +47,9 @@ import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ZalbaOdlukaService {
@@ -55,6 +62,9 @@ public class ZalbaOdlukaService {
 
     @Autowired
     private ExistManager existManager;
+
+    @Autowired
+    private ZahtevService zahtevService;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = zalbaOdlukaRepository.getMaxId();
@@ -73,18 +83,44 @@ public class ZalbaOdlukaService {
 
     }
 
-    public boolean create(ZalbaOdluka zalbaOdlukaDTO, String userEmail) throws XMLDBException, NumberFormatException, JAXBException {
+    public boolean create(ZalbaOdluka zalbaOdlukaDTO) throws XMLDBException, NumberFormatException, JAXBException {
         if (jaxB.validate(zalbaOdlukaDTO.getClass(), zalbaOdlukaDTO)) {
+
+            if (canMakeZalba(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev().getValue())) {
+                return false;
+            }
 
             String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-            ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id, userEmail);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = (User) authentication.getPrincipal();
+
+            ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id, user.getEmail());
 
             if (jaxB.validate(zalbaOdluka.getClass(), zalbaOdluka)) {
                 return zalbaOdlukaRepository.create(zalbaOdluka);
             }
         }
         return false;
+    }
+
+    public boolean canMakeZalba(String idZahteva) {
+        getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
+        if (zahtevResponse == null)
+            return false;
+        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen")){
+            return false;
+        }
+
+        XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
+
+        Date xmlDate = date.toGregorianCalendar().getTime();
+        Date dateNow = new Date();
+
+        long diffInMillies = Math.abs(dateNow.getTime() - xmlDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MINUTES);
+
+        return diff >= 2;
     }
 
     public ZalbaOdlukaList getAll() throws XMLDBException, JAXBException {
@@ -238,6 +274,7 @@ public class ZalbaOdlukaService {
             ZalbaOdluka xml = getOne(broj);
             transformator.generateHTML(existManager.getOutputStream(xml),
                     XSL, OUTPUT_HTML);
+
             transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
         } catch (XMLDBException | IOException | JAXBException e) {
             e.printStackTrace();
@@ -251,10 +288,13 @@ public class ZalbaOdlukaService {
         return true;
     }
 
-    public ZalbaOdlukaList getByUser(String email) throws XMLDBException, JAXBException {
+    public ZalbaOdlukaList getByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         List<ZalbaOdluka> zalbaOdlukaList = new ArrayList<>();
 
-        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByUser(email);
+        ResourceSet resourceSet = zalbaOdlukaRepository.getAllByUser(user.getEmail());
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()) {

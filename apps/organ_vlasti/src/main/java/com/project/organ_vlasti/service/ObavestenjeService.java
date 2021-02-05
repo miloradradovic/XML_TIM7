@@ -95,14 +95,21 @@ public class ObavestenjeService {
             //email usera koji je podnio zahtjev na koji se odnosi obavjestenje
             String zahtevId = obavestenjeDTO.getObavestenjeBody().getIdZahteva();
             Zahtev zahtev = zahtevService.getOne(zahtevId);
+
+            if (zahtev == null) {
+                return false;
+            } else if (!zahtev.getZahtevBody().getStatus().getValue().equals("neobradjen")) {
+                return false;
+            }
             String userEmail = zahtev.getZahtevBody().getInformacijeOTraziocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
             Obavestenje obavestenje = ObavestenjeMapper.mapFromDTO(obavestenjeDTO, id, userEmail);
 
             if (jaxB.validate(obavestenje.getClass(), obavestenje)) {
                 if (obavestenjeRepository.create(obavestenje) != null) {
                     String email = obavestenje.getObavestenjeBody().getInformacijeOPodnosiocu().getLice().getOsoba().getOtherAttributes().get(new QName("id"));
-                    zahtevService.update(zahtev, "prihvacen");
-                    return sendToUser(id, email);
+                    if (zahtevService.update(zahtev, "prihvacen")) {
+                        return sendToUser(id, email);
+                    }
                 }
             }
         }
@@ -127,9 +134,9 @@ public class ObavestenjeService {
         sendAttach.getEmail().setContent("Postovani, <br/><br/> dostavljamo Vam obavestenje na Vas zahtev. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Obavestenje " + broj);
 
-        boolean obavestenje = generateDocuments(broj);
-        //TODO - boolean provera
-
+        if (!generateDocuments(broj)) {
+            return false;
+        }
 
         String pdfName = "obavestenje" + broj + ".pdf";
         sendAttach.getEmail().setFilePdfName(pdfName);
@@ -147,7 +154,6 @@ public class ObavestenjeService {
             byte[] htmlBytes = Files.readAllBytes(htmlPath);
 
             sendAttach.getEmail().setFileHtml(htmlBytes);
-
 
             return emailClient.sentAttach(sendAttach);
 
@@ -181,13 +187,9 @@ public class ObavestenjeService {
         if (xmlResource == null)
             return null;
 
-        Obavestenje obavestenje;
-
         JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        obavestenje = (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-
-        return obavestenje;
+        return (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
     }
 
     public Obavestenje getObavestenjeByZahtev(String idZahteva) throws JAXBException, XMLDBException {
@@ -204,11 +206,6 @@ public class ObavestenjeService {
         JAXBContext context = JAXBContext.newInstance(Obavestenje.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (Obavestenje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-
-    }
-
-    public boolean delete(String broj) throws XMLDBException {
-        return obavestenjeRepository.delete(broj);
     }
 
     public boolean update(Obavestenje obavestenje) throws JAXBException, XMLDBException {
@@ -330,13 +327,14 @@ public class ObavestenjeService {
             obavestenjeList.add(obavestenje);
         }
         return new ObavestenjeList(obavestenjeList);
-
     }
 
-    public ObavestenjeList getAllByUser(String email) throws XMLDBException, JAXBException {
+    public ObavestenjeList getAllByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         List<Obavestenje> obavestenjeList = new ArrayList<>();
 
-        ResourceSet resourceSet = obavestenjeRepository.getAllByUser(email);
+        ResourceSet resourceSet = obavestenjeRepository.getAllByUser(user.getEmail());
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()) {
@@ -405,4 +403,23 @@ public class ObavestenjeService {
 		query.close();
 		return "src/main/resources/generated_files/metadata/" + "obavestenje-" + id + ".json";
 	}
+
+    public String downloadResenjePDF(String broj) {
+        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj) {
+        String path = "src/main/resources/generated_files/documents/obavestenje" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
 }

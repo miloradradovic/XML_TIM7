@@ -45,6 +45,8 @@ import { DetaljniPrikazObavestenjaComponent } from './components/organ-vlasti/de
 import { DetaljniPrikazIzvestajaComponent } from './components/organ-vlasti/detaljni-prikaz-izvestaja/detaljni-prikaz-izvestaja.component';
 import { DetaljniPrikazResenjaComponent } from './components/organ-vlasti/detaljni-prikaz-resenja/detaljni-prikaz-resenja.component';
 import { DetaljniPrikazZalbeComponent } from './components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
+import { DialogOdbijanjeComponent } from './components/organ-vlasti/detaljni-prikaz-zahteva/dialog-odbijanje/dialog-odbijanje.component';
+import { AddOrganVlastiFormComponent } from './components/forms/add-organ-vlasti-form/add-organ-vlasti-form.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { DetaljniPrikazZalbeComponent } from './components/organ-vlasti/detaljni
     DetaljniPrikazObavestenjaComponent,
     DetaljniPrikazIzvestajaComponent,
     DetaljniPrikazResenjaComponent,
-    DetaljniPrikazZalbeComponent
+    DetaljniPrikazZalbeComponent,
+    DialogOdbijanjeComponent,
+    AddOrganVlastiFormComponent
   ],
   imports: [
     BrowserModule,

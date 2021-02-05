@@ -58,79 +58,74 @@ import java.util.List;
 @Service
 public class IzvestajiService {
 
-	@Autowired
-	private IzvestajiRepository izvestajiRepository;
-
+    @Autowired
+    private IzvestajiRepository izvestajiRepository;
+    
 	@Autowired
 	private ExistManager existManager;
 
 	@Autowired
 	private ZahtevService zahtevService;
 
-	private String getMaxId() throws XMLDBException, JAXBException {
-		ResourceSet max = izvestajiRepository.getMaxId();
-		ResourceIterator resourceIterator = max.getIterator();
+    private String getMaxId() throws XMLDBException, JAXBException {
+        ResourceSet max = izvestajiRepository.getMaxId();
+        ResourceIterator resourceIterator = max.getIterator();
 
-		if (!resourceIterator.hasMoreResources()) {
-			return "0000";
-		}
-		XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-		if (xmlResource == null)
-			return "0000";
-		JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		Izvestaj izvestajMax = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-		return izvestajMax.getIzvestajBody().getId();
-	}
+        if (!resourceIterator.hasMoreResources()) {
+            return "0000";
+        }
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            return "0000";
+        JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Izvestaj izvestajMax = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        return izvestajMax.getIzvestajBody().getId();
+    }
 
-	public boolean generate() throws XMLDBException, JAXBException, DatatypeConfigurationException {
-		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.client");
+    public boolean generate() throws XMLDBException, JAXBException, DatatypeConfigurationException {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.client");
 
-		IzvestajiClient izvestajiClient = new IzvestajiClient();
-		izvestajiClient.setDefaultUri("http://localhost:8085/ws");
-		izvestajiClient.setMarshaller(marshaller);
-		izvestajiClient.setUnmarshaller(marshaller);
+        IzvestajiClient izvestajiClient = new IzvestajiClient();
+        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
+        izvestajiClient.setMarshaller(marshaller);
+        izvestajiClient.setUnmarshaller(marshaller);
 
-		getPodaci getPodaciRequest = new getPodaci();
-		getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
+        getPodaci getPodaciRequest = new getPodaci();
+        getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
 
-		Izvestaj izvestaj = compose(response.getResponse());
-		String id = create(izvestaj);
-		if (id != null) {
-			if (sendToPoverenik(id)) {
-				izvestaj.getIzvestajBody().setId(id);
-				return true;
-			}
-		}
+        if(response == null){
+            return false;
+        }
 
-		return false;
-	}
+        Izvestaj izvestaj = compose(response.getResponse());
+        String id = create(izvestaj);
+        if (id != null) {
+            return sendToPoverenik(id);
+        }
+        return false;
+    }
 
-	private boolean sendToPoverenik(String id) {
+    private boolean sendToPoverenik(String id) {
 
-		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.database.client");
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.database.client");
 
-		IzvestajiClient izvestajiClient = new IzvestajiClient();
-		izvestajiClient.setDefaultUri("http://localhost:8085/ws");
-		izvestajiClient.setMarshaller(marshaller);
-		izvestajiClient.setUnmarshaller(marshaller);
+        IzvestajiClient izvestajiClient = new IzvestajiClient();
+        izvestajiClient.setDefaultUri("http://localhost:8085/ws");
+        izvestajiClient.setMarshaller(marshaller);
+        izvestajiClient.setUnmarshaller(marshaller);
 
-		podnesiIzvestaj podnesiIzvestajRequest = new podnesiIzvestaj();
-		podnesiIzvestajRequest.setIzvestajRef(id);
-		return izvestajiClient.sendIzvestajRef(podnesiIzvestajRequest);
+        podnesiIzvestaj podnesiIzvestajRequest = new podnesiIzvestaj();
+        podnesiIzvestajRequest.setIzvestajRef(id);
+        return izvestajiClient.sendIzvestajRef(podnesiIzvestajRequest);
 
-	}
+    }
 
-	public String create(Izvestaj izvestaj) throws XMLDBException, JAXBException {
-
-		String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
-		izvestaj.getIzvestajBody().setId(id);
-
-		return izvestajiRepository.create(izvestaj);
-
-	}
+    public String create(Izvestaj izvestaj) throws XMLDBException {
+        return izvestajiRepository.create(izvestaj);
+    }
 
 	public Izvestaj compose(Tbody zalbe) throws XMLDBException, JAXBException, DatatypeConfigurationException {
 
@@ -265,61 +260,62 @@ public class IzvestajiService {
 		return izvestajiRepository.delete(id);
 	}
 
-	public IzvestajList searchMetadata(String datumAfter, String datumBefore)
-			throws IOException, JAXBException, XMLDBException {
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+	public IzvestajList searchMetadata(String datumAfter, String datumBefore) throws IOException, JAXBException, XMLDBException {
+        ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
-		if (datumAfter.equals("")) {
-			datumAfter = "1000-01-01T00:00:00";
-		}
-		if (datumBefore.equals("")) {
-			datumBefore = "9999-12-31T00:00:00";
-		}
+        if (datumAfter.equals("")) {
+            datumAfter = "1000-01-01T00:00:00";
+        }
+        if (datumBefore.equals("")) {
+            datumBefore = "9999-12-31T00:00:00";
+        }
 
-		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_izvestaj.rq",
-				StandardCharsets.UTF_8);
-		System.out.println(sparqlQueryTemplate);
+        String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_izvestaj.rq",
+                StandardCharsets.UTF_8);
+        System.out.println(sparqlQueryTemplate);
 
-		String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore);
-		System.out.println(sparqlQuery);
+        String sparqlQuery = String.format(sparqlQueryTemplate, datumAfter, datumBefore);
+        System.out.println(sparqlQuery);
 
-		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		ResultSet results = query.execSelect();
+        ResultSet results = query.execSelect();
 
-		RDFNode id;
+        RDFNode id;
 
-		IzvestajList zcList;
+        IzvestajList zcList;
 
-		List<Izvestaj> listZC = new ArrayList<>();
+        List<Izvestaj> listZC = new ArrayList<>();
 
-		while (results.hasNext()) {
+        while (results.hasNext()) {
 
-			QuerySolution querySolution = results.next();
+            QuerySolution querySolution = results.next();
 
-			id = querySolution.get("izvestaj");
-			String idStr = id.toString().split("izvestaji/")[1];
-			Izvestaj z = getOne(idStr);
-			listZC.add(z);
-		}
+            id = querySolution.get("izvestaj");
+            String idStr = id.toString().split("izvestaji/")[1];
+            Izvestaj z = getOne(idStr);
+            if(z == null){
+                return null;
+            }
+            listZC.add(z);
+        }
 
-		zcList = new IzvestajList(listZC);
-		System.out.println();
+        zcList = new IzvestajList(listZC);
+        System.out.println();
 
-		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		results = query.execSelect();
+        results = query.execSelect();
 
-		// ResultSetFormatter.outputAsXML(System.out, results);
-		ResultSetFormatter.out(System.out, results);
+        // ResultSetFormatter.outputAsXML(System.out, results);
+        ResultSetFormatter.out(System.out, results);
 
-		query.close();
+        query.close();
 
-		System.out.println("[INFO] End.");
+        System.out.println("[INFO] End.");
 
-		return zcList;
-
-	}
+        return zcList;
+    }
 
 	public String generateRdf(String id)
 			throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
@@ -378,5 +374,4 @@ public class IzvestajiService {
 		query.close();
 		return "src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json";
 	}
-
 }

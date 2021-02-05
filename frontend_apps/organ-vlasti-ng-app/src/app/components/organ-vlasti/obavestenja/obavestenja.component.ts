@@ -85,7 +85,7 @@ export class ObavestenjaComponent implements OnInit {
     console.log(newValue.value)
     this.obavestenjeService.getPretragaTekst(newValue.value).subscribe(
       result => {
-        this.renderObavestenja(result);    
+        this.renderObavestenja(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -101,7 +101,7 @@ export class ObavestenjaComponent implements OnInit {
     console.log(this.form.controls.datumBefore.value)
     this.obavestenjeService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value, this.form.controls.zahtev.value).subscribe(
       result => {
-        this.renderObavestenja(result);    
+        this.renderObavestenja(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -118,11 +118,53 @@ export class ObavestenjaComponent implements OnInit {
   }
 
 
-  pdf($event: number) {
+  pdf($event: string): void {
+    this.obavestenjeService.convertZahtevPDF($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'obavestenje' + $event + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  xhtml($event: string): void {
+    this.obavestenjeService.convertZahtevXHTML($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'obavestenje' + $event + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  rdfObavestenje($event: number) {
 
   }
 
-  xhtml($event: number) {
+  jsonObavestenje($event: number) {
 
   }
 }

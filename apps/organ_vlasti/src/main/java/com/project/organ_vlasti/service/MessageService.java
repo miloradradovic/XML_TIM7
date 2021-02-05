@@ -74,13 +74,9 @@ public class MessageService {
         if (xmlResource == null)
             return null;
 
-        Message message;
-
         JAXBContext context = JAXBContext.newInstance(Message.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        message = (Message) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-
-        return message;
+        return (Message) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
     }
 
     public boolean delete(String id) throws XMLDBException {
@@ -98,13 +94,10 @@ public class MessageService {
 
         SetIzjasnjavanje setIzjasnjavanje = new SetIzjasnjavanje();
         setIzjasnjavanje.setMessage(message.getBody().getValue());
-        boolean isSet = izvestavanjeClient.sendIzjasnjavanje(setIzjasnjavanje);
-        if (isSet) {
-            delete(message.getBody().getId());
-            return true;
+
+        if (izvestavanjeClient.sendIzjasnjavanje(setIzjasnjavanje)) {
+            return delete(message.getBody().getId());
         }
         return false;
-
     }
-
 }

@@ -92,6 +92,10 @@ public class IzvestajRefService {
         ResourceSet resourceSet = izvestajRefRepository.getOneByBroj(broj);
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
+        if (!resourceIterator.hasMoreResources()) {
+            return null;
+        }
+
         XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
         if (xmlResource == null)
             return null;
@@ -145,7 +149,6 @@ public class IzvestajRefService {
             return getRefs(refsResponse.getResponse().getRef(), status);
         }
         return null;
-
     }
 
     public IzvestajRefList getRefs(List<String> refs, String status) throws XMLDBException, JAXBException {
@@ -185,6 +188,8 @@ public class IzvestajRefService {
         getIzvestajByIdResponse getIzvestajByIdResponse = izvestajClient.getOneResenje(getIzvestajById);
         if (getIzvestajByIdResponse != null) {
             IzvestajRef izvestajRef = getOneByBroj(id);
+            if (izvestajRef == null)
+                return null;
             izvestajRef.getBody().setProcitano("da");
             update(izvestajRef);
         }

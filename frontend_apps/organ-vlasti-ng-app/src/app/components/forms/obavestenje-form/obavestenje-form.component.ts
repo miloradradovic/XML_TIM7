@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ObavestenjeXonomyService } from 'src/app/services/obavestenje-xonomy-service/obavestenje-xonomy.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare const Xonomy: any;
 
@@ -12,7 +12,7 @@ declare const Xonomy: any;
 })
 export class ObavestenjeFormComponent implements OnInit {
 
-  constructor(private obavestenjeService: ObavestenjeXonomyService, public snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router, private obavestenjeService: ObavestenjeXonomyService, public snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) { }
 
   idZahteva = '1';
 

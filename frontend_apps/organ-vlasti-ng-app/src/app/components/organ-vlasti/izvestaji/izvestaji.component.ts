@@ -98,7 +98,7 @@ export class IzvestajiComponent implements OnInit {
     console.log(this.form.controls.datumBefore.value)
     this.izvestajService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value).subscribe(
       result => {
-        this.renderIzvestaji(result);    
+        this.renderIzvestaji(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -119,6 +119,14 @@ export class IzvestajiComponent implements OnInit {
   }
 
   xhtml($event: number) {
+
+  }
+
+  rdfIzvestaji($event: number) {
+
+  }
+
+  jsonIzvestaji($event: number) {
 
   }
 }

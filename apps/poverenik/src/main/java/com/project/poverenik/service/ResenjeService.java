@@ -102,14 +102,22 @@ public class ResenjeService {
             String email;
             if (zalba.equals("cutanje")) {
                 ZalbaCutanje zalbaCutanje = zalbaCutanjeService.getOne(idZalbe);
-                if (zalbaCutanje == null)
+                if (zalbaCutanje == null) {
                     return false;
+                } else if (!zalbaCutanje.getZalbaCutanjeBody().getStatus().getValue().equals("u obradi")) {
+                    return false;
+                }
+
                 email = zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().get(new QName("id"));
                 zalbaCutanjeService.update(zalbaCutanje, status);
             } else {
                 ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
-                if (zalbaOdluka == null)
+                if (zalbaOdluka == null) {
                     return false;
+                } else if (!zalbaOdluka.getZalbaOdlukaBody().getStatus().equals("u obradi")) {
+                    return false;
+                }
+
                 email = zalbaOdluka.getZalbaOdlukaBody().getZalilac().getTipLica().getOsoba().getOtherAttributes().get(new QName("id"));
                 zalbaOdlukaService.update(zalbaOdluka, status);
             }
@@ -172,6 +180,7 @@ public class ResenjeService {
     }
 
     public Resenje getResenjeByZalba(String idZalbe) throws JAXBException, XMLDBException {
+        idZalbe = idZalbe.replace("-", "/");
         ResourceSet resourceSet = resenjeRepository.getResenjeByZalba(idZalbe);
 
         ResourceIterator resourceIterator = resourceSet.getIterator();
@@ -242,6 +251,8 @@ public class ResenjeService {
             id = querySolution.get("resenje");
             String idStr = id.toString().split("resenja/")[1];
             Resenje r = getOne(idStr);
+            if (r == null)
+                return null;
             listR.add(r);
         }
 
@@ -263,10 +274,12 @@ public class ResenjeService {
 
     }
 
-    public ResenjeList getByUser(String email) throws XMLDBException, JAXBException {
+    public ResenjeList getByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         List<Resenje> resenjeList = new ArrayList<>();
 
-        ResourceSet resourceSet = resenjeRepository.getAllByUser(email);
+        ResourceSet resourceSet = resenjeRepository.getAllByUser(user.getEmail());
         ResourceIterator resourceIterator = resourceSet.getIterator();
 
         while (resourceIterator.hasMoreResources()) {
@@ -358,8 +371,10 @@ public class ResenjeService {
         sendAttach.getEmail().setContent("Postovani, <br/><br/> Dostavljamo Vam resenje na Vasu zalbu. <br/><br/> Srdacno,  " + user.getName() + " " + user.getLastName());
         sendAttach.getEmail().setSubject("Resenje " + broj);
 
-        generateDocuments(broj);
-        //TODO - boolean povezati
+        if (!generateDocuments(broj)) {
+            return false;
+        }
+
         String pdfName = "resenje" + broj + ".pdf";
         sendAttach.getEmail().setFilePdfName(pdfName);
         String htmlName = "resenje" + broj + ".html";

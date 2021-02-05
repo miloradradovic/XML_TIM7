@@ -86,7 +86,7 @@ export class ProcitanaResenjaComponent implements OnInit {
     console.log(newValue.value)
     this.resenjeService.getPretragaTekst('da', newValue.value).subscribe(
       result => {
-        this.renderResenja(result);    
+        this.renderResenja(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -106,7 +106,7 @@ export class ProcitanaResenjaComponent implements OnInit {
     this.resenjeService.getPretragaMetadata('da', this.form.controls.poverenik.value, this.form.controls.trazilac.value, this.form.controls.zalba.value.replace('/', '-'), this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.tip.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value).subscribe(
       result => {
         console.log(result)
-        this.renderResenja(result);    
+        this.renderResenja(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -127,6 +127,14 @@ export class ProcitanaResenjaComponent implements OnInit {
   }
 
   xhtml($event: number) {
+
+  }
+
+  rdfResenja($event: number) {
+
+  }
+
+  jsonResenja($event: number) {
 
   }
 }

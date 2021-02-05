@@ -88,4 +88,20 @@ export class GradjaninMainPageComponent implements OnInit {
   convertToXHTMLObavestenje($event: number) {
 
   }
+
+  jsonZahtev($event: number) {
+
+  }
+
+  rdfZahtev($event: number) {
+
+  }
+
+  rdfObavestenje($event: number) {
+
+  }
+
+  jsonObavestenje($event: number) {
+
+  }
 }

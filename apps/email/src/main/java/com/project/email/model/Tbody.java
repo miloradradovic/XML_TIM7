@@ -29,8 +29,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tbody", propOrder = {
@@ -62,10 +60,8 @@ public class Tbody {
     /**
      * Gets the value of the to property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTo() {
         return to;
@@ -74,10 +70,8 @@ public class Tbody {
     /**
      * Sets the value of the to property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTo(String value) {
         this.to = value;
@@ -86,10 +80,8 @@ public class Tbody {
     /**
      * Gets the value of the content property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getContent() {
         return content;
@@ -98,10 +90,8 @@ public class Tbody {
     /**
      * Sets the value of the content property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setContent(String value) {
         this.content = value;
@@ -110,10 +100,8 @@ public class Tbody {
     /**
      * Gets the value of the subject property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getSubject() {
         return subject;
@@ -122,10 +110,8 @@ public class Tbody {
     /**
      * Sets the value of the subject property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSubject(String value) {
         this.subject = value;
@@ -134,10 +120,8 @@ public class Tbody {
     /**
      * Gets the value of the filePdfName property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getFilePdfName() {
         return filePdfName;
@@ -146,10 +130,8 @@ public class Tbody {
     /**
      * Sets the value of the filePdfName property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFilePdfName(String value) {
         this.filePdfName = value;
@@ -158,10 +140,8 @@ public class Tbody {
     /**
      * Gets the value of the fileHtmlName property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getFileHtmlName() {
         return fileHtmlName;
@@ -170,10 +150,8 @@ public class Tbody {
     /**
      * Sets the value of the fileHtmlName property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFileHtmlName(String value) {
         this.fileHtmlName = value;
@@ -182,10 +160,8 @@ public class Tbody {
     /**
      * Gets the value of the filePdf property.
      *
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *
+     * @return possible object is
+     * {@link Object }
      */
     public Object getFilePdf() {
         return filePdf;
@@ -194,10 +170,8 @@ public class Tbody {
     /**
      * Sets the value of the filePdf property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *
+     * @param value allowed object is
+     *              {@link Object }
      */
     public void setFilePdf(Object value) {
         this.filePdf = value;
@@ -206,10 +180,8 @@ public class Tbody {
     /**
      * Gets the value of the fileHtml property.
      *
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *
+     * @return possible object is
+     * {@link Object }
      */
     public Object getFileHtml() {
         return fileHtml;
@@ -218,10 +190,8 @@ public class Tbody {
     /**
      * Sets the value of the fileHtml property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *
+     * @param value allowed object is
+     *              {@link Object }
      */
     public void setFileHtml(Object value) {
         this.fileHtml = value;

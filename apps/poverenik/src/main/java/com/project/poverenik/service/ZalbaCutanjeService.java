@@ -3,7 +3,9 @@ package com.project.poverenik.service;
 import com.project.poverenik.database.ExistManager;
 import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaCutanjeMapper;
+import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
+import com.project.poverenik.model.zahtev.client.getZahtevResponse;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
@@ -18,6 +20,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
@@ -38,6 +42,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -46,19 +51,25 @@ import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ZalbaCutanjeService {
-
+	
 	@Autowired
-	private JaxB jaxB;
+    private JaxB jaxB;
 
-	@Autowired
-	private ZalbaCutanjeRepository zalbaCutanjeRepository;
+    @Autowired
+    private ZalbaCutanjeRepository zalbaCutanjeRepository;
 
-	@Autowired
-	private ExistManager existManager;
+    @Autowired
+    private ExistManager existManager;
+
+    @Autowired
+    private ZahtevService zahtevService;
+
 
 	private String getMaxId() throws XMLDBException, JAXBException {
 		ResourceSet max = zalbaCutanjeRepository.getMaxId();
@@ -382,5 +393,129 @@ public class ZalbaCutanjeService {
 		query.close();
 		return "src/main/resources/generated_files/metadata/" + idZalbe + ".json";
 	}
+    
 
+    public boolean create(ZalbaCutanje zalbaCutanjeDTO) throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        if (jaxB.validate(zalbaCutanjeDTO.getClass(), zalbaCutanjeDTO)) {
+
+            if (canMakeZalba(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev().getValue())) {
+                return false;
+            }
+            String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
+
+            ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, user.getEmail());
+
+            if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
+                return zalbaCutanjeRepository.create(zalbaCutanje);
+            }
+        }
+        return false;
+    }
+
+    public boolean canMakeZalba(String idZahteva) {
+        getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
+        if (zahtevResponse == null)
+            return false;
+        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen")){
+            return false;
+        }
+
+        XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
+
+        Date xmlDate = date.toGregorianCalendar().getTime();
+        Date dateNow = new Date();
+
+        long diffInMillies = Math.abs(dateNow.getTime() - xmlDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MINUTES);
+
+        return diff >= 2;
+    }
+
+    
+    public ZalbaCutanjeList getByUser() throws XMLDBException, JAXBException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        List<ZalbaCutanje> zalbaCutanjeList = new ArrayList<>();
+
+        ResourceSet resourceSet = zalbaCutanjeRepository.getAllByUser(user.getEmail());
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        while (resourceIterator.hasMoreResources()) {
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if (xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            zalbaCutanjeList.add(zalbaCutanje);
+        }
+        return new ZalbaCutanjeList(zalbaCutanjeList);
+    }
+
+    public ZalbaCutanjeList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
+                                           String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
+        ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+        if (datumAfter.equals("")) {
+            datumAfter = "1000-01-01T00:00:00";
+        }
+        if (datumBefore.equals("")) {
+            datumBefore = "9999-12-31T00:00:00";
+        }
+
+        String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
+                StandardCharsets.UTF_8);
+        System.out.println(sparqlQueryTemplate);
+
+        String user;
+        if (userEmail.equals("")) {
+            user = "?podnosilac";
+        } else {
+            user = "<http://users/" + userEmail + ">";
+        }
+
+        String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
+        System.out.println(sparqlQuery);
+
+        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+        ResultSet results = query.execSelect();
+
+        RDFNode id;
+
+        ZalbaCutanjeList zcList;
+
+        List<ZalbaCutanje> listZC = new ArrayList<>();
+
+        while (results.hasNext()) {
+
+            QuerySolution querySolution = results.next();
+
+            id = querySolution.get("zalba");
+            if (id.toString().contains("cutanje")) {
+                String idStr = id.toString().split("zalbe/cutanje/")[1];
+                ZalbaCutanje z = getOne(idStr);
+                listZC.add(z);
+            }
+        }
+
+        zcList = new ZalbaCutanjeList(listZC);
+        System.out.println();
+
+        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+        results = query.execSelect();
+
+        // ResultSetFormatter.outputAsXML(System.out, results);
+        ResultSetFormatter.out(System.out, results);
+
+        query.close();
+
+        System.out.println("[INFO] End.");
+
+        return zcList;
+
+    }
 }

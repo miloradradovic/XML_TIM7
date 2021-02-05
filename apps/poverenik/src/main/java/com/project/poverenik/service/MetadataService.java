@@ -27,7 +27,7 @@ public class MetadataService {
 
     private static final String SPARQL_NAMED_GRAPH_URI = "/tim7/metadata";
 
-    public void extractMetadata(String graph, OutputStream os) throws IOException, SAXException, TransformerException {
+    public void extractMetadata(String graph, OutputStream os, String documentId) throws IOException, SAXException, TransformerException {
 
         ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
@@ -56,6 +56,9 @@ public class MetadataService {
         Model model = ModelFactory.createDefaultModel();
         model.read(new StringReader(rdf),
                 "TURTLE");
+        
+        model.write(new FileOutputStream(new File("src/main/resources/rdf_data/" + documentId + ".rdf")), SparqlUtil.RDF_XML);
+        
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -63,8 +66,7 @@ public class MetadataService {
 
         System.out.println("[INFO] Extracted metadata as RDF/XML...");
         model.write(System.out, SparqlUtil.RDF_XML);
-
-
+        
         // Writing the named graph
         System.out.println("[INFO] Populating named graph \"" + SPARQL_NAMED_GRAPH_URI + graph + "\" with extracted metadata.");
         String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI + graph, new String(out.toByteArray()));
@@ -93,7 +95,7 @@ public class MetadataService {
         ResultSet results = query.execSelect();
 
         ResultSetFormatter.out(System.out, results);
-
+        
         query.close();
 
         System.out.println("[INFO] End.");

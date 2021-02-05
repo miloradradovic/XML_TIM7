@@ -1,0 +1,12 @@
+PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
+
+SELECT * FROM <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/zalbe>
+WHERE { 
+	%s <http://examples/predicate/datum> ?datum . 
+	%s <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
+	%s <http://examples/predicate/zahtev> ?zahtev . 
+	%s <http://examples/predicate/status> ?status . 
+	%s <http://examples/predicate/mesto> ?mesto . 
+	%s <http://examples/predicate/podnosilac> ?podnosilac . 
+	
+}

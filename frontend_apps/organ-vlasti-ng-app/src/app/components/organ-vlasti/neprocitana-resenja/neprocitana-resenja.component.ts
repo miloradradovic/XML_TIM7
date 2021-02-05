@@ -87,7 +87,7 @@ export class NeprocitanaResenjaComponent implements OnInit {
     console.log(newValue.value)
     this.resenjeService.getPretragaTekst('ne', newValue.value).subscribe(
       result => {
-        this.renderResenja(result);    
+        this.renderResenja(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -106,7 +106,7 @@ export class NeprocitanaResenjaComponent implements OnInit {
     console.log(this.form.controls.datumBefore.value)
     this.resenjeService.getPretragaMetadata('ne', this.form.controls.poverenik.value, this.form.controls.trazilac.value, this.form.controls.zalba.value.replace('/', '-'), this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.tip.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value).subscribe(
       result => {
-        this.renderResenja(result);    
+        this.renderResenja(result);
       },
       error => {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
@@ -131,6 +131,14 @@ export class NeprocitanaResenjaComponent implements OnInit {
   }
 
   pdf($event: number) {
+
+  }
+
+  rdfResenje($event: number) {
+
+  }
+
+  jsonResenje($event: number) {
 
   }
 }

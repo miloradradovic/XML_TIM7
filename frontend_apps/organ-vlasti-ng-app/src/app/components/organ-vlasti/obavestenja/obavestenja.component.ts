@@ -159,4 +159,12 @@ export class ObavestenjaComponent implements OnInit {
         this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
       });
   }
+
+  rdfObavestenje($event: number) {
+
+  }
+
+  jsonObavestenje($event: number) {
+
+  }
 }

@@ -63,4 +63,12 @@ export class OrganVlastiMainPageComponent implements OnInit {
       }
     });
   }
+
+  rdfZahtev($event: number) {
+
+  }
+
+  jsonZahtev($event: number) {
+
+  }
 }

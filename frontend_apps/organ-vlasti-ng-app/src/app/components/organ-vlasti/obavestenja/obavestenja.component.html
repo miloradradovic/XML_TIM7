@@ -1,7 +1,7 @@
 
 <div style="padding-top: 5%; width: 100%; padding-left: 2%">
   <mat-form-field appearance="outline" style="width: 35%">
-    <mat-label> Pretraga po tekstu </mat-label>
+    <mat-label> Претрага по тексту </mat-label>
     <input id="pretragaTekst" (input)="onTekstChanged($event.target.valueOf())" #inputField matInput placeholder="...">
   </mat-form-field>
 </div>
@@ -9,35 +9,35 @@
 <div style="width: 100%; padding-left: 2%">
   <form [formGroup]="form" (ngSubmit)="onSubmitClicked()">
     <mat-form-field appearance="outline" style="width: 15%">
-      <mat-label> Identifikator zahteva </mat-label>
-      <input id="mesto" matInput placeholder="..." [formControl]="form.controls.zahtev">
+      <mat-label> Ид захтева </mat-label>
+      <input id="mesto" matInput placeholder="захтев" [formControl]="form.controls.zahtev">
     </mat-form-field>
     <mat-form-field appearance="outline" style="width: 15%;margin-left: 1%">
-      <mat-label> Organ vlasti </mat-label>
-      <input id="organVlasti" matInput placeholder="..." [formControl]="form.controls.organVlasti">
+      <mat-label> Орган власти </mat-label>
+      <input id="organVlasti" matInput placeholder="орган власти" [formControl]="form.controls.organVlasti">
     </mat-form-field>
     <mat-form-field appearance="outline" style="width: 15%;margin-left: 1%">
-      <mat-label> Email tražioca </mat-label>
-      <input id="trazilac" matInput placeholder="..." [formControl]="form.controls.userEmail">
+      <mat-label> E-пошта тражиоца </mat-label>
+      <input id="trazilac" matInput placeholder="е-пошта" [formControl]="form.controls.userEmail">
     </mat-form-field>
     <mat-form-field appearance="outline" style="width:15%;margin-left: 1%">
-      <mat-label>Od:</mat-label>
+      <mat-label>Од:</mat-label>
       <input (dateChange)="onDatumAfterChanged($event)" id="datumAfter" [value]="form.controls.datumAfter.value | date: 'yyyy-MM-dd'" matInput [matDatepicker]="picker3">
       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
       <mat-datepicker #picker3></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline" style="width:15%;margin-left: 1%">
-      <mat-label>Do:</mat-label>
+      <mat-label>До:</mat-label>
       <input (dateChange)="onDatumBeforeChanged($event)" id="datumBefore" [value]="form.controls.datumBefore.value | date: 'yyyy-MM-dd'" matInput [matDatepicker]="picker4">
       <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
       <mat-datepicker #picker4></mat-datepicker>
     </mat-form-field>
-    <button id="submit" style="width:8%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Pretraži</button>
+    <button id="submit" style="width:8%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Претражи</button>
   </form>
 </div>
 
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Broj obavestenja', 'xhtml', 'pdf', 'rdf', 'json']"
+  <app-table [columnsToDisplay]="['Број обавештења', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id']"
              [dataSource]="obavestenja" (PDF)="pdf($event)" (XHTML)="xhtml($event)" (RDF)="rdfObavestenje($event)" (JSON)="jsonObavestenje($event)"
              (DoubleClick)="doubleClicked($event)"></app-table>

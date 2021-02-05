@@ -45,29 +45,9 @@ export class IzvestajiComponent implements OnInit {
           }
           this.izvestaji = newList;
         }
-        /*
-        const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
-        if (izjasnjavanja !== undefined){
-          try {
-            izjasnjavanja.forEach((item, index) => {
-              const message = item['ns2:body']._text;
-              const idMessage = item['ns2:body']._attributes.id;
-              const messageObject = {id: idMessage, messageText: message};
-              newList.push(messageObject);
-            });
-          } catch (err){
-            const message = izjasnjavanja['ns2:body']._text;
-            const idMessage = izjasnjavanja['ns2:body']._attributes.id;
-            const messageObject = {id: idMessage, messageText: message};
-            newList.push(messageObject);
-          }
-          this.izjasnjavanja = newList;
-        }
-
-         */
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -101,7 +81,7 @@ export class IzvestajiComponent implements OnInit {
         this.renderIzvestaji(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }

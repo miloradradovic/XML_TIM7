@@ -43,7 +43,7 @@ export class OrganVlastiMainPageComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }

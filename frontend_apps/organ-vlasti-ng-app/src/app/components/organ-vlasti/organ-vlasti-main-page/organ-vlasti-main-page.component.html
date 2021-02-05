@@ -1,5 +1,5 @@
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Id zahteva', 'xhtml', 'pdf', 'rdf', 'json']"
+  <app-table [columnsToDisplay]="['Идентификатор захтева', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id']"
              [dataSource]="zahtevi" (RDF)="rdfZahtev($event)" (JSON)="jsonZahtev($event)" (XHTML)="xhtml($event)" (PDF)="pdf($event)" (DoubleClick)="doubleClicked($event)"></app-table>
 </div>

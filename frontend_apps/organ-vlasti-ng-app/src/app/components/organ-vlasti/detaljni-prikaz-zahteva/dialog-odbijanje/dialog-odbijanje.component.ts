@@ -29,11 +29,11 @@ export class DialogOdbijanjeComponent implements OnInit {
     const toSend = zahtevId + ':' + this.razlog;
     this.zahtevService.posaljiOdbijanje(toSend).subscribe(
       result => {
-        this.snackBar.open('Uspjesno poslato odbijanje!', 'Ok', {duration: 2000});
+        this.snackBar.open('Успешно послато одбијање!', 'Ок', {duration: 2000});
         this.dialogRef.close();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Слање није успешно!', 'Ок', { duration: 2000 });
       }
     );
   }

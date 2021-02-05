@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ObavestenjeXonomyService } from 'src/app/services/obavestenje-xonomy-service/obavestenje-xonomy.service';
+import {Component, OnInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ObavestenjeXonomyService} from 'src/app/services/obavestenje-xonomy-service/obavestenje-xonomy.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 declare const Xonomy: any;
@@ -12,7 +12,8 @@ declare const Xonomy: any;
 })
 export class ObavestenjeFormComponent implements OnInit {
 
-  constructor(private router: Router, private obavestenjeService: ObavestenjeXonomyService, public snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router, private obavestenjeService: ObavestenjeXonomyService, public snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) {
+  }
 
   idZahteva = '1';
 
@@ -21,10 +22,17 @@ export class ObavestenjeFormComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    const datumAtr = (new Date()).toISOString().split('.')[0];
-    let elementObavestenje = document.getElementById("obavestenje");
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0'); // day
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // month
+    const yyyy = today.getFullYear(); // year
+    const hour = String(today.getUTCHours() + 1).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    const seconds = String(today.getSeconds()).padStart(2, '0');
+    const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;
+    let elementObavestenje = document.getElementById('obavestenje');
     let xmlStringObavestenje =
-    `<?xml version="1.0" encoding="UTF-8"?>
+      `<?xml version="1.0" encoding="UTF-8"?>
     <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
     <oba:obavestenje
         xmlns:oba="http://www.obavestenje"
@@ -42,14 +50,14 @@ export class ObavestenjeFormComponent implements OnInit {
 
   public submit(): void {
     if (Xonomy.warnings.length) {
-      this.snackBar.open("Popunite sva obavezna polja!", 'Ok', { duration: 3000 });
+      this.snackBar.open('Попуните сва обавезна поља!', 'Ок', {duration: 3000});
       return;
     }
-    console.log(Xonomy.harvest())
+    console.log(Xonomy.harvest());
     let data = Xonomy.harvest();
 
     const datumAtr = data.split('datum=')[1].split('><oba:naziv_organa sediste=')[0];
-    const sedisteAtr = data.split('><oba:naziv_organa sediste=')[1].split('>')[0]
+    const sedisteAtr = data.split('><oba:naziv_organa sediste=')[1].split('>')[0];
     const nazivOrgana = data.split('><oba:naziv_organa sediste=')[1].split('>')[1].split('</oba:naziv_organa')[0];
     const ime = data.split('<re:lice><re:osoba><re:ime>')[1].split('</re:ime>')[0];
     const prezime = data.split('<re:prezime>')[1].split('</re:prezime>')[0];
@@ -70,7 +78,7 @@ export class ObavestenjeFormComponent implements OnInit {
     const opcija1 = data.split('<oba:opcija_dostave><re:opcija izabran=')[1].split('>Именованом</re:opcija><re:opcija izabran=')[0];
     const opcija2 = data.split('>Именованом</re:opcija><re:opcija izabran=')[1].split('>Архиви')[0];
 
-   let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
+    let dataTemplate = `<?xml version="1.0" encoding="UTF-8"?>
    <?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
    <oba:obavestenje
        xmlns:oba="http://www.obavestenje"
@@ -102,10 +110,10 @@ export class ObavestenjeFormComponent implements OnInit {
                    <re:poziv_na_broj>97</re:poziv_na_broj>
                </re:ukupan_trosak>
            </oba:tekst_zahteva><oba:opcija_dostave><re:opcija izabran=${opcija1}>Именованом</re:opcija><re:opcija izabran=${opcija2}>Архиви</re:opcija></oba:opcija_dostave></oba:obavestenje_body></oba:obavestenje>`;
-     console.log(dataTemplate)
+    console.log(dataTemplate);
     this.obavestenjeService.send(dataTemplate)
       .subscribe(res => console.log(res));
-    this.snackBar.open("Uspešno ste poslali obavestenje!", 'Ok', { duration: 3000 });
+    this.snackBar.open('Успешно сте послали обавештење!', 'Ок', {duration: 3000});
 
   }
 

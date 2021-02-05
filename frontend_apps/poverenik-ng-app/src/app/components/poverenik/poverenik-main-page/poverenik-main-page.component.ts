@@ -151,9 +151,7 @@ export class PoverenikMainPageComponent implements OnInit {
     this.zalbaService.ponisti($event).subscribe(
       result => {
         this.snackBar.open('Uspjesno ponistena zalba!', 'Ok', {duration: 2000});
-        this.zalbaService.getNeobradjeneAndUObradiZalbeCutanje();
-        this.zalbaService.getNeobradjeneAndUObradiZalbeOdluka();
-        this.zalbe = this.zalbe.filter( zalba => zalba.id !== $event.split('/')[1] && zalba.tip !== $event.split('/')[0]);
+        this.zalbe = this.zalbe.filter( zalba => zalba.tip + '/' + zalba.id !== $event);
         this.zalbe = [...this.zalbe];
         this.detectChange.markForCheck();
       },

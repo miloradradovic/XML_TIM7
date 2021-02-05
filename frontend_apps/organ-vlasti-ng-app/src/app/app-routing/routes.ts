@@ -19,6 +19,7 @@ import {DetaljniPrikazObavestenjaComponent} from '../components/organ-vlasti/det
 import {DetaljniPrikazResenjaComponent} from '../components/organ-vlasti/detaljni-prikaz-resenja/detaljni-prikaz-resenja.component';
 import {DetaljniPrikazZalbeComponent} from '../components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
 import {AddOrganVlastiFormComponent} from '../components/forms/add-organ-vlasti-form/add-organ-vlasti-form.component';
+import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   {
@@ -96,5 +97,9 @@ export const routes: Routes = [
   {
     path: 'dodaj-sluzbenika',
     component: AddOrganVlastiFormComponent
+  },
+  {
+    path: 'profil',
+    component: EditProfileComponent
   }
 ];

@@ -43,7 +43,10 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    public boolean create(User user, String role) throws XMLDBException {
+    public boolean create(User user, String role) throws XMLDBException, JAXBException {
+    	if (getOne(user.getEmail()) != null) {
+        	return false;
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(role);
         if (jaxB.validate(user.getClass(), user)) {
@@ -90,6 +93,14 @@ public class UserService {
     }
 
     public boolean update(User user) throws JAXBException, XMLDBException {
+    	if (getOne(user.getEmail()) == null) {
+    		return false;
+    	}
+    	if (user.getPassword().equals("")) {
+    		user.setPassword(getOne(user.getEmail()).getPassword());
+    	} else {
+    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	}
         String patch = jaxB.marshall(user.getClass(), user);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         patch = patch.substring(patch.lastIndexOf("<u:name>"), patch.indexOf("</u:role>") + "</u:role>".length());

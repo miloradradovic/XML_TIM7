@@ -4,6 +4,9 @@ import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.UserTokenStateDTO;
 import com.project.organ_vlasti.security.TokenUtils;
 import com.project.organ_vlasti.service.UserService;
+
+import javax.xml.bind.JAXBException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,7 +52,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, value = "/sign-up")
-    public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException {
+    public ResponseEntity<?> createUser(@RequestBody User user) throws XMLDBException, JAXBException {
         if (userService.create(user, "ROLE_USER")) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

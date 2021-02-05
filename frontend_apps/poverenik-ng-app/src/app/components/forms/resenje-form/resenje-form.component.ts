@@ -28,8 +28,8 @@ export class ResenjeFormComponent implements OnInit {
     const seconds = String(today.getSeconds()).padStart(2, '0');
     const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;
     const idPoverenika = JSON.parse(localStorage.getItem('user')).email;
-    let elementR = document.getElementById("resenje");
-    let xmlStringR =
+    const elementR = document.getElementById('resenje');
+    const xmlStringR =
     `<resenje xmlns="http://resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -48,14 +48,18 @@ export class ResenjeFormComponent implements OnInit {
 
   public submit(): void {
     if (Xonomy.warnings.length) {
-      this.snackBar.open("Popunite sva obavezna rešenje!", 'Ok', { duration: 3000 });
+      this.snackBar.open('Попуните сва обавезна поља!', 'Ok', { duration: 3000 });
       return;
     }
-    console.log(Xonomy.harvest())
+    console.log(Xonomy.harvest());
 
     this.resenjeService.send(Xonomy.harvest())
-      .subscribe(res => console.log(res));
-    this.snackBar.open("Uspešno ste poslali rešenje!", 'Ok', { duration: 3000 });
+      .subscribe(res => {
+        this.snackBar.open('Успешно сте послали решење!', 'Ok', { duration: 3000 });
+      }, error => {
+        this.snackBar.open('Немогуће креирање и слање решења!', 'Ok', { duration: 3000 });
+
+      });
 
   }
 

@@ -55,11 +55,11 @@ export class AddOrganVlastiFormComponent implements OnInit {
 
     this.addSluzbenikService.addSluzbenik(signUpUserXML).subscribe(
       result => {
-        this.snackBar.open('Uspjesno dodat sluzbenik!', 'Ok', { duration: 2000 });
-        this.router.navigate(['/main-page-organ-vlasti']);
+        this.snackBar.open('Успешно додат службеник!', 'Ok', { duration: 2000 });
+        this.router.navigate(['/pocetna-stranica-organ-vlasti']);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Постојећа е-пошта!', 'Ok', { duration: 2000 });
       }
     );
   }

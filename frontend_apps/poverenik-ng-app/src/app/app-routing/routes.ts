@@ -20,11 +20,11 @@ import {PoverenikDetaljniPrikazZahtevaComponent} from '../components/poverenik/p
 
 export const routes: Routes = [
   {
-    path: 'sign-in',
+    path: 'prijava',
     component: SignInComponent
   },
   {
-    path: 'sign-up',
+    path: 'registracija',
     component: SignUpComponent
   },
   {
@@ -40,11 +40,11 @@ export const routes: Routes = [
     component: ResenjeFormComponent
   },
   {
-    path: 'main-page-gradjanin',
+    path: 'pocetna-stranica-gradjanin',
     component: GradjaninMainPageComponent
   },
   {
-    path: 'main-page-poverenik',
+    path: 'pocetna-stranica-poverenik',
     component: PoverenikMainPageComponent
   },
   {
@@ -60,7 +60,7 @@ export const routes: Routes = [
     component: PoverenikSvaResenjaComponent
   },
   {
-    path: 'add-poverenik',
+    path: 'dodaj-poverenika',
     component: AddPoverenikFormComponent
   },
   {

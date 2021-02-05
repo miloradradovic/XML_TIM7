@@ -43,7 +43,7 @@ export class PoverenikNeprocitaniIzvestajiComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }
@@ -74,10 +74,10 @@ export class PoverenikNeprocitaniIzvestajiComponent implements OnInit {
     console.log(this.form.controls.datumBefore.value)
     this.izvestajService.getPretragaMetadata('ne', this.form.controls.datumAfter.value, this.form.controls.datumBefore.value).subscribe(
       result => {
-        this.renderIzvestaji(result);    
+        this.renderIzvestaji(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
       }
     );
   }

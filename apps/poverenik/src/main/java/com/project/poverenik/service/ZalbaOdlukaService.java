@@ -86,7 +86,7 @@ public class ZalbaOdlukaService {
     public boolean create(ZalbaOdluka zalbaOdlukaDTO) throws XMLDBException, NumberFormatException, JAXBException {
         if (jaxB.validate(zalbaOdlukaDTO.getClass(), zalbaOdlukaDTO)) {
 
-            if (canMakeZalba(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev().getValue())) {
+            if (!canMakeZalba(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev().getValue())) {
                 return false;
             }
 
@@ -108,19 +108,10 @@ public class ZalbaOdlukaService {
         getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
         if (zahtevResponse == null)
             return false;
-        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen")){
-            return false;
+        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("odbijen")){
+            return true;
         }
-
-        XMLGregorianCalendar date = zahtevResponse.getZahtev().getDatum();
-
-        Date xmlDate = date.toGregorianCalendar().getTime();
-        Date dateNow = new Date();
-
-        long diffInMillies = Math.abs(dateNow.getTime() - xmlDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MINUTES);
-
-        return diff >= 2;
+        return false;
     }
 
     public ZalbaOdlukaList getAll() throws XMLDBException, JAXBException {

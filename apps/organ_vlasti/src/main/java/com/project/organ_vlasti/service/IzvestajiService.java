@@ -60,12 +60,12 @@ public class IzvestajiService {
 
     @Autowired
     private IzvestajiRepository izvestajiRepository;
-    
-	@Autowired
-	private ExistManager existManager;
 
-	@Autowired
-	private ZahtevService zahtevService;
+    @Autowired
+    private ExistManager existManager;
+
+    @Autowired
+    private ZahtevService zahtevService;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = izvestajiRepository.getMaxId();
@@ -83,7 +83,7 @@ public class IzvestajiService {
         return izvestajMax.getIzvestajBody().getId();
     }
 
-    public boolean generate() throws XMLDBException, JAXBException, DatatypeConfigurationException {
+    public Izvestaj generate() throws XMLDBException, JAXBException, DatatypeConfigurationException {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.izvestaji.client");
 
@@ -95,16 +95,18 @@ public class IzvestajiService {
         getPodaci getPodaciRequest = new getPodaci();
         getPodaciResponse response = izvestajiClient.getPodaci(getPodaciRequest);
 
-        if(response == null){
-            return false;
+        if (response == null) {
+            return null;
         }
 
         Izvestaj izvestaj = compose(response.getResponse());
         String id = create(izvestaj);
         if (id != null) {
-            return sendToPoverenik(id);
+            if (sendToPoverenik(id)) {
+                return izvestaj;
+            }
         }
-        return false;
+        return null;
     }
 
     private boolean sendToPoverenik(String id) {
@@ -127,140 +129,140 @@ public class IzvestajiService {
         return izvestajiRepository.create(izvestaj);
     }
 
-	public Izvestaj compose(Tbody zalbe) throws XMLDBException, JAXBException, DatatypeConfigurationException {
+    public Izvestaj compose(Tbody zalbe) throws XMLDBException, JAXBException, DatatypeConfigurationException {
 
-		String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
+        String id = String.valueOf(Integer.parseInt(getMaxId()) + 1);
 
-		ObjectFactory of = new ObjectFactory();
-		Izvestaj izvestaj = of.createIzvestaj();
-		izvestaj.setIzvestajBody(of.createTbody());
+        ObjectFactory of = new ObjectFactory();
+        Izvestaj izvestaj = of.createIzvestaj();
+        izvestaj.setIzvestajBody(of.createTbody());
 
-		izvestaj.getIzvestajBody().setZahteviPodneti(new Tbody.ZahteviPodneti());
-		izvestaj.getIzvestajBody().getZahteviPodneti().setValue(BigInteger.valueOf(zahtevService.getPodnetiZahtevi()));
-		izvestaj.getIzvestajBody().getZahteviPodneti().getOtherAttributes().put(new QName("property"),
-				"pred:zahtevi_podneti");
-		izvestaj.getIzvestajBody().getZahteviPodneti().getOtherAttributes().put(new QName("datatype"), "xs:integer");
+        izvestaj.getIzvestajBody().setZahteviPodneti(new Tbody.ZahteviPodneti());
+        izvestaj.getIzvestajBody().getZahteviPodneti().setValue(BigInteger.valueOf(zahtevService.getPodnetiZahtevi()));
+        izvestaj.getIzvestajBody().getZahteviPodneti().getOtherAttributes().put(new QName("property"),
+                "pred:zahtevi_podneti");
+        izvestaj.getIzvestajBody().getZahteviPodneti().getOtherAttributes().put(new QName("datatype"), "xs:integer");
 
-		izvestaj.getIzvestajBody().setZahteviOdbijeni(new Tbody.ZahteviOdbijeni());
-		izvestaj.getIzvestajBody().getZahteviOdbijeni()
-				.setValue(BigInteger.valueOf(zahtevService.getOdbijeniZahtevi()));
-		izvestaj.getIzvestajBody().getZahteviOdbijeni().getOtherAttributes().put(new QName("property"),
-				"pred:zahtevi_odbijeni");
-		izvestaj.getIzvestajBody().getZahteviOdbijeni().getOtherAttributes().put(new QName("datatype"), "xs:integer");
+        izvestaj.getIzvestajBody().setZahteviOdbijeni(new Tbody.ZahteviOdbijeni());
+        izvestaj.getIzvestajBody().getZahteviOdbijeni()
+                .setValue(BigInteger.valueOf(zahtevService.getOdbijeniZahtevi()));
+        izvestaj.getIzvestajBody().getZahteviOdbijeni().getOtherAttributes().put(new QName("property"),
+                "pred:zahtevi_odbijeni");
+        izvestaj.getIzvestajBody().getZahteviOdbijeni().getOtherAttributes().put(new QName("datatype"), "xs:integer");
 
-		izvestaj.getIzvestajBody().setZahteviPrihvaceni(new Tbody.ZahteviPrihvaceni());
-		izvestaj.getIzvestajBody().getZahteviPrihvaceni()
-				.setValue(BigInteger.valueOf(zahtevService.getPrihvaceniZahtevi()));
-		izvestaj.getIzvestajBody().getZahteviPrihvaceni().getOtherAttributes().put(new QName("property"),
-				"pred:zahtevi_prihvaceni");
-		izvestaj.getIzvestajBody().getZahteviPrihvaceni().getOtherAttributes().put(new QName("datatype"), "xs:integer");
+        izvestaj.getIzvestajBody().setZahteviPrihvaceni(new Tbody.ZahteviPrihvaceni());
+        izvestaj.getIzvestajBody().getZahteviPrihvaceni()
+                .setValue(BigInteger.valueOf(zahtevService.getPrihvaceniZahtevi()));
+        izvestaj.getIzvestajBody().getZahteviPrihvaceni().getOtherAttributes().put(new QName("property"),
+                "pred:zahtevi_prihvaceni");
+        izvestaj.getIzvestajBody().getZahteviPrihvaceni().getOtherAttributes().put(new QName("datatype"), "xs:integer");
 
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateString = sdf.format(date);
-		XMLGregorianCalendar dateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(dateString);
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = sdf.format(date);
+        XMLGregorianCalendar dateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(dateString);
 
-		izvestaj.getIzvestajBody().setDatum(dateXML);
-		izvestaj.getIzvestajBody().setId(id);
+        izvestaj.getIzvestajBody().setDatum(dateXML);
+        izvestaj.getIzvestajBody().setId(id);
 
-		izvestaj.getIzvestajBody().setZalbeCutanjeOdbijeno(zalbe.getZalbeCutanjeOdbijeno());
-		izvestaj.getIzvestajBody().getZalbeCutanjeOdbijeno().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_cutanje_odbijeno");
-		izvestaj.getIzvestajBody().getZalbeCutanjeOdbijeno().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeCutanjeOdbijeno(zalbe.getZalbeCutanjeOdbijeno());
+        izvestaj.getIzvestajBody().getZalbeCutanjeOdbijeno().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_cutanje_odbijeno");
+        izvestaj.getIzvestajBody().getZalbeCutanjeOdbijeno().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeCutanjePodneti(zalbe.getZalbeCutanjePodneti());
-		izvestaj.getIzvestajBody().getZalbeCutanjePodneti().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_cutanje_podneti");
-		izvestaj.getIzvestajBody().getZalbeCutanjePodneti().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeCutanjePodneti(zalbe.getZalbeCutanjePodneti());
+        izvestaj.getIzvestajBody().getZalbeCutanjePodneti().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_cutanje_podneti");
+        izvestaj.getIzvestajBody().getZalbeCutanjePodneti().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeCutanjePonisteno(zalbe.getZalbeCutanjePonisteno());
-		izvestaj.getIzvestajBody().getZalbeCutanjePonisteno().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_cutanje_ponisteno");
-		izvestaj.getIzvestajBody().getZalbeCutanjePonisteno().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeCutanjePonisteno(zalbe.getZalbeCutanjePonisteno());
+        izvestaj.getIzvestajBody().getZalbeCutanjePonisteno().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_cutanje_ponisteno");
+        izvestaj.getIzvestajBody().getZalbeCutanjePonisteno().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeCutanjePrihvaceno(zalbe.getZalbeCutanjePrihvaceno());
-		izvestaj.getIzvestajBody().getZalbeCutanjePrihvaceno().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_cutanje_prihvaceno");
-		izvestaj.getIzvestajBody().getZalbeCutanjePrihvaceno().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeCutanjePrihvaceno(zalbe.getZalbeCutanjePrihvaceno());
+        izvestaj.getIzvestajBody().getZalbeCutanjePrihvaceno().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_cutanje_prihvaceno");
+        izvestaj.getIzvestajBody().getZalbeCutanjePrihvaceno().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeOdlukeOdbijeno(zalbe.getZalbeOdlukeOdbijeno());
-		izvestaj.getIzvestajBody().getZalbeOdlukeOdbijeno().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_odluke_odbijeno");
-		izvestaj.getIzvestajBody().getZalbeOdlukeOdbijeno().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeOdlukeOdbijeno(zalbe.getZalbeOdlukeOdbijeno());
+        izvestaj.getIzvestajBody().getZalbeOdlukeOdbijeno().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_odluke_odbijeno");
+        izvestaj.getIzvestajBody().getZalbeOdlukeOdbijeno().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeOdlukePodneti(zalbe.getZalbeOdlukePodneti());
-		izvestaj.getIzvestajBody().getZalbeOdlukePodneti().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_odluke_podneti");
-		izvestaj.getIzvestajBody().getZalbeOdlukePodneti().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeOdlukePodneti(zalbe.getZalbeOdlukePodneti());
+        izvestaj.getIzvestajBody().getZalbeOdlukePodneti().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_odluke_podneti");
+        izvestaj.getIzvestajBody().getZalbeOdlukePodneti().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeOdlukePonisteno(zalbe.getZalbeOdlukePonisteno());
-		izvestaj.getIzvestajBody().getZalbeOdlukePonisteno().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_odluke_ponisteno");
-		izvestaj.getIzvestajBody().getZalbeOdlukePonisteno().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeOdlukePonisteno(zalbe.getZalbeOdlukePonisteno());
+        izvestaj.getIzvestajBody().getZalbeOdlukePonisteno().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_odluke_ponisteno");
+        izvestaj.getIzvestajBody().getZalbeOdlukePonisteno().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().setZalbeOdlukePrihvaceno(zalbe.getZalbeOdlukePrihvaceno());
-		izvestaj.getIzvestajBody().getZalbeOdlukePrihvaceno().getOtherAttributes().put(new QName("property"),
-				"pred:zalbe_odluke_prihvaceno");
-		izvestaj.getIzvestajBody().getZalbeOdlukePrihvaceno().getOtherAttributes().put(new QName("datatype"),
-				"xs:integer");
+        izvestaj.getIzvestajBody().setZalbeOdlukePrihvaceno(zalbe.getZalbeOdlukePrihvaceno());
+        izvestaj.getIzvestajBody().getZalbeOdlukePrihvaceno().getOtherAttributes().put(new QName("property"),
+                "pred:zalbe_odluke_prihvaceno");
+        izvestaj.getIzvestajBody().getZalbeOdlukePrihvaceno().getOtherAttributes().put(new QName("datatype"),
+                "xs:integer");
 
-		izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("about"),
-				"http://izvestaji/" + izvestaj.getIzvestajBody().getId());
-		izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/");
-		izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("property"), "pred:datum");
-		izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
-		izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("content"),
-				izvestaj.getIzvestajBody().getDatum().toString());
+        izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("about"),
+                "http://izvestaji/" + izvestaj.getIzvestajBody().getId());
+        izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/");
+        izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("property"), "pred:datum");
+        izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("datatype"), "xs:date");
+        izvestaj.getIzvestajBody().getOtherAttributes().put(new QName("content"),
+                izvestaj.getIzvestajBody().getDatum().toString());
 
-		return izvestaj;
+        return izvestaj;
 
-	}
+    }
 
-	public IzvestajList getAll() throws XMLDBException, JAXBException {
-		List<Izvestaj> izvestajList = new ArrayList<>();
+    public IzvestajList getAll() throws XMLDBException, JAXBException {
+        List<Izvestaj> izvestajList = new ArrayList<>();
 
-		ResourceSet resourceSet = izvestajiRepository.getAll();
-		ResourceIterator resourceIterator = resourceSet.getIterator();
+        ResourceSet resourceSet = izvestajiRepository.getAll();
+        ResourceIterator resourceIterator = resourceSet.getIterator();
 
-		while (resourceIterator.hasMoreResources()) {
-			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
-			if (xmlResource == null)
-				return null;
-			JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-			Izvestaj izvestaj = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
-			izvestajList.add(izvestaj);
-		}
-		return new IzvestajList(izvestajList);
-	}
+        while (resourceIterator.hasMoreResources()) {
+            XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+            if (xmlResource == null)
+                return null;
+            JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Izvestaj izvestaj = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+            izvestajList.add(izvestaj);
+        }
+        return new IzvestajList(izvestajList);
+    }
 
-	public Izvestaj getOne(String id) throws JAXBException, XMLDBException {
-		XMLResource xmlResource = izvestajiRepository.getOne(id);
+    public Izvestaj getOne(String id) throws JAXBException, XMLDBException {
+        XMLResource xmlResource = izvestajiRepository.getOne(id);
 
-		if (xmlResource == null)
-			return null;
+        if (xmlResource == null)
+            return null;
 
-		Izvestaj izvestaj;
+        Izvestaj izvestaj;
 
-		JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		izvestaj = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+        JAXBContext context = JAXBContext.newInstance(Izvestaj.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        izvestaj = (Izvestaj) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
 
-		return izvestaj;
-	}
+        return izvestaj;
+    }
 
-	public boolean delete(String id) throws XMLDBException {
-		return izvestajiRepository.delete(id);
-	}
+    public boolean delete(String id) throws XMLDBException {
+        return izvestajiRepository.delete(id);
+    }
 
-	public IzvestajList searchMetadata(String datumAfter, String datumBefore) throws IOException, JAXBException, XMLDBException {
+    public IzvestajList searchMetadata(String datumAfter, String datumBefore) throws IOException, JAXBException, XMLDBException {
         ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
         if (datumAfter.equals("")) {
@@ -294,7 +296,7 @@ public class IzvestajiService {
             id = querySolution.get("izvestaj");
             String idStr = id.toString().split("izvestaji/")[1];
             Izvestaj z = getOne(idStr);
-            if(z == null){
+            if (z == null) {
                 return null;
             }
             listZC.add(z);
@@ -317,61 +319,61 @@ public class IzvestajiService {
         return zcList;
     }
 
-	public String generateRdf(String id)
-			throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
-		Izvestaj xml = getOne(id);
-		if (xml == null) {
-			return "";
-		}
-		MetadataExtractor metadataExtractor = new MetadataExtractor();
+    public String generateRdf(String id)
+            throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+        Izvestaj xml = getOne(id);
+        if (xml == null) {
+            return "";
+        }
+        MetadataExtractor metadataExtractor = new MetadataExtractor();
 
-		ByteArrayInputStream inStream = new ByteArrayInputStream(existManager.getOutputStream(xml).getBytes());
+        ByteArrayInputStream inStream = new ByteArrayInputStream(existManager.getOutputStream(xml).getBytes());
 
-		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-		metadataExtractor.extractMetadata(inStream, outStream);
-		ByteArrayInputStream rdfStream = new ByteArrayInputStream(outStream.toByteArray());
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        metadataExtractor.extractMetadata(inStream, outStream);
+        ByteArrayInputStream rdfStream = new ByteArrayInputStream(outStream.toByteArray());
 
-		StringBuilder textBuilder = new StringBuilder();
-		try (Reader reader = new BufferedReader(
-				new InputStreamReader(rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
-			int c;
-			while ((c = reader.read()) != -1) {
-				textBuilder.append((char) c);
-			}
-		}
-		String rdf = textBuilder.toString();
-		Model model = ModelFactory.createDefaultModel();
-		model.read(new StringReader(rdf), "TURTLE");
-		model.write(
-				new FileOutputStream(
-						new File("src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".rdf")),
-				SparqlUtil.RDF_XML);
-		return "src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".rdf";
-	}
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader = new BufferedReader(
+                new InputStreamReader(rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
+        String rdf = textBuilder.toString();
+        Model model = ModelFactory.createDefaultModel();
+        model.read(new StringReader(rdf), "TURTLE");
+        model.write(
+                new FileOutputStream(
+                        new File("src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".rdf")),
+                SparqlUtil.RDF_XML);
+        return "src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".rdf";
+    }
 
-	public String generateJson(String id)
-			throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
-		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+    public String generateJson(String id)
+            throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+        ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
-		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_izvestaj_json.rq",
-				StandardCharsets.UTF_8);
-		System.out.println(sparqlQueryTemplate);
+        String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_izvestaj_json.rq",
+                StandardCharsets.UTF_8);
+        System.out.println(sparqlQueryTemplate);
 
-		String izvestaj = "<http://izvestaji/" + id + ">";
-		String sparqlQuery = String.format(sparqlQueryTemplate, izvestaj, izvestaj, izvestaj, izvestaj, izvestaj,
-				izvestaj, izvestaj, izvestaj, izvestaj, izvestaj, izvestaj, izvestaj);
-		System.out.println(sparqlQuery);
+        String izvestaj = "<http://izvestaji/" + id + ">";
+        String sparqlQuery = String.format(sparqlQueryTemplate, izvestaj, izvestaj, izvestaj, izvestaj, izvestaj,
+                izvestaj, izvestaj, izvestaj, izvestaj, izvestaj, izvestaj, izvestaj);
+        System.out.println(sparqlQuery);
 
-		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		ResultSet results = query.execSelect();
+        ResultSet results = query.execSelect();
 
-		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-		results = query.execSelect();
-		ResultSetFormatter.outputAsJSON(new FileOutputStream(
-				new File("src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json")), results);
-		query.close();
-		return "src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json";
-	}
+        results = query.execSelect();
+        ResultSetFormatter.outputAsJSON(new FileOutputStream(
+                new File("src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json")), results);
+        query.close();
+        return "src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json";
+    }
 }

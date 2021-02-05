@@ -43,7 +43,7 @@ export class ZalbaCutanjeFormComponent implements OnInit {
 
   public submit(): void {
     if (Xonomy.warnings.length) {
-      this.snackBar.open("Popunite sva obavezna polja!", 'Ok', { duration: 3000 });
+      this.snackBar.open("Попуните сва обавезна поља!", 'Ok', { duration: 3000 });
       return;
     }
     console.log(Xonomy.harvest())

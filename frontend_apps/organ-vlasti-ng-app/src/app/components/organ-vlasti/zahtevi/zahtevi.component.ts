@@ -166,4 +166,12 @@ export class ZahteviComponent implements OnInit {
       }
     });
   }
+
+  rdfZahtev($event: number) {
+
+  }
+
+  jsonZahtev($event: number) {
+
+  }
 }

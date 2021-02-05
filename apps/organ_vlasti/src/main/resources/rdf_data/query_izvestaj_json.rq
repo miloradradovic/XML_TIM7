@@ -1,0 +1,17 @@
+PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
+
+SELECT * FROM <http://localhost:8080/fusekiOV/Tim7Dataset/data/tim7/metadata/izvestaji>
+WHERE { 
+	%s <http://examples/predicate/datum> ?datum . 
+	%s <http://examples/predicate/zahtevi_odbijeni> ?zahtevi_odbijeni .
+    %s <http://examples/predicate/zahtevi_podneti> ?zahtevi_podneti .
+    %s <http://examples/predicate/zahtevi_prihvaceni> ?zahtevi_prihvaceni .
+    %s <http://examples/predicate/zalbe_cutanje_odbijeno> ?zalbe_cutanje_odbijeno .
+    %s <http://examples/predicate/zalbe_cutanje_podneti> ?zalbe_cutanje_podneti .
+    %s <http://examples/predicate/zalbe_cutanje_ponisteno> ?zalbe_cutanje_ponisteno .
+    %s <http://examples/predicate/zalbe_cutanje_prihvaceno> ?zalbe_cutanje_prihvaceno .
+    %s <http://examples/predicate/zalbe_odluke_odbijeno> ?zalbe_odluke_odbijeno .
+    %s <http://examples/predicate/zalbe_odluke_podneti> ?zalbe_odluke_podneti .
+    %s <http://examples/predicate/zalbe_odluke_ponisteno> ?zalbe_odluke_ponisteno .
+    %s <http://examples/predicate/zalbe_odluke_prihvaceno> ?zalbe_odluke_prihvaceno .
+}

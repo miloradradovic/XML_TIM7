@@ -4,6 +4,7 @@ import com.project.organ_vlasti.client.EmailClient;
 import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.jaxb.JaxB;
 import com.project.organ_vlasti.mappers.ZahtevMapper;
+import com.project.organ_vlasti.model.obavestenje.Obavestenje;
 import com.project.organ_vlasti.model.user.User;
 import com.project.organ_vlasti.model.util.email.Tbody;
 import com.project.organ_vlasti.model.util.email.client.sendPlain;
@@ -12,15 +13,20 @@ import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities;
 import com.project.organ_vlasti.rdf_utils.AuthenticationUtilities.ConnectionProperties;
 import com.project.organ_vlasti.rdf_utils.FileUtil;
+import com.project.organ_vlasti.rdf_utils.MetadataExtractor;
+import com.project.organ_vlasti.rdf_utils.SparqlUtil;
 import com.project.organ_vlasti.repository.ZahtevRepository;
 import com.project.organ_vlasti.transformer.Transformator;
 import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.base.XMLDBException;
@@ -30,7 +36,18 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
+import javax.xml.transform.TransformerException;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -335,4 +352,59 @@ public class ZahtevService {
         }
         return "";
     }
+    
+    public String generateRdf(String id) throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+		Zahtev xml = getOne(id);
+		if (xml == null) {
+			return "";
+		}
+		MetadataExtractor metadataExtractor = new MetadataExtractor();
+
+        ByteArrayInputStream inStream = new ByteArrayInputStream(existManager.getOutputStream(xml).getBytes());
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        metadataExtractor.extractMetadata(
+                inStream,
+                outStream);
+        ByteArrayInputStream rdfStream = new ByteArrayInputStream(outStream.toByteArray());
+
+
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader = new BufferedReader(new InputStreamReader
+                (rdfStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
+        String rdf = textBuilder.toString();
+        Model model = ModelFactory.createDefaultModel();
+        model.read(new StringReader(rdf),
+                "TURTLE");
+        model.write(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + "zahtev-" + id + ".rdf")), SparqlUtil.RDF_XML);
+        return "src/main/resources/generated_files/metadata/" + "zahtev-" + id + ".rdf";
+	}
+	
+	public String generateJson(String id) throws XMLDBException, TransformerException, SAXException, IOException, JAXBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_zahtev_json.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+
+		String zahtev = "<http://zahtevi/" + id + ">";
+		String sparqlQuery = String.format(sparqlQueryTemplate, zahtev, zahtev, zahtev, zahtev);
+		System.out.println(sparqlQuery);
+
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		ResultSet results = query.execSelect();
+
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+		results = query.execSelect();
+		ResultSetFormatter.outputAsJSON(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + "zahtev-" + id + ".json")), results);
+		query.close();
+		return "src/main/resources/generated_files/metadata/" + "zahtev-" + id + ".json";
+	}
 }

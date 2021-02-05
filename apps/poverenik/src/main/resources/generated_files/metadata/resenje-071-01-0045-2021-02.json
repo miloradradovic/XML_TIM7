@@ -1,0 +1,10 @@
+{
+  "head": {
+    "vars": [ "datum" , "organVlasti" , "tip" , "trazilac" , "mesto" , "podnosilac" , "responseTo" ]
+  } ,
+  "results": {
+    "bindings": [
+      
+    ]
+  }
+}

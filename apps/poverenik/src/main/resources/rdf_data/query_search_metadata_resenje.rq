@@ -3,12 +3,12 @@ PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
 SELECT * FROM <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/resenja>
 WHERE { 
 	?resenje <http://examples/predicate/datum> ?datum . 
-	?resenje <http://examples/predicate/organVlasti> ?organVlasti . 
+	?resenje <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
 	?resenje <http://examples/predicate/tip> ?tip . 
 	?resenje <http://examples/predicate/mesto> ?mesto . 
 	?resenje <http://examples/predicate/poverenik> %s . 
 	?resenje <http://examples/predicate/trazilac> %s . 
-	?resenje <http://examples/predicate/responseTo> %s . 
+	?resenje <http://examples/predicate/zalba> %s . 
 	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime> 
 	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime>
 	&& regex(UCASE(str(?tip)), UCASE(".*%s.*"))

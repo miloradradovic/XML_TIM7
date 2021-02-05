@@ -9,10 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import java.io.IOException;
 
 @CrossOrigin(origins = "https://localhost:4200")
@@ -59,5 +62,19 @@ public class IzvestajiController {
 
         IzvestajList izvestajList = izvestajiService.searchMetadata(datumAfter, datumBefore);
         return new ResponseEntity<>(izvestajList, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/toRdf/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadIzvestajRdf(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
+
+        String path = izvestajiService.generateRdf(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/toJson/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadIzvestajJson(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
+
+        String path = izvestajiService.generateJson(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -50,12 +50,12 @@ export class ZalbaService {
     return this.http.get('http://localhost:8085/zalba-odluka/search-text?input=' + input,
     {headers: this.headers, responseType: 'text'});
   }
-  getPretragaMetadataZalbeCutanje(datumAfter, datumBefore, status, mesto, organVlasti, userEmail): Observable<any> {
-    return this.http.get('http://localhost:8085/zalba-cutanje/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&status=' + status + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail,
+  getPretragaMetadataZalbeCutanje(datumAfter, datumBefore, status, mesto, organVlasti, userEmail, zahtevId): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-cutanje/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&status=' + status + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail + '&zahtevId=' + zahtevId,
       {headers: this.headers, responseType: 'text'});
   }
-  getPretragaMetadataZalbeOdluka(datumAfter, datumBefore, status, mesto, organVlasti, userEmail): Observable<any> {
-    return this.http.get('http://localhost:8085/zalba-odluka/search-metadata?datumAfter='+ datumAfter + '&datumBefore=' + datumBefore + '&status=' + status + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail,
+  getPretragaMetadataZalbeOdluka(datumAfter, datumBefore, status, mesto, organVlasti, userEmail, zahtevId): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-odluka/search-metadata?datumAfter='+ datumAfter + '&datumBefore=' + datumBefore + '&status=' + status + '&mesto=' + mesto + '&organ_vlasti=' + organVlasti + '&userEmail=' + userEmail + '&zahtevId=' + zahtevId,
     {headers: this.headers, responseType: 'text'});
   }
 

@@ -1,6 +1,8 @@
 package com.project.poverenik.database;
 
 import com.project.poverenik.model.resenje.Resenje;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
+import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.MetadataService;
 import org.exist.xmldb.DatabaseImpl;
 import org.exist.xmldb.EXistResource;
@@ -120,10 +122,13 @@ public class ExistManager {
             res.setContent(os);
             collection.storeResource(res);
 
+            String id = collectionUri.split("/")[3] + documentId;
             if (xml instanceof Resenje)
-                metadataService.extractMetadata("/resenja", os);
-            else
-                metadataService.extractMetadata("/zalbe", os);
+                metadataService.extractMetadata("/resenja", os, id);
+            else if (xml instanceof ZalbaCutanje)
+                metadataService.extractMetadata("/zalbe", os, id);
+            else if (xml instanceof ZalbaOdluka)
+                metadataService.extractMetadata("/zalbe", os, id);
 
         } catch (Exception e) {
             e.printStackTrace();

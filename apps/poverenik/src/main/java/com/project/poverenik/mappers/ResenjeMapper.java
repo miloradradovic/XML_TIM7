@@ -30,7 +30,7 @@ public class ResenjeMapper {
                 "http://localhost:8085/zalba-odluka/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[1];
         resenje.getResenjeBody().setBroj("071-01-" + id + "-" + resenje.getResenjeBody().getDatum().substring(0, 7));
         resenje.getResenjeBody().getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getResenjeBody().getBroj());
-        resenje.getResenjeBody().getOtherAttributes().put(new QName("rel"), "pred:responseTo");
+        resenje.getResenjeBody().getOtherAttributes().put(new QName("rel"), "pred:zalba");
         resenje.getResenjeBody().getOtherAttributes().put(new QName("vocab"), "http://examples/predicate/"); //cutanje/1 odluka/1
         resenje.getResenjeBody().getOtherAttributes().put(new QName("href"), "http://zalbe/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")));
         resenje.getResenjeBody().getOtherAttributes().put(new QName("property"), "pred:datum");
@@ -51,7 +51,7 @@ public class ResenjeMapper {
             }
             try {
                 JAXBElement<TuvodneInformacije.Lice> element = (JAXBElement<TuvodneInformacije.Lice>) resenje.getResenjeBody().getUvodneInformacije().getContent().get(i);
-                element.getValue().getOtherAttributes().put(new QName("property"), "pred:organVlasti");
+                element.getValue().getOtherAttributes().put(new QName("property"), "pred:organ_vlasti");
                 element.getValue().getOtherAttributes().put(new QName("datatype"), "xs:string");
             } catch (Exception e) {
             }

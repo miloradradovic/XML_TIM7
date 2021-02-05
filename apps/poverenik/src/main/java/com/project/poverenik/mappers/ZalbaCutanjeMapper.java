@@ -27,9 +27,8 @@ public class ZalbaCutanjeMapper {
         zalbaCutanje.getZalbaCutanjeBody().setDatum(zalbaCutanjeDTO.getZalbaCutanjeBody().getDatum());
 
         zalbaCutanje.getZalbaCutanjeBody().setZahtev(zalbaCutanjeDTO.getZalbaCutanjeBody().getZahtev());
-        zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("property"), "pred:zahtev");
-        zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("datatype"), "xs:string");
-        zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("content"), zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue());
+        zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("rel"), "pred:zahtev");
+        zalbaCutanje.getZalbaCutanjeBody().getZahtev().getOtherAttributes().put(new QName("href"), "http://zahtevi/" + zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue());
         zalbaCutanje.getZalbaCutanjeBody().getZahtev().setValue("http://localhost:8085/zahtev/" + zalbaCutanje.getZalbaCutanjeBody().getZahtev().getValue());
 
         zalbaCutanje.getZalbaCutanjeBody().setStatus(new Tzalba.Status());

@@ -14,9 +14,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.TransformerException;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,9 +40,10 @@ public class ZalbaCutanjeController {
                                                            @RequestParam("status") String status,
                                                            @RequestParam("organ_vlasti") String organ_vlasti,
                                                            @RequestParam("mesto") String mesto,
-                                                           @RequestParam("userEmail") String userEmail) throws XMLDBException, JAXBException, IOException {
+                                                           @RequestParam("userEmail") String userEmail,
+                                                           @RequestParam("zahtevId") String zahtevId) throws XMLDBException, JAXBException, IOException {
         ZalbaCutanjeList zalbaCutanjeList = zalbaCutanjeService.searchMetadata(
-                datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail);
+                datumAfter, datumBefore, status, organ_vlasti, mesto, userEmail, zahtevId);
         return new ResponseEntity<>(zalbaCutanjeList, HttpStatus.OK);
     }
 
@@ -155,6 +159,22 @@ public class ZalbaCutanjeController {
             }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    //cutanje-1
+    @RequestMapping(value = "/toRdf/{idZalbe}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZalbaCutanjeRdf(@PathVariable String idZalbe) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
+
+        String path = zalbaCutanjeService.generateRdf(idZalbe);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    //cutanje-1
+    @RequestMapping(value = "/toJson/{idZalbe}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZalbaCutanjeJson(@PathVariable String idZalbe) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
+
+        String path = zalbaCutanjeService.generateJson(idZalbe);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

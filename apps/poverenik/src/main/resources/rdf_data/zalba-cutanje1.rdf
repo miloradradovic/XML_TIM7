@@ -2,14 +2,13 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:pred="http://examples/predicate/">
-  <rdf:Description rdf:about="http://zalbe/odluka/1">
+  <rdf:Description rdf:about="http://zalbe/cutanje/1">
+    <pred:mesto></pred:mesto>
     <pred:podnosilac rdf:resource="http://users/eromana98@gmail.com"/>
-    <pred:obavjestenje rdf:resource="http://obavestenja/1"/>
-    <pred:organ_vlasti>Bla</pred:organ_vlasti>
-    <pred:mesto>Београд</pred:mesto>
+    <pred:organ_vlasti>Oki</pred:organ_vlasti>
     <pred:status>ponistena</pred:status>
-    <pred:zahtev rdf:resource="http://zahtevi/3"/>
+    <pred:zahtev rdf:resource="http://zahtevi/1"/>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-05T21:02:49</pred:datum>
+    >2021-02-05T22:02:11</pred:datum>
   </rdf:Description>
 </rdf:RDF>

@@ -41,7 +41,7 @@ public class ZalbaCutanjeServiceSoapBindingImpl implements ZalbaCutanjeServicePo
         LOG.info("Executing operation getZalbaCutanjeById");
         System.out.println(id);
         try {
-            Tzalba _return = zalbaCutanjeService.getOne(id).getZalbaCutanjeBody();
+            Tzalba _return = zalbaCutanjeService.getByZahtevId(id);
             return _return;
         } catch (Exception ex) {
             ObjectFactory objectFactory = new ObjectFactory();

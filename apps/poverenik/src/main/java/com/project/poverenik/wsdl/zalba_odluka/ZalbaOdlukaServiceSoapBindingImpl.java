@@ -42,7 +42,7 @@ public class ZalbaOdlukaServiceSoapBindingImpl implements ZalbaOdlukaServicePort
         LOG.info("Executing operation getZalbaOdlukaById");
         System.out.println(id);
         try {
-            Tzalba _return = zalbaOdlukaService.getOne(id).getZalbaOdlukaBody();
+            Tzalba _return = zalbaOdlukaService.getByZahtevId(id);
             return _return;
         } catch (Exception ex) {
             ObjectFactory objectFactory = new ObjectFactory();

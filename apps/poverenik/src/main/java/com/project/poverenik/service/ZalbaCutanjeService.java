@@ -5,7 +5,9 @@ import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaCutanjeMapper;
 import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaCutanjeList;
+import com.project.poverenik.model.zahtev.Tzahtev;
 import com.project.poverenik.model.zahtev.client.getZahtevResponse;
+import com.project.poverenik.model.zalba_cutanje.Tzalba;
 import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities.ConnectionProperties;
@@ -466,6 +468,25 @@ public class ZalbaCutanjeService {
         }
         return new ZalbaCutanjeList(zalbaCutanjeList);
     }
+
+	public Tzalba getByZahtevId(String zahtevId) throws Exception {
+
+		ResourceSet resourceSet = zalbaCutanjeRepository.getOneByZahtev(zahtevId);
+		ResourceIterator resourceIterator = resourceSet.getIterator();
+
+		if (!resourceIterator.hasMoreResources()) {
+			throw new Exception("");
+		}
+			XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+			if (xmlResource == null)
+				throw new Exception("");
+			JAXBContext context = JAXBContext.newInstance(ZalbaCutanje.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			ZalbaCutanje zalbaCutanje = (ZalbaCutanje) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+
+
+		return zalbaCutanje.getZalbaCutanjeBody();
+	}
 
     public ZalbaCutanjeList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
                                            String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {

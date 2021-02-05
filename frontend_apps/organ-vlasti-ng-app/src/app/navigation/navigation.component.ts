@@ -27,7 +27,7 @@ export class NavigationComponent implements OnInit {
     localStorage.clear();
     this.role = '';
     localStorage.setItem('role', this.role);
-    this.router.navigate(['/sign-in']);
+    this.router.navigate(['/prijava']);
   }
 
 }

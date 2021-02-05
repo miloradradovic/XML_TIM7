@@ -19,7 +19,14 @@ export class ResenjeFormComponent implements OnInit {
 
   ngAfterViewInit(): void {
     const idZalbe = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
-    const datumAtr = (new Date()).toISOString().split('.')[0];
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0'); // day
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // month
+    const yyyy = today.getFullYear(); // year
+    const hour = String(today.getUTCHours() + 1).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    const seconds = String(today.getSeconds()).padStart(2, '0');
+    const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;
     const idPoverenika = JSON.parse(localStorage.getItem('user')).email;
     let elementR = document.getElementById("resenje");
     let xmlStringR =

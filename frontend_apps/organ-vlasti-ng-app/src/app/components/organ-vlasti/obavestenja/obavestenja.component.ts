@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ObavestenjeService} from '../../../services/obavestenje-service/obavestenje.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 declare var require: any;
 
@@ -16,16 +16,17 @@ export class ObavestenjaComponent implements OnInit {
   obavestenja = [];
 
   form: FormGroup;
+
   constructor(private obavestenjeService: ObavestenjeService,
               private snackBar: MatSnackBar,
               private fb: FormBuilder) {
-                this.form = this.fb.group({
-                  zahtev: [''],
-                  organVlasti: [''],
-                  userEmail: [''],
-                  datumAfter: [''],
-                  datumBefore: [''],
-                });
+    this.form = this.fb.group({
+      zahtev: [''],
+      organVlasti: [''],
+      userEmail: [''],
+      datumAfter: [''],
+      datumBefore: [''],
+    });
   }
 
   ngOnInit(): void {
@@ -37,14 +38,14 @@ export class ObavestenjaComponent implements OnInit {
         const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
-        if (lista !== undefined){
-          try{
+        if (lista !== undefined) {
+          try {
             lista.forEach((item, index) => {
               const idObavestenja = item['oba:obavestenje_body']._attributes.id;
               const obavestenje = {id: idObavestenja};
               newList.push(obavestenje);
             });
-          } catch (err){
+          } catch (err) {
             const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
             const obavestenje = {id: idObavestenja};
             newList.push(obavestenje);
@@ -53,7 +54,7 @@ export class ObavestenjaComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
       }
     );
   }
@@ -62,49 +63,49 @@ export class ObavestenjaComponent implements OnInit {
     this.obavestenja = [];
     const newList = [];
     const convert = require('xml-js');
-        const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(obavestenjeList);
-        const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
-        if (lista !== undefined){
-          try{
-            lista.forEach((item, index) => {
-              const idObavestenja = item['oba:obavestenje_body']._attributes.id;
-              const obavestenje = {id: idObavestenja};
-              newList.push(obavestenje);
-            });
-          } catch (err){
-            const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
-            const obavestenje = {id: idObavestenja};
-            newList.push(obavestenje);
-          }
-          this.obavestenja = newList;
-        }
-  }
+    const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
+    console.log(obavestenjeList);
+    const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
+    if (lista !== undefined) {
+      try {
+        lista.forEach((item, index) => {
+          const idObavestenja = item['oba:obavestenje_body']._attributes.id;
+          const obavestenje = {id: idObavestenja};
+          newList.push(obavestenje);
+        });
+      } catch (err) {
+        const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
+        const obavestenje = {id: idObavestenja};
+        newList.push(obavestenje);
+      }
+      this.obavestenja = newList;
+    }
+  };
 
-  onTekstChanged(newValue: any){
-    console.log(newValue.value)
+  onTekstChanged(newValue: any) {
+    console.log(newValue.value);
     this.obavestenjeService.getPretragaTekst(newValue.value).subscribe(
       result => {
         this.renderObavestenja(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
       }
     );
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.zahtev.value)
-    console.log(this.form.controls.organVlasti.value)
-    console.log(this.form.controls.userEmail.value)
-    console.log(this.form.controls.datumAfter.value)
-    console.log(this.form.controls.datumBefore.value)
+    console.log(this.form.controls.zahtev.value);
+    console.log(this.form.controls.organVlasti.value);
+    console.log(this.form.controls.userEmail.value);
+    console.log(this.form.controls.datumAfter.value);
+    console.log(this.form.controls.datumBefore.value);
     this.obavestenjeService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value, this.form.controls.zahtev.value).subscribe(
       result => {
         this.renderObavestenja(result);
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
       }
     );
   }
@@ -135,7 +136,7 @@ export class ObavestenjaComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
       });
   }
 
@@ -156,7 +157,7 @@ export class ObavestenjaComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
       });
   }
 

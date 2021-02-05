@@ -1,20 +1,20 @@
 <div style="float: left; padding-top: 5%; padding-left: 5%">
-  <button mat-flat-button (click)="generisiIzvestaj($event)">Generisi i posalji godisnji izvestaj</button>
+  <button mat-flat-button (click)="generisiIzvestaj($event)">Генериши и пошаљи годишњи извештај</button>
 </div>
 
 <div [hidden]="false" style="float: right; padding-top: 5%; width: 60%; padding-right: 5%">
-  <app-table [columnsToDisplay]="['Broj podnetih zahteva', 'Broj prihvacenih zahteva', 'Broj odbijenih zahteva']"
+  <app-table [columnsToDisplay]="['Број поднетих захтева', 'Број прихваћених захтева', 'Број одбијених захтева']"
              [columnsToIterate]="['broj_podnetih_zahteva', 'broj_prihvacenih_zahteva', 'broj_odbijenih_zahteva']"
              [dataSource]="zahtevi"></app-table>
   <br><br><br>
-  <app-table [columnsToDisplay]="['Broj podnetih zalbi na cutanje', 'Broj prihvacenih zalbi na cutanje', 'Broj odbijenih zalbi na cutanje',
-                                  'Broj ponistenih zalbi na cutanje']"
+  <app-table [columnsToDisplay]="['Број поднетих жалби на ћутање', 'Број прихваћених жалби на ћутање', 'Број одбијених жалби на ћутање',
+                                  'Број поништених жалби на ћутање']"
              [columnsToIterate]="['broj_podnetih_zalbi_cutanje', 'broj_prihvacenih_zalbi_cutanje', 'broj_odbijenih_zalbi_cutanje',
                                   'broj_ponistenih_zalbi_cutanje']"
              [dataSource]="zalbecutanje"></app-table>
   <br><br><br>
-  <app-table [columnsToDisplay]="['Broj podnetih zalbi na odluku', 'Broj prihvacenih zalbi na odluku',
-                                  'Broj odbijenih zalbi na odluku', 'Broj ponistenih zalbi na odluku']"
+  <app-table [columnsToDisplay]="['Број поднетих жалби на одлуку', 'Број прихваћених жалби на одлуку',
+                                  'Број одбијених жалби на одлуку', 'Број поништених жалби на одлуку']"
              [columnsToIterate]="['broj_podnetih_zalbi_odluka', 'broj_prihvacenih_zalbi_odluka',
                                   'broj_odbijenih_zalbi_odluka', 'broj_ponistenih_zalbi_odluka']"
              [dataSource]="zalbeodluka"></app-table>

@@ -1,11 +1,11 @@
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Id zahteva', 'xhtml', 'pdf', 'rdf', 'json']"
+  <app-table [columnsToDisplay]="['Идентификатор захтева', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id']"
              (PDF)="convertToPdfZahtev($event)" (XHTML)="convertToXHTMLZahtev($event)" (JSON)="jsonZahtev($event)" (RDF)="rdfZahtev($event)"
              [dataSource]="zahtevi"></app-table>
 </div>
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Id obavestenja','Id zahteva', 'xhtml', 'pdf', 'rdf', 'json']"
+  <app-table [columnsToDisplay]="['Идентификатор обавештења','Идентификатор захтева', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id', 'idZahteva']"
              (PDF)="convertToPdfObavestenje($event)" (XHTML)="convertToXHTMLObavestenje($event)" (RDF)="rdfObavestenje($event)" (JSON)="jsonObavestenje($event)"
              [dataSource]="obavestenja"></app-table>

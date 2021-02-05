@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IzjasnjavanjeDialogComponent} from '../izjasnjavanja/izjasnjavanje-dialog/izjasnjavanje-dialog.component';
 import {DialogOdbijanjeComponent} from './dialog-odbijanje/dialog-odbijanje.component';
@@ -14,15 +14,17 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
   zahtevId = '0';
   odbijen = false;
   neobradjena = true;
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog) { }
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.zahtevId = this.activatedRoute.snapshot.queryParamMap.get('zahtev_id');
     const status = this.activatedRoute.snapshot.queryParamMap.get('zahtev_status');
-    if (status === 'odbijen' || status === 'prihvacen'){
+    if (status === 'odbijen' || status === 'prihvacen') {
       this.odbijen = true;
     }
-    if (status === 'neobradjen'){
+    if (status === 'neobradjen') {
       this.neobradjena = true;
     }
   }
@@ -40,7 +42,7 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.router.navigate(['/main-page-organ-vlasti']);
+      this.router.navigate(['/pocetna-stranica-organ-vlasti']);
     });
   }
 }

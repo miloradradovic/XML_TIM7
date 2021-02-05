@@ -1,4 +1,4 @@
-<h1 class="mat-display-1;" style="text-align: center;  margin-top: 1%;">Dodavanje poverenika</h1>
+<h1 class="mat-display-1;" style="text-align: center;  margin-top: 1%;">Додавање повереника</h1>
 <mat-divider></mat-divider>
 
 <div style="display: block; text-align: center; margin: 10%;">
@@ -6,44 +6,44 @@
   <form [formGroup]="form"  (ngSubmit)="submit()" style="display: inline-block; width: 100%">
     <div>
       <mat-form-field>
-        <mat-label for="name">Ime:</mat-label>
+        <mat-label for="name">Име:</mat-label>
         <input matInput id="name" name="name" placeholder="name" [formControl]="form.controls.name">
         <mat-error *ngIf="form.controls.name.touched && form.controls.name.errors?.required">
-          Ovo polje ne sme biti prazno!</mat-error >
+          Ово поље не сме бити празно!</mat-error >
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label for="surname">Prezime:</mat-label>
+        <mat-label for="surname">Презиме:</mat-label>
         <input matInput id="surname" name="surname" placeholder="surname" [formControl]="form.controls.surname">
         <mat-error *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
-          Ovo polje ne sme biti prazno!</mat-error >
+          Ово поље не сме бити празно!</mat-error >
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field >
-        <mat-label for="email">Email:</mat-label>
+        <mat-label for="email">Електронска пошта:</mat-label>
         <input matInput type="email" id="email" name="email" placeholder="email" [formControl]="form.controls.email">
         <mat-error *ngIf="form.controls.email.touched && form.controls.email.errors?.required">
-          Ovo polje ne sme biti prazno!</mat-error >
+          Ово поље не сме бити празно!</mat-error >
         <mat-error *ngIf="form.controls.email.errors?.email">
-          Email nije validan!</mat-error>
+          Електронска пошта није валидна!</mat-error>
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field>
-        <mat-label for="password">Lozinka:</mat-label>
+        <mat-label for="password">Лозинка:</mat-label>
         <input matInput  type="password" id="password" name="password" placeholder="Password" [formControl]="form.controls.password">
         <mat-error *ngIf="form.controls.password.touched && form.controls.password.errors?.required">
-          Ovo polje ne sme biti prazno!</mat-error>
+          Ово поље не сме бити празно!</mat-error>
         <mat-error *ngIf="form.controls.password.errors?.minlength">
-          Duzina lozinke mora biti minimum 8!</mat-error>
+          Дужина лозинке мора бити минимално 8 карактера!</mat-error>
       </mat-form-field>
     </div>
     <div>
-      <button mat-raised-button type="submit" id="add-poverenik" [disabled]="!form.valid">Dodaj sluzbenika</button>
+      <button mat-raised-button type="submit" id="add-poverenik" [disabled]="!form.valid">Додај службеника</button>
     </div>
   </form>
 </div>

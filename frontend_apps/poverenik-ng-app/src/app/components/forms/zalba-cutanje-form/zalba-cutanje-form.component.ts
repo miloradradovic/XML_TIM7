@@ -18,18 +18,25 @@ export class ZalbaCutanjeFormComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    const datumAtr = (new Date()).toISOString().split('.')[0];
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0'); // day
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // month
+    const yyyy = today.getFullYear(); // year
+    const hour = String(today.getUTCHours() + 1).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    const seconds = String(today.getSeconds()).padStart(2, '0');
+    const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;
     let elementCutanje = document.getElementById("zalbaCutanje");
     let xmlStringCutanje =
-    `<zc:zalba_cutanje 
-      xmlns:zc="http://www.zalbacutanje" 
+    `<zc:zalba_cutanje
+      xmlns:zc="http://www.zalbacutanje"
       xmlns:re="http://www.reusability"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.zalbacutanje ../xsd/zalba_cutanje.xsd"><zc:zalba_cutanje_body  mjesto="" datum="${datumAtr}"><zc:zahtev></zc:zahtev><zc:sadrzaj_zalbe><re:clan></re:clan><re:ciljani_organ_vlasti></re:ciljani_organ_vlasti><re:razlog_zalbe><re:opcija izabran="false">није поступио</re:opcija><re:opcija izabran="false">није поступио у целости</re:opcija><re:opcija izabran="false">у законском року</re:opcija></re:razlog_zalbe><re:datum></re:datum><re:podaci_o_zahtjevu_i_informacijama></re:podaci_o_zahtjevu_i_informacijama><re:napomena></re:napomena></zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
     Xonomy.render(xmlStringCutanje, elementCutanje, {
       validate: this.zalbaCutanjeService.zalbaCutanjeSpecification.validate,
       elements: this.zalbaCutanjeService.zalbaCutanjeSpecification.elements,
-      onchange: () => { 
+      onchange: () => {
       }
     });
   }
@@ -48,8 +55,8 @@ export class ZalbaCutanjeFormComponent implements OnInit {
     const razlog_zalbe = data.split('<re:razlog_zalbe>')[1].split('</re:razlog_zalbe>')[0];
     const datum = data.split('<re:datum>')[1].split('</re:datum>')[0];
     const podaci_o_zahtjevu_i_informacijama = data.split('<re:podaci_o_zahtjevu_i_informacijama>')[1].split('</re:podaci_o_zahtjevu_i_informacijama>')[0];
-    let dataTemplate = `<zc:zalba_cutanje 
-    xmlns:zc="http://www.zalbacutanje" 
+    let dataTemplate = `<zc:zalba_cutanje
+    xmlns:zc="http://www.zalbacutanje"
     xmlns:re="http://www.reusability"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema#"
@@ -61,11 +68,15 @@ export class ZalbaCutanjeFormComponent implements OnInit {
         <re:podaci_o_zahtjevu_i_informacijama>${podaci_o_zahtjevu_i_informacijama}</re:podaci_o_zahtjevu_i_informacijama>
         <re:napomena></re:napomena>
     </zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
-  
+
     console.log(dataTemplate)
     this.zalbaCutanjeService.send(dataTemplate)
-      .subscribe(res => console.log(res));
-    this.snackBar.open("Uspešno ste poslali žalbu!", 'Ok', { duration: 3000 });
+      .subscribe(res => {
+          this.snackBar.open('Успешно сте послали жалбу на ћутање!', 'Ок', {duration: 3000});
+        },
+        error => {
+          this.snackBar.open('Креирање жалбе на ћутање је тренутно немогуће!', 'Ок', {duration: 3000});
+        });
 
   }
 

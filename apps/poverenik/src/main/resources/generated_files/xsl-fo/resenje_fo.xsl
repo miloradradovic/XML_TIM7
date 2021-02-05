@@ -84,6 +84,11 @@
                             </fo:block>
                         </fo:inline-container>
                     </fo:block>
+                    <fo:block>
+                        <fo:basic-link external-destination="url({/ra:resenje/ra:resenje_body/@link_na_zalbu})"  font-family="Times New Roman" text-altitude="2cm" color="blue">
+                            Референцирана жалба
+                        </fo:basic-link>
+                    </fo:block>
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>

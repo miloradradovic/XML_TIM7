@@ -79,7 +79,7 @@ public class ResenjeController {
 
     @RequestMapping(value = "/download/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadResenje(@PathVariable String broj) {
-        String path = resenjeRefService.downloadResenjePDF(broj);
+        String path = resenjeRefService.downloadResenjeXHTML(broj);
         if (!path.equals(""))
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));

@@ -26,8 +26,8 @@ public class ResenjeMapper {
                 break;
         }
         String linkNaZalbu = resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[0].equals("cutanje") ?
-                "http://localhost:8085/zalba-cutanje/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[1] :
-                "http://localhost:8085/zalba-odluka/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[1];
+                "http://localhost:4201/detaljni-prikaz-zalbe?zalba_id=cutanje/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[1] :
+                "http://localhost:4201/detaljni-prikaz-zalbe?zalba_id=odluka/" + resenje.getResenjeBody().getOtherAttributes().get(new QName("idZalbe")).split("/")[1];
         resenje.getResenjeBody().setBroj("071-01-" + id + "-" + resenje.getResenjeBody().getDatum().substring(0, 7));
         resenje.getResenjeBody().getOtherAttributes().put(new QName("about"), "http://resenja/" + resenje.getResenjeBody().getBroj());
         resenje.getResenjeBody().getOtherAttributes().put(new QName("rel"), "pred:zalba");

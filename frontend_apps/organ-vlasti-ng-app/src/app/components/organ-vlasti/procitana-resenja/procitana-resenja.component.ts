@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from "@angular/router";
 
 declare var require: any;
 
@@ -17,7 +18,8 @@ export class ProcitanaResenjaComponent implements OnInit {
 
   constructor(private resenjeService: ResenjeService,
               private snackBar: MatSnackBar,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private router: Router) {
     this.form = this.fb.group({
       mesto: [''],
       organVlasti: [''],
@@ -123,19 +125,61 @@ export class ProcitanaResenjaComponent implements OnInit {
     this.form.controls.datumBefore.patchValue(new Date(event.target.value).toISOString().split('.')[0]);
   }
 
-  pdf($event: number) {
-
-  }
-
-  xhtml($event: number) {
-
-  }
-
   rdfResenja($event: number) {
 
   }
 
   jsonResenja($event: number) {
 
+  }
+
+  pdf($event: number): void {
+    this.resenjeService.convertResenjePDF(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  xhtml($event: number): void {
+    this.resenjeService.convertResenjeXHTML(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  doubleClicked($event: number): void {
+    this.resenja.forEach( resenje => {
+      if (resenje.id === $event){
+        this.router.navigate(['/detaljni-prikaz-resenja'], {queryParams: {broj: resenje.id}});
+      }
+    });
   }
 }

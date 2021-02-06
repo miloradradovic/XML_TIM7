@@ -27,15 +27,19 @@ export class IzjasnjavanjaComponent implements OnInit {
         if (izjasnjavanja !== undefined){
           try {
             izjasnjavanja.forEach((item, index) => {
+              console.log(item);
               const message = item['ns2:body']._text;
               const idMessage = item['ns2:body']._attributes.id;
-              const messageObject = {id: idMessage, messageText: message};
+              const idZahteva = message.split(': ')[1];
+              const messageObject = {id: idMessage, messageText: message, zahtev: idZahteva};
               newList.push(messageObject);
             });
           } catch (err){
+            console.log(izjasnjavanja);
             const message = izjasnjavanja['ns2:body']._text;
             const idMessage = izjasnjavanja['ns2:body']._attributes.id;
-            const messageObject = {id: idMessage, messageText: message};
+            const idZahteva = message.split(': ')[1];
+            const messageObject = {id: idMessage, messageText: message, zahtev: idZahteva};
             newList.push(messageObject);
           }
           this.izjasnjavanja = newList;
@@ -48,9 +52,15 @@ export class IzjasnjavanjaComponent implements OnInit {
   }
 
   openDialog($event: number): void {
+    let zahtevId = '0';
+    this.izjasnjavanja.forEach((item, index) => {
+      if (item.id === $event){
+        zahtevId = item.zahtev;
+      }
+    });
     const dialogRef = this.dialog.open(IzjasnjavanjeDialogComponent, {
       width: '250px',
-      data: {messageId: $event}
+      data: {messageId: $event, zahtev: zahtevId}
     });
 
     dialogRef.afterClosed().subscribe(result => {

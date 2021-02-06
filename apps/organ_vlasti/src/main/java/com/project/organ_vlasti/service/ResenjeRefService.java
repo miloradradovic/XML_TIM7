@@ -1,6 +1,8 @@
 package com.project.organ_vlasti.service;
 
+import com.project.organ_vlasti.client.FileClient;
 import com.project.organ_vlasti.client.ResenjeClient;
+import com.project.organ_vlasti.client.ZalbeClient;
 import com.project.organ_vlasti.database.ExistManager;
 import com.project.organ_vlasti.model.resenje.Resenje;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBroj;
@@ -8,10 +10,16 @@ import com.project.organ_vlasti.model.resenje.client.getResenjeByBrojResponse;
 import com.project.organ_vlasti.model.resenje.database.ResenjeRef;
 import com.project.organ_vlasti.model.resenje.database.client.getRefs;
 import com.project.organ_vlasti.model.resenje.database.client.getRefsResponse;
+import com.project.organ_vlasti.model.util.file.Tpath;
+import com.project.organ_vlasti.model.util.file.client.sendJsonFile;
+import com.project.organ_vlasti.model.util.file.client.sendRdfFile;
+import com.project.organ_vlasti.model.util.file.client.sendRdfFileResponse;
 import com.project.organ_vlasti.model.util.lists.ResenjeRefList;
 import com.project.organ_vlasti.model.util.parametars.ParametarMap;
 import com.project.organ_vlasti.model.util.parametars.Tvalue;
 import com.project.organ_vlasti.model.zahtev.Zahtev;
+import com.project.organ_vlasti.model.zalba_odluka.client.getZalbaOdlukaById;
+import com.project.organ_vlasti.model.zalba_odluka.client.getZalbaOdlukaByIdResponse;
 import com.project.organ_vlasti.repository.ResenjeRefRepository;
 import com.project.organ_vlasti.transformer.Transformator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -307,5 +315,37 @@ public class ResenjeRefService {
 
     public boolean update(ResenjeRef resenjeRef) throws XMLDBException {
         return resenjeRefRepository.update(resenjeRef);
+    }
+
+    public Tpath getRdf(String id) {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.file.client");
+
+        FileClient fileClient = new FileClient();
+        fileClient.setDefaultUri("http://localhost:8085/ws");
+        fileClient.setMarshaller(marshaller);
+        fileClient.setUnmarshaller(marshaller);
+
+
+        sendRdfFile sendRdfFile = new sendRdfFile();
+        sendRdfFile.setId(id);
+
+        return fileClient.getRdf(sendRdfFile).getPath();
+    }
+
+    public Tpath getJson(String id) {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.util.file.client");
+
+        FileClient fileClient = new FileClient();
+        fileClient.setDefaultUri("http://localhost:8085/ws");
+        fileClient.setMarshaller(marshaller);
+        fileClient.setUnmarshaller(marshaller);
+
+
+        sendJsonFile sendJsonFile = new sendJsonFile();
+        sendJsonFile.setId(id);
+
+        return fileClient.getJson(sendJsonFile).getPath();
     }
 }

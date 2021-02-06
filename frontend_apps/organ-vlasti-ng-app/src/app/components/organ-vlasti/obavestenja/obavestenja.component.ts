@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ObavestenjeService} from '../../../services/obavestenje-service/obavestenje.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {Router} from "@angular/router";
+
 
 declare var require: any;
 
@@ -19,6 +21,7 @@ export class ObavestenjaComponent implements OnInit {
 
   constructor(private obavestenjeService: ObavestenjeService,
               private snackBar: MatSnackBar,
+              private router: Router,
               private fb: FormBuilder) {
     this.form = this.fb.group({
       zahtev: [''],
@@ -36,7 +39,6 @@ export class ObavestenjaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
         if (lista !== undefined) {
           try {
@@ -64,7 +66,6 @@ export class ObavestenjaComponent implements OnInit {
     const newList = [];
     const convert = require('xml-js');
     const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-    console.log(obavestenjeList);
     const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
     if (lista !== undefined) {
       try {
@@ -83,7 +84,6 @@ export class ObavestenjaComponent implements OnInit {
   };
 
   onTekstChanged(newValue: any) {
-    console.log(newValue.value);
     this.obavestenjeService.getPretragaTekst(newValue.value).subscribe(
       result => {
         this.renderObavestenja(result);
@@ -95,11 +95,6 @@ export class ObavestenjaComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.zahtev.value);
-    console.log(this.form.controls.organVlasti.value);
-    console.log(this.form.controls.userEmail.value);
-    console.log(this.form.controls.datumAfter.value);
-    console.log(this.form.controls.datumBefore.value);
     this.obavestenjeService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value, this.form.controls.zahtev.value).subscribe(
       result => {
         this.renderObavestenja(result);
@@ -120,7 +115,7 @@ export class ObavestenjaComponent implements OnInit {
 
 
   pdf($event: string): void {
-    this.obavestenjeService.convertZahtevPDF($event).subscribe(
+    this.obavestenjeService.convertObavestenjePDF($event).subscribe(
       result => {
         const binaryData = [];
         binaryData.push(result);
@@ -141,7 +136,7 @@ export class ObavestenjaComponent implements OnInit {
   }
 
   xhtml($event: string): void {
-    this.obavestenjeService.convertZahtevXHTML($event).subscribe(
+    this.obavestenjeService.convertObavestenjeXHTML($event).subscribe(
       result => {
         const binaryData = [];
         binaryData.push(result);
@@ -168,4 +163,13 @@ export class ObavestenjaComponent implements OnInit {
   jsonObavestenje($event: number) {
 
   }
+
+  doubleClicked($event: number): void {
+    this.obavestenja.forEach( obavestenje => {
+      if (obavestenje.id === $event){
+        this.router.navigate(['/detaljni-prikaz-obavestenja'], {queryParams: {broj: obavestenje.id}});
+      }
+    });
+  }
+
 }

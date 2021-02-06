@@ -100,6 +100,11 @@
                         У <xsl:value-of select="/zc:zalba_cutanje/zc:zalba_cutanje_body/zc:podaci_o_primaocu/re:adresa/re:mesto"/>,
                         дана <xsl:value-of select="/zc:zalba_cutanje/zc:zalba_cutanje_body/@content"/>
                     </fo:block>
+                    <fo:block>
+                        <fo:basic-link external-destination="url({/zc:zalba_cutanje/zc:zalba_cutanje_body/zc:zahtev/@href})"  font-family="Times New Roman" text-altitude="2cm" color="blue">
+                            Референцирани захтев
+                        </fo:basic-link>
+                    </fo:block>
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>

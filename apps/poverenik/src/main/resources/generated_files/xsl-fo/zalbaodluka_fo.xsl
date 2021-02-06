@@ -107,6 +107,11 @@
                         •	Уз жалбу обавезно приложити копију поднетог захтева и доказ о његовој предаји-упућивању
                         органу као и копију одлуке органа која се оспорава жалбом.
                     </fo:block>
+                    <fo:block>
+                        <fo:basic-link external-destination="url({/zoc:zalba_cutanje/zoc:zalba_cutanje_body/zoc:zahtev/@href})"  font-family="Times New Roman" text-altitude="2cm" color="blue">
+                            Референцирани захтев
+                        </fo:basic-link>
+                    </fo:block>
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>

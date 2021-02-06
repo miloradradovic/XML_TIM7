@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ZalbaService} from '../../../services/zalba-service/zalba.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-poverenik-main-page',
@@ -75,16 +76,67 @@ export class PoverenikMainPageComponent implements OnInit {
   }
 
 
-  convertToXHTML($event: string): void {
-    console.log($event);
+  convertToPDF($event: string): void {
+    let obs$ = of([]);
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjePDF($event.split('/')[1]);
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaPDF($event.split('/')[1]);
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 
-  convertToPDF($event: string): void {
-    console.log($event);
+  convertToXHTML($event: string): void {
+    let obs$;
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeXHTML($event.split('/')[1]);
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaXHTML($event.split('/')[1]);
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 
   doubleClicked($event: string): void {
-    console.log($event);
     this.zalbe.forEach((item, index) => {
       const zalba = item.tip + '/' + item.id;
       if (zalba === $event){

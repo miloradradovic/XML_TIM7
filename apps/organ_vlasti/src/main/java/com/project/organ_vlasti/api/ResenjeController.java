@@ -4,6 +4,8 @@ import com.project.organ_vlasti.model.resenje.client.getResenjeByBrojResponse;
 import com.project.organ_vlasti.model.util.lists.ResenjeRefList;
 import com.project.organ_vlasti.service.ResenjeRefService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
+import java.io.ByteArrayInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 @CrossOrigin(origins = "https://localhost:4200")
@@ -69,6 +74,23 @@ public class ResenjeController {
         if (resenjeRefList != null) {
             return new ResponseEntity<>(resenjeRefList, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/download/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadResenje(@PathVariable String broj) {
+        String path = resenjeRefService.downloadResenjeXHTML(broj);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".pdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

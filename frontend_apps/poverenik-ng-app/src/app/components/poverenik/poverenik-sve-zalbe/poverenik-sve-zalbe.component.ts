@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import {of} from 'rxjs';
+import {Router} from '@angular/router';
 
 declare var require: any;
 
@@ -16,7 +17,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
 
   form: FormGroup;
   zalbe = []; // objekti tipa {id: number}
-  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private fb: FormBuilder) {
+  constructor(private zalbaService: ZalbaService, private snackBar: MatSnackBar, private fb: FormBuilder, private router: Router ) {
     this.form = this.fb.group({
       mesto: [''],
       organVlasti: [''],
@@ -115,8 +116,6 @@ export class PoverenikSveZalbeComponent implements OnInit {
     const zalbaCutanjeOdluka = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
     const lista = zalbaCutanjeOdluka.zalbaOdlukaList;
     const zalbe = lista['zoc:zalba_odluka'];
-    console.log('render zalbe odluka');
-    console.log(zalbe);
     if (zalbe !== undefined){
       try {
         zalbe.forEach((item, index) => {
@@ -154,13 +153,6 @@ export class PoverenikSveZalbeComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.mesto.value)
-    console.log(this.form.controls.organVlasti.value)
-    console.log(this.form.controls.userEmail.value)
-    console.log(this.form.controls.status.value)
-    console.log(this.form.controls.datumAfter.value)
-    console.log(this.form.controls.datumBefore.value)
-    console.log(this.form.controls.zahtevId.value)
     this.zalbe = [];
     this.zalbaService.getPretragaMetadataZalbeCutanje(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.status.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value, this.form.controls.userEmail.value, this.form.controls.zahtevId.value).subscribe(
       result => {
@@ -179,6 +171,17 @@ export class PoverenikSveZalbeComponent implements OnInit {
       }
     );
 
+  }
+
+  doubleClicked($event: string): void {
+    console.log($event);
+    this.zalbe.forEach((item, index) => {
+      const zalba = item.tip + '/' + item.id;
+      if (zalba === $event){
+        this.router.navigate(['/detaljni-prikaz-zalbe'], {queryParams: {zalba_id: zalba, zalba_status: item.status}});
+      }
+    });
+    // this.router.navigate(['/detailed-cultural-offer'], {queryParams: {offer_id: offerId}});
   }
 
   onDatumAfterChanged(event) {

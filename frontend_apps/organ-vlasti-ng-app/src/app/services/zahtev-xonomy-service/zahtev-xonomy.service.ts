@@ -214,9 +214,6 @@ export class ZahtevXonomyService {
         hasText: true,
         asker: Xonomy.askString
       },
-     
-
-
     }
   }
 

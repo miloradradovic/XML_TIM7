@@ -4,11 +4,11 @@
     xmlns:pred="http://examples/predicate/">
   <rdf:Description rdf:about="http://zalbe/cutanje/1">
     <pred:mesto></pred:mesto>
-    <pred:podnosilac rdf:resource="http://users/eromana98@gmail.com"/>
-    <pred:organ_vlasti>Oki</pred:organ_vlasti>
-    <pred:status>ponistena</pred:status>
-    <pred:zahtev rdf:resource="http://zahtevi/1"/>
+    <pred:podnosilac rdf:resource="http://users/email1@email.com"/>
+    <pred:organ_vlasti>aaaa</pred:organ_vlasti>
+    <pred:status>prihvacena</pred:status>
+    <pred:zahtev rdf:resource="http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=2"/>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-05T22:02:11</pred:datum>
+    >2021-02-05T23:47:29</pred:datum>
   </rdf:Description>
 </rdf:RDF>

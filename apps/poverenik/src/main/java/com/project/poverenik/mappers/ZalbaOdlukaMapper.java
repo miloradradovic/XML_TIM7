@@ -28,8 +28,8 @@ public class ZalbaOdlukaMapper {
 
         zalbaOdluka.getZalbaOdlukaBody().setZahtev(zalbaOdlukaDTO.getZalbaOdlukaBody().getZahtev());
         zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("rel"), "pred:zahtev");
-        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("href"), "http://zahtevi/" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
-        zalbaOdluka.getZalbaOdlukaBody().getZahtev().setValue("http://localhost:8085/zahtev/" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
+        zalbaOdluka.getZalbaOdlukaBody().getZahtev().getOtherAttributes().put(new QName("href"), "http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
+        zalbaOdluka.getZalbaOdlukaBody().getZahtev().setValue("http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=" + zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue());
 
         zalbaOdluka.getZalbaOdlukaBody().setStatus(new Tzalba.Status());
         zalbaOdluka.getZalbaOdlukaBody().getStatus().setValue("neobradjena");

@@ -21,4 +21,15 @@ export class ResenjeService {
     return this.http.get('http://localhost:8090/resenje/search-metadata/' + status + '?poverenik=' + poverenik + '&trazilac=' + trazilac + '&zalba=' + zalba + '&datumAfter=' + datumAfter + '&datumBefore=' + datumBefore + '&tip=' + tip + '&organVlasti=' + organVlasti + '&mesto=' + mesto,
       {headers: this.headers, responseType: 'text'});
   }
+
+  convertResenjeXHTML(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/resenje/download/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
+
+  convertResenjePDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/resenje/download/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+
 }

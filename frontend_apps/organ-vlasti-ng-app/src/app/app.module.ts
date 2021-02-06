@@ -47,6 +47,7 @@ import { DetaljniPrikazResenjaComponent } from './components/organ-vlasti/detalj
 import { DetaljniPrikazZalbeComponent } from './components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
 import { DialogOdbijanjeComponent } from './components/organ-vlasti/detaljni-prikaz-zahteva/dialog-odbijanje/dialog-odbijanje.component';
 import { AddOrganVlastiFormComponent } from './components/forms/add-organ-vlasti-form/add-organ-vlasti-form.component';
+import {EmptyComponent} from './components/organ-vlasti/empty/empty.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
@@ -78,6 +79,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     DetaljniPrikazZalbeComponent,
     DialogOdbijanjeComponent,
     AddOrganVlastiFormComponent,
+    EmptyComponent,
     EditProfileComponent
   ],
   imports: [

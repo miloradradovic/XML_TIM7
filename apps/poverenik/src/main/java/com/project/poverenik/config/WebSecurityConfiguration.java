@@ -76,8 +76,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				// svim korisnicima dopusti da pristupe putanji /auth/**
 				.authorizeRequests()
 				.antMatchers("/auth/**", "/ws/**", "/users/**", "/zalba-cutanje/toPdf/**", "/zalba-odluka/toPdf/**",
-						"/resenje/toPdf/**", "/zalba-cutanje/toRdf/**", "/zalba-cutanje/toJson/**",
-						"/zalba-odluka/toRdf/**", "/zalba-odluka/toJson/**", "/resenje/toRdf/**", "/resenje/toJson/**")
+						"/resenje/toPdf/**", "/zalba-cutanje/toRdf/**", "/zalba-cutanje/toXhtml/**", "/zalba-odluka/toXhtml/**", "/zalba-cutanje/toJson/**",
+						"/zalba-odluka/toRdf/**", "/zalba-odluka/toJson/**", "/resenje/toRdf/**", "/resenje/toJson/**" )
 				.permitAll()
 
 				// za svaki drugi zahtev korisnik mora biti autentifikovan

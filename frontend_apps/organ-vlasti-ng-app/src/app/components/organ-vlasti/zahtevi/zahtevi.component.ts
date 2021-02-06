@@ -63,7 +63,6 @@ export class ZahteviComponent implements OnInit {
     const newList = [];
     const convert = require('xml-js');
       const zahtevList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-      console.log(zahtevList);
       const lista = zahtevList.zahtevList['zcir:zahtev'];
       if (lista !== undefined){
         try {
@@ -82,7 +81,6 @@ export class ZahteviComponent implements OnInit {
   }
 
   onTekstChanged(newValue: any){
-    console.log(newValue.value)
     this.zahtevService.getPretragaTekst(newValue.value).subscribe(
       result => {
         this.renderZahtevi(result);
@@ -94,11 +92,6 @@ export class ZahteviComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.mesto.value)
-    console.log(this.form.controls.organVlasti.value)
-    console.log(this.form.controls.userEmail.value)
-    console.log(this.form.controls.datumAfter.value)
-    console.log(this.form.controls.datumBefore.value)
     this.zahtevService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.mesto.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value).subscribe(
       result => {
         this.renderZahtevi(result);

@@ -5,7 +5,7 @@ import com.project.poverenik.jaxb.JaxB;
 import com.project.poverenik.mappers.ZalbaOdlukaMapper;
 import com.project.poverenik.model.user.User;
 import com.project.poverenik.model.util.lists.ZalbaOdlukaList;
-import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
+import com.project.poverenik.model.zalba_odluka.Tzalba;
 import com.project.poverenik.model.zahtev.client.getZahtevResponse;
 import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.rdf_utils.AuthenticationUtilities;
@@ -85,6 +85,25 @@ public class ZalbaOdlukaService {
         ZalbaOdluka zalbaOdlukaMax = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
         return zalbaOdlukaMax.getZalbaOdlukaBody().getId();
 
+    }
+
+    public Tzalba getByZahtevId(String zahtevId) throws Exception {
+
+        ResourceSet resourceSet = zalbaOdlukaRepository.getOneByZahtev(zahtevId);
+        ResourceIterator resourceIterator = resourceSet.getIterator();
+
+        if (!resourceIterator.hasMoreResources()) {
+            throw new Exception("");
+        }
+        XMLResource xmlResource = (XMLResource) resourceIterator.nextResource();
+        if (xmlResource == null)
+            throw new Exception("");
+        JAXBContext context = JAXBContext.newInstance(ZalbaOdluka.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        ZalbaOdluka zalbaOdluka = (ZalbaOdluka) unmarshaller.unmarshal(xmlResource.getContentAsDOM());
+
+
+        return zalbaOdluka.getZalbaOdlukaBody();
     }
 
     public boolean create(ZalbaOdluka zalbaOdlukaDTO) throws XMLDBException, NumberFormatException, JAXBException {

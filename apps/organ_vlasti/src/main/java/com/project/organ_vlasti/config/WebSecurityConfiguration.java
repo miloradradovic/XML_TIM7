@@ -77,7 +77,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 				// svim korisnicima dopusti da pristupe putanji /auth/**
 				.authorizeRequests()
-				.antMatchers("/auth/**", "/ws/**", "/obavestenje/toPdf/{broj}", "/zahtev/toPdf/{broj}",
+				.antMatchers("/auth/**", "/ws/**", "/obavestenje/toPdf/{broj}", "/zahtev/toPdf/{broj}", "/resenje/download/{broj}",
 						"/obavestenje/toRdf/**", "/obavestenje/toJson/**", "/zahtev/toRdf/**", "/zahtev/toJson/**",
 						"/izvestaji/toRdf/**", "/izvestaji/toJson/**")
 				.permitAll()
@@ -95,6 +95,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 	}
 
+
 	// Generalna bezbednost aplikacije
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -103,6 +104,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
 				"/**/*.css", "/**/*.js", "/ws/**", "/obavestenje/toPdf/{broj}", "/zahtev/toPdf/{broj}",
 				"/obavestenje/toRdf/**", "/obavestenje/toJson/**", "/zahtev/toRdf/**", "/zahtev/toJson/**",
-				"/izvestaji/toRdf/**", "/izvestaji/toJson/**");
+				"/izvestaji/toRdf/**", "/izvestaji/toJson/**", "/resenje/download/{broj}");
 	}
 }

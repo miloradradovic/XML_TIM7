@@ -18,7 +18,7 @@ public class ObavestenjeMapper {
 
         obavestenje.setObavestenjeBody(ofO.createTobavestenje());
 
-        String linkNaZahtev = "http://localhost:8090/zahtev/" + obavestenjeDTO.getObavestenjeBody().getIdZahteva();
+        String linkNaZahtev = "http://localhost:4200/detaljni-prikaz-zahteva?zahtev_id=" + obavestenjeDTO.getObavestenjeBody().getIdZahteva();
         obavestenje.getObavestenjeBody().setId(id);
         obavestenje.getObavestenjeBody().setBroj(id);
         obavestenje.getObavestenjeBody().setIdZahteva(obavestenjeDTO.getObavestenjeBody().getIdZahteva());

@@ -43,6 +43,5 @@ export class PoverenikIzjasnjavanjaComponent implements OnInit {
 
 
   clicked($event: number) {
-    console.log($event);
   }
 }

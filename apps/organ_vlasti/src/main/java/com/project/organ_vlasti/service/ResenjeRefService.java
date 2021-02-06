@@ -1,6 +1,8 @@
 package com.project.organ_vlasti.service;
 
 import com.project.organ_vlasti.client.ResenjeClient;
+import com.project.organ_vlasti.database.ExistManager;
+import com.project.organ_vlasti.model.resenje.Resenje;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBroj;
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBrojResponse;
 import com.project.organ_vlasti.model.resenje.database.ResenjeRef;
@@ -9,7 +11,9 @@ import com.project.organ_vlasti.model.resenje.database.client.getRefsResponse;
 import com.project.organ_vlasti.model.util.lists.ResenjeRefList;
 import com.project.organ_vlasti.model.util.parametars.ParametarMap;
 import com.project.organ_vlasti.model.util.parametars.Tvalue;
+import com.project.organ_vlasti.model.zahtev.Zahtev;
 import com.project.organ_vlasti.repository.ResenjeRefRepository;
+import com.project.organ_vlasti.transformer.Transformator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
@@ -29,6 +33,9 @@ public class ResenjeRefService {
 
     @Autowired
     private ResenjeRefRepository resenjeRefRepository;
+
+    @Autowired
+    private ExistManager existManager;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = resenjeRefRepository.getMaxId();
@@ -121,6 +128,62 @@ public class ResenjeRefService {
             }
         }
         return null;
+    }
+
+    public boolean downloadResenje(String broj){
+        //pocetak soap
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
+
+        ResenjeClient resenjeClient = new ResenjeClient();
+        resenjeClient.setDefaultUri("http://localhost:8085/ws");
+        resenjeClient.setMarshaller(marshaller);
+        resenjeClient.setUnmarshaller(marshaller);
+
+        getResenjeByBroj getResenjeByBroj = new getResenjeByBroj();
+        getResenjeByBroj.setBroj(broj);
+
+        getResenjeByBrojResponse getResenjeByBrojResponse = resenjeClient.getOneResenje(getResenjeByBroj);
+        //kraj soap
+        if(getResenjeByBrojResponse == null){
+            return false;
+        }
+        com.project.organ_vlasti.model.resenje.ObjectFactory of = new com.project.organ_vlasti.model.resenje.ObjectFactory();
+        Resenje r = of.createResenje();
+        r.setResenjeBody(getResenjeByBrojResponse.getResenje());
+
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/resenje" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/resenje_fo.xsl";
+        try {
+            Transformator transformator = new Transformator();
+            transformator.generateHTML(existManager.getOutputStream(r),
+                    "src/main/resources/generated_files/xslt/resenje.xsl", OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO, existManager.getOutputStream(r), OUTPUT_PDF);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public String downloadResenjePDF(String broj) {
+        String path = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
+        boolean resenje = downloadResenje(broj);
+        if (resenje) {
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadResenjeXHTML(String broj) {
+        String path = "src/main/resources/generated_files/documents/resenje" + broj + ".html";
+        boolean resenje = downloadResenje(broj);
+        if (resenje) {
+            return path;
+        }
+        return "";
     }
 
     public ResenjeRefList searchMetadata(String status,

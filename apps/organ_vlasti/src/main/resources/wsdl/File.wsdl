@@ -61,7 +61,7 @@
     </wsdl:binding>
     <wsdl:service name="FileService">
         <wsdl:port name="FileServiceSoapBinding" binding="tns:FileServiceSoapBinding">
-            <soap:address location="http://localhost:8085/filePort" />
+            <soap:address location="http://localhost:8090/filePort" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

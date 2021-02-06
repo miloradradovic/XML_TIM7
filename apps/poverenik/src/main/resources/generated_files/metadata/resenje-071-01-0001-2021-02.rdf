@@ -4,12 +4,12 @@
     xmlns:pred="http://examples/predicate/">
   <rdf:Description rdf:about="http://resenja/071-01-0001-2021-02">
     <pred:poverenik rdf:resource="http://users/email@email.com"/>
-    <pred:mesto>novi sad</pred:mesto>
+    <pred:mesto>mesto</pred:mesto>
     <pred:organ_vlasti>lice</pred:organ_vlasti>
-    <pred:trazilac rdf:resource="http://users/null"/>
+    <pred:trazilac rdf:resource="http://users/miloradradovicmico98@gmail.com"/>
     <pred:tip>prihvacena</pred:tip>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-06T18:36:00</pred:datum>
+    >2021-02-06T21:46:55</pred:datum>
     <pred:zalba rdf:resource="http://zalbe/odluka/1"/>
   </rdf:Description>
 </rdf:RDF>

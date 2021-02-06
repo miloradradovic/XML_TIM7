@@ -5,10 +5,10 @@
   <rdf:Description rdf:about="http://zalbe/cutanje/1">
     <pred:mesto>mesto</pred:mesto>
     <pred:podnosilac rdf:resource="http://users/miloradradovicmico98@gmail.com"/>
-    <pred:organ_vlasti>ciljani</pred:organ_vlasti>
+    <pred:organ_vlasti>organ vlasti</pred:organ_vlasti>
     <pred:status>neobradjena</pred:status>
     <pred:zahtev rdf:resource="http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=4"/>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-06T20:36:28</pred:datum>
+    >2021-02-06T21:33:48</pred:datum>
   </rdf:Description>
 </rdf:RDF>

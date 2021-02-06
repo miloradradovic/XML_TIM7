@@ -28,7 +28,6 @@ export class IzjasnjavanjaComponent implements OnInit {
         if (izjasnjavanja !== undefined) {
           try {
             izjasnjavanja.forEach((item, index) => {
-              console.log(item);
               const start = item['ns2:body']._text.split(':')[0];
               const end = item['ns2:body']._text.split('=')[1];
               const message = start + ': ' +  end;
@@ -38,8 +37,9 @@ export class IzjasnjavanjaComponent implements OnInit {
               newList.push(messageObject);
             });
           } catch (err) {
-            console.log(izjasnjavanja);
-            const message = izjasnjavanja['ns2:body']._text;
+            const start = izjasnjavanja['ns2:body']._text.split(':')[0];
+            const end = izjasnjavanja['ns2:body']._text.split('=')[1];
+            const message = start + ': ' +  end;
             const idMessage = izjasnjavanja['ns2:body']._attributes.id;
             const idZahteva = message.split(': ')[1];
             const messageObject = {id: idMessage, messageText: message, zahtev: idZahteva};

@@ -6,10 +6,10 @@
     <pred:poverenik rdf:resource="http://users/email@email.com"/>
     <pred:mesto></pred:mesto>
     <pred:organ_vlasti></pred:organ_vlasti>
-    <pred:trazilac rdf:resource="http://users/miloradradovicmico98@gmail.com"/>
+    <pred:trazilac rdf:resource="http://users/email@email.com"/>
     <pred:tip>prihvacena</pred:tip>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-06T18:56:05</pred:datum>
+    >2021-02-06T22:05:37</pred:datum>
     <pred:zalba rdf:resource="http://zalbe/cutanje/3"/>
   </rdf:Description>
 </rdf:RDF>

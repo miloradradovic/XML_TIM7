@@ -26,7 +26,7 @@ export class IzjasnjavanjeDialogComponent {
   posaljiIzjasnjavanje(): void {
     const messageId = this.data.messageId;
     this.idZahteva = this.data.zahtev;
-    const messageNew = 'Zahtev sa ID-jem ' + messageId + ': ' + this.messageText;
+    const messageNew = 'Zahtev sa ID-jem ' + this.idZahteva + ': ' + this.messageText;
     const messageObject = { _declaration:
         { _attributes: { version: '1.0', encoding: 'utf-8' } },
       message: { _attributes:

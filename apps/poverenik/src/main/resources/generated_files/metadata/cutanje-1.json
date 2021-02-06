@@ -5,8 +5,8 @@
   "results": {
     "bindings": [
       {
-        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2021-02-06T20:36:28" } ,
-        "organ_vlasti": { "type": "literal" , "value": "ciljani" } ,
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2021-02-06T21:33:48" } ,
+        "organ_vlasti": { "type": "literal" , "value": "organ vlasti" } ,
         "zahtev": { "type": "uri" , "value": "http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=4" } ,
         "status": { "type": "literal" , "value": "neobradjena" } ,
         "mesto": { "type": "literal" , "value": "mesto" } ,

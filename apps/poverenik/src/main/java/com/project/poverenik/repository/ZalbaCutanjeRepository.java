@@ -60,7 +60,7 @@ public class ZalbaCutanjeRepository {
     }
 
     public ResourceSet getOneByZahtev(String id) throws XMLDBException {
-        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/zahtev[.='%s']/ancestor::zalba_cutanje", "http://localhost:8085/zahtev/" + id);
+        String xpath = String.format("/zalba_cutanje/zalba_cutanje_body/zahtev[.='%s']/ancestor::zalba_cutanje", "http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=" + id);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 

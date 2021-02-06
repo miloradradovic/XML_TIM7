@@ -11,17 +11,22 @@ export class ZalbaService {
   constructor(private http: HttpClient) { }
 
   convertZalbaCutanjeXHTML(s: string): Observable<any> {
-    return this.http.get('http://localhost:8090//zalbe/cutanjeDownload/' + s,
+    return this.http.get('http://localhost:8090/zalbe/cutanjeDownload/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
 
   convertZalbaOdlukaXHTML(s: string): Observable<any> {
-    return this.http.get('http://localhost:8085/zalbe/odlukaDownload/' + s,
+    return this.http.get('http://localhost:8090/zalbe/odlukaDownload/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
 
-  /*convertZalbaOdlukaXHTML(s: string): Observable<any> {
-    return this.http.get('http://localhost:8085/zalbe/odlukaDownload/' + s,
-      {headers: this.headers, responseType: 'blob'});
-  }*/
+  getZalbaCutanjeByZahtev(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zalbe/cutanje/' + s,
+      {headers: this.headers, responseType: 'text'});
+  }
+
+  getZalbaOdlukaByZahtev(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zalbe/odluka/' + s,
+      {headers: this.headers, responseType: 'text'});
+  }
 }

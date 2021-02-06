@@ -45,12 +45,14 @@ export class PoverenikSveZalbeComponent implements OnInit {
           try {
             zalbe.forEach((item, index) => {
               const idZalbe = item['zc:zalba_cutanje_body']._attributes.id;
-              const zalba = {id: idZalbe, tip: 'cutanje'};
+              const statusZalbe = item['zc:zalba_cutanje_body']['zc:status']._text;
+              const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
               newList.push(zalba);
             });
           } catch (err){
             const idZalbe = zalbe['zc:zalba_cutanje_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'cutanje'};
+            const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
+            const zalba = {id: idZalbe, tip: 'cutanje', status: statusZalbe};
             newList.push(zalba);
           }
           this.zalbe = newList.concat(this.zalbe);
@@ -71,12 +73,14 @@ export class PoverenikSveZalbeComponent implements OnInit {
           try {
             zalbe.forEach((item, index) => {
               const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
-              const zalba = {id: idZalbe, tip: 'odluka'};
+              const statusZalbe = item['zoc:zalba_odluka_body']['zoc:status']._text;
+              const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
               newList2.push(zalba);
             });
           } catch (err) {
             const idZalbe = zalbe['zoc:zalba_odluka_body']._attributes.id;
-            const zalba = {id: idZalbe, tip: 'odluka'};
+            const statusZalbe = zalbe['zoc:zalba_odluka_body']['zoc:status']._text;
+            const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
             newList2.push(zalba);
           }
           this.zalbe = newList2.concat(this.zalbe);
@@ -120,12 +124,14 @@ export class PoverenikSveZalbeComponent implements OnInit {
       try {
         zalbe.forEach((item, index) => {
           const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
-          const zalba = {id: idZalbe, tip: 'odluka'};
+          const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
+          const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
           newList2.push(zalba);
         });
       } catch (err) {
         const idZalbe = zalbe['zoc:zalba_odluka_body']._attributes.id;
-        const zalba = {id: idZalbe, tip: 'odluka'};
+        const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
+        const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
         newList2.push(zalba);
       }
       this.zalbe = newList2.concat(this.zalbe);
@@ -177,6 +183,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
     console.log($event);
     this.zalbe.forEach((item, index) => {
       const zalba = item.tip + '/' + item.id;
+      console.log(item);
       if (zalba === $event){
         this.router.navigate(['/detaljni-prikaz-zalbe'], {queryParams: {zalba_id: zalba, zalba_status: item.status}});
       }

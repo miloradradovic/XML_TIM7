@@ -1,0 +1,17 @@
+{
+  "head": {
+    "vars": [ "datum" , "organ_vlasti" , "zahtev" , "status" , "mesto" , "podnosilac" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2021-02-06T17:51:18" } ,
+        "organ_vlasti": { "type": "literal" , "value": "Jebigica" } ,
+        "zahtev": { "type": "uri" , "value": "http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=1" } ,
+        "status": { "type": "literal" , "value": "neobradjena" } ,
+        "mesto": { "type": "literal" , "value": "" } ,
+        "podnosilac": { "type": "uri" , "value": "http://users/miloradradovicmico98@gmail.com" }
+      }
+    ]
+  }
+}

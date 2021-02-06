@@ -35,7 +35,6 @@ export class GradjaninMainPageComponent implements OnInit {
         const zalbaOdlukaList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zalbaOdlukaList.zalbaOdlukaList;
         const zalbe = lista['zoc:zalba_odluka'];
-        console.log(zalbe);
         if (zalbe !== undefined){
           try {
             zalbe.forEach((item, index) => {
@@ -94,20 +93,17 @@ export class GradjaninMainPageComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const resenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        const lista = resenjeList;
-        const resenja = lista['ra:resenjeList'];
-        console.log(resenja);
+        const resenja = resenjeList['ra:resenjeList']['ra:resenje'];
         if (resenja !== undefined){
           try {
             resenja.forEach((item, index) => {
-              const idResenja = item['ra:resenje_body']._attributes.id;
+              const idResenja = item['ra:resenje_body']._attributes.broj;
               const resenje = {id: idResenja};
               newList3.push(resenje);
             });
           }
           catch (err) {
-            console.log(resenja);
-            const idResenja = resenja['ra:resenje_body']._attributes.id;
+            const idResenja = resenja['ra:resenje_body']._attributes.broj;
             const resenje = {id: idResenja};
             newList3.push(resenje);
           }

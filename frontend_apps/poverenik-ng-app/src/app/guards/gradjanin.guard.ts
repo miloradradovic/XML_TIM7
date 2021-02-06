@@ -5,7 +5,7 @@ import {SignInService} from '../services/sign-in-service/sign-in.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SignInGuard implements CanActivate {
+export class GradjaninGuard implements CanActivate {
 
   constructor(
     public auth: SignInService,
@@ -13,12 +13,8 @@ export class SignInGuard implements CanActivate {
   ) { }
 
   canActivate(): boolean {
-    const role = this.auth.getRole();
-    if (role === 'ROLE_POVERENIK') {
-      this.router.navigate(['/pocetna-stranica-poverenik']);
-      return false;
-    } else if (role === 'ROLE_USER') {
-      this.router.navigate(['/pocetna-stranica-gradjanin']);
+    if (this.auth.getRole() !== 'ROLE_USER') {
+      this.router.navigate(['/']);
       return false;
     }
     return true;

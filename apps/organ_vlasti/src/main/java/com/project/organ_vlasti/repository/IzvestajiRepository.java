@@ -20,7 +20,7 @@ public class IzvestajiRepository {
 
 
     public String create(Izvestaj izvestaj) throws XMLDBException {
-        if (existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj)) {
+        if (existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj, false)) {
             return izvestaj.getIzvestajBody().getId();
         }
         return null;
@@ -45,6 +45,6 @@ public class IzvestajiRepository {
 
     public boolean update(Izvestaj izvestaj) throws XMLDBException {
 
-        return existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj);
+        return existManager.store(collectionUri, izvestaj.getIzvestajBody().getId(), izvestaj, true);
     }
 }

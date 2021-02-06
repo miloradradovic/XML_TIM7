@@ -55,7 +55,6 @@ export class PoverenikProcitaniIzvestajiComponent implements OnInit {
     const convert = require('xml-js');
     const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
     const izvestaj = izvestajList.izvestajRefList['ns2:izvestaj_ref'];
-    console.log(izvestaj);
     if (izvestaj !== undefined){
       try {
         izvestaj.forEach((item, index) => {
@@ -71,8 +70,6 @@ export class PoverenikProcitaniIzvestajiComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.datumAfter.value)
-    console.log(this.form.controls.datumBefore.value)
     this.izvestajService.getPretragaMetadata('da', this.form.controls.datumAfter.value, this.form.controls.datumBefore.value).subscribe(
       result => {
         this.renderIzvestaji(result);

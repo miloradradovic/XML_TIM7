@@ -40,7 +40,6 @@ export class NeprocitanaResenjaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const resenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(resenjeList);
         const lista = resenjeList.resenjeRefList['ns2:resenje_ref'];
         if (lista !== undefined) {
           try {
@@ -68,7 +67,6 @@ export class NeprocitanaResenjaComponent implements OnInit {
     const newList = [];
     const convert = require('xml-js');
     const resenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-    console.log(resenjeList);
     const lista = resenjeList.resenjeRefList['ns2:resenje_ref'];
     if (lista !== undefined) {
       try {
@@ -87,7 +85,6 @@ export class NeprocitanaResenjaComponent implements OnInit {
   };
 
   onTekstChanged(newValue: any) {
-    console.log(newValue.value);
     this.resenjeService.getPretragaTekst('ne', newValue.value).subscribe(
       result => {
         this.renderResenja(result);
@@ -99,14 +96,6 @@ export class NeprocitanaResenjaComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.mesto.value);
-    console.log(this.form.controls.organVlasti.value);
-    console.log(this.form.controls.poverenik.value);
-    console.log(this.form.controls.trazilac.value);
-    console.log(this.form.controls.zalba.value);
-    console.log(this.form.controls.tip.value);
-    console.log(this.form.controls.datumAfter.value);
-    console.log(this.form.controls.datumBefore.value);
     this.resenjeService.getPretragaMetadata('ne', this.form.controls.poverenik.value, this.form.controls.trazilac.value, this.form.controls.zalba.value.replace('/', '-'), this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.tip.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value).subscribe(
       result => {
         this.renderResenja(result);

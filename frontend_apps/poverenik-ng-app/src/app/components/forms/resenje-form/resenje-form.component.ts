@@ -51,7 +51,6 @@ export class ResenjeFormComponent implements OnInit {
       this.snackBar.open('Попуните сва обавезна поља!', 'Ok', { duration: 3000 });
       return;
     }
-    console.log(Xonomy.harvest());
 
     this.resenjeService.send(Xonomy.harvest())
       .subscribe(res => {

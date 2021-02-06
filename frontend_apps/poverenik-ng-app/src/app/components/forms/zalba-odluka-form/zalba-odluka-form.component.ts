@@ -48,7 +48,6 @@ export class ZalbaOdlukaFormComponent implements OnInit {
       this.snackBar.open("Попуните сва обавезна поља!", 'Ok', { duration: 3000 });
       return;
     }
-    console.log(Xonomy.harvest())
     let data = Xonomy.harvest();
     const mestoAtr = data.split('mesto=')[1].split(' datum')[0];
     const datumAtr = data.split('datum=')[1].split('><zoc:zahtev>')[0];
@@ -82,7 +81,6 @@ export class ZalbaOdlukaFormComponent implements OnInit {
              <re:clan><re:stav></re:stav></re:clan>
          </zoc:sadrzaj><zoc:podaci_o_podnosiocu_zalbe><re:osoba><re:ime>${imePodnosilac}</re:ime><re:prezime>${prezimePodnosilac}</re:prezime></re:osoba><re:adresa><re:mesto>${adresaMestoPodnosilac}</re:mesto><re:ulica broj=${adresaBrojPodnosilac}>${adresaUlicaPodnosilac}</re:ulica></re:adresa><re:drugi_podaci_za_kontakt>${kontaktPodnosilac}</re:drugi_podaci_za_kontakt></zoc:podaci_o_podnosiocu_zalbe></zoc:zalba_odluka_body></zoc:zalba_odluka>`;
 
-    console.log(dataTemplate)
     this.zalbaOdlukaService.send(dataTemplate)
       .subscribe(res => {
         this.snackBar.open('Успешно сте послали жалбу!', 'Ok', { duration: 3000 });

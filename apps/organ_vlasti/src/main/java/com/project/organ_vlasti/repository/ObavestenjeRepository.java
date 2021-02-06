@@ -28,7 +28,7 @@ public class ObavestenjeRepository {
 
 
     public String create(Obavestenje obavestenje) throws XMLDBException {
-        if (existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje)) {
+        if (existManager.store(collectionUri, obavestenje.getObavestenjeBody().getBroj(), obavestenje, false)) {
             return obavestenje.getObavestenjeBody().getId();
         }
         return null;

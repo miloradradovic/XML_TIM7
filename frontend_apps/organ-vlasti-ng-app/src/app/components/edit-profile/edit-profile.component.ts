@@ -62,13 +62,10 @@ export class EditProfileComponent implements OnInit {
     signUpUser.user.email = this.email;
     signUpUser.user.password = this.form.value.password;
     signUpUser.user.role._text = this.role;
-    console.log(signUpUser)
 
     // @ts-ignore
     const convert = require('xml-js');
     const signUpUserXML = convert.js2xml(signUpUser, {compact: true, ignoreComment: true, spaces: 4});
-
-    console.log(signUpUserXML)
 
     this.addSluzbenikService.editProfile(signUpUserXML).subscribe(
       result => {

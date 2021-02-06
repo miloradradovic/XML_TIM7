@@ -39,7 +39,6 @@ export class ObavestenjaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
         if (lista !== undefined) {
           try {
@@ -67,7 +66,6 @@ export class ObavestenjaComponent implements OnInit {
     const newList = [];
     const convert = require('xml-js');
     const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-    console.log(obavestenjeList);
     const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
     if (lista !== undefined) {
       try {
@@ -86,7 +84,6 @@ export class ObavestenjaComponent implements OnInit {
   };
 
   onTekstChanged(newValue: any) {
-    console.log(newValue.value);
     this.obavestenjeService.getPretragaTekst(newValue.value).subscribe(
       result => {
         this.renderObavestenja(result);
@@ -98,11 +95,6 @@ export class ObavestenjaComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.zahtev.value);
-    console.log(this.form.controls.organVlasti.value);
-    console.log(this.form.controls.userEmail.value);
-    console.log(this.form.controls.datumAfter.value);
-    console.log(this.form.controls.datumBefore.value);
     this.obavestenjeService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.organVlasti.value, this.form.controls.userEmail.value, this.form.controls.zahtev.value).subscribe(
       result => {
         this.renderObavestenja(result);

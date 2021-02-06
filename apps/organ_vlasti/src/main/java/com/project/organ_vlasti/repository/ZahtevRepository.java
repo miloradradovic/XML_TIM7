@@ -27,8 +27,8 @@ public class ZahtevRepository {
             + "</xu:modifications>";
 
 
-    public boolean create(Zahtev zahtev) throws XMLDBException {
-        return existManager.store(collectionUri, zahtev.getZahtevBody().getId(), zahtev);
+    public boolean create(Zahtev zahtev, boolean update) throws XMLDBException {
+        return existManager.store(collectionUri, zahtev.getZahtevBody().getId(), zahtev, update);
     }
 
     public ResourceSet getAll() throws XMLDBException {

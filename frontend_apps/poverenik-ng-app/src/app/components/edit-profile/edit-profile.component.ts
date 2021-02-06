@@ -30,7 +30,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(JSON.parse(localStorage.getItem('user')).email.replace('.', '-'))
     this.addSluzbenikService.getUser(JSON.parse(localStorage.getItem('user')).email.replace('.', '-')).subscribe(
       result => {
         const convert = require('xml-js');

@@ -22,7 +22,6 @@ export class IzjasnjavanjaComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const izjasnjavanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(izjasnjavanjeList);
         const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
         if (izjasnjavanja !== undefined){
           try {
@@ -54,7 +53,6 @@ export class IzjasnjavanjaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       const newList = [];
       this.izjasnjavanja = this.izjasnjavanja.filter( izjasnjavanje => izjasnjavanje.id !== $event);
       this.izjasnjavanja = [...this.izjasnjavanja];

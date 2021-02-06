@@ -27,7 +27,7 @@ public class UserRepository {
             + "</xu:modifications>";
 
     public boolean create(User user) throws XMLDBException {
-        return existManager.store(collectionUri, user.getEmail(), user);
+        return existManager.store(collectionUri, user.getEmail(), user, false);
     }
 
     public XMLResource getOne(String email) throws XMLDBException {

@@ -90,7 +90,7 @@ public class ZahtevService {
 
             Zahtev zahtev = ZahtevMapper.mapFromDTO(zahtevDTO, id, user.getEmail());
             if (jaxB.validate(zahtev.getClass(), zahtev)) {
-                return zahtevRepository.create(zahtev);
+                return zahtevRepository.create(zahtev, false);
             }
         }
         return false;
@@ -127,7 +127,7 @@ public class ZahtevService {
 
     public boolean update(Zahtev zahtev, String status) throws XMLDBException {
         zahtev.getZahtevBody().getStatus().setValue(status);
-        return zahtevRepository.create(zahtev);
+        return zahtevRepository.create(zahtev, true);
         //String patch = jaxB.marshall(zahtev.getClass(), zahtev);
         ////u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
         //patch = patch.substring(patch.lastIndexOf("<zcir:ciljani_organ_vlasti>"), patch.indexOf("</zcir:fusnote>") + "</zcir:fusnote>".length());

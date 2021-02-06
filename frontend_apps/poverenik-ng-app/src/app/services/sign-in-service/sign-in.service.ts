@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {StorageService} from '../stogare-service/storage.service';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class SignInService {
   private headers = new HttpHeaders({'Content-Type': 'application/xml'});
 
-  constructor(private http: HttpClient
+  constructor(private http: HttpClient, private storageService: StorageService
   ) { }
 
   signIn(auth: any): Observable<any> {
@@ -18,14 +19,14 @@ export class SignInService {
   }
 
   signOut(): void{
-    localStorage.removeItem('user');
+    this.storageService.clearStorage();
   }
 
-  isLoggedIn(): boolean {
+  getRole(): string {
     if (!localStorage.getItem('user')) {
-      return false;
+      return '';
     }
-    return true;
+    return JSON.parse(localStorage.getItem('user')).role;
   }
 
 }

@@ -20,7 +20,7 @@ public class MessageRepository {
 
 
     public boolean create(Message message) throws XMLDBException {
-        return existManager.store(collectionUri, message.getBody().getId(), message);
+        return existManager.store(collectionUri, message.getBody().getId(), message, false);
     }
 
     public ResourceSet getAll() throws XMLDBException {

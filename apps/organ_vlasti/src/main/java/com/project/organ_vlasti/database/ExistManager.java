@@ -117,7 +117,7 @@ public class ExistManager {
     }
 
     //create new
-    public boolean store(String collectionUri, String documentId, Object xml) throws XMLDBException {
+    public boolean store(String collectionUri, String documentId, Object xml, boolean update) throws XMLDBException {
         createConnection();
         Collection collection = null;
         XMLResource res = null;
@@ -140,12 +140,14 @@ public class ExistManager {
             res.setContent(os);
             collection.storeResource(res);
 
-            if (xml instanceof Obavestenje)
-                metadataService.extractMetadata("/obavestenja", os);
-            else if (xml instanceof Zahtev)
-                metadataService.extractMetadata("/zahtevi", os);
-            else if (xml instanceof Izvestaj) {
-                metadataService.extractMetadata("/izvestaji", os);
+            if (!update) {
+            	if (xml instanceof Obavestenje)
+                    metadataService.extractMetadata("/obavestenja", os);
+                else if (xml instanceof Zahtev)
+                    metadataService.extractMetadata("/zahtevi", os);
+                else if (xml instanceof Izvestaj) {
+                    metadataService.extractMetadata("/izvestaji", os);
+                }
             }
 
 

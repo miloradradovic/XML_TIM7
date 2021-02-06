@@ -21,6 +21,10 @@ import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -99,7 +103,7 @@ public class ZalbaCutanjeService {
 			ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, userEmail);
 
 			if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
-				return zalbaCutanjeRepository.create(zalbaCutanje);
+				return zalbaCutanjeRepository.create(zalbaCutanje, false);
 			}
 		}
 		return false;
@@ -143,8 +147,13 @@ public class ZalbaCutanjeService {
 	}
 
 	public boolean update(ZalbaCutanje zalbaCutanje, String status) throws XMLDBException {
+		try {
+			updateStatusFuseki(zalbaCutanje.getZalbaCutanjeBody().getId(), zalbaCutanje.getZalbaCutanjeBody().getStatus().getValue(), status);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		zalbaCutanje.getZalbaCutanjeBody().getStatus().setValue(status);
-		return zalbaCutanjeRepository.create(zalbaCutanje);
+		return zalbaCutanjeRepository.create(zalbaCutanje, true);
 
 		// String patch = jaxB.marshall(zalbaCutanje.getClass(), zalbaCutanje);
 		// u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti
@@ -232,7 +241,7 @@ public class ZalbaCutanjeService {
 		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
 		results = query.execSelect();
-		ResultSetFormatter.outputAsJSON(System.out, results);
+		//ResultSetFormatter.outputAsJSON(System.out, results);
 
 		ResultSetFormatter.out(System.out, results);
 		
@@ -413,7 +422,7 @@ public class ZalbaCutanjeService {
             ZalbaCutanje zalbaCutanje = ZalbaCutanjeMapper.mapFromDTO(zalbaCutanjeDTO, id, user.getEmail());
 
             if (jaxB.validate(zalbaCutanje.getClass(), zalbaCutanje)) {
-                return zalbaCutanjeRepository.create(zalbaCutanje);
+                return zalbaCutanjeRepository.create(zalbaCutanje, false);
             }
         }
         return false;
@@ -490,66 +499,82 @@ public class ZalbaCutanjeService {
 
     public ZalbaCutanjeList searchMetadata(String datumAfter, String datumBefore, String status, String organ_vlasti,
                                            String mesto, String userEmail) throws IOException, JAXBException, XMLDBException {
-        ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 
-        if (datumAfter.equals("")) {
-            datumAfter = "1000-01-01T00:00:00";
-        }
-        if (datumBefore.equals("")) {
-            datumBefore = "9999-12-31T00:00:00";
-        }
+		if (datumAfter.equals("")) {
+			datumAfter = "1000-01-01T00:00:00";
+		}
+		if (datumBefore.equals("")) {
+			datumBefore = "9999-12-31T00:00:00";
+		}
 
-        String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
-                StandardCharsets.UTF_8);
-        System.out.println(sparqlQueryTemplate);
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/query_search_metadata_zalbe.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
 
-        String user;
-        if (userEmail.equals("")) {
-            user = "?podnosilac";
-        } else {
-            user = "<http://users/" + userEmail + ">";
-        }
+		String user;
+		if (userEmail.equals("")) {
+			user = "?podnosilac";
+		} else {
+			user = "<http://users/" + userEmail + ">";
+		}
 
-        String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
-        System.out.println(sparqlQuery);
+		String sparqlQuery = String.format(sparqlQueryTemplate, user, datumAfter, datumBefore, status, organ_vlasti, mesto);
+		System.out.println(sparqlQuery);
 
-        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+		QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-        ResultSet results = query.execSelect();
+		ResultSet results = query.execSelect();
 
-        RDFNode id;
+		RDFNode id;
 
-        ZalbaCutanjeList zcList;
+		ZalbaCutanjeList zcList;
 
-        List<ZalbaCutanje> listZC = new ArrayList<>();
+		List<ZalbaCutanje> listZC = new ArrayList<>();
 
-        while (results.hasNext()) {
+		while (results.hasNext()) {
 
-            QuerySolution querySolution = results.next();
+			QuerySolution querySolution = results.next();
 
-            id = querySolution.get("zalba");
-            if (id.toString().contains("cutanje")) {
-                String idStr = id.toString().split("zalbe/cutanje/")[1];
-                ZalbaCutanje z = getOne(idStr);
-                listZC.add(z);
-            }
-        }
+			id = querySolution.get("zalba");
+			if (id.toString().contains("cutanje")) {
+				String idStr = id.toString().split("zalbe/cutanje/")[1];
+				ZalbaCutanje z = getOne(idStr);
+				listZC.add(z);
+			}
+		}
 
-        zcList = new ZalbaCutanjeList(listZC);
-        System.out.println();
+		zcList = new ZalbaCutanjeList(listZC);
+		System.out.println();
 
-        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+		query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
 
-        results = query.execSelect();
+		results = query.execSelect();
 
-        // ResultSetFormatter.outputAsXML(System.out, results);
-        ResultSetFormatter.out(System.out, results);
+		// ResultSetFormatter.outputAsXML(System.out, results);
+		ResultSetFormatter.out(System.out, results);
 
-        query.close();
+		query.close();
 
-        System.out.println("[INFO] End.");
+		System.out.println("[INFO] End.");
 
-        return zcList;
+		return zcList;
+	}
 
-    }
+    public void updateStatusFuseki(String idZalbe, String oldValue, String newValue) throws IOException, JAXBException, XMLDBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/update_zalba.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+
+		String zalba = "<http://zalbe/cutanje/" + idZalbe + ">";
+ 
+		String sparqlQuery = String.format(sparqlQueryTemplate, zalba, oldValue, zalba, newValue);
+		System.out.println(sparqlQuery);
+
+		UpdateRequest request = UpdateFactory.create(sparqlQuery) ;
+        UpdateProcessor proc = UpdateExecutionFactory.createRemote(request, conn.updateEndpoint);
+
+	}
 }

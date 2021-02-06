@@ -18,51 +18,65 @@ import {PoverenikDetaljniPrikazObavestenjaComponent} from '../components/poveren
 import {PoverenikDetaljniPrikazResenjaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-resenja/poverenik-detaljni-prikaz-resenja.component';
 import {PoverenikDetaljniPrikazZahtevaComponent} from '../components/poverenik/poverenik-detaljni-prikaz-zahteva/poverenik-detaljni-prikaz-zahteva.component';
 import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
+import {SignInGuard} from '../guards/sign-in.guard';
+import {PoverenikGuard} from '../guards/poverenik.guard';
+import {GradjaninGuard} from '../guards/gradjanin.guard';
 
 export const routes: Routes = [
   {
-    path: 'prijava',
-    component: SignInComponent
+    path: '',
+    component: SignInComponent,
+    canActivate: [SignInGuard]
   },
   {
     path: 'registracija',
-    component: SignUpComponent
+    component: SignUpComponent,
+    canActivate: [SignInGuard]
   },
   {
     path: 'zalba-cutanje',
-    component: ZalbaCutanjeFormComponent
+    component: ZalbaCutanjeFormComponent,
+    canActivate: [GradjaninGuard]
   },
   {
     path: 'zalba-odluka',
-    component: ZalbaOdlukaFormComponent
+    component: ZalbaOdlukaFormComponent,
+    canActivate: [GradjaninGuard]
   },
   {
     path: 'resenje',
-    component: ResenjeFormComponent
+    component: ResenjeFormComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'pocetna-stranica-gradjanin',
-    component: GradjaninMainPageComponent
+    component: GradjaninMainPageComponent,
+    canActivate: [GradjaninGuard]
   },
   {
     path: 'pocetna-stranica-poverenik',
-    component: PoverenikMainPageComponent
+    component: PoverenikMainPageComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'zalbe',
-    component: PoverenikSveZalbeComponent
+    component: PoverenikSveZalbeComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'izjasnjavanja',
-    component: PoverenikIzjasnjavanjaComponent
+    component: PoverenikIzjasnjavanjaComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'resenja',
-    component: PoverenikSvaResenjaComponent
+    component: PoverenikSvaResenjaComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'dodaj-poverenika',
-    component: AddPoverenikFormComponent
+    component: AddPoverenikFormComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'detaljni-prikaz-zalbe',
@@ -86,14 +100,23 @@ export const routes: Routes = [
   },
   {
     path: 'neprocitani-izvestaji',
-    component: PoverenikNeprocitaniIzvestajiComponent
+    component: PoverenikNeprocitaniIzvestajiComponent,
+    canActivate: [PoverenikGuard]
   },
   {
     path: 'procitani-izvestaji',
-    component: PoverenikProcitaniIzvestajiComponent
+    component: PoverenikProcitaniIzvestajiComponent,
+    canActivate: [PoverenikGuard]
   },
   {
-    path: 'profil',
-    component: EditProfileComponent
+    path: 'gradjanin/profil',
+    component: EditProfileComponent,
+    canActivate: [GradjaninGuard]
+  },
+  {
+    path: 'poverenik/profil',
+    component: EditProfileComponent,
+    canActivate: [PoverenikGuard]
   }
+
 ];

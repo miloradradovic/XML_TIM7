@@ -1,12 +1,12 @@
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Идентификатор жалбе', 'Тип жалбе', 'ponisti', 'xhtml', 'pdf']"
+  <app-table [columnsToDisplay]="['Идентификатор жалбе', 'Тип жалбе', 'ponisti', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id', 'tip']"
              (PonistiZalba)="ponistiZalba($event)" (PDFZalba)="convertToPdfZalba($event)" (XHTMLZalba)="convertToXHTMLZalba($event)"
-             [dataSource]="zalbe" (DoubleClickZalba)="doubleClickedZalbe($event)"></app-table>
+             [dataSource]="zalbe" (DoubleClickZalba)="doubleClickedZalbe($event)" (RDFZalba)="rdfZalba($event)" (JSONZalba)="jsonZalba($event)"></app-table>
 </div>
 <div style="padding-top: 5%; width: 50%; padding-left: 20%">
-  <app-table [columnsToDisplay]="['Идентификатор решења', 'xhtml', 'pdf']"
+  <app-table [columnsToDisplay]="['Идентификатор решења', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id']"
              (PDF)="convertToPdfResenje($event)" (XHTML)="convertToXHTMLResenje($event)"
-             [dataSource]="resenja" (DoubleClick)="doubleClickedResenje($event)"></app-table>
+             [dataSource]="resenja" (DoubleClick)="doubleClickedResenje($event)" (RDF)="rdfResenje($event)" (JSON)="jsonResenje($event)"></app-table>
 </div>

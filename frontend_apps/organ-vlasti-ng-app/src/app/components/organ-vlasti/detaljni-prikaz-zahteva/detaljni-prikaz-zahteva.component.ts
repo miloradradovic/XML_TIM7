@@ -4,6 +4,7 @@ import {IzjasnjavanjeDialogComponent} from '../izjasnjavanja/izjasnjavanje-dialo
 import {DialogOdbijanjeComponent} from './dialog-odbijanje/dialog-odbijanje.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ZahtevService} from "../../../services/zahtev-service/zahtev.service";
+import {ObavestenjeService} from "../../../services/obavestenje-service/obavestenje.service";
 
 @Component({
   selector: 'app-detaljni-prikaz-zahteva',
@@ -16,8 +17,10 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
   odbijen = false;
   neobradjena = true;
   src = '';
+  obavestenje = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private service: ZahtevService) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private service: ZahtevService
+              , private obavestenjeService: ObavestenjeService) { }
 
 
   ngOnInit(): void {
@@ -35,6 +38,11 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
     if (status === 'neobradjen') {
       this.neobradjena = true;
     }
+    this.obavestenjeService.getObavestenjeByZahtev(this.zahtevId).subscribe( res => {
+      if (res !== null){
+
+      }
+    });
   }
 
 

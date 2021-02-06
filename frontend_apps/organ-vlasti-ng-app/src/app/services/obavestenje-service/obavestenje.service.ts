@@ -34,4 +34,9 @@ export class ObavestenjeService {
     return this.http.get('http://localhost:8090/obavestenje/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
+
+  getObavestenjeByZahtev(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/obavestenje/by-zahtev/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 }

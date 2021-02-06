@@ -137,7 +137,6 @@ export class PoverenikMainPageComponent implements OnInit {
   }
 
   doubleClicked($event: string): void {
-    console.log($event);
     this.zalbe.forEach((item, index) => {
       const zalba = item.tip + '/' + item.id;
       if (zalba === $event){

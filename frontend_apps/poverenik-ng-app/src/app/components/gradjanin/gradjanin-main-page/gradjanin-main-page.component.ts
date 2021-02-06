@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ResenjeService} from '../../../services/resenje-service/resenje.service';
 import {GradjaninPonistavanjeDialogComponent} from './gradjanin-ponistavanje-dialog/gradjanin-ponistavanje-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {of} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gradjanin-main-page',
@@ -19,7 +21,8 @@ export class GradjaninMainPageComponent implements OnInit {
   constructor(private zalbaService: ZalbaService,
               private resenjeService: ResenjeService,
               private snackBar: MatSnackBar,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private router: Router) { }
 
   ngOnInit(): void {
     const newList = [];
@@ -36,7 +39,9 @@ export class GradjaninMainPageComponent implements OnInit {
         if (zalbe !== undefined){
           try {
             zalbe.forEach((item, index) => {
+
               const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
+
               const statusZalbe = item['zoc:zalba_odluka_body']['zoc:status']._text;
               const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
               newList.push(zalba);
@@ -90,7 +95,8 @@ export class GradjaninMainPageComponent implements OnInit {
         const convert = require('xml-js');
         const resenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = resenjeList;
-        const resenja = lista['ra:resenje'];
+        const resenja = lista['ra:resenjeList'];
+        console.log(resenja);
         if (resenja !== undefined){
           try {
             resenja.forEach((item, index) => {
@@ -100,6 +106,7 @@ export class GradjaninMainPageComponent implements OnInit {
             });
           }
           catch (err) {
+            console.log(resenja);
             const idResenja = resenja['ra:resenje_body']._attributes.id;
             const resenje = {id: idResenja};
             newList3.push(resenje);
@@ -140,19 +147,122 @@ export class GradjaninMainPageComponent implements OnInit {
     });
   }
 
-  convertToPdfZalba($event: string) {
-    console.log($event);
+  convertToPdfZalba($event: string): void {
+    let obs$ = of([]);
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjePDF($event.split('/')[1]);
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaPDF($event.split('/')[1]);
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 
-  convertToXHTMLZalba($event: string) {
-    console.log($event);
+  convertToXHTMLZalba($event: string): void {
+    let obs$;
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeXHTML($event.split('/')[1]);
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaXHTML($event.split('/')[1]);
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 
-  convertToPdfResenje($event: number) {
-    console.log($event);
+  convertToPdfResenje($event: number): void {
+    this.resenjeService.convertResenjePDF(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 
-  convertToXHTMLResenje($event: number) {
-    console.log($event);
+  convertToXHTMLResenje($event: number): void {
+    this.resenjeService.convertResenjeXHTML(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.html';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  doubleClickedResenje($event: number): void {
+    this.resenja.forEach( resenje => {
+      if (resenje.id === $event){
+        this.router.navigate(['/detaljni-prikaz-resenja'], {queryParams: {broj: resenje.id}});
+      }
+    });
+  }
+
+  doubleClickedZalbe($event: string): void {
+    this.zalbe.forEach((item, index) => {
+      const zalba = item.tip + '/' + item.id;
+      if (zalba === $event){
+        this.router.navigate(['/detaljni-prikaz-zalbe'], {queryParams: {zalba_id: zalba, zalba_status: item.status}});
+      }
+    });
   }
 }

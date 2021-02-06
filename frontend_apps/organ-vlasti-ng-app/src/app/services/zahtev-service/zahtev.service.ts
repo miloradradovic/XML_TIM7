@@ -42,4 +42,5 @@ export class ZahtevService {
     return this.http.get('http://localhost:8090/zahtev/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
+
 }

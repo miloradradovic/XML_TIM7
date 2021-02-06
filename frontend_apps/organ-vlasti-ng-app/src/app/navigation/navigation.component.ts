@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SignInService} from '../services/sign-in-service/sign-in.service';
 import {Router} from '@angular/router';
+import {StorageService} from '../services/stogare-service/storage.service';
 
 @Component({
   selector: 'app-navigation',
@@ -10,24 +11,32 @@ import {Router} from '@angular/router';
 export class NavigationComponent implements OnInit {
 
   role: string;
-  constructor(private signInService: SignInService,
-              public router: Router) { }
+
+  constructor(private storageService: StorageService,
+              private signInService: SignInService,
+              public router: Router) {
+  }
 
   ngOnInit(): void {
-    // this.authService.get
+    this.storageService.watchStorage().subscribe(() => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user === null) {
+        this.role = '';
+      } else {
+        this.role = user.role;
+      }
+    });
+
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user === null){
+    if (user === null) {
       this.role = '';
-    }else{
+    } else {
       this.role = user.role;
     }
   }
 
   signOut($event: any): void {
-    localStorage.clear();
-    this.role = '';
-    localStorage.setItem('role', this.role);
-    this.router.navigate(['/prijava']);
+    this.signInService.signOut();
   }
 
 }

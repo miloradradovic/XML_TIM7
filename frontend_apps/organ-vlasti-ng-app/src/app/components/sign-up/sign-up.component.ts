@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit {
     this.signUpService.signUp(signUpUserXML).subscribe(
       result => {
         this.snackBar.open('Регистрација је успешна!', 'Ок', { duration: 2000 });
-        this.router.navigate(['/prijava']);
+        this.router.navigate(['/']);
       },
       error => {
         this.snackBar.open('Нешто није у реду!', 'Ок', { duration: 2000 });

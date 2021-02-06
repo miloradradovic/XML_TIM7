@@ -236,10 +236,12 @@ public class ZalbaOdlukaService {
             QuerySolution querySolution = results.next();
 
             id = querySolution.get("zalba");
+            System.out.println(id);
             if (id.toString().contains("odluka")) {
                 String idStr = id.toString().split("zalbe/odluka/")[1];
                 ZalbaOdluka z = getOne(idStr);
                 listZC.add(z);
+                System.out.println(z);
             }
         }
 

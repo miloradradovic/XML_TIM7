@@ -159,4 +159,64 @@ export class PoverenikMainPageComponent implements OnInit {
       }
     );
   }
+
+  convertToRDF($event: string): void {
+    let obs$;
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeRDF($event.replace('/', '-'));
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaRDF($event.replace('/', '-'));
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  convertToJSON($event: string): void {
+    let obs$;
+    const tip: string = $event.split('/')[0];
+    const broj: string = $event.split('/')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeJSON($event.replace('/', '-'));
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaJSON($event.replace('/', '-'));
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
 }

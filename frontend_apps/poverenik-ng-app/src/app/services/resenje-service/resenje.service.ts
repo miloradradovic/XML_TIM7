@@ -28,6 +28,15 @@ export class ResenjeService {
       {headers: this.headers, responseType: 'blob'});
   }
 
+  convertResenjeRDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/toRdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertResenjeJSON(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/toJson/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
+
   getPretragaTekst(input): Observable<any> {
     return this.http.get('http://localhost:8085/resenje/search-text?input=' + input,
     {headers: this.headers, responseType: 'text'});

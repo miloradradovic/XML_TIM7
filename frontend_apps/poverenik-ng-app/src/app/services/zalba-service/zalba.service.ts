@@ -77,4 +77,22 @@ export class ZalbaService {
       {headers: this.headers, responseType: 'blob'});
   }
 
+  convertZalbaCutanjeRDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-cutanje/toRdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertZalbaCutanjeJSON(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-cutanje/toJson/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
+
+  convertZalbaOdlukaRDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-odluka/toRdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertZalbaOdlukaJSON(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-odluka/toJson/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
+
 }

@@ -32,12 +32,12 @@ export class ResenjeService {
       {headers: this.headers, responseType: 'blob'});
   }
   convertResenjeRDF(s: string): Observable<any> {
-    return this.http.get('http://localhost:8090/resenje/' + s,
+    return this.http.get('http://localhost:8090/resenje/downloadRdf' + s,
       {headers: this.headers, responseType: 'blob'});
   }
 
   convertResenjeJSON(broj: string): Observable<any> {
-    return this.http.get('http://localhost:8090/resenje/' + broj,
+    return this.http.get('http://localhost:8090/resenje/downloadJson' + broj,
       {headers: this.headers, responseType: 'blob'});
   }
 

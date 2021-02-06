@@ -20,6 +20,10 @@ export class TableComponent implements OnChanges {
   @Output() XHTMLZalba = new EventEmitter<string>();
   @Output() PDF = new EventEmitter<number>();
   @Output() PDFZalba = new EventEmitter<string>();
+  @Output() RDF = new EventEmitter<number>();
+  @Output() RDFZalba = new EventEmitter<string>();
+  @Output() JSON = new EventEmitter<number>();
+  @Output() JSONZalba = new EventEmitter<string>();
   constructor() {
 
   }
@@ -80,6 +84,26 @@ export class TableComponent implements OnChanges {
       this.PDFZalba.emit(returnValue);
     }else{
       this.PDF.emit(id);
+    }
+  }
+
+  rdf(id, tip: any) {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
+      returnValue = tip + '-' + id;
+      this.RDFZalba.emit(returnValue);
+    }else{
+      this.RDF.emit(id);
+    }
+  }
+
+  json(id, tip: any) {
+    let returnValue = '';
+    if (this.columnsToDisplay.includes('Идентификатор жалбе')){
+      returnValue = tip + '-' + id;
+      this.JSONZalba.emit(returnValue);
+    }else{
+      this.JSON.emit(id);
     }
   }
 

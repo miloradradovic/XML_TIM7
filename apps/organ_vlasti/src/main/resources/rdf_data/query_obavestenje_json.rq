@@ -5,4 +5,5 @@ WHERE {
 	%s <http://examples/predicate/datum> ?datum . 
 	%s <http://examples/predicate/organ_vlasti> ?organ_vlasti . 
 	%s <http://examples/predicate/podnosilac> ?podnosilac . 
-	%s <http://examples/predicate/zahtev> zahtev . 
+	%s <http://examples/predicate/zahtev> ?zahtev . 
+}

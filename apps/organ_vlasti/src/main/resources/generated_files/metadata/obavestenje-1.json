@@ -1,0 +1,10 @@
+{
+  "head": {
+    "vars": [ "datum" , "organ_vlasti" , "podnosilac" , "zahtev" ]
+  } ,
+  "results": {
+    "bindings": [
+      
+    ]
+  }
+}

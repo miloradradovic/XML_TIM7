@@ -16,4 +16,12 @@ export class IzvestajService {
     return this.http.get('http://localhost:8085/izvestaj/search-metadata/' + status + '?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore,
       {headers: this.headers, responseType: 'text'});
   }
+  convertIzvestajRDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8085/izvestaj/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertIzvestajJSON(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/izvestaj/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 }

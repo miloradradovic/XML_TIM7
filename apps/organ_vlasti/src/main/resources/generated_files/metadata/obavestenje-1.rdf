@@ -1,0 +1,13 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:pred="http://examples/predicate/">
+  <rdf:Description rdf:about="http://obavestenja/1">
+    <pred:podnosilac rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >s</pred:podnosilac>
+    <pred:organVlasti></pred:organVlasti>
+    <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2000-12-12</pred:datum>
+    <pred:responseTo rdf:resource="http://zahtevi/1"/>
+  </rdf:Description>
+</rdf:RDF>

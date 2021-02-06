@@ -1,6 +1,7 @@
 package com.project.organ_vlasti.api;
 
 import com.project.organ_vlasti.model.resenje.client.getResenjeByBrojResponse;
+import com.project.organ_vlasti.model.util.file.Tpath;
 import com.project.organ_vlasti.model.util.lists.ResenjeRefList;
 import com.project.organ_vlasti.service.ResenjeRefService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,40 @@ public class ResenjeController {
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Type", "application/xml; charset=utf-8");
                 headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".pdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/downloadRdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadRdf(@PathVariable String broj) {
+        Tpath path = resenjeRefService.getRdf(broj);
+        if (path.getBytes() != null)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream((byte[]) path.getBytes());
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".rdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/downloadJson/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadJson(@PathVariable String broj) {
+        Tpath path = resenjeRefService.getJson(broj);
+        if (path.getBytes() != null)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream((byte[]) path.getBytes());
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".json");
                 return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

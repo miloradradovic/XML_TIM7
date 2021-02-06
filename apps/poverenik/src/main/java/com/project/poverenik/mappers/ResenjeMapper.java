@@ -46,7 +46,7 @@ public class ResenjeMapper {
                 JAXBElement<TuvodneInformacije.Trazilac> element = (JAXBElement<TuvodneInformacije.Trazilac>) resenje.getResenjeBody().getUvodneInformacije().getContent().get(i);
                 element.getValue().setId(email);
                 element.getValue().getOtherAttributes().put(new QName("rel"), "pred:trazilac");
-                element.getValue().getOtherAttributes().put(new QName("href"), "http://users/" + element.getValue().getId());
+                element.getValue().getOtherAttributes().put(new QName("href"), "http://users/" + element.getValue().getValue());
             } catch (Exception e) {
             }
             try {

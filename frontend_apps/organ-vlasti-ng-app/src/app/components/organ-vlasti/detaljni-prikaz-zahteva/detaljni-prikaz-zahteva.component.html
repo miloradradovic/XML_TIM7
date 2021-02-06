@@ -5,4 +5,7 @@
   <button mat-raised-button [disabled]="!neobradjena" (click)="kreirajObavestenje($event)">Креирај обавештење</button>
   <br><br><br>
   <button mat-raised-button [disabled]="odbijen" (click)="openDialog($event)">Одбиј захтев</button>
+  <br><br><br>
+  <button mat-raised-button [disabled]="this.obavestenje === ''" (click)="obavestenjeDetails()">Обавештење</button>
+
 </div>

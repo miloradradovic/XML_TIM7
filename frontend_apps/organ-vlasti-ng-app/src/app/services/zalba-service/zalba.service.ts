@@ -20,4 +20,8 @@ export class ZalbaService {
       {headers: this.headers, responseType: 'blob'});
   }
 
+  /*convertZalbaOdlukaXHTML(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalbe/odlukaDownload/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }*/
 }

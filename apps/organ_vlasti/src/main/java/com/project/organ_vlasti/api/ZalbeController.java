@@ -24,6 +24,7 @@ public class ZalbeController {
     @Autowired
     ZalbeService zalbeService;
 
+    //id zahteva
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/cutanje/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaCutanje(@PathVariable String id) {
@@ -34,6 +35,7 @@ public class ZalbeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //id zahteva
     @PreAuthorize("hasRole('ROLE_ORGAN_VLASTI') || hasRole('ROLE_USER')")
     @RequestMapping(value = "/odluka/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZalbaOdluka(@PathVariable String id) {

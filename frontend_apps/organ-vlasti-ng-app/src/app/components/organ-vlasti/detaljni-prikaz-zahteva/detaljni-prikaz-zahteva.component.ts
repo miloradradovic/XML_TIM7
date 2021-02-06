@@ -39,8 +39,20 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
       this.neobradjena = true;
     }
     this.obavestenjeService.getObavestenjeByZahtev(this.zahtevId).subscribe( res => {
-      if (res !== null){
+      if (res){
+        // @ts-ignore
+        const convert = require('xml-js');
+        const obavestenje = JSON.parse(convert.xml2json(res, {compact: true, spaces: 4}));
+        this.obavestenje = obavestenje['oba:obavestenje']['oba:obavestenje_body']._attributes.id;
+      }
+    });
 
+    this.obavestenjeService.getObavestenjeByZahtev(this.zahtevId).subscribe( res => {
+      if (res){
+        // @ts-ignore
+        const convert = require('xml-js');
+        const obavestenje = JSON.parse(convert.xml2json(res, {compact: true, spaces: 4}));
+        this.obavestenje = obavestenje['oba:obavestenje']['oba:obavestenje_body']._attributes.id;
       }
     });
   }
@@ -60,5 +72,9 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
       console.log('The dialog was closed');
       this.router.navigate(['/pocetna-stranica-organ-vlasti']);
     });
+  }
+
+  obavestenjeDetails() {
+    this.router.navigate(['/detaljni-prikaz-obavestenja'], {queryParams: {broj: this.obavestenje}});
   }
 }

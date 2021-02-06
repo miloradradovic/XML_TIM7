@@ -16,6 +16,7 @@ import com.project.organ_vlasti.rdf_utils.FileUtil;
 import com.project.organ_vlasti.rdf_utils.MetadataExtractor;
 import com.project.organ_vlasti.rdf_utils.SparqlUtil;
 import com.project.organ_vlasti.repository.IzvestajiRepository;
+import com.project.organ_vlasti.transformer.Transformator;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -375,5 +376,52 @@ public class IzvestajiService {
                 new File("src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json")), results);
         query.close();
         return "src/main/resources/generated_files/metadata/" + "izvestaj-" + id + ".json";
+    }
+
+    public boolean generateDocuments(String broj) {
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/izvestaj" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/izvestaj" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/izvestaj_fo.xsl";
+
+
+        System.out.println("[INFO] " + Transformator.class.getSimpleName());
+
+
+        try {
+            Transformator transformator = new Transformator();
+            Izvestaj xml = getOne(broj);
+            transformator.generateHTML(existManager.getOutputStream(xml),
+                    "src/main/resources/generated_files/xslt/izvestaj.xsl", OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO, existManager.getOutputStream(xml), OUTPUT_PDF);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+		/*pdfTransformer.generateHTML(existManager.getOutputStream(), XSL_FILE);
+		pdfTransformer.generatePDF(OUTPUT_FILE);
+*/
+        System.out.println("[INFO] File \"" + OUTPUT_HTML + "\" generated successfully.");
+        System.out.println("[INFO] End.");
+        return true;
+    }
+
+    public String downloadIzvestajPDF(String broj) {
+        String path = "src/main/resources/generated_files/documents/izvestaj" + broj + ".pdf";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
+    }
+
+
+    public String downloadIzvestajXHTML(String broj) {
+        String path = "src/main/resources/generated_files/documents/izvestaj" + broj + ".html";
+        boolean obavestenje = generateDocuments(broj);
+        if (obavestenje) {
+            return path;
+        }
+        return "";
     }
 }

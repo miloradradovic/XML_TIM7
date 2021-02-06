@@ -79,7 +79,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/auth/**", "/ws/**", "/obavestenje/toPdf/{broj}", "/zahtev/toPdf/{broj}", "/resenje/download/{broj}",
 						"/obavestenje/toRdf/**", "/obavestenje/toJson/**", "/zahtev/toRdf/**", "/zahtev/toJson/**",
-						"/izvestaji/toRdf/**", "/izvestaji/toJson/**")
+						"/izvestaji/toRdf/**", "/izvestaji/toJson/**","/izvestaji/toPdf/**","/izvestaji/toXhtml/**")
 				.permitAll()
 
 				// za svaki drugi zahtev korisnik mora biti autentifikovan
@@ -104,6 +104,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
 				"/**/*.css", "/**/*.js", "/ws/**", "/obavestenje/toPdf/{broj}", "/zahtev/toPdf/{broj}",
 				"/obavestenje/toRdf/**", "/obavestenje/toJson/**", "/zahtev/toRdf/**", "/zahtev/toJson/**",
-				"/izvestaji/toRdf/**", "/izvestaji/toJson/**", "/resenje/download/{broj}");
+				"/izvestaji/toRdf/**", "/izvestaji/toJson/**", "/resenje/download/{broj}","/izvestaji/toPdf/**","/izvestaji/toXhtml/**");
 	}
 }

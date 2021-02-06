@@ -20,4 +20,13 @@ export class IzvestajService {
     return this.http.get('http://localhost:8090/izvestaji/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore,
       {headers: this.headers, responseType: 'text'});
   }
+
+  convertIzvestajPDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/izvestaji/toPdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertIzvestajXHTML(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/izvestaji/toXhtml/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 }

@@ -20,5 +20,6 @@
   <app-table [columnsToDisplay]="['Идентификатор извештаја', 'xhtml', 'pdf', 'rdf', 'json']"
              [columnsToIterate]="['id']"
              [dataSource]="izvestaji" (PDF)="pdf($event)" (XHTML)="xhtml($event)"
-             (RDF)="rdfIzvestaji($event)" (JSON)="jsonIzvestaji($event)"></app-table>
+             (RDF)="rdfIzvestaji($event)" (JSON)="jsonIzvestaji($event)"
+              (DoubleClick)="doubleClicked($event)"></app-table>
 </div>

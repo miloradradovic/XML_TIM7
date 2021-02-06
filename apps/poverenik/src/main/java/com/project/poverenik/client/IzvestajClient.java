@@ -9,7 +9,7 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 public class IzvestajClient extends WebServiceGatewaySupport {
 
-    public getIzvestajByIdResponse getOneResenje(getIzvestajById request) {
+    public getIzvestajByIdResponse getOneIzvestaj(getIzvestajById request) {
 
         getIzvestajByIdResponse response = (getIzvestajByIdResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("http://localhost:8090/ws/izvestaj", request,

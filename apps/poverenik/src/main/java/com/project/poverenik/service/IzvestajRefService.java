@@ -2,6 +2,8 @@ package com.project.poverenik.service;
 
 import com.project.poverenik.client.FileClient;
 import com.project.poverenik.client.IzvestajClient;
+import com.project.poverenik.database.ExistManager;
+import com.project.poverenik.model.izvestaj.Izvestaj;
 import com.project.poverenik.model.izvestaj.client.getIzvestajById;
 import com.project.poverenik.model.izvestaj.client.getIzvestajByIdResponse;
 import com.project.poverenik.model.izvestaj.database.IzvestajRef;
@@ -13,6 +15,7 @@ import com.project.poverenik.model.util.lists.IzvestajRefList;
 import com.project.poverenik.model.util.parametars.ParametarMap;
 import com.project.poverenik.model.util.parametars.Tvalue;
 import com.project.poverenik.repository.IzvestajRefRepository;
+import com.project.poverenik.transformer.Transformator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,8 @@ public class IzvestajRefService {
 
     @Autowired
     private IzvestajRefRepository izvestajRefRepository;
+    @Autowired
+    ExistManager existManager;
 
     private String getMaxId() throws XMLDBException, JAXBException {
         ResourceSet max = izvestajRefRepository.getMaxId();
@@ -188,7 +193,7 @@ public class IzvestajRefService {
         getIzvestajById getIzvestajById = new getIzvestajById();
         getIzvestajById.setId(id);
 
-        getIzvestajByIdResponse getIzvestajByIdResponse = izvestajClient.getOneResenje(getIzvestajById);
+        getIzvestajByIdResponse getIzvestajByIdResponse = izvestajClient.getOneIzvestaj(getIzvestajById);
         if (getIzvestajByIdResponse != null) {
             IzvestajRef izvestajRef = getOneByBroj(id);
             if (izvestajRef == null)
@@ -230,5 +235,64 @@ public class IzvestajRefService {
         sendJsonFile.setId(id);
 
         return fileClient.getJson(sendJsonFile).getPath();
+    }
+
+    public boolean downloadIzvestaj(String broj){
+        //pocetak soap
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.poverenik.model.izvestaj.client");
+
+        IzvestajClient izvestajClient = new IzvestajClient();
+        izvestajClient.setDefaultUri("http://localhost:8090/ws");
+        izvestajClient.setMarshaller(marshaller);
+        izvestajClient.setUnmarshaller(marshaller);
+
+
+        getIzvestajById getIzvestajById = new getIzvestajById();
+        getIzvestajById.setId(broj);
+
+        getIzvestajByIdResponse getIzvestajByIdResponse = izvestajClient.getOneIzvestaj(getIzvestajById);
+        //kraj soap
+        if(getIzvestajByIdResponse == null){
+            return false;
+        }
+
+        com.project.poverenik.model.izvestaj.ObjectFactory of = new com.project.poverenik.model.izvestaj.ObjectFactory();
+
+        Izvestaj i = of.createIzvestaj();
+        i.setIzvestajBody(getIzvestajByIdResponse.getIzvestaj());
+
+        final String OUTPUT_PDF = "src/main/resources/generated_files/documents/izvestaj" + broj + ".pdf";
+        final String OUTPUT_HTML = "src/main/resources/generated_files/documents/izvestaj" + broj + ".html";
+        final String XSL_FO = "src/main/resources/generated_files/xsl-fo/izvestaj_fo.xsl";
+        try {
+            Transformator transformator = new Transformator();
+            transformator.generateHTML(existManager.getOutputStream(i),
+                    "src/main/resources/generated_files/xslt/izvestaj.xsl", OUTPUT_HTML);
+            transformator.generatePDF(XSL_FO, existManager.getOutputStream(i), OUTPUT_PDF);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
+    public String downloadIzvestajXHTML(String broj) {
+        String path = "src/main/resources/generated_files/documents/izvestaj" + broj + ".html";
+        boolean izvestaj = downloadIzvestaj(broj);
+        if (izvestaj) {
+            return path;
+        }
+        return "";
+    }
+
+    public String downloadIzvestajPDF(String broj) {
+        String path = "src/main/resources/generated_files/documents/izvestaj" + broj + ".pdf";
+        boolean izvestaj = downloadIzvestaj(broj);
+        if (izvestaj) {
+            return path;
+        }
+        return "";
     }
 }

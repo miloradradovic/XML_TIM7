@@ -16,6 +16,8 @@ import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
 import java.io.ByteArrayInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4201")
 @RestController
@@ -86,6 +88,40 @@ public class IzvestajRefController {
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Type", "application/xml; charset=utf-8");
                 headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=izvestaj" + broj + ".json");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/izvestajDownloadXHTML/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadIzvestajXHTML(@PathVariable String id) {
+        String path = izvestajRefService.downloadIzvestajXHTML(id);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=izvestaj" + id + ".pdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/izvestajDownloadPDF/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZalbaOdluka(@PathVariable String id) {
+        String path = izvestajRefService.downloadIzvestajPDF(id);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=izvestaj" + id + ".pdf");
                 return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

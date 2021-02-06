@@ -77,7 +77,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/auth/**", "/ws/**", "/users/**", "/zalba-cutanje/toPdf/**", "/zalba-odluka/toPdf/**",
 						"/resenje/toPdf/**", "/zalba-cutanje/toRdf/**", "/zalba-cutanje/toXhtml/**", "/zalba-odluka/toXhtml/**", "/zalba-cutanje/toJson/**",
-						"/zalba-odluka/toRdf/**", "/zalba-odluka/toJson/**", "/resenje/toRdf/**", "/resenje/toJson/**" )
+						"/zalba-odluka/toRdf/**", "/zalba-odluka/toJson/**", "/resenje/toRdf/**", "/resenje/toJson/**","izvestaj/izvestajDownloadXHTML/**","izvestaj/izvestajDownloadPDF/**" )
 				.permitAll()
 
 				// za svaki drugi zahtev korisnik mora biti autentifikovan
@@ -101,6 +101,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
 				"/**/*.css", "/**/*.js", "/ws/**", "/zalba-cutanje/toPdf/**", "/zalba-odluka/toPdf/**",
 				"/resenje/toPdf/**", "/zalba-cutanje/toRdf/**", "/zalba-cutanje/toJson/**", "/zalba-odluka/toRdf/**",
-				"/zalba-odluka/toJson/**", "/resenje/toRdf/**", "/resenje/toJson/**");
+				"/zalba-odluka/toJson/**", "/resenje/toRdf/**", "/resenje/toJson/**", "izvestaj/izvestajDownload/**");
 	}
 }

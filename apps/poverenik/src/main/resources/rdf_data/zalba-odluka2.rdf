@@ -3,6 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:pred="http://examples/predicate/">
   <rdf:Description rdf:about="http://zalbe/odluka/2">
+<<<<<<< HEAD
     <pred:podnosilac rdf:resource="http://users/a@gmail.com"/>
     <pred:obavjestenje rdf:resource="http://obavestenja/"/>
     <pred:organ_vlasti></pred:organ_vlasti>
@@ -11,5 +12,15 @@
     <pred:zahtev rdf:resource="http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=17"/>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2021-02-06T20:09:42</pred:datum>
+=======
+    <pred:podnosilac rdf:resource="http://users/miloradradovicmico98@gmail.com"/>
+    <pred:obavjestenje rdf:resource="http://obavestenja/147"/>
+    <pred:organ_vlasti>Organ</pred:organ_vlasti>
+    <pred:mesto>Београд</pred:mesto>
+    <pred:status>neobradjena</pred:status>
+    <pred:zahtev rdf:resource="http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=4"/>
+    <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2021-02-06T19:41:16</pred:datum>
+>>>>>>> b28e1411154260c582bca6adcac1653660eb141e
   </rdf:Description>
 </rdf:RDF>

@@ -1,0 +1,17 @@
+{
+  "head": {
+    "vars": [ "datum" , "organ_vlasti" , "zahtev" , "status" , "mesto" , "podnosilac" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2021-02-06T18:10:19" } ,
+        "organ_vlasti": { "type": "literal" , "value": "Organ" } ,
+        "zahtev": { "type": "uri" , "value": "http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=1" } ,
+        "status": { "type": "literal" , "value": "neobradjena" } ,
+        "mesto": { "type": "literal" , "value": "Београд" } ,
+        "podnosilac": { "type": "uri" , "value": "http://users/miloradradovicmico98@gmail.com" }
+      }
+    ]
+  }
+}

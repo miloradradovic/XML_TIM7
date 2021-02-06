@@ -12,10 +12,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class IzjasnjavanjeDialogComponent {
   messageText: string;
+  idZahteva: string;
 
   constructor(
     public dialogRef: MatDialogRef<IzjasnjavanjeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {messageId: number},
+    @Inject(MAT_DIALOG_DATA) public data: {messageId: number, zahtev: string},
     private izjasnjavanjeService: IzjasnjavanjeService,
     private snackBar: MatSnackBar) {}
 
@@ -24,12 +25,14 @@ export class IzjasnjavanjeDialogComponent {
   }
   posaljiIzjasnjavanje(): void {
     const messageId = this.data.messageId;
+    this.idZahteva = this.data.zahtev;
+    const messageNew = 'Zahtev sa ID-jem ' + messageId + ': ' + this.messageText;
     const messageObject = { _declaration:
         { _attributes: { version: '1.0', encoding: 'utf-8' } },
       message: { _attributes:
           { xmlns: 'http://www.message' },
         body: { _text: '', _attributes: {id: 0} } } };
-    messageObject.message.body._text = this.messageText;
+    messageObject.message.body._text = messageNew;
     messageObject.message.body._attributes.id = messageId;
     // @ts-ignore
     const convert = require('xml-js');

@@ -114,7 +114,7 @@ public class ResenjeService {
                 ZalbaOdluka zalbaOdluka = zalbaOdlukaService.getOne(idZalbe);
                 if (zalbaOdluka == null) {
                     return false;
-                } else if (!zalbaOdluka.getZalbaOdlukaBody().getStatus().equals("u obradi")) {
+                } else if (!zalbaOdluka.getZalbaOdlukaBody().getStatus().getValue().equals("u obradi")) {
                     return false;
                 }
 

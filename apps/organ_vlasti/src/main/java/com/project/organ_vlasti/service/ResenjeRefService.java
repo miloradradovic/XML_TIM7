@@ -138,7 +138,7 @@ public class ResenjeRefService {
         return null;
     }
 
-    public boolean downloadResenje(String broj){
+    public boolean downloadResenje(String broj) throws XMLDBException, JAXBException {
         //pocetak soap
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.organ_vlasti.model.resenje.client");
@@ -153,8 +153,14 @@ public class ResenjeRefService {
 
         getResenjeByBrojResponse getResenjeByBrojResponse = resenjeClient.getOneResenje(getResenjeByBroj);
         //kraj soap
-        if(getResenjeByBrojResponse == null){
-            return false;
+        if (getResenjeByBrojResponse != null) {
+            ResenjeRef resenjeRef = getOneByBroj(broj);
+            if (resenjeRef == null)
+                return false;
+            resenjeRef.getBody().setProcitano("da");
+            if (!update(resenjeRef)) {
+                return false;
+            }
         }
         com.project.organ_vlasti.model.resenje.ObjectFactory of = new com.project.organ_vlasti.model.resenje.ObjectFactory();
         Resenje r = of.createResenje();
@@ -175,7 +181,7 @@ public class ResenjeRefService {
         return true;
     }
 
-    public String downloadResenjePDF(String broj) {
+    public String downloadResenjePDF(String broj) throws XMLDBException, JAXBException {
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".pdf";
         boolean resenje = downloadResenje(broj);
         if (resenje) {
@@ -185,7 +191,7 @@ public class ResenjeRefService {
     }
 
 
-    public String downloadResenjeXHTML(String broj) {
+    public String downloadResenjeXHTML(String broj) throws XMLDBException, JAXBException {
         String path = "src/main/resources/generated_files/documents/resenje" + broj + ".html";
         boolean resenje = downloadResenje(broj);
         if (resenje) {

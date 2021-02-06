@@ -87,7 +87,7 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ORGAN_VLASTI')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> getZahtev(@PathVariable String id) throws XMLDBException, JAXBException {
         Zahtev zahtev = zahtevService.getOne(id);

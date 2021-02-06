@@ -79,7 +79,7 @@ public class ResenjeController {
     }
 
     @RequestMapping(value = "/download/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadResenje(@PathVariable String broj) {
+    public ResponseEntity<?> downloadResenje(@PathVariable String broj) throws XMLDBException, JAXBException {
         String path = resenjeRefService.downloadResenjeXHTML(broj);
         if (!path.equals(""))
             try {

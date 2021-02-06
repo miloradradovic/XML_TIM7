@@ -29,7 +29,6 @@ export class IzvestajService {
     return this.http.get('http://localhost:8090/izvestaji/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
-
   convertIzvestajiRDF(broj: string): Observable<any> {
     return this.http.get('http://localhost:8090/izvestaji/toRdf/' + broj,
       {headers: this.headers, responseType: 'blob'});

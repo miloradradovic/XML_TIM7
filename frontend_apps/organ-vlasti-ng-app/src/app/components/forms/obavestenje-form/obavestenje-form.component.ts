@@ -110,9 +110,11 @@ export class ObavestenjeFormComponent implements OnInit {
                </re:ukupan_trosak>
            </oba:tekst_zahteva><oba:opcija_dostave><re:opcija izabran=${opcija1}>Именованом</re:opcija><re:opcija izabran=${opcija2}>Архиви</re:opcija></oba:opcija_dostave></oba:obavestenje_body></oba:obavestenje>`;
     this.obavestenjeService.send(dataTemplate)
-      .subscribe(res => console.log(res));
-    this.snackBar.open('Успешно сте послали обавештење!', 'Ок', {duration: 3000});
-
+      .subscribe(res => {
+        this.snackBar.open('Успешно сте послали обавештење!', 'Ок', {duration: 3000});
+      }, error => {
+        this.snackBar.open('Невалидно попуњена поља!', 'Ок', {duration: 3000});
+      });
   }
 
 }

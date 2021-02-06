@@ -1,0 +1,14 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:pred="http://examples/predicate/">
+  <rdf:Description rdf:about="http://zalbe/cutanje/54">
+    <pred:mesto></pred:mesto>
+    <pred:podnosilac rdf:resource="http://users/a@gmail.com"/>
+    <pred:organ_vlasti>gs</pred:organ_vlasti>
+    <pred:status>neobradjena</pred:status>
+    <pred:zahtev rdf:resource="http://localhost:4201/detaljni-prikaz-zahteva?zahtev_id=20"/>
+    <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2021-02-06T18:27:24</pred:datum>
+  </rdf:Description>
+</rdf:RDF>

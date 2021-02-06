@@ -1,12 +1,12 @@
 
-<div style="padding-top: 5%; width: 100%; padding-left: 2%">
+<div style="padding-top: 5%; width: 97%; padding-left: 2%">
   <mat-form-field appearance="outline" style="width: 35%">
     <mat-label> Претрага по тексту </mat-label>
     <input id="pretragaTekst" (input)="onTekstChanged($event.target.valueOf())" #inputField matInput placeholder="...">
   </mat-form-field>
 </div>
 
-<div style="width: 100%; padding-left: 2%">
+<div style="width: 97%; padding-left: 2%">
   <form [formGroup]="form" (ngSubmit)="onSubmitClicked()">
     <mat-form-field appearance="outline" style="width: 15%">
       <mat-label> Ид захтева </mat-label>

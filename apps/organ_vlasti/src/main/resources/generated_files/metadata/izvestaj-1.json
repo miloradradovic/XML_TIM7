@@ -1,0 +1,23 @@
+{
+  "head": {
+    "vars": [ "datum" , "zahtevi_odbijeni" , "zahtevi_podneti" , "zahtevi_prihvaceni" , "zalbe_cutanje_odbijeno" , "zalbe_cutanje_podneti" , "zalbe_cutanje_ponisteno" , "zalbe_cutanje_prihvaceno" , "zalbe_odluke_odbijeno" , "zalbe_odluke_podneti" , "zalbe_odluke_ponisteno" , "zalbe_odluke_prihvaceno" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2021-02-06" } ,
+        "zahtevi_odbijeni": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1" } ,
+        "zahtevi_podneti": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "3" } ,
+        "zahtevi_prihvaceni": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "1" } ,
+        "zalbe_cutanje_odbijeno": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_cutanje_podneti": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_cutanje_ponisteno": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_cutanje_prihvaceno": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_odluke_odbijeno": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_odluke_podneti": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_odluke_ponisteno": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" } ,
+        "zalbe_odluke_prihvaceno": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "0" }
+      }
+    ]
+  }
+}

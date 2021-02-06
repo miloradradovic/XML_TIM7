@@ -1,0 +1,31 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:pred="http://examples/predicate/">
+  <rdf:Description rdf:about="http://izvestaji/1">
+    <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2021-02-06</pred:datum>
+    <pred:zalbe_cutanje_prihvaceno rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_cutanje_prihvaceno>
+    <pred:zalbe_odluke_podneti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_odluke_podneti>
+    <pred:zahtevi_podneti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >3</pred:zahtevi_podneti>
+    <pred:zahtevi_prihvaceni rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</pred:zahtevi_prihvaceni>
+    <pred:zalbe_cutanje_odbijeno rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_cutanje_odbijeno>
+    <pred:zahtevi_odbijeni rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</pred:zahtevi_odbijeni>
+    <pred:zalbe_odluke_prihvaceno rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_odluke_prihvaceno>
+    <pred:zalbe_odluke_odbijeno rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_odluke_odbijeno>
+    <pred:zalbe_cutanje_ponisteno rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_cutanje_ponisteno>
+    <pred:zalbe_odluke_ponisteno rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_odluke_ponisteno>
+    <pred:zalbe_cutanje_podneti rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >0</pred:zalbe_cutanje_podneti>
+  </rdf:Description>
+</rdf:RDF>

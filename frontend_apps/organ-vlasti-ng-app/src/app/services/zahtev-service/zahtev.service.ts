@@ -42,5 +42,13 @@ export class ZahtevService {
     return this.http.get('http://localhost:8090/zahtev/toXhtml/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
+  convertZahtevRDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/toRdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertZahtevJSON(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/toJson/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 
 }

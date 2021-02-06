@@ -98,11 +98,45 @@ export class OrganVlastiMainPageComponent implements OnInit {
     });
   }
 
-  rdfZahtev($event: number) {
-
+  rdfZahtev($event: string) {
+    this.zahtevService.convertZahtevRDF($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zahtev' + $event + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 
-  jsonZahtev($event: number) {
-
+  jsonZahtev($event: string) {
+    this.zahtevService.convertZahtevJSON($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zahtev' + $event + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
   }
 }

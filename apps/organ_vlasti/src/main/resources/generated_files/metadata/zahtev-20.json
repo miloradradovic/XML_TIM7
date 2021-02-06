@@ -1,0 +1,15 @@
+{
+  "head": {
+    "vars": [ "datum" , "organ_vlasti" , "mesto" , "podnosilac" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2021-02-06T02:04:20" } ,
+        "organ_vlasti": { "type": "literal" , "value": "" } ,
+        "mesto": { "type": "literal" , "value": "" } ,
+        "podnosilac": { "type": "uri" , "value": "http://users/a@gmail.com" }
+      }
+    ]
+  }
+}

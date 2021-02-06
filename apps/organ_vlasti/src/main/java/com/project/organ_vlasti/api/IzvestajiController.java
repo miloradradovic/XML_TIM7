@@ -4,6 +4,8 @@ import com.project.organ_vlasti.model.izvestaji.Izvestaj;
 import com.project.organ_vlasti.model.util.lists.IzvestajList;
 import com.project.organ_vlasti.service.IzvestajiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -71,13 +76,35 @@ public class IzvestajiController {
     public ResponseEntity<?> downloadIzvestajRdf(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = izvestajiService.generateRdf(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + id + ".rdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/toJson/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadIzvestajJson(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = izvestajiService.generateJson(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + id + ".json");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

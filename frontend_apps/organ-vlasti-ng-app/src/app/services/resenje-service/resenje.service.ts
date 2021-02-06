@@ -31,5 +31,14 @@ export class ResenjeService {
     return this.http.get('http://localhost:8090/resenje/download/' + broj,
       {headers: this.headers, responseType: 'blob'});
   }
+  convertResenjeRDF(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/resenje/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
+
+  convertResenjeJSON(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/resenje/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
 
 }

@@ -20,59 +20,74 @@ import {DetaljniPrikazResenjaComponent} from '../components/organ-vlasti/detaljn
 import {DetaljniPrikazZalbeComponent} from '../components/organ-vlasti/detaljni-prikaz-zalbe/detaljni-prikaz-zalbe.component';
 import {AddOrganVlastiFormComponent} from '../components/forms/add-organ-vlasti-form/add-organ-vlasti-form.component';
 import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
+import {GradjaninGuardService} from '../guards/gradjanin.guard.service';
+import {SluzbenikGuardService} from '../guards/sluzbenik.guard.service';
 
 export const routes: Routes = [
   {
-    path: 'prijava',
-    component: SignInComponent
+    path: '',
+    component: SignInComponent,
+    canActivate: [SignInGuard]
   },
   {
     path: 'registracija',
-    component: SignUpComponent
+    component: SignUpComponent,
+    canActivate: [SignInGuard]
   },
   {
     path: 'zahtev',
-    component: ZahtevFormComponent
+    component: ZahtevFormComponent,
+    canActivate: [GradjaninGuardService]
   },
   {
     path: 'obavestenje',
-    component: ObavestenjeFormComponent
+    component: ObavestenjeFormComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'izjasnjavanja',
-    component: IzjasnjavanjaComponent
+    component: IzjasnjavanjaComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'neprocitana-resenja',
-    component: NeprocitanaResenjaComponent
+    component: NeprocitanaResenjaComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'procitana-resenja',
-    component: ProcitanaResenjaComponent
+    component: ProcitanaResenjaComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'obavestenja',
-    component: ObavestenjaComponent
+    component: ObavestenjaComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'pocetna-stranica-organ-vlasti',
-    component: OrganVlastiMainPageComponent
+    component: OrganVlastiMainPageComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'zahtevi',
-    component: ZahteviComponent
+    component: ZahteviComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'pocetna-stranica-gradjanin',
-    component: GradjaninMainPageComponent
+    component: GradjaninMainPageComponent,
+    canActivate: [GradjaninGuardService]
   },
   {
     path: 'kreiraj-izvestaj',
-    component: KreiranjeIzvestajaComponent
+    component: KreiranjeIzvestajaComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'izvestaji',
-    component: IzvestajiComponent
+    component: IzvestajiComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
     path: 'detaljni-prikaz-zahteva',
@@ -96,10 +111,17 @@ export const routes: Routes = [
   },
   {
     path: 'dodaj-sluzbenika',
-    component: AddOrganVlastiFormComponent
+    component: AddOrganVlastiFormComponent,
+    canActivate: [SluzbenikGuardService]
   },
   {
-    path: 'profil',
-    component: EditProfileComponent
+    path: 'gradjanin/profil',
+    component: EditProfileComponent,
+    canActivate: [GradjaninGuardService]
+  },
+  {
+    path: 'sluzbenik/profil',
+    component: EditProfileComponent,
+    canActivate: [SluzbenikGuardService]
   }
 ];

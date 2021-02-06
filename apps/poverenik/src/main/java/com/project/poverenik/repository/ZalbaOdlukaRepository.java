@@ -55,7 +55,7 @@ public class ZalbaOdlukaRepository {
     }
 
     public ResourceSet getAllByUser(String email) throws XMLDBException {///re:osoba[@id = '%s']/ancestor::zalba_odluka
-        String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::zalilac/*[1]/*[1][@id = '%s']/ancestor::zalba_odluka", email);
+        String xpath = String.format("/zalba_odluka/zalba_odluka_body/child::podaci_o_podnosiocu_zalbe/*[1]/@id[.= '%s']/ancestor::zalba_odluka", email);
         return existManager.retrieve(collectionUri, xpath, TARGET_NAMESPACE);
     }
 

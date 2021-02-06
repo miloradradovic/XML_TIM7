@@ -5,6 +5,7 @@ import {SignInService} from '../../services/sign-in-service/sign-in.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {SignInModel} from '../../model/sign-in.model';
 import {Router} from '@angular/router';
+import {StorageService} from '../../services/stogare-service/storage.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,7 +20,8 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private signInService: SignInService,
-    public router: Router
+    public router: Router,
+    private storageService: StorageService
   ) {
     this.form = this.fb.group({
       email : [null, Validators.required],
@@ -57,7 +59,7 @@ export class SignInComponent implements OnInit {
         const role = info.role;
         const user = new SignInModel(email, userToken.token.jwt._text, role);
         console.log(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        this.storageService.setStorageItem('user', JSON.stringify(user));
         this.snackBar.open('Успешна пријава!', 'Ок', { duration: 2000 });
         if (role === 'ROLE_USER'){
           this.router.navigate(['/pocetna-stranica-gradjanin']);

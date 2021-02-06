@@ -115,6 +115,8 @@ export class PoverenikSveZalbeComponent implements OnInit {
     const zalbaCutanjeOdluka = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
     const lista = zalbaCutanjeOdluka.zalbaOdlukaList;
     const zalbe = lista['zoc:zalba_odluka'];
+    console.log('render zalbe odluka');
+    console.log(zalbe);
     if (zalbe !== undefined){
       try {
         zalbe.forEach((item, index) => {

@@ -77,7 +77,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     PoverenikDetaljniPrikazObavestenjaComponent,
     PoverenikDetaljniPrikazIzvestajaComponent,
     EmptyComponent,
-    EditProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

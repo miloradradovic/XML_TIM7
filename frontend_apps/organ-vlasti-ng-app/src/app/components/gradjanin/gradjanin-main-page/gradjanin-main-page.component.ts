@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ObavestenjeService} from '../../../services/obavestenje-service/obavestenje.service';
 import {ZahtevService} from '../../../services/zahtev-service/zahtev.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -12,10 +12,12 @@ import {Router} from '@angular/router';
 export class GradjaninMainPageComponent implements OnInit {
   zahtevi = [];
   obavestenja = [];
+
   constructor(private obavestenjeService: ObavestenjeService,
               private zahtevService: ZahtevService,
               private snackBar: MatSnackBar,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     const newList = [];
@@ -26,14 +28,14 @@ export class GradjaninMainPageComponent implements OnInit {
         const convert = require('xml-js');
         const zahtevList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zahtevList.zahtevList['zcir:zahtev'];
-        if (lista !== undefined){
+        if (lista !== undefined) {
           try {
             lista.forEach((item, index) => {
               const idZahteva = item['zcir:zahtev_body']._attributes.id;
               const zahtev = {id: idZahteva};
               newList.push(zahtev);
             });
-          } catch (err){
+          } catch (err) {
             const idZahteva = lista['zcir:zahtev_body']._attributes.id;
             const zahtev = {id: idZahteva};
             newList.push(zahtev);
@@ -42,7 +44,7 @@ export class GradjaninMainPageComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Something went wrong!', 'Ok', {duration: 2000});
       }
     );
     this.obavestenjeService.getObavestenjeListByUser().subscribe(
@@ -51,7 +53,7 @@ export class GradjaninMainPageComponent implements OnInit {
         const convert = require('xml-js');
         const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
-        if (lista !== undefined){
+        if (lista !== undefined) {
           try {
             lista.forEach((item, index) => {
               const idObavestenja = item['oba:obavestenje_body']._attributes.id;
@@ -59,7 +61,7 @@ export class GradjaninMainPageComponent implements OnInit {
               const obavestenje = {id: idObavestenja, idZahteva: idZahtevaOba};
               newList2.push(obavestenje);
             });
-          } catch (err){
+          } catch (err) {
             const idObavestenja = lista['oba:obavestenje_body']._attributes.id;
             const idZahtevaOba = lista['oba:obavestenje_body']._attributes.idZahteva;
             const obavestenje = {id: idObavestenja, idZahteva: idZahtevaOba};
@@ -69,7 +71,7 @@ export class GradjaninMainPageComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Something went wrong!', 'Ok', {duration: 2000});
       }
     );
   }
@@ -91,7 +93,7 @@ export class GradjaninMainPageComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Something went wrong!', 'Ok', {duration: 2000});
       });
   }
 
@@ -112,7 +114,7 @@ export class GradjaninMainPageComponent implements OnInit {
         a.remove();
       },
       error => {
-        this.snackBar.open('Something went wrong!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Something went wrong!', 'Ok', {duration: 2000});
       });
   }
 
@@ -159,8 +161,8 @@ export class GradjaninMainPageComponent implements OnInit {
   }
 
   doubleClickedObavestenje($event: number): void {
-    this.obavestenja.forEach( obavestenje => {
-      if (obavestenje.id === $event){
+    this.obavestenja.forEach(obavestenje => {
+      if (obavestenje.id === $event) {
         this.router.navigate(['/detaljni-prikaz-obavestenja'], {queryParams: {broj: obavestenje.id}});
       }
     });
@@ -168,25 +170,98 @@ export class GradjaninMainPageComponent implements OnInit {
 
   doubleClickedZahtev($event: number): void {
     this.zahtevi.forEach((item, index) => {
-      if (item.id === $event){
-        this.router.navigate(['/detaljni-prikaz-zahteva'], {queryParams: {zahtev_id: $event, zahtev_status: item.status}});
+      if (item.id === $event) {
+        this.router.navigate(['/detaljni-prikaz-zahteva'], {
+          queryParams: {
+            zahtev_id: $event,
+            zahtev_status: item.status
+          }
+        });
       }
     });
   }
 
-  jsonZahtev($event: number) {
-
+  rdfZahtev($event: string) {
+    this.zahtevService.convertZahtevRDF($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zahtev' + $event + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
+      });
   }
 
-  rdfZahtev($event: number) {
-
+  jsonZahtev($event: string) {
+    this.zahtevService.convertZahtevJSON($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zahtev' + $event + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
+      });
   }
 
-  rdfObavestenje($event: number) {
-
+  rdfObavestenje($event: string) {
+    this.obavestenjeService.convertObavestenjeRDF($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'obavestenje' + $event + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
+      });
   }
 
-  jsonObavestenje($event: number) {
-
+  jsonObavestenje($event: string) {
+    this.obavestenjeService.convertObavestenjeJSON($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'obavestenje' + $event + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
+      });
   }
 }

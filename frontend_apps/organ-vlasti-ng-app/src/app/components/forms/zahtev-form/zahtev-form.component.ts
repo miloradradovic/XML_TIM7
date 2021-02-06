@@ -90,6 +90,7 @@ export class ZahtevFormComponent implements OnInit {
         this.snackBar.open('Успешно сте послали захтев!', 'Ок', {duration: 3000});
       },
         error => {
+          this.snackBar.open('Слање није успешно!', 'Ок', {duration: 3000});
         });
   }
 

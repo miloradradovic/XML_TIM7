@@ -3,7 +3,7 @@
 </div>
 <div style="float: right; padding-top: 10%; padding-right: 20%">
   <div *ngIf="this.obavestenje === ''">
-    <button mat-raised-button (click)="kreirajObavestenje($event)">Креирај обавештење</button>
+    <button mat-raised-button [disabled]="this.odbijen" (click)="kreirajObavestenje($event)">Креирај обавештење</button>
     <br><br><br>
   </div>
   <div *ngIf="this.obavestenje !== ''">

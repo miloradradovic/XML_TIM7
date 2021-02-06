@@ -1,0 +1,15 @@
+{
+  "head": {
+    "vars": [ "datum" , "organ_vlasti" , "mesto" , "podnosilac" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2021-02-06T16:40:24" } ,
+        "organ_vlasti": { "type": "literal" , "value": "Organ" } ,
+        "mesto": { "type": "literal" , "value": "Novi Sad" } ,
+        "podnosilac": { "type": "uri" , "value": "http://users/miloradradovicmico98@gmail.com" }
+      }
+    ]
+  }
+}

@@ -237,7 +237,7 @@ public class IzvestajRefService {
         return fileClient.getJson(sendJsonFile).getPath();
     }
 
-    public boolean downloadIzvestaj(String broj){
+    public boolean downloadIzvestaj(String broj) throws XMLDBException, JAXBException {
         //pocetak soap
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.project.poverenik.model.izvestaj.client");
@@ -253,8 +253,14 @@ public class IzvestajRefService {
 
         getIzvestajByIdResponse getIzvestajByIdResponse = izvestajClient.getOneIzvestaj(getIzvestajById);
         //kraj soap
-        if(getIzvestajByIdResponse == null){
-            return false;
+        if (getIzvestajByIdResponse != null) {
+            IzvestajRef izvestajRef = getOneByBroj(broj);
+            if (izvestajRef == null)
+                return false;
+            izvestajRef.getBody().setProcitano("da");
+            if(!update(izvestajRef)){
+                return false;
+            };
         }
 
         com.project.poverenik.model.izvestaj.ObjectFactory of = new com.project.poverenik.model.izvestaj.ObjectFactory();
@@ -278,7 +284,7 @@ public class IzvestajRefService {
     }
 
 
-    public String downloadIzvestajXHTML(String broj) {
+    public String downloadIzvestajXHTML(String broj) throws XMLDBException, JAXBException {
         String path = "src/main/resources/generated_files/documents/izvestaj" + broj + ".html";
         boolean izvestaj = downloadIzvestaj(broj);
         if (izvestaj) {
@@ -287,7 +293,7 @@ public class IzvestajRefService {
         return "";
     }
 
-    public String downloadIzvestajPDF(String broj) {
+    public String downloadIzvestajPDF(String broj) throws XMLDBException, JAXBException {
         String path = "src/main/resources/generated_files/documents/izvestaj" + broj + ".pdf";
         boolean izvestaj = downloadIzvestaj(broj);
         if (izvestaj) {

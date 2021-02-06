@@ -96,7 +96,7 @@ public class IzvestajRefController {
     }
 
     @RequestMapping(value = "/izvestajDownloadXHTML/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadIzvestajXHTML(@PathVariable String id) {
+    public ResponseEntity<?> downloadIzvestajXHTML(@PathVariable String id) throws XMLDBException, JAXBException {
         String path = izvestajRefService.downloadIzvestajXHTML(id);
         if (!path.equals(""))
             try {
@@ -113,7 +113,7 @@ public class IzvestajRefController {
     }
 
     @RequestMapping(value = "/izvestajDownloadPDF/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadZalbaOdluka(@PathVariable String id) {
+    public ResponseEntity<?> downloadZalbaOdluka(@PathVariable String id) throws XMLDBException, JAXBException {
         String path = izvestajRefService.downloadIzvestajPDF(id);
         if (!path.equals(""))
             try {

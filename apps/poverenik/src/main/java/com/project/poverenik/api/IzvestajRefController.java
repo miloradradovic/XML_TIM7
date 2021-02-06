@@ -1,9 +1,12 @@
 package com.project.poverenik.api;
 
 import com.project.poverenik.model.izvestaj.client.getIzvestajByIdResponse;
+import com.project.poverenik.model.util.file.Tpath;
 import com.project.poverenik.model.util.lists.IzvestajRefList;
 import com.project.poverenik.service.IzvestajRefService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.xmldb.api.base.XMLDBException;
 
 import javax.xml.bind.JAXBException;
+import java.io.ByteArrayInputStream;
 
 @CrossOrigin(origins = "https://localhost:4201")
 @RestController
@@ -52,6 +56,40 @@ public class IzvestajRefController {
         if (izvestajRefList != null) {
             return new ResponseEntity<>(izvestajRefList, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/downloadRdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadRdf(@PathVariable String broj) {
+        Tpath path = izvestajRefService.getRdf(broj);
+        if (path.getBytes() != null)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream((byte[]) path.getBytes());
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=izvestaj" + broj + ".rdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/downloadJson/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadJson(@PathVariable String broj) {
+        Tpath path = izvestajRefService.getJson(broj);
+        if (path.getBytes() != null)
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream((byte[]) path.getBytes());
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=izvestaj" + broj + ".json");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

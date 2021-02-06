@@ -109,7 +109,7 @@ public class ZalbeService {
     public boolean downloadZalbaOdluka(String broj){
         //pocetak soap
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.project.organ_vlasti.model.zalba_cutanje.client");
+        marshaller.setContextPath("com.project.organ_vlasti.model.zalba_odluka.client");
 
         ZalbeClient zalbeClient = new ZalbeClient();
         zalbeClient.setDefaultUri("http://localhost:8085/ws");

@@ -8,6 +8,7 @@ package com.project.poverenik.wsdl.zalba_odluka;
 
 import com.project.poverenik.model.zalba_odluka.ObjectFactory;
 import com.project.poverenik.model.zalba_odluka.Tzalba;
+import com.project.poverenik.model.zalba_odluka.ZalbaOdluka;
 import com.project.poverenik.service.ZalbaOdlukaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,16 @@ public class ZalbaOdlukaServiceSoapBindingImpl implements ZalbaOdlukaServicePort
         LOG.info("Executing operation getZalbaOdlukaById");
         System.out.println(id);
         try {
-            Tzalba _return = zalbaOdlukaService.getByZahtevId(id);
+            Tzalba _return;
+            if(id.contains("-")){
+                ZalbaOdluka odluka = zalbaOdlukaService.getOne(id);
+                if(odluka == null){
+                    throw new Exception("nema");
+                }
+                _return = odluka.getZalbaOdlukaBody();
+            }else{
+                _return = zalbaOdlukaService.getByZahtevId(id);
+            }
             return _return;
         } catch (Exception ex) {
             ObjectFactory objectFactory = new ObjectFactory();

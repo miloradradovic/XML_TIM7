@@ -165,11 +165,11 @@ export class PoverenikSvaResenjaComponent implements OnInit {
   }
 
   convertToRDF($event: string): void {
-    this.resenjeService.convertResenjeRDF(String($event)).subscribe(
+    this.resenjeService.convertResenjeRDF($event).subscribe(
       result => {
         const binaryData = [];
         binaryData.push(result);
-        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
         const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute('style', 'display: none');
@@ -190,7 +190,7 @@ export class PoverenikSvaResenjaComponent implements OnInit {
       result => {
         const binaryData = [];
         binaryData.push(result);
-        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
         const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute('style', 'display: none');

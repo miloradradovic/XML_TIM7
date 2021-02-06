@@ -17,11 +17,11 @@ export class IzvestajService {
       {headers: this.headers, responseType: 'text'});
   }
   convertIzvestajRDF(broj: string): Observable<any> {
-    return this.http.get('http://localhost:8085/izvestaj/' + broj,
+    return this.http.get('http://localhost:8085/izvestaj/downloadRdf/' + broj,
       {headers: this.headers, responseType: 'blob'});
   }
   convertIzvestajJSON(s: string): Observable<any> {
-    return this.http.get('http://localhost:8085/izvestaj/' + s,
+    return this.http.get('http://localhost:8085/izvestaj/downloadJson/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
 }

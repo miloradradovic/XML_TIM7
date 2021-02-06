@@ -41,12 +41,14 @@ export class ZahteviComponent implements OnInit {
           try {
             lista.forEach((item, index) => {
               const idZahteva = item['zcir:zahtev_body']._attributes.id;
-              const zahtev = {id: idZahteva};
+              const statusZahteva = item['zcir:zahtev_body']['zcir:status']._text;
+              const zahtev = {id: idZahteva, status: statusZahteva};
               newList.push(zahtev);
             });
           } catch (err){
             const idZahteva = lista['zcir:zahtev_body']._attributes.id;
-            const zahtev = {id: idZahteva};
+            const statusZahteva = lista['zcir:zahtev_body']['zcir:status']._text;
+            const zahtev = {id: idZahteva, status: statusZahteva};
             newList.push(zahtev);
           }
           this.zahtevi = newList;

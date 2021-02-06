@@ -10,6 +10,16 @@ export class ZalbaService {
 
   constructor(private http: HttpClient) { }
 
+  getOneZalbaCutanje(id: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-cutanje/',
+      {headers: this.headers, responseType: 'text'});
+  }
+
+  getOneZalbaOdluka(id: string): Observable<any> {
+    return this.http.get('http://localhost:8085/zalba-odluka/',
+      {headers: this.headers, responseType: 'text'});
+  }
+
   getZalbaOdlukaList(): Observable<any> {
     return this.http.get('http://localhost:8085/zalba-odluka',
       {headers: this.headers, responseType: 'text'});
@@ -93,6 +103,10 @@ export class ZalbaService {
   convertZalbaOdlukaJSON(s: string): Observable<any> {
     return this.http.get('http://localhost:8085/zalba-odluka/toJson/' + s,
       {headers: this.headers, responseType: 'blob'});
+  }
+  getResenjeByZalba(s: string): Observable<any> {
+    return this.http.get('http://localhost:8085/resenje/by-zalba/' + s,
+      {headers: this.headers, responseType: 'text'});
   }
 
 }

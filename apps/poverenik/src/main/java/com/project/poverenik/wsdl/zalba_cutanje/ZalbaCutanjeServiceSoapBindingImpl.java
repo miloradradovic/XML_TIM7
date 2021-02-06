@@ -8,6 +8,7 @@ package com.project.poverenik.wsdl.zalba_cutanje;
 
 import com.project.poverenik.model.zalba_cutanje.ObjectFactory;
 import com.project.poverenik.model.zalba_cutanje.Tzalba;
+import com.project.poverenik.model.zalba_cutanje.ZalbaCutanje;
 import com.project.poverenik.service.ZalbaCutanjeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,16 @@ public class ZalbaCutanjeServiceSoapBindingImpl implements ZalbaCutanjeServicePo
         LOG.info("Executing operation getZalbaCutanjeById");
         System.out.println(id);
         try {
-            Tzalba _return = zalbaCutanjeService.getByZahtevId(id);
+            Tzalba _return;
+            if(id.contains("-")){
+                 ZalbaCutanje cutanje = zalbaCutanjeService.getOne(id.split("-")[1]);
+                if(cutanje == null){
+                    throw new Exception("nema");
+                }
+                _return = cutanje.getZalbaCutanjeBody();
+            }else{
+                _return = zalbaCutanjeService.getByZahtevId(id);
+            }
             return _return;
         } catch (Exception ex) {
             ObjectFactory objectFactory = new ObjectFactory();

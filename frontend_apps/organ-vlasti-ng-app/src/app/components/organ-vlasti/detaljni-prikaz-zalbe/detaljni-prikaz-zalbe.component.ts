@@ -18,15 +18,15 @@ export class DetaljniPrikazZalbeComponent implements OnInit {
 
   ngOnInit(): void {
     const zalbaId: string = this.activatedRoute.snapshot.queryParamMap.get('zalba_id');
-    const tip = zalbaId.split('/')[0];
-    const broj = zalbaId.split('/')[1];
+    const tip = zalbaId.split('-')[0];
+    const broj = zalbaId.split('-')[1];
     console.log(zalbaId);
     let obs$;
     if (tip === 'cutanje'){
-      obs$ = this.service.convertZalbaCutanjeXHTML(broj);
+      obs$ = this.service.convertZalbaCutanjeXHTML(zalbaId);
     }
     else{
-      obs$ = this.service.convertZalbaOdlukaXHTML(broj);
+      obs$ = this.service.convertZalbaOdlukaXHTML(zalbaId);
     }
     obs$.subscribe( res => {
       const binaryData = [];

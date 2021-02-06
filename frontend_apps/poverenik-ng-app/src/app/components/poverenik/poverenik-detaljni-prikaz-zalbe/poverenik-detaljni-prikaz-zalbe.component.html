@@ -5,7 +5,12 @@
 
 
 <div style="float: right; padding-top: 10%; padding-right: 20%">
-  <button mat-raised-button [disabled]="!neobradjena" (click)="traziIzjasnjenje($event)">Trazi izjasnjenje</button>
+  <button mat-raised-button [disabled]="!neobradjena" (click)="traziIzjasnjenje($event)">Тражи изјашњење</button>
   <br><br><br>
-  <button mat-raised-button [disabled]="!uObradi" (click)="redirectToKreirajResenje($event)">Kreiraj resenje</button>
+  <div *ngIf="this.resenje === ''">
+    <button mat-raised-button  [disabled]="!uObradi" (click)="redirectToKreirajResenje($event)">Креирај решење</button>
+  </div>
+  <div *ngIf="this.resenje !== ''">
+    <button mat-raised-button  (click)="resenjeDetails()">Погледај решење</button>
+  </div>
 </div>

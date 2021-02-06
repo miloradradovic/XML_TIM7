@@ -2,10 +2,16 @@
   <app-empty [isTrusted]="true" [source]="this.src"></app-empty>
 </div>
 <div style="float: right; padding-top: 10%; padding-right: 20%">
-  <button mat-raised-button [disabled]="!neobradjena" (click)="kreirajObavestenje($event)">Креирај обавештење</button>
-  <br><br><br>
+  <div *ngIf="this.obavestenje === ''">
+    <button mat-raised-button (click)="kreirajObavestenje($event)">Креирај обавештење</button>
+    <br><br><br>
+  </div>
+  <div *ngIf="this.obavestenje !== ''">
+    <button mat-raised-button [disabled]="this.obavestenje === ''" (click)="obavestenjeDetails()">Обавештење</button>
+    <br><br><br>
+  </div>
+
   <button mat-raised-button [disabled]="odbijen" (click)="openDialog($event)">Одбиј захтев</button>
   <br><br><br>
-  <button mat-raised-button [disabled]="this.obavestenje === ''" (click)="obavestenjeDetails()">Обавештење</button>
-
+  <button mat-raised-button [disabled]="this.zalba === ''" (click)="zalbaDetails()">Жалба</button>
 </div>

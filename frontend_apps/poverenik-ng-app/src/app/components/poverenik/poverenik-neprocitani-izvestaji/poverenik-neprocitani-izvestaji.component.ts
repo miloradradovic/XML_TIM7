@@ -105,13 +105,13 @@ export class PoverenikNeprocitaniIzvestajiComponent implements OnInit {
       result => {
         const binaryData = [];
         binaryData.push(result);
-        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
         const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute('style', 'display: none');
         a.setAttribute('target', 'blank');
         a.href = url;
-        a.download = 'resenje' + $event + '.rdf';
+        a.download = 'izvestaj' + $event + '.rdf';
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();
@@ -126,13 +126,13 @@ export class PoverenikNeprocitaniIzvestajiComponent implements OnInit {
       result => {
         const binaryData = [];
         binaryData.push(result);
-        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/html'}));
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
         const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute('style', 'display: none');
         a.setAttribute('target', 'blank');
         a.href = url;
-        a.download = 'resenje' + $event + '.json';
+        a.download = 'izvestaj' + $event + '.json';
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();

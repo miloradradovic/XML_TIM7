@@ -1,5 +1,6 @@
 package com.project.organ_vlasti.endpoint;
 
+import com.project.organ_vlasti.wsdl.file.FileServiceSoapBindingImpl;
 import com.project.organ_vlasti.wsdl.izjasnjavanje.IzjasnjavanjeServiceSoapBindingImpl;
 import com.project.organ_vlasti.wsdl.izvestaj.IzvestajServiceSoapBindingImpl;
 import com.project.organ_vlasti.wsdl.obavestenje.ObavestenjeServiceSoapBindingImpl;
@@ -34,6 +35,9 @@ public class EndpointConfig {
     @Autowired
     IzvestajServiceSoapBindingImpl izvestajServiceSoapBindingImpl;
 
+    @Autowired
+    FileServiceSoapBindingImpl fileServiceSoapBindingImpl;
+
     @Bean(name = "obavestenjeEndpointBean")
     public Endpoint obavestenjeEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, obavestenjeServiceSoapBindingImpl);
@@ -66,6 +70,13 @@ public class EndpointConfig {
     public Endpoint izvestajEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izvestajServiceSoapBindingImpl);
         endpoint.publish("/izvestaj");
+        return endpoint;
+    }
+
+    @Bean(name = "fileEndpointBean")
+    public Endpoint fileEndpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, fileServiceSoapBindingImpl);
+        endpoint.publish("/file");
         return endpoint;
     }
 }

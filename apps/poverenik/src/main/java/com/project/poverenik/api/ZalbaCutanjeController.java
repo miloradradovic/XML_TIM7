@@ -153,7 +153,7 @@ public class ZalbaCutanjeController {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Type", "application/xml; charset=utf-8");
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + idZalbe + ".rdf");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=zalbacutanje" + idZalbe + ".rdf");
                 return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -172,7 +172,7 @@ public class ZalbaCutanjeController {
                 ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Type", "application/xml; charset=utf-8");
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + idZalbe + ".json");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=zalbacutanje" + idZalbe + ".json");
                 return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

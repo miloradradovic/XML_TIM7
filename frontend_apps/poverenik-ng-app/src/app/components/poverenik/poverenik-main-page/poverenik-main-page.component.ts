@@ -162,8 +162,8 @@ export class PoverenikMainPageComponent implements OnInit {
 
   convertToRDF($event: string): void {
     let obs$;
-    const tip: string = $event.split('/')[0];
-    const broj: string = $event.split('/')[1];
+    const tip: string = $event.split('-')[0];
+    const broj: string = $event.split('-')[1];
     if (tip === 'cutanje'){
       obs$ = this.zalbaService.convertZalbaCutanjeRDF($event.replace('/', '-'));
     }
@@ -192,8 +192,8 @@ export class PoverenikMainPageComponent implements OnInit {
 
   convertToJSON($event: string): void {
     let obs$;
-    const tip: string = $event.split('/')[0];
-    const broj: string = $event.split('/')[1];
+    const tip: string = $event.split('-')[0];
+    const broj: string = $event.split('-')[1];
     if (tip === 'cutanje'){
       obs$ = this.zalbaService.convertZalbaCutanjeJSON($event.replace('/', '-'));
     }

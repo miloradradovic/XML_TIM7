@@ -29,6 +29,7 @@ export class ResenjeService {
   }
 
   convertResenjeRDF(broj: string): Observable<any> {
+    console.log(broj)
     return this.http.get('http://localhost:8085/resenje/toRdf/' + broj,
       {headers: this.headers, responseType: 'blob'});
   }

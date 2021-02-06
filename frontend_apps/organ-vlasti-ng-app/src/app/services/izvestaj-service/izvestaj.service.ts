@@ -20,7 +20,6 @@ export class IzvestajService {
     return this.http.get('http://localhost:8090/izvestaji/search-metadata?datumAfter=' + datumAfter + '&datumBefore=' + datumBefore,
       {headers: this.headers, responseType: 'text'});
   }
-<<<<<<< HEAD
 
   convertIzvestajPDF(broj: string): Observable<any> {
     return this.http.get('http://localhost:8090/izvestaji/toPdf/' + broj,
@@ -28,14 +27,15 @@ export class IzvestajService {
   }
   convertIzvestajXHTML(s: string): Observable<any> {
     return this.http.get('http://localhost:8090/izvestaji/toXhtml/' + s,
-=======
+      {headers: this.headers, responseType: 'blob'});
+  }
+
   convertIzvestajiRDF(broj: string): Observable<any> {
     return this.http.get('http://localhost:8090/izvestaji/toRdf/' + broj,
       {headers: this.headers, responseType: 'blob'});
   }
   convertIzvestajiJSON(s: string): Observable<any> {
     return this.http.get('http://localhost:8090/izvestaji/toJson/' + s,
->>>>>>> 8aeddcc570466220d7a50ced8de40bd425f39831
       {headers: this.headers, responseType: 'blob'});
   }
 }

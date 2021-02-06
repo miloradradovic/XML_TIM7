@@ -68,6 +68,7 @@ public class ZalbaCutanjeMapper {
         JaxbNapomena.setValue("Напомена: Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.");
         zalbaCutanje.getZalbaCutanjeBody().getSadrzajZalbe().getContent().set(11, JaxbNapomena);
 
+        System.out.println(zalbaCutanjeDTO.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getPrezime());
         zalbaCutanje.getZalbaCutanjeBody().setPodaciOPodnosiocu(zalbaCutanjeDTO.getZalbaCutanjeBody().getPodaciOPodnosiocu());
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("id"), userEmail);
         zalbaCutanje.getZalbaCutanjeBody().getPodaciOPodnosiocu().getOsoba().getOtherAttributes().put(new QName("rel"), "pred:podnosilac");

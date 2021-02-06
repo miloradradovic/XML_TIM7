@@ -46,6 +46,7 @@ export class ZalbaCutanjeFormComponent implements OnInit {
       this.snackBar.open("Попуните сва обавезна поља!", 'Ok', { duration: 3000 });
       return;
     }
+    //console.log(Xonomy.harvest())
     let data = Xonomy.harvest();
     const mjestoAtr = data.split('mjesto=')[1].split(' datum')[0];
     const datumAtr = data.split('datum=')[1].split('><zc:sadrzaj_zalbe>')[0];
@@ -54,6 +55,12 @@ export class ZalbaCutanjeFormComponent implements OnInit {
     const razlog_zalbe = data.split('<re:razlog_zalbe>')[1].split('</re:razlog_zalbe>')[0];
     const datum = data.split('<re:datum>')[1].split('</re:datum>')[0];
     const podaci_o_zahtjevu_i_informacijama = data.split('<re:podaci_o_zahtjevu_i_informacijama>')[1].split('</re:podaci_o_zahtjevu_i_informacijama>')[0];
+    const ime = data.split('<re:ime>')[1].split('</re:ime>')[0];
+    const prezime = data.split('<re:prezime>')[1].split('</re:prezime>')[0];
+    const mesto = data.split('<re:mesto>')[1].split('</re:mesto>')[0];
+    const broj = data.split('</re:mesto><re:ulica broj=')[1].split('>')[0];
+    const ulica = data.split('</re:mesto><re:ulica broj=')[1].split('>')[1].split('</re:ulica')[0];
+    const drugi_podaci = data.split('<re:drugi_podaci_za_kontakt>')[1].split('</re:drugi_podaci_za_kontakt>')[0];
     let dataTemplate = `<zc:zalba_cutanje
     xmlns:zc="http://www.zalbacutanje"
     xmlns:re="http://www.reusability"
@@ -66,8 +73,7 @@ export class ZalbaCutanjeFormComponent implements OnInit {
         <re:datum>${datum}</re:datum>
         <re:podaci_o_zahtjevu_i_informacijama>${podaci_o_zahtjevu_i_informacijama}</re:podaci_o_zahtjevu_i_informacijama>
         <re:napomena></re:napomena>
-    </zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
-
+    </zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime>${ime}</re:ime><re:prezime>${prezime}</re:prezime></re:osoba><re:adresa><re:mesto>${mesto}</re:mesto><re:ulica broj=${broj}>${ulica}</re:ulica></re:adresa><re:drugi_podaci_za_kontakt>${drugi_podaci}</re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
     this.zalbaCutanjeService.send(dataTemplate)
       .subscribe(res => {
           this.snackBar.open('Успешно сте послали жалбу на ћутање!', 'Ок', {duration: 3000});

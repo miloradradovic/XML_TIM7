@@ -51,7 +51,7 @@ public class IzjasnjavanjeService {
             int last = zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue().split("/").length - 1;
             idZahteva = zalbaOdluka.getZalbaOdlukaBody().getZahtev().getValue().split("/")[last];
 
-            if (zalbaOdlukaService.update(zalbaOdluka, "u obradi")) {
+            if (!zalbaOdlukaService.update(zalbaOdluka, "u obradi")) {
                 return false;
             }
         }

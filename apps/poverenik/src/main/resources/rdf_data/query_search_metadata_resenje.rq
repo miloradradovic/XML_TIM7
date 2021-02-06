@@ -12,7 +12,7 @@ WHERE {
 	FILTER ( ?datum >= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime> 
 	&& ?datum <= "%s"^^<http://www.w3.org/2001/XMLSchema#dateTime>
 	&& regex(UCASE(str(?tip)), UCASE(".*%s.*"))
-	&& regex(UCASE(str(?organVlasti)), UCASE(".*%s.*"))
+	&& regex(UCASE(str(?organ_vlasti)), UCASE(".*%s.*"))
 	&& regex(UCASE(str(?mesto)), UCASE(".*%s.*"))
 	)
 }

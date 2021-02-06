@@ -124,13 +124,13 @@ export class PoverenikSveZalbeComponent implements OnInit {
       try {
         zalbe.forEach((item, index) => {
           const idZalbe = item['zoc:zalba_odluka_body']._attributes.id;
-          const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
+          const statusZalbe = zalbe['zoc:zalba_odluka_body']['zoc:status']._text;
           const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
           newList2.push(zalba);
         });
       } catch (err) {
         const idZalbe = zalbe['zoc:zalba_odluka_body']._attributes.id;
-        const statusZalbe = zalbe['zc:zalba_cutanje_body']['zc:status']._text;
+        const statusZalbe = zalbe['zoc:zalba_odluka_body']['zoc:status']._text;
         const zalba = {id: idZalbe, tip: 'odluka', status: statusZalbe};
         newList2.push(zalba);
       }
@@ -170,6 +170,7 @@ export class PoverenikSveZalbeComponent implements OnInit {
     );
     this.zalbaService.getPretragaMetadataZalbeOdluka(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value, this.form.controls.status.value, this.form.controls.organVlasti.value, this.form.controls.mesto.value, this.form.controls.userEmail.value, this.form.controls.zahtevId.value).subscribe(
       result => {
+        console.log(result)
         this.renderZalbeOdluka(result);
       },
       error => {

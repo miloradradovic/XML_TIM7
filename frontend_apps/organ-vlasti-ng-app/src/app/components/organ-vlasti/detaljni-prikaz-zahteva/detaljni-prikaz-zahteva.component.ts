@@ -21,13 +21,25 @@ export class DetaljniPrikazZahtevaComponent implements OnInit {
   zalba = '';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, public dialog: MatDialog, private service: ZahtevService
-              , private obavestenjeService: ObavestenjeService, private zalbaService: ZalbaService) { }
+              ,private obavestenjeService: ObavestenjeService, private zalbaService: ZalbaService) { }
 
 
   ngOnInit(): void {
     this.zahtevId = this.activatedRoute.snapshot.queryParamMap.get('zahtev_id');
-    const status = this.activatedRoute.snapshot.queryParamMap.get('zahtev_status');
-    console.log(status);
+    let status = this.activatedRoute.snapshot.queryParamMap.get('zahtev_status');
+
+    if (!status) {
+      this.service.getOneZahtev(this.zahtevId).subscribe(res => {
+        // @ts-ignore
+        const convert = require('xml-js');
+        const zahtev = JSON.parse(convert.xml2json(res, {compact: true, spaces: 4}));
+        status = zahtev['zcir:zahtev']['zcir:zahtev_body']['zcir:status']._text;
+        if (status === 'odbijen' || status === 'prihvacen'){
+          this.odbijen = true;
+        }
+      });
+    }
+
     this.service.convertZahtevXHTML(this.zahtevId).subscribe( res => {
       const binaryData = [];
       binaryData.push(res);

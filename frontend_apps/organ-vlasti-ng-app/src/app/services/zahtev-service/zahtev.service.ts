@@ -50,5 +50,9 @@ export class ZahtevService {
     return this.http.get('http://localhost:8090/zahtev/toJson/' + s,
       {headers: this.headers, responseType: 'blob'});
   }
+  getOneZahtev(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/zahtev/' + s,
+      {headers: this.headers, responseType: 'text'});
+  }
 
 }

@@ -93,13 +93,13 @@ export class GradjaninMainPageComponent implements OnInit {
         if (resenja !== undefined){
           try {
             resenja.forEach((item, index) => {
-              const idResenja = item['ra:resenje_body']._attributes.id;
+              const idResenja = item['ra:resenje_body']._attributes.broj;
               const resenje = {id: idResenja};
               newList3.push(resenje);
             });
           }
           catch (err) {
-            const idResenja = resenja['ra:resenje_body']._attributes.id;
+            const idResenja = resenja['ra:resenje_body']._attributes.broj;
             const resenje = {id: idResenja};
             newList3.push(resenje);
           }

@@ -3,6 +3,7 @@ import {IzjasnjavanjeService} from '../../../services/izjasnjavanje-service/izja
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {IzjasnjavanjeDialogComponent} from './izjasnjavanje-dialog/izjasnjavanje-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-izjasnjavanja',
@@ -13,7 +14,7 @@ export class IzjasnjavanjaComponent implements OnInit {
   izjasnjavanja = [];
 
   constructor(private izjasnjavanjeService: IzjasnjavanjeService,
-              private snackBar: MatSnackBar, public dialog: MatDialog, private detectChange: ChangeDetectorRef) { }
+              private snackBar: MatSnackBar, public dialog: MatDialog, private detectChange: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
     const newList = [];
@@ -54,9 +55,7 @@ export class IzjasnjavanjaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       const newList = [];
-      this.izjasnjavanja = this.izjasnjavanja.filter( izjasnjavanje => izjasnjavanje.id !== $event);
-      this.izjasnjavanja = [...this.izjasnjavanja];
-      this.detectChange.markForCheck();
+      this.router.navigate(['/pocetna-stranica-organ-vlasti']);
     });
   }
 }

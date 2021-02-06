@@ -22,7 +22,7 @@ export class ZalbaOdlukaFormComponent implements OnInit {
     const dd = String(today.getDate()).padStart(2, '0'); // day
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // month
     const yyyy = today.getFullYear(); // year
-    const hour = String(today.getUTCHours() + 1).padStart(2, '0');
+    const hour =  String(today.getUTCHours()) === '23' ? String('00').padStart(2, '0') : String(today.getUTCHours() + 1).padStart(2, '0');
     const minutes = String(today.getMinutes()).padStart(2, '0');
     const seconds = String(today.getSeconds()).padStart(2, '0');
     const datumAtr = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + minutes + ':' + seconds;

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://file"
+                  xmlns:tns="http://file"
+                  name="FileService">
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://file" schemaLocation="../xsd/File.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="sendRdfFileRequest">
+        <wsdl:part name="id" type="xsd:string" />
+    </wsdl:message>
+    <wsdl:message name="sendRdfFileResponse">
+        <wsdl:part name="path" type="tns:Tpath" />
+    </wsdl:message>
+
+    <wsdl:message name="sendJsonFileRequest">
+        <wsdl:part name="id" type="xsd:string" />
+    </wsdl:message>
+    <wsdl:message name="sendJsonFileResponse">
+        <wsdl:part name="path" type="tns:Tpath" />
+    </wsdl:message>
+
+    <wsdl:portType name="FileServicePortType">
+        <wsdl:operation name="sendRdfFile">
+            <wsdl:input message="tns:sendRdfFileRequest" />
+            <wsdl:output message="tns:sendRdfFileResponse" />
+        </wsdl:operation>
+
+        <wsdl:operation name="sendJsonFile">
+            <wsdl:input message="tns:sendJsonFileRequest" />
+            <wsdl:output message="tns:sendJsonFileResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="FileServiceSoapBinding" type="tns:FileServicePortType">
+        <soap:binding style="rpc"  transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="sendRdfFile">
+            <soap:operation soapAction="http://file/ws/sendRdfFile" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendJsonFile">
+            <soap:operation soapAction="http://file/ws/sendJsonFile" />
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="FileService">
+        <wsdl:port name="FileServiceSoapBinding" binding="tns:FileServiceSoapBinding">
+            <soap:address location="http://localhost:8085/filePort" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

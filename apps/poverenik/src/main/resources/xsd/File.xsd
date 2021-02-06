@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://file" xmlns:f="http://file">
+
+    <xs:element name="File">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="path" type="f:Tpath"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Tpath">
+        <xs:sequence>
+            <xs:element name="bytes"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,11 +1,14 @@
 package com.project.poverenik.service;
 
+import com.project.poverenik.client.FileClient;
 import com.project.poverenik.client.IzvestajClient;
 import com.project.poverenik.model.izvestaj.client.getIzvestajById;
 import com.project.poverenik.model.izvestaj.client.getIzvestajByIdResponse;
 import com.project.poverenik.model.izvestaj.database.IzvestajRef;
 import com.project.poverenik.model.izvestaj.database.client.getRefs;
 import com.project.poverenik.model.izvestaj.database.client.getRefsResponse;
+import com.project.poverenik.model.util.file.Tpath;
+import com.project.poverenik.model.util.file.client.*;
 import com.project.poverenik.model.util.lists.IzvestajRefList;
 import com.project.poverenik.model.util.parametars.ParametarMap;
 import com.project.poverenik.model.util.parametars.Tvalue;
@@ -195,5 +198,37 @@ public class IzvestajRefService {
         }
         return getIzvestajByIdResponse;
 
+    }
+
+    public Tpath getRdf(String id) {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.poverenik.model.util.file.client");
+
+        FileClient fileClient = new FileClient();
+        fileClient.setDefaultUri("http://localhost:8090/ws");
+        fileClient.setMarshaller(marshaller);
+        fileClient.setUnmarshaller(marshaller);
+
+
+        sendRdfFile sendRdfFile = new sendRdfFile();
+        sendRdfFile.setId(id);
+
+        return fileClient.getRdf(sendRdfFile).getPath();
+    }
+
+    public Tpath getJson(String id) {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.project.poverenik.model.util.file.client");
+
+        FileClient fileClient = new FileClient();
+        fileClient.setDefaultUri("http://localhost:8090/ws");
+        fileClient.setMarshaller(marshaller);
+        fileClient.setUnmarshaller(marshaller);
+
+
+        sendJsonFile sendJsonFile = new sendJsonFile();
+        sendJsonFile.setId(id);
+
+        return fileClient.getJson(sendJsonFile).getPath();
     }
 }

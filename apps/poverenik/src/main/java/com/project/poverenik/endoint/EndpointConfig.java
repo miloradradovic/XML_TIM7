@@ -1,5 +1,6 @@
 package com.project.poverenik.endoint;
 
+import com.project.poverenik.wsdl.file.FileServiceSoapBindingImpl;
 import com.project.poverenik.wsdl.izjasnjavanje.IzjasnjavanjeServiceSoapBindingImpl;
 import com.project.poverenik.wsdl.izvestaji.IzvestajServiceSoapBindingImpl;
 import com.project.poverenik.wsdl.resenje.ResenjeServiceSoapBindingImpl;
@@ -26,6 +27,8 @@ public class EndpointConfig {
     IzjasnjavanjeServiceSoapBindingImpl izjasnjavanjeServiceSoapBindingImpl;
     @Autowired
     IzvestajServiceSoapBindingImpl izvestajServiceSoapBindingImpl;
+    @Autowired
+    FileServiceSoapBindingImpl fileServiceSoapBindingImpl;
     @Autowired
     private Bus bus;
 
@@ -61,6 +64,13 @@ public class EndpointConfig {
     public Endpoint izvestajEndpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, izvestajServiceSoapBindingImpl);
         endpoint.publish("/izvestaj");
+        return endpoint;
+    }
+
+    @Bean(name = "fileEndpointBean")
+    public Endpoint fileEndpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, fileServiceSoapBindingImpl);
+        endpoint.publish("/file");
         return endpoint;
     }
 

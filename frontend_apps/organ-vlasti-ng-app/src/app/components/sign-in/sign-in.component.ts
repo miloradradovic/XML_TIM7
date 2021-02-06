@@ -58,7 +58,6 @@ export class SignInComponent implements OnInit {
         const email = info.email;
         const role = info.role;
         const user = new SignInModel(email, userToken.token.jwt._text, role);
-        console.log(user);
         this.storageService.setStorageItem('user', JSON.stringify(user));
         this.snackBar.open('Успешна пријава!', 'Ок', { duration: 2000 });
         if (role === 'ROLE_USER'){

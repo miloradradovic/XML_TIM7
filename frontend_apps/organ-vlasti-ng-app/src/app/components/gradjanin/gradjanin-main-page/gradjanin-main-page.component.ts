@@ -48,7 +48,6 @@ export class GradjaninMainPageComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const obavestenjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(obavestenjeList);
         const lista = obavestenjeList.obavestenjeList['oba:obavestenje'];
         if (lista !== undefined){
           try {

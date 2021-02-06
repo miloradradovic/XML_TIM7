@@ -53,7 +53,6 @@ export class ObavestenjeFormComponent implements OnInit {
       this.snackBar.open('Попуните сва обавезна поља!', 'Ок', {duration: 3000});
       return;
     }
-    console.log(Xonomy.harvest());
     let data = Xonomy.harvest();
 
     const datumAtr = data.split('datum=')[1].split('><oba:naziv_organa sediste=')[0];
@@ -110,7 +109,6 @@ export class ObavestenjeFormComponent implements OnInit {
                    <re:poziv_na_broj>97</re:poziv_na_broj>
                </re:ukupan_trosak>
            </oba:tekst_zahteva><oba:opcija_dostave><re:opcija izabran=${opcija1}>Именованом</re:opcija><re:opcija izabran=${opcija2}>Архиви</re:opcija></oba:opcija_dostave></oba:obavestenje_body></oba:obavestenje>`;
-    console.log(dataTemplate);
     this.obavestenjeService.send(dataTemplate)
       .subscribe(res => console.log(res));
     this.snackBar.open('Успешно сте послали обавештење!', 'Ок', {duration: 3000});

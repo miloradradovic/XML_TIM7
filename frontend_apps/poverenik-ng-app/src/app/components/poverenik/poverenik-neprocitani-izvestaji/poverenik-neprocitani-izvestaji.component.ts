@@ -70,8 +70,6 @@ export class PoverenikNeprocitaniIzvestajiComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.datumAfter.value)
-    console.log(this.form.controls.datumBefore.value)
     this.izvestajService.getPretragaMetadata('ne', this.form.controls.datumAfter.value, this.form.controls.datumBefore.value).subscribe(
       result => {
         this.renderIzvestaji(result);

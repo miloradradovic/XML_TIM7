@@ -278,18 +278,6 @@ export class ObavestenjeXonomyService {
         },
         asker: Xonomy.askForbidden
       },
-
-      
-      
-      
-
-
-
-
-
-
-
-
     }
   }
 

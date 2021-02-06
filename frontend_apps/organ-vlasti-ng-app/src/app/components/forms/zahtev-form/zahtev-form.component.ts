@@ -51,7 +51,6 @@ export class ZahtevFormComponent implements OnInit {
       this.snackBar.open('Попуните сва обавезна поља!', 'Ок', {duration: 3000});
       return;
     }
-    console.log(Xonomy.harvest());
     let data = Xonomy.harvest();
     const datumAtr = data.split('datum=')[1].split('><zcir:mesto>')[0];
     const mesto = data.split('><zcir:mesto>')[1].split('</zcir:mesto>')[0];
@@ -86,7 +85,6 @@ export class ZahtevFormComponent implements OnInit {
                <re:opcije><re:opcija izabran=${opcija1}>oбавештење да ли поседује тражену информацију;</re:opcija><re:opcija izabran=${opcija2}>увид у документ који садржи тражену информацију;</re:opcija><re:opcija izabran=${opcija3}>копију документа који садржи тражену информацију;</re:opcija><re:opcija izabran=${opcija4}>достављање копије документа који садржи тражену информацију:**</re:opcija><re:nacini_dostave><re:nacin_dostave izabran=${opcija11}>поштом</re:nacin_dostave><re:nacin_dostave izabran=${opcija12}>електронском поштом</re:nacin_dostave><re:nacin_dostave izabran=${opcija13}>факсом</re:nacin_dostave><re:nacin_dostave>на други начин:***<re:nacin_dostave_input>${opcijaInput}</re:nacin_dostave_input></re:nacin_dostave></re:nacini_dostave></re:opcije>
                <re:informacija_o_zahtevu>${opis}</re:informacija_o_zahtevu>
            </zcir:tekst_zahteva><zcir:informacije_o_traziocu><re:lice><re:osoba><re:ime>${ime}</re:ime><re:prezime>${prezime}</re:prezime></re:osoba></re:lice><re:adresa><re:mesto>${adresaMesto}</re:mesto><re:ulica broj=${adresaBroj}>${adresaUlica}</re:ulica></re:adresa><re:drugi_podaci_za_kontakt>${kontakt}</re:drugi_podaci_za_kontakt></zcir:informacije_o_traziocu></zcir:zahtev_body></zcir:zahtev>`;
-    console.log(dataTemplate);
     this.zahtevService.send(dataTemplate)
       .subscribe(res => {
         this.snackBar.open('Успешно сте послали захтев!', 'Ок', {duration: 3000});

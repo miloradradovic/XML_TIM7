@@ -46,7 +46,6 @@ export class ZalbaCutanjeFormComponent implements OnInit {
       this.snackBar.open("Попуните сва обавезна поља!", 'Ok', { duration: 3000 });
       return;
     }
-    console.log(Xonomy.harvest())
     let data = Xonomy.harvest();
     const mjestoAtr = data.split('mjesto=')[1].split(' datum')[0];
     const datumAtr = data.split('datum=')[1].split('><zc:sadrzaj_zalbe>')[0];
@@ -69,7 +68,6 @@ export class ZalbaCutanjeFormComponent implements OnInit {
         <re:napomena></re:napomena>
     </zc:sadrzaj_zalbe><zc:podaci_o_podnosiocu><re:osoba><re:ime></re:ime><re:prezime></re:prezime></re:osoba><re:adresa><re:mesto></re:mesto><re:ulica broj="0"></re:ulica></re:adresa><re:drugi_podaci_za_kontakt></re:drugi_podaci_za_kontakt></zc:podaci_o_podnosiocu></zc:zalba_cutanje_body></zc:zalba_cutanje>`;
 
-    console.log(dataTemplate)
     this.zalbaCutanjeService.send(dataTemplate)
       .subscribe(res => {
           this.snackBar.open('Успешно сте послали жалбу на ћутање!', 'Ок', {duration: 3000});

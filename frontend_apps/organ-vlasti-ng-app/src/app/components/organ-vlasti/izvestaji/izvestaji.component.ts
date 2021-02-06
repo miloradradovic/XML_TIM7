@@ -31,7 +31,6 @@ export class IzvestajiComponent implements OnInit {
         // @ts-ignore
         const convert = require('xml-js');
         const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-        console.log(izvestajList);
         const izvestaj = izvestajList.izvestajList['ns4:izvestaj'];
         if (izvestaj !== undefined){
           try{
@@ -57,7 +56,6 @@ export class IzvestajiComponent implements OnInit {
     const newList = [];
     const convert = require('xml-js');
     const izvestajList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
-    console.log(izvestajList);
     const izvestaj = izvestajList.izvestajList['ns4:izvestaj'];
     if (izvestaj !== undefined){
       try{
@@ -74,8 +72,6 @@ export class IzvestajiComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    console.log(this.form.controls.datumAfter.value)
-    console.log(this.form.controls.datumBefore.value)
     this.izvestajService.getPretragaMetadata(this.form.controls.datumAfter.value, this.form.controls.datumBefore.value).subscribe(
       result => {
         this.renderIzvestaji(result);

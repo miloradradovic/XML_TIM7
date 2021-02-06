@@ -32,7 +32,6 @@ export class GradjaninMainPageComponent implements OnInit {
         const zalbaOdlukaList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const lista = zalbaOdlukaList.zalbaOdlukaList;
         const zalbe = lista['zoc:zalba_odluka'];
-        console.log(zalbe);
         if (zalbe !== undefined){
           try {
             zalbe.forEach((item, index) => {

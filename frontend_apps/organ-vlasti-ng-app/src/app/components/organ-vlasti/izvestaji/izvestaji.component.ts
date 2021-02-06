@@ -153,7 +153,7 @@ export class IzvestajiComponent implements OnInit {
         a.setAttribute('style', 'display: none');
         a.setAttribute('target', 'blank');
         a.href = url;
-        a.download = 'obavestenje' + $event + '.rdf';
+        a.download = 'izvestaj' + $event + '.rdf';
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();
@@ -174,7 +174,7 @@ export class IzvestajiComponent implements OnInit {
         a.setAttribute('style', 'display: none');
         a.setAttribute('target', 'blank');
         a.href = url;
-        a.download = 'obavestenje' + $event + '.json';
+        a.download = 'izvestaji' + $event + '.json';
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();

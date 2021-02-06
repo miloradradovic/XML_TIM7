@@ -261,4 +261,106 @@ export class GradjaninMainPageComponent implements OnInit {
       }
     });
   }
+
+  rdfZalba($event: string) {
+    let obs$;
+    const tip: string = $event.split('-')[0];
+    const broj: string = $event.split('-')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeRDF($event.replace('/', '-'));
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaRDF($event.replace('/', '-'));
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  jsonZalba($event: string) {
+    let obs$;
+    const tip: string = $event.split('-')[0];
+    const broj: string = $event.split('-')[1];
+    if (tip === 'cutanje'){
+      obs$ = this.zalbaService.convertZalbaCutanjeJSON($event.replace('/', '-'));
+    }
+    else{
+      obs$ = this.zalbaService.convertZalbaOdlukaJSON($event.replace('/', '-'));
+    }
+    obs$.subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'zalba' + tip + broj + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  rdfResenje($event: number) {
+    this.resenjeService.convertResenjeRDF(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
+
+  jsonResenje($event: number) {
+    this.resenjeService.convertResenjeJSON(String($event)).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'resenje' + $event + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+      });
+  }
 }

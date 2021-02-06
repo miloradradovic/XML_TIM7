@@ -44,12 +44,12 @@ export class ProcitanaResenjaComponent implements OnInit {
         if (lista !== undefined) {
           try {
             lista.forEach((item, index) => {
-              const idResenja = item['ns2:body']._attributes.broj;
+              const idResenja = item['ns2:body']._text;
               const resenje = {id: idResenja};
               newList.push(resenje);
             });
           } catch (err) {
-            const idResenja = lista['ns2:body']._attributes.broj;
+            const idResenja = lista['ns2:body']._text;
             const resenje = {id: idResenja};
             newList.push(resenje);
           }
@@ -207,4 +207,5 @@ export class ProcitanaResenjaComponent implements OnInit {
       }
     });
   }
+
 }

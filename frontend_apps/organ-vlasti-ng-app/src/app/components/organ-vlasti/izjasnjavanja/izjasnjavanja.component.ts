@@ -14,7 +14,8 @@ export class IzjasnjavanjaComponent implements OnInit {
   izjasnjavanja = [];
 
   constructor(private izjasnjavanjeService: IzjasnjavanjeService,
-              private snackBar: MatSnackBar, public dialog: MatDialog, private detectChange: ChangeDetectorRef, private router: Router) { }
+              private snackBar: MatSnackBar, public dialog: MatDialog, private detectChange: ChangeDetectorRef, private router: Router) {
+  }
 
   ngOnInit(): void {
     const newList = [];
@@ -24,17 +25,19 @@ export class IzjasnjavanjaComponent implements OnInit {
         const convert = require('xml-js');
         const izjasnjavanjeList = JSON.parse(convert.xml2json(result, {compact: true, spaces: 4}));
         const izjasnjavanja = izjasnjavanjeList.messageList['ns2:message'];
-        if (izjasnjavanja !== undefined){
+        if (izjasnjavanja !== undefined) {
           try {
             izjasnjavanja.forEach((item, index) => {
               console.log(item);
-              const message = item['ns2:body']._text;
+              const start = item['ns2:body']._text.split(':')[0];
+              const end = item['ns2:body']._text.split('=')[1];
+              const message = start + ': ' +  end;
               const idMessage = item['ns2:body']._attributes.id;
               const idZahteva = message.split(': ')[1];
               const messageObject = {id: idMessage, messageText: message, zahtev: idZahteva};
               newList.push(messageObject);
             });
-          } catch (err){
+          } catch (err) {
             console.log(izjasnjavanja);
             const message = izjasnjavanja['ns2:body']._text;
             const idMessage = izjasnjavanja['ns2:body']._attributes.id;
@@ -46,7 +49,7 @@ export class IzjasnjavanjaComponent implements OnInit {
         }
       },
       error => {
-        this.snackBar.open('Нешто није у реду!', 'Ok', { duration: 2000 });
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
       }
     );
   }
@@ -54,7 +57,7 @@ export class IzjasnjavanjaComponent implements OnInit {
   openDialog($event: number): void {
     let zahtevId = '0';
     this.izjasnjavanja.forEach((item, index) => {
-      if (item.id === $event){
+      if (item.id === $event) {
         zahtevId = item.zahtev;
       }
     });

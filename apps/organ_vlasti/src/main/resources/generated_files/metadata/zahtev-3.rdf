@@ -4,9 +4,9 @@
     xmlns:pred="http://examples/predicate/">
   <rdf:Description rdf:about="http://zahtevi/3">
     <pred:podnosilac rdf:resource="http://users/miloradradovicmico98@gmail.com"/>
-    <pred:organ_vlasti>Organ</pred:organ_vlasti>
-    <pred:mesto>Bijelo Polje</pred:mesto>
+    <pred:organ_vlasti>Organtreci</pred:organ_vlasti>
+    <pred:mesto>beogradpls</pred:mesto>
     <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-06T16:40:24</pred:datum>
+    >2021-02-06T20:22:38</pred:datum>
   </rdf:Description>
 </rdf:RDF>

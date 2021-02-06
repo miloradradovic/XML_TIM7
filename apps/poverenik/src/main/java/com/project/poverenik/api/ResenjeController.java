@@ -158,17 +158,39 @@ public class ResenjeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
-    @RequestMapping(value = "/toRdf/{idZalbe}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadZalbaCutanjeRdf(@PathVariable String idZalbe) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
+    @RequestMapping(value = "/toRdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZalbaCutanjeRdf(@PathVariable String broj) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
-        String path = resenjeService.generateRdf(idZalbe);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String path = resenjeService.generateRdf(broj);
+        if (!path.equals("")) {
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".rdf");
+                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
-    @RequestMapping(value = "/toJson/{idZalbe}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> downloadZalbaCutanjeJson(@PathVariable String idZalbe) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
+    @RequestMapping(value = "/toJson/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> downloadZalbaCutanjeJson(@PathVariable String broj) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
-        String path = resenjeService.generateJson(idZalbe);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String path = resenjeService.generateJson(broj);
+        if (!path.equals("")) {
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=resenje" + broj + ".json");
+                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

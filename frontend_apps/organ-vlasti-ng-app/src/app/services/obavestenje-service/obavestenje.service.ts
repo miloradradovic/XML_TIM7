@@ -39,4 +39,12 @@ export class ObavestenjeService {
     return this.http.get('http://localhost:8090/obavestenje/by-zahtev/' + s,
       {headers: this.headers, responseType: 'text'});
   }
+  convertObavestenjeRDF(broj: string): Observable<any> {
+    return this.http.get('http://localhost:8090/obavestenje/toRdf/' + broj,
+      {headers: this.headers, responseType: 'blob'});
+  }
+  convertObavestenjeJSON(s: string): Observable<any> {
+    return this.http.get('http://localhost:8090/obavestenje/toJson/' + s,
+      {headers: this.headers, responseType: 'blob'});
+  }
 }

@@ -151,7 +151,18 @@ public class ZalbaOdlukaController {
     public ResponseEntity<?> downloadZalbaCutanjeRdf(@PathVariable String idZalbe) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = zalbaOdlukaService.generateRdf(idZalbe);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (!path.equals("")) {
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=zalbaodluka" + idZalbe + ".rdf");
+                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
     //odluka-1
@@ -159,7 +170,18 @@ public class ZalbaOdlukaController {
     public ResponseEntity<?> downloadZalbaCutanjeJson(@PathVariable String idZalbe) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = zalbaOdlukaService.generateJson(idZalbe);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (!path.equals("")) {
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=zalbaodluka" + idZalbe + ".json");
+                return new ResponseEntity<>(new InputStreamResource(bis), headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

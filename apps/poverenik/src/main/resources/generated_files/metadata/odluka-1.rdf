@@ -3,13 +3,13 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:pred="http://examples/predicate/">
   <rdf:Description rdf:about="http://zalbe/odluka/1">
-    <pred:podnosilac rdf:resource="http://users/eromana98@gmail.com"/>
+    <pred:podnosilac rdf:resource="http://users/a@gmail.com"/>
     <pred:obavjestenje rdf:resource="http://obavestenja/1"/>
-    <pred:organ_vlasti>Bla</pred:organ_vlasti>
+    <pred:organ_vlasti>O</pred:organ_vlasti>
     <pred:mesto>Београд</pred:mesto>
-    <pred:status>u obradi</pred:status>
-    <pred:zahtev rdf:resource="http://zahtevi/3"/>
-    <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2021-02-05T21:02:49</pred:datum>
+    <pred:status>neobradjena</pred:status>
+    <pred:zahtev>1</pred:zahtev>
+    <pred:datum rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2000-12-12T00:00:00</pred:datum>
   </rdf:Description>
 </rdf:RDF>

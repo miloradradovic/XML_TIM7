@@ -76,14 +76,36 @@ public class IzvestajiController {
     public ResponseEntity<?> downloadIzvestajRdf(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = izvestajiService.generateRdf(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + id + ".rdf");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/toJson/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> downloadIzvestajJson(@PathVariable String id) throws XMLDBException, JAXBException, IOException, TransformerException, SAXException {
 
         String path = izvestajiService.generateJson(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if (!path.equals(""))
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(Files.readAllBytes(Paths.get(path)));
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/xml; charset=utf-8");
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=obavestenje" + id + ".json");
+                return ResponseEntity.ok().headers(headers).body(new InputStreamResource(bis));
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/toPdf/{broj}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_XML_VALUE)

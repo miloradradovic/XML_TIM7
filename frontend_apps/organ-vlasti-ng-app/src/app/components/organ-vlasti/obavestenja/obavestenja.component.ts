@@ -156,12 +156,46 @@ export class ObavestenjaComponent implements OnInit {
       });
   }
 
-  rdfObavestenje($event: number) {
-
+  rdfObavestenje($event: string) {
+    this.obavestenjeService.convertObavestenjeRDF($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'obavestenje' + $event + '.rdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
+      });
   }
 
-  jsonObavestenje($event: number) {
-
+  jsonObavestenje($event: string) {
+    this.obavestenjeService.convertObavestenjeJSON($event).subscribe(
+      result => {
+        const binaryData = [];
+        binaryData.push(result);
+        const url = window.URL.createObjectURL(new Blob(binaryData, {type: 'application/pdf'}));
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.setAttribute('target', 'blank');
+        a.href = url;
+        a.download = 'obavestenje' + $event + '.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      },
+      error => {
+        this.snackBar.open('Нешто није у реду!', 'Ok', {duration: 2000});
+      });
   }
 
   doubleClicked($event: number): void {

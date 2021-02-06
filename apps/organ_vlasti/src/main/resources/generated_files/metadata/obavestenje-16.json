@@ -1,0 +1,15 @@
+{
+  "head": {
+    "vars": [ "datum" , "organ_vlasti" , "podnosilac" , "zahtev" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "datum": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#dateTime" , "value": "2000-12-12T00:00:00" } ,
+        "organ_vlasti": { "type": "literal" , "value": "" } ,
+        "podnosilac": { "type": "uri" , "value": "http://users/s" } ,
+        "zahtev": { "type": "uri" , "value": "http://zahtevi/1" }
+      }
+    ]
+  }
+}

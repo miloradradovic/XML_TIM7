@@ -19,6 +19,10 @@ import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -98,7 +102,7 @@ public class ZalbaOdlukaService {
             ZalbaOdluka zalbaOdluka = ZalbaOdlukaMapper.mapFromDTO(zalbaOdlukaDTO, id, user.getEmail());
 
             if (jaxB.validate(zalbaOdluka.getClass(), zalbaOdluka)) {
-                return zalbaOdlukaRepository.create(zalbaOdluka);
+                return zalbaOdlukaRepository.create(zalbaOdluka, false);
             }
         }
         return false;
@@ -152,8 +156,13 @@ public class ZalbaOdlukaService {
     }
 
     public boolean update(ZalbaOdluka zalbaOdluka, String status) throws XMLDBException {
+    	try {
+			updateStatusFuseki(zalbaOdluka.getZalbaOdlukaBody().getId(), zalbaOdluka.getZalbaOdlukaBody().getStatus().getValue(), status);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         zalbaOdluka.getZalbaOdlukaBody().getStatus().setValue(status);
-        return zalbaOdlukaRepository.create(zalbaOdluka);
+        return zalbaOdlukaRepository.create(zalbaOdluka, true);
 
         //String patch = jaxB.marshall(zalbaOdluka.getClass(), zalbaOdluka);
         //u patch moraju biti navedeni svi elementi unutar root elementa inace ce biti obrisani
@@ -410,5 +419,22 @@ public class ZalbaOdlukaService {
 		ResultSetFormatter.outputAsJSON(new FileOutputStream(new File("src/main/resources/generated_files/metadata/" + idZalbe + ".json")), results);
 		query.close();
 		return "src/main/resources/generated_files/metadata/" + idZalbe + ".json";
+	}
+	
+	public void updateStatusFuseki(String idZalbe, String oldValue, String newValue) throws IOException, JAXBException, XMLDBException {
+		ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+
+		String sparqlQueryTemplate = FileUtil.readFile("src/main/resources/rdf_data/update_zalba.rq",
+				StandardCharsets.UTF_8);
+		System.out.println(sparqlQueryTemplate);
+
+		String zalba = "<http://zalbe/odluka/" + idZalbe + ">";
+ 
+		String sparqlQuery = String.format(sparqlQueryTemplate, zalba, oldValue, zalba, newValue);
+		System.out.println(sparqlQuery);
+
+		UpdateRequest request = UpdateFactory.create(sparqlQuery) ;
+        UpdateProcessor proc = UpdateExecutionFactory.createRemote(request, conn.updateEndpoint);
+
 	}
 }

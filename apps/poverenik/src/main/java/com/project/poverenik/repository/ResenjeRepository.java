@@ -32,7 +32,7 @@ public class ResenjeRepository {
 
 
     public String create(Resenje resenje) throws XMLDBException {
-        if (existManager.store(collectionUri, resenje.getResenjeBody().getBroj(), resenje)) {
+        if (existManager.store(collectionUri, resenje.getResenjeBody().getBroj(), resenje, false)) {
             return resenje.getResenjeBody().getBroj();
         }
         return null;

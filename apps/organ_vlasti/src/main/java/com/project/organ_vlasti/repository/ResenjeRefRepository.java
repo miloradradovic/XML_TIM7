@@ -20,7 +20,7 @@ public class ResenjeRefRepository {
 
 
     public boolean create(ResenjeRef resenjeRef) throws XMLDBException {
-        return existManager.store(collectionUri, resenjeRef.getBody().getBroj(), resenjeRef);
+        return existManager.store(collectionUri, resenjeRef.getBody().getBroj(), resenjeRef, false);
     }
 
     public ResourceSet getAllByProcitano(String procitano) throws XMLDBException {
@@ -53,6 +53,6 @@ public class ResenjeRefRepository {
 
     public boolean update(ResenjeRef resenjeRef) throws XMLDBException {
 
-        return existManager.store(collectionUri, resenjeRef.getBody().getBroj(), resenjeRef);
+        return existManager.store(collectionUri, resenjeRef.getBody().getBroj(), resenjeRef, true);
     }
 }

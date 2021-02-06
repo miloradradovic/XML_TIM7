@@ -1,0 +1,9 @@
+PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>
+
+DELETE DATA
+{ GRAPH <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/zalbe> { 
+    %s  <http://examples/predicate/status> "%s" } } ;
+
+INSERT DATA
+{ GRAPH <http://localhost:8080/fusekiP/Tim7Dataset/data/tim7/metadata/zalbe> { 
+    %s  <http://examples/predicate/status> "%s" } } ;

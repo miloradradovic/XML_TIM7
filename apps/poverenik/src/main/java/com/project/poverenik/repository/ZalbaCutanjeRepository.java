@@ -27,8 +27,8 @@ public class ZalbaCutanjeRepository {
             + "</xu:modifications>";
 
 
-    public boolean create(ZalbaCutanje zalbaCutanje) throws XMLDBException {
-        return existManager.store(collectionUri, zalbaCutanje.getZalbaCutanjeBody().getId(), zalbaCutanje);
+    public boolean create(ZalbaCutanje zalbaCutanje, boolean update) throws XMLDBException {
+        return existManager.store(collectionUri, zalbaCutanje.getZalbaCutanjeBody().getId(), zalbaCutanje, update);
     }
 
     public ResourceSet getAll() throws XMLDBException {

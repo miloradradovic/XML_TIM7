@@ -20,7 +20,7 @@ public class IzvestajRefRepository {
 
 
     public boolean create(IzvestajRef izvestajRef) throws XMLDBException {
-        return existManager.store(collectionUri, izvestajRef.getBody().getId(), izvestajRef);
+        return existManager.store(collectionUri, izvestajRef.getBody().getId(), izvestajRef, false);
     }
 
     public ResourceSet getAllByProcitano(String procitano) throws XMLDBException {
@@ -53,6 +53,6 @@ public class IzvestajRefRepository {
 
     public boolean update(IzvestajRef izvestajRef) throws XMLDBException {
 
-        return existManager.store(collectionUri, izvestajRef.getBody().getId(), izvestajRef);
+        return existManager.store(collectionUri, izvestajRef.getBody().getId(), izvestajRef, true);
     }
 }

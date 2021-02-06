@@ -1,11 +1,11 @@
-  <div style="padding-top: 5%; width: 100%; padding-left: 2%">
+  <div style="padding-top: 5%; width: 97%; padding-left: 2%">
     <mat-form-field appearance="outline" style="width: 35%">
       <mat-label> Претрага по тексту </mat-label>
       <input id="pretragaTekst" (input)="onTekstChanged($event.target.valueOf())" #inputField matInput placeholder="...">
     </mat-form-field>
   </div>
 
-  <div style="width: 100%; padding-left: 2%">
+  <div style="width: 97%; padding-left: 2%">
     <form (ngSubmit)="onSubmitClicked()">
       <mat-form-field appearance="outline" style="width: 11%">
         <mat-label> Место </mat-label>
@@ -46,7 +46,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
-      <button id="submit" style="width:6%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Претражи</button>
+      <button id="submit" style="width:8%;margin-left: 1%;background-color: green" mat-raised-button type="submit">Претражи</button>
     </form>
   </div>
 

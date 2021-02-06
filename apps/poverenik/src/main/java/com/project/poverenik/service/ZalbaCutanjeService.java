@@ -432,7 +432,8 @@ public class ZalbaCutanjeService {
         getZahtevResponse zahtevResponse = zahtevService.getZahtev(idZahteva);
         if (zahtevResponse == null)
             return false;
-        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen")){
+        else if(zahtevResponse.getZahtev().getStatus().getValue().equals("prihvacen") ||
+				zahtevResponse.getZahtev().getStatus().getValue().equals("odbijen")){
             return false;
         }
 

@@ -27,6 +27,7 @@ export class IzjasnjavanjaComponent implements OnInit {
         if (izjasnjavanja !== undefined){
           try {
             izjasnjavanja.forEach((item, index) => {
+              console.log(item);
               const message = item['ns2:body']._text;
               const idMessage = item['ns2:body']._attributes.id;
               const messageObject = {id: idMessage, messageText: message};

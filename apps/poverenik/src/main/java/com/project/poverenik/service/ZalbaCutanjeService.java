@@ -576,6 +576,6 @@ public class ZalbaCutanjeService {
 
 		UpdateRequest request = UpdateFactory.create(sparqlQuery) ;
         UpdateProcessor proc = UpdateExecutionFactory.createRemote(request, conn.updateEndpoint);
-
+        proc.execute();
 	}
 }
